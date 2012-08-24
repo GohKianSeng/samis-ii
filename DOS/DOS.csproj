@@ -1,0 +1,424 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{1EDB2686-6A4D-4B5F-80C0-4558AA36DAC4}</ProjectGuid>
+    <ProjectTypeGuids>{F85E285D-A4E0-4152-9332-AB1D724D3325};{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>DOS</RootNamespace>
+    <AssemblyName>DOS</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <MvcBuildViews>false</MvcBuildViews>
+    <UseIISExpress>true</UseIISExpress>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.JScript">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Data.Linq">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data.DataSetExtensions">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="System.Xml.Linq">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Web.Abstractions" />
+    <Reference Include="System.Web.Routing" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\CityKidsController.cs" />
+    <Compile Include="Controllers\ErrorController.cs" />
+    <Compile Include="Controllers\ErrorHandler.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\MasterPageController.cs" />
+    <Compile Include="Controllers\MembershipController.cs" />
+    <Compile Include="Controllers\ParishController.cs" />
+    <Compile Include="Controllers\ReportingController.cs" />
+    <Compile Include="Controllers\SettingsController.cs" />
+    <Compile Include="Controllers\UploadFileController.cs" />
+    <Compile Include="Default.aspx.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Models\AccountModels.cs" />
+    <Compile Include="Models\DOS_DB.designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DOS_DB.dbml</DependentUpon>
+    </Compile>
+    <Compile Include="Models\JsonClass.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\css\bk_datepicker.css" />
+    <Content Include="Content\css\datepicker.css" />
+    <Content Include="Content\css\dhtmlwindow.css" />
+    <Content Include="Content\css\fileuploader.css" />
+    <Content Include="Content\css\ITSCHistory.css" />
+    <Content Include="Content\css\jquery-ui.css" />
+    <Content Include="Content\css\jquery.multiselect.css" />
+    <Content Include="Content\css\jquery.multiselect.filter.css" />
+    <Content Include="Content\css\jquery.ui.timepicker.css" />
+    <Content Include="Content\css\login_view.css" />
+    <Content Include="Content\css\modal.css" />
+    <Content Include="Content\css\searchsuggest.css" />
+    <Content Include="Content\css\TablesView.css" />
+    <Content Include="Content\css\TabsView.css" />
+    <Content Include="Content\css\TopMenu.css" />
+    <Content Include="Content\images\loading.gif" />
+    <Content Include="Content\images\add.png" />
+    <Content Include="Content\images\asc.gif" />
+    <Content Include="Content\images\bg.gif" />
+    <Content Include="Content\images\blank.gif" />
+    <Content Include="Content\images\bottom.png" />
+    <Content Include="Content\images\C3-icon.jpg" />
+    <Content Include="Content\images\cancel.png" />
+    <Content Include="Content\images\custom_b.png" />
+    <Content Include="Content\images\custom_bl.png" />
+    <Content Include="Content\images\custom_br.png" />
+    <Content Include="Content\images\custom_l.png" />
+    <Content Include="Content\images\custom_r.png" />
+    <Content Include="Content\images\custom_t.png" />
+    <Content Include="Content\images\custom_tl.png" />
+    <Content Include="Content\images\custom_tr.png" />
+    <Content Include="Content\images\datepicker_b.png" />
+    <Content Include="Content\images\datepicker_bl.png" />
+    <Content Include="Content\images\datepicker_br.png" />
+    <Content Include="Content\images\datepicker_l.png" />
+    <Content Include="Content\images\datepicker_r.png" />
+    <Content Include="Content\images\datepicker_t.png" />
+    <Content Include="Content\images\datepicker_tl.png" />
+    <Content Include="Content\images\datepicker_tr.png" />
+    <Content Include="Content\images\desc.gif" />
+    <Content Include="Content\images\empty_profile_pix.gif" />
+    <Content Include="Content\images\field.png" />
+    <Content Include="Content\images\ictemp.jpg" />
+    <Content Include="Content\images\T-icon.png" />
+    <Content Include="Content\images\menubg_0a_blue.jpg" />
+    <Content Include="Content\images\menubg_0_blue.jpg" />
+    <Content Include="Content\images\menubg_1a_blue.jpg" />
+    <Content Include="Content\images\menubg_1_blue.jpg" />
+    <Content Include="Content\images\printelectoralroll.png" />
+    <Content Include="Content\images\printgreenform.jpg" />
+    <Content Include="Content\images\remove.png" />
+    <Content Include="Content\images\sactitle.PNG" />
+    <Content Include="Content\images\samis2icon.ico" />
+    <Content Include="Content\images\samis2logo.gif" />
+    <Content Include="Content\images\samis2logo.png" />
+    <Content Include="Content\images\shadow.gif" />
+    <Content Include="Content\images\top.png" />
+    <Content Include="Content\images\transfericon.png" />
+    <Content Include="Content\images\ui-bg_diagonals-thick_18_b81900_40x40.png" />
+    <Content Include="Content\images\ui-bg_diagonals-thick_20_666666_40x40.png" />
+    <Content Include="Content\images\ui-bg_flat_10_000000_40x100.png" />
+    <Content Include="Content\images\ui-bg_glass_100_f6f6f6_1x400.png" />
+    <Content Include="Content\images\ui-bg_glass_100_fdf5ce_1x400.png" />
+    <Content Include="Content\images\ui-bg_glass_65_ffffff_1x400.png" />
+    <Content Include="Content\images\ui-bg_gloss-wave_35_f6a828_500x100.png" />
+    <Content Include="Content\images\ui-bg_highlight-soft_100_eeeeee_1x100.png" />
+    <Content Include="Content\images\ui-bg_highlight-soft_75_ffe45c_1x100.png" />
+    <Content Include="Content\images\ui-icons_222222_256x240.png" />
+    <Content Include="Content\images\ui-icons_228ef1_256x240.png" />
+    <Content Include="Content\images\ui-icons_ef8c08_256x240.png" />
+    <Content Include="Content\images\ui-icons_ffd27a_256x240.png" />
+    <Content Include="Content\images\ui-icons_ffffff_256x240.png" />
+    <Content Include="Content\images\uploadify.swf" />
+    <Content Include="Content\scripts\addmodifycellgroup.debug.js" />
+    <Content Include="Content\scripts\addmodifycellgroup.min.js" />
+    <Content Include="Content\scripts\addmodifycourse.debug.js" />
+    <Content Include="Content\scripts\addmodifycourse.min.js" />
+    <Content Include="Content\scripts\addmodifyministry.debug.js" />
+    <Content Include="Content\scripts\addmodifyministry.min.js" />
+    <Content Include="Content\scripts\adduser.debug.js" />
+    <Content Include="Content\scripts\adduser.min.js" />
+    <Content Include="Content\scripts\changepassword.debug.js" />
+    <Content Include="Content\scripts\changepassword.min.js" />
+    <Content Include="Content\scripts\cityKidSchedule.min.js" />
+    <Content Include="Content\scripts\citykids_membership.debug.js" />
+    <Content Include="Content\scripts\citykids_membership.min.js" />
+    <Content Include="Content\scripts\common_function.debug.js" />
+    <Content Include="Content\scripts\cityKidSchedule.debug.js" />
+    <Content Include="Content\scripts\common_function.min.js" />
+    <Content Include="Content\scripts\courseregistration.min.js" />
+    <Content Include="Content\scripts\DOS_membership.min.js" />
+    <Content Include="Content\scripts\fileuploader.js" />
+    <Content Include="Content\scripts\jquery.watermark.min.js" />
+    <Content Include="Content\scripts\logon.min.js" />
+    <Content Include="Content\scripts\navigateAway.debug.js" />
+    <Content Include="Content\scripts\navigateAway.min.js" />
+    <Content Include="Content\scripts\parish_course.min.js" />
+    <Content Include="Content\scripts\parish_ministry.min.js" />
+    <Content Include="Content\scripts\parish_staff.min.js" />
+    <Content Include="Content\scripts\samis2settings.min.js" />
+    <Content Include="Content\scripts\staffUpdateCityKids.debug.js" />
+    <Content Include="Content\scripts\courseregistration.debug.js" />
+    <Content Include="Content\scripts\datepicker.js" />
+    <Content Include="Content\scripts\dhtmlwindow.min.js" />
+    <Content Include="Content\scripts\DOS_membership.debug.js" />
+    <Content Include="Content\scripts\expand.min.js" />
+    <Content Include="Content\scripts\jquery-1.6.4.min.js" />
+    <Content Include="Content\scripts\jquery-ui-1.8.16.custom.min.js" />
+    <Content Include="Content\scripts\jquery.cookie.js" />
+    <Content Include="Content\scripts\jquery.multiselect.filter.min.js" />
+    <Content Include="Content\scripts\jquery.multiselect.min.js" />
+    <Content Include="Content\scripts\jquery.tablesorter.min.js" />
+    <Content Include="Content\scripts\jquery.ui.core.min.js" />
+    <Content Include="Content\scripts\jquery.ui.timepicker.js" />
+    <Content Include="Content\scripts\jquery.uploadify.v2.1.4.min.js" />
+    <Content Include="Content\scripts\logon.debug.js" />
+    <Content Include="Content\scripts\mnuHover.min.js" />
+    <Content Include="Content\scripts\modal.min.js" />
+    <Content Include="Content\scripts\parish_course.debug.js" />
+    <Content Include="Content\scripts\parish_ministry.debug.js" />
+    <Content Include="Content\scripts\parish_staff.debug.js" />
+    <Content Include="Content\scripts\samis2settings.debug.js" />
+    <Content Include="Content\scripts\sha1.min.js" />
+    <Content Include="Content\scripts\staffUpdateCityKids.min.js" />
+    <Content Include="Content\scripts\staffUpdateMembership.debug.js" />
+    <Content Include="Content\scripts\staffUpdateMembership.min.js" />
+    <Content Include="Content\scripts\staffUpdateVisitor.debug.js" />
+    <Content Include="Content\scripts\staffUpdateVisitor.min.js" />
+    <Content Include="Content\scripts\UserAdmin.debug.js" />
+    <Content Include="Content\scripts\UserAdmin.min.js" />
+    <Content Include="Default.aspx" />
+    <Content Include="Default.html" />
+    <Content Include="Global.asax" />
+    <Content Include="Content\images\bar.PNG" />
+    <Content Include="Content\images\sacbigtitle.PNG" />
+    <Content Include="Views\Account\AddUser.aspx" />
+    <Content Include="Views\Account\ChangePassword.aspx" />
+    <Content Include="Views\Account\ChangePasswordSuccess.aspx" />
+    <Content Include="Views\Account\UpdateUser.aspx" />
+    <Content Include="Views\Account\LogOn.aspx" />
+    <Content Include="Views\CityKids\CityKidsMembershipForm.aspx" />
+    <Content Include="Views\CityKids\UpdateCityKidsSchedule.aspx" />
+    <Content Include="Views\CityKids\ListOfCityKids.aspx" />
+    <Content Include="Views\CityKids\UpdateCityKidsSearchForm.aspx" />
+    <Content Include="Views\CityKids\UpdateCityKidsMembershipForm_forStaff.aspx" />
+    <Content Include="Views\Error\DisplayError.aspx" />
+    <Content Include="Views\Home\About.aspx" />
+    <Content Include="Views\Membership\CourseAttendance.aspx" />
+    <Content Include="Views\Membership\courseregistration.aspx" />
+    <Content Include="Views\Membership\ElectoralRoll.aspx" />
+    <Content Include="Views\Membership\GreenForm.aspx" />
+    <Content Include="Views\Membership\ListOfMembers.aspx" />
+    <Content Include="Views\Membership\ListOfVisitors.aspx" />
+    <Content Include="Views\Membership\MembershipForm.aspx" />
+    <Content Include="Views\Membership\MembershipTransferForm.aspx" />
+    <Content Include="Views\Membership\NewMemberApproval.aspx" />
+    <Content Include="Views\Membership\NewMemberResubmit.aspx" />
+    <Content Include="Views\Membership\OfflineMembership.aspx" />
+    <Content Include="Views\Membership\UpdateMembershipForm_forStaff.aspx" />
+    <Content Include="Views\Membership\UpdateMembershipSearchForm.aspx" />
+    <Content Include="Views\Membership\UpdateVisitorForm_forStaff.aspx" />
+    <Content Include="Views\Membership\UpdateVisitorSearchForm.aspx" />
+    <Content Include="Views\Parish\AddCellgroup.aspx" />
+    <Content Include="Views\Parish\AddCourse.aspx" />
+    <Content Include="Views\Parish\AddMinistry.aspx" />
+    <Content Include="Views\Parish\Cellgroup.aspx" />
+    <Content Include="Views\Parish\Course.aspx" />
+    <Content Include="Views\Parish\CourseParticipant.aspx" />
+    <Content Include="Views\Parish\ListOfCellgroup.aspx" />
+    <Content Include="Views\Parish\ListOfCourse.aspx" />
+    <Content Include="Views\Parish\ListOfCourseParticipants.aspx" />
+    <Content Include="Views\Parish\ListOfMinistry.aspx" />
+    <Content Include="Views\Parish\Ministry.aspx" />
+    <Content Include="Views\Parish\Staff.aspx" />
+    <Content Include="Views\Reporting\Age.aspx" />
+    <Content Include="Views\Reporting\AgeList.aspx" />
+    <Content Include="Views\Reporting\BaptismConfirm.aspx" />
+    <Content Include="Views\Reporting\BaptismConfirmList.aspx" />
+    <Content Include="Views\Reporting\CellgroupInvolvement.aspx" />
+    <Content Include="Views\Reporting\CellgroupInvolvementList.aspx" />
+    <Content Include="Views\Reporting\Electoral.aspx" />
+    <Content Include="Views\Reporting\ElectoralList.aspx" />
+    <Content Include="Views\Reporting\ManualSearch.aspx" />
+    <Content Include="Views\Reporting\ManualSearchList.aspx" />
+    <Content Include="Views\Reporting\Marriage.aspx" />
+    <Content Include="Views\Reporting\MarriageList.aspx" />
+    <Content Include="Views\Reporting\MinistryInvolvement.aspx" />
+    <Content Include="Views\Reporting\MinistryInvolvementList.aspx" />
+    <Content Include="Views\Reporting\Occupation.aspx" />
+    <Content Include="Views\Reporting\OccupationList.aspx" />
+    <Content Include="Views\Settings\accessControl.aspx" />
+    <Content Include="Views\Settings\Samis2Settings.aspx" />
+    <Content Include="Views\Shared\Agreement.aspx" />
+    <Content Include="Views\Shared\downloadMembershipForm.aspx" />
+    <Content Include="Views\Shared\Error.aspx" />
+    <Content Include="Views\Shared\ListOfStaff.aspx" />
+    <Content Include="Views\Shared\LogOnUserControl.ascx" />
+    <Content Include="Views\Shared\simplehtml.aspx" />
+    <Content Include="Web.config" />
+    <Content Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Views\Web.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Data\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Content\images\Thumbs.db" />
+    <Content Include="Views\Shared\Site.Master" />
+    <None Include="Models\DOS_DB.dbml">
+      <Generator>MSLinqToSQLGenerator</Generator>
+      <LastGenOutput>DOS_DB.designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Models\DOS_DB.dbml.layout">
+      <DependentUpon>DOS_DB.dbml</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{3259AA49-8AA1-44D3-9025-A0B520596A8C}" />
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target> -->
+  <Target Name="AfterBuild" Condition="'$(MvcBuildViews)'=='true'">
+    <AspNetCompiler VirtualPath="temp" PhysicalPath="$(ProjectDir)" />
+  </Target>
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>False</AutoAssignPort>
+          <DevelopmentServerPort>8081</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:8081/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <PropertyGroup>
+    <PostBuildEvent>echo "Minify: addmodifycellgroup.debug.js -&gt;  addmodifycellgroup.min.js"
+"$(ProjectDir)Tools\jsmin" &lt; "$(ProjectDir)Content\scripts\addmodifycellgroup.debug.js" &gt; "$(ProjectDir)Content\scripts\addmodifycellgroup.min.js"
+
+echo "Minify: addmodifycourse.debug.js -&gt;  addmodifycourse.min.js"
+"$(ProjectDir)Tools\jsmin" &lt; "$(ProjectDir)Content\scripts\addmodifycourse.debug.js" &gt; "$(ProjectDir)Content\scripts\addmodifycourse.min.js"
+
+echo "Minify: addmodifyministry.debug.js -&gt;  addmodifyministry.min.js"
+"$(ProjectDir)Tools\jsmin" &lt; "$(ProjectDir)Content\scripts\addmodifyministry.debug.js" &gt; "$(ProjectDir)Content\scripts\addmodifyministry.min.js"
+
+echo "Minify: adduser.debug.js -&gt;  adduser.min.js"
+"$(ProjectDir)Tools\jsmin" &lt; "$(ProjectDir)Content\scripts\adduser.debug.js" &gt; "$(ProjectDir)Content\scripts\adduser.min.js"
+
+echo "Minify: changepassword.debug.js -&gt;  changepassword.min.js"
+"$(ProjectDir)Tools\jsmin" &lt; "$(ProjectDir)Content\scripts\changepassword.debug.js" &gt; "$(ProjectDir)Content\scripts\changepassword.min.js"
+
+echo "Minify: citykids_membership.debug.js -&gt;  citykids_membership.min.js"
+"$(ProjectDir)Tools\jsmin" &lt; "$(ProjectDir)Content\scripts\citykids_membership.debug.js" &gt; "$(ProjectDir)Content\scripts\citykids_membership.min.js"
+
+echo "Minify: cityKidSchedule.debug.js -&gt;  cityKidSchedule.min.js"
+"$(ProjectDir)Tools\jsmin" &lt; "$(ProjectDir)Content\scripts\cityKidSchedule.debug.js" &gt; "$(ProjectDir)Content\scripts\cityKidSchedule.min.js"
+
+echo "Minify: common_function.debug.js -&gt;  common_function.min.js"
+"$(ProjectDir)Tools\jsmin" &lt; "$(ProjectDir)Content\scripts\addmodifycellgroup.debug.js" &gt; "$(ProjectDir)Content\scripts\addmodifycellgroup.min.js"
+
+echo "Minify: courseregistration.debug.js -&gt;  courseregistration.min.js"
+"$(ProjectDir)Tools\jsmin" &lt; "$(ProjectDir)Content\scripts\courseregistration.debug.js" &gt; "$(ProjectDir)Content\scripts\courseregistration.min.js"
+
+echo "Minify: DOS_membership.debug.js -&gt;  DOS_membership.min.js"
+"$(ProjectDir)Tools\jsmin" &lt; "$(ProjectDir)Content\scripts\DOS_membership.debug.js" &gt; "$(ProjectDir)Content\scripts\DOS_membership.min.js"
+
+echo "Minify: logon.debug.js -&gt;  logon.min.js"
+"$(ProjectDir)Tools\jsmin" &lt; "$(ProjectDir)Content\scripts\logon.debug.js" &gt; "$(ProjectDir)Content\scripts\logon.min.js"
+
+echo "Minify: navigateAway.debug.js -&gt;  navigateAway.min.js"
+"$(ProjectDir)Tools\jsmin" &lt; "$(ProjectDir)Content\scripts\navigateAway.debug.js" &gt; "$(ProjectDir)Content\scripts\navigateAway.min.js"
+
+echo "Minify: parish_course.debug.js -&gt;  parish_course.min.js"
+"$(ProjectDir)Tools\jsmin" &lt; "$(ProjectDir)Content\scripts\parish_course.debug.js" &gt; "$(ProjectDir)Content\scripts\parish_course.min.js"
+
+echo "Minify: parish_ministry.debug.js -&gt;  parish_ministry.min.js"
+"$(ProjectDir)Tools\jsmin" &lt; "$(ProjectDir)Content\scripts\parish_ministry.debug.js" &gt; "$(ProjectDir)Content\scripts\parish_ministry.min.js"
+
+echo "Minify: parish_staff.debug.js -&gt;  parish_staff.min.js"
+"$(ProjectDir)Tools\jsmin" &lt; "$(ProjectDir)Content\scripts\parish_staff.debug.js" &gt; "$(ProjectDir)Content\scripts\parish_staff.min.js"
+
+echo "Minify: samis2settings.debug.js -&gt;  samis2settings.min.js"
+"$(ProjectDir)Tools\jsmin" &lt; "$(ProjectDir)Content\scripts\samis2settings.debug.js" &gt; "$(ProjectDir)Content\scripts\samis2settings.min.js"
+
+echo "Minify: staffUpdateCityKids.debug.js -&gt;  staffUpdateCityKids.min.js"
+"$(ProjectDir)Tools\jsmin" &lt; "$(ProjectDir)Content\scripts\staffUpdateCityKids.debug.js" &gt; "$(ProjectDir)Content\scripts\staffUpdateCityKids.min.js"
+
+echo "Minify: staffUpdateMembership.debug.js -&gt;  staffUpdateMembership.min.js"
+"$(ProjectDir)Tools\jsmin" &lt; "$(ProjectDir)Content\scripts\staffUpdateMembership.debug.js" &gt; "$(ProjectDir)Content\scripts\staffUpdateMembership.min.js"
+
+echo "Minify: staffUpdateVisitor.debug.js -&gt;  staffUpdateVisitor.min.js"
+"$(ProjectDir)Tools\jsmin" &lt; "$(ProjectDir)Content\scripts\staffUpdateVisitor.debug.js" &gt; "$(ProjectDir)Content\scripts\staffUpdateVisitor.min.js"
+
+echo "Minify: UserAdmin.debug.js -&gt;  UserAdmin.min.js"
+"$(ProjectDir)Tools\jsmin" &lt; "$(ProjectDir)Content\scripts\UserAdmin.debug.js" &gt; "$(ProjectDir)Content\scripts\UserAdmin.min.js"
+
+echo "Minify: UserAdmin.min.js -&gt;  UserAdmin.min.js"
+"$(ProjectDir)Tools\jsmin" &lt; "$(ProjectDir)Content\scripts\UserAdmin.debug.js" &gt; "$(ProjectDir)Content\scripts\UserAdmin.min.js"
+
+echo "Minify: common_function.debug.js -&gt;  common_function.min.js"
+"$(ProjectDir)Tools\jsmin" &lt; "$(ProjectDir)Content\scripts\common_function.debug.js" &gt; "$(ProjectDir)Content\scripts\common_function.min.js"
+</PostBuildEvent>
+  </PropertyGroup>
+</Project>

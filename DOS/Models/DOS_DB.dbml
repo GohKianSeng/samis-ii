@@ -1,0 +1,1315 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="DOS" Class="DOS_DBDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="WebSettings" ConnectionString="Data Source=localhost;Initial Catalog=DOS;Persist Security Info=True;User ID=root" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="DOSConnectionString" Provider="System.Data.SqlClient" />
+  <Function Name="dbo.usp_addNewCellgroup" Method="usp_addNewCellgroup">
+    <Parameter Name="cellgroupname" Type="System.String" DbType="VarChar(50)" />
+    <Parameter Name="incharge" Type="System.String" DbType="VarChar(20)" />
+    <Parameter Name="postalCode" Type="System.Int32" DbType="Int" />
+    <Parameter Name="blkhouse" Type="System.String" DbType="VarChar(10)" />
+    <Parameter Name="streetAddress" Type="System.String" DbType="VarChar(100)" />
+    <Parameter Name="unit" Type="System.String" DbType="VarChar(10)" />
+    <ElementType Name="usp_addNewCellgroupResult">
+      <Column Name="Result" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.usp_updateVistor" Method="usp_updateVistor">
+    <Parameter Name="updateXML" Type="System.Xml.Linq.XElement" DbType="Xml" />
+    <ElementType Name="usp_updateVistorResult">
+      <Column Name="Result" Type="System.String" DbType="VarChar(7) NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.usp_addNewCityKid" Method="usp_addNewCityKid">
+    <Parameter Name="newXML" Type="System.Xml.Linq.XElement" DbType="Xml" />
+    <ElementType Name="usp_addNewCityKidResult">
+      <Column Name="Result" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.usp_addNewCourse" Method="usp_addNewCourse">
+    <Parameter Name="coursename" Type="System.String" DbType="VarChar(100)" />
+    <Parameter Name="startdate" Type="System.String" DbType="VarChar(2000)" />
+    <Parameter Name="starttime" Type="System.String" DbType="VarChar(5)" />
+    <Parameter Name="endtime" Type="System.String" DbType="VarChar(5)" />
+    <Parameter Name="incharge" Type="System.String" DbType="VarChar(10)" />
+    <Parameter Name="location" Type="System.Int32" DbType="Int" />
+    <Parameter Name="fee" Type="System.Decimal" DbType="Decimal(5,2)" />
+    <ElementType Name="usp_addNewCourseResult">
+      <Column Name="Result" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.usp_addNewCourseMemberParticipant" Method="usp_addNewCourseMemberParticipant">
+    <Parameter Name="NRIC" Parameter="nRIC" Type="System.String" DbType="VarChar(100)" />
+    <Parameter Name="courseid" Type="System.Int32" DbType="Int" />
+    <ElementType Name="usp_addNewCourseMemberParticipantResult">
+      <Column Name="Result" Type="System.String" DbType="VarChar(2) NOT NULL" CanBeNull="false" />
+      <Column Name="SalutationName" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="EnglishName" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="CourseName" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.usp_addNewCourseMemberParticipantAndAttendance" Method="usp_addNewCourseMemberParticipantAndAttendance">
+    <Parameter Name="NRIC" Parameter="nRIC" Type="System.String" DbType="VarChar(100)" />
+    <Parameter Name="courseid" Type="System.Int32" DbType="Int" />
+    <ElementType Name="usp_addNewCourseMemberParticipantAndAttendanceResult">
+      <Column Name="Result" Type="System.String" DbType="VarChar(185)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.usp_addNewMember" Method="usp_addNewMember">
+    <Parameter Name="newXML" Type="System.Xml.Linq.XElement" DbType="Xml" />
+    <ElementType Name="usp_addNewMemberResult">
+      <Column Name="Result" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.usp_addNewMinistry" Method="usp_addNewMinistry">
+    <Parameter Name="ministryname" Type="System.String" DbType="VarChar(50)" />
+    <Parameter Name="ministrydescription" Type="System.String" DbType="VarChar(2000)" />
+    <Parameter Name="incharge" Type="System.String" DbType="VarChar(10)" />
+    <ElementType Name="usp_addNewMinistryResult">
+      <Column Name="Result" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.usp_addNewUser" Method="usp_addNewUser">
+    <Parameter Name="UserID" Parameter="userID" Type="System.String" DbType="VarChar(50)" />
+    <Parameter Name="Name" Parameter="name" Type="System.String" DbType="VarChar(100)" />
+    <Parameter Name="Email" Parameter="email" Type="System.String" DbType="VarChar(100)" />
+    <Parameter Name="Phone" Parameter="phone" Type="System.String" DbType="VarChar(100)" />
+    <Parameter Name="Mobile" Parameter="mobile" Type="System.String" DbType="VarChar(100)" />
+    <Parameter Name="Department" Parameter="department" Type="System.String" DbType="VarChar(100)" />
+    <Parameter Name="NRIC" Parameter="nRIC" Type="System.String" DbType="VarChar(50)" />
+    <Parameter Name="Password" Parameter="password" Type="System.String" DbType="VarChar(40)" />
+    <Parameter Name="Style" Parameter="style" Type="System.String" DbType="VarChar(2)" />
+    <ElementType Name="usp_addNewUserResult">
+      <Column Name="Result" Type="System.String" DbType="VarChar(6) NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.usp_ApproveMembership" Method="usp_ApproveMembership">
+    <Parameter Name="NRICS" Parameter="nRICS" Type="System.String" DbType="VarChar(MAX)" />
+    <ElementType Name="usp_ApproveMembershipResult">
+      <Column Name="ICPhoto" Type="System.String" DbType="VarChar(1000) NOT NULL" CanBeNull="false" />
+      <Column Name="Result" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.usp_checkUserLogin" Method="usp_checkUserLogin">
+    <Parameter Name="UserID" Parameter="userID" Type="System.String" DbType="VarChar(50)" />
+    <Parameter Name="Password" Parameter="password" Type="System.String" DbType="VarChar(40)" />
+    <ElementType Name="usp_checkUserLoginResult">
+      <Column Name="Result" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.usp_getAllBusGroupClusterInXML" Method="usp_getAllBusGroupClusterInXML">
+    <ElementType Name="usp_getAllBusGroupClusterInXMLResult">
+      <Column Name="XML" Type="System.Xml.Linq.XElement" DbType="Xml" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.usp_getAllChurchArea" Method="usp_getAllChurchArea">
+    <ElementType Name="usp_getAllChurchAreaResult">
+      <Column Name="AreaID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="AreaName" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.usp_getAllChurchAreaInXML" Method="usp_getAllChurchAreaInXML">
+    <ElementType Name="usp_getAllChurchAreaInXMLResult">
+      <Column Name="XML" Type="System.Xml.Linq.XElement" DbType="Xml" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.usp_getAllClergy" Method="usp_getAllClergy">
+    <ElementType Name="usp_getAllClergyResult">
+      <Column Name="NRIC" Type="System.String" DbType="VarChar(10) NOT NULL" CanBeNull="false" />
+      <Column Name="UserID" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="VarChar(151) NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.usp_getAllClubGroupInXML" Method="usp_getAllClubGroupInXML">
+    <ElementType Name="usp_getAllClubGroupInXMLResult">
+      <Column Name="XML" Type="System.Xml.Linq.XElement" DbType="Xml" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.usp_getAllConfigInXML" Method="usp_getAllConfigInXML">
+    <ElementType Name="usp_getAllConfigInXMLResult">
+      <Column Name="XML" Type="System.Xml.Linq.XElement" DbType="Xml" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.usp_getAllCongregation" Method="usp_getAllCongregation">
+    <ElementType Name="usp_getAllCongregationResult">
+      <Column Name="CongregationID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="CongregationName" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.usp_getAllCongregationInXML" Method="usp_getAllCongregationInXML">
+    <ElementType Name="usp_getAllCongregationInXMLResult">
+      <Column Name="XML" Type="System.Xml.Linq.XElement" DbType="Xml" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.usp_getAllCountry" Method="usp_getAllCountry">
+    <ElementType Name="usp_getAllCountryResult">
+      <Column Name="CountryID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="CountryName" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.usp_getAllCountryInXML" Method="usp_getAllCountryInXML">
+    <ElementType Name="usp_getAllCountryInXMLResult">
+      <Column Name="XML" Type="System.Xml.Linq.XElement" DbType="Xml" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.usp_getAllDialect" Method="usp_getAllDialect">
+    <ElementType Name="usp_getAllDialectResult">
+      <Column Name="DialectID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="DialectName" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.usp_getAllDialectInXML" Method="usp_getAllDialectInXML">
+    <ElementType Name="usp_getAllDialectInXMLResult">
+      <Column Name="XML" Type="System.Xml.Linq.XElement" DbType="Xml" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.usp_getAllEducation" Method="usp_getAllEducation">
+    <ElementType Name="usp_getAllEducationResult">
+      <Column Name="EducationID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="EducationName" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.usp_getAllEducationInXML" Method="usp_getAllEducationInXML">
+    <ElementType Name="usp_getAllEducationInXMLResult">
+      <Column Name="XML" Type="System.Xml.Linq.XElement" DbType="Xml" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.usp_getAllFileType" Method="usp_getAllFileType">
+    <ElementType Name="usp_getAllFileTypeResult">
+      <Column Name="FileTypeID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="FileType" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.usp_getAllFileTypeInXML" Method="usp_getAllFileTypeInXML">
+    <ElementType Name="usp_getAllFileTypeInXMLResult">
+      <Column Name="XML" Type="System.Xml.Linq.XElement" DbType="Xml" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.usp_getAllLanguage" Method="usp_getAllLanguage">
+    <ElementType Name="usp_getAllLanguageResult">
+      <Column Name="LanguageID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="LanguageName" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.usp_getAllLanguageInXML" Method="usp_getAllLanguageInXML">
+    <ElementType Name="usp_getAllLanguageInXMLResult">
+      <Column Name="XML" Type="System.Xml.Linq.XElement" DbType="Xml" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.usp_getAllMaritalStatus" Method="usp_getAllMaritalStatus">
+    <ElementType Name="usp_getAllMaritalStatusResult">
+      <Column Name="MaritalStatusID" Type="System.Byte" DbType="TinyInt NOT NULL" CanBeNull="false" />
+      <Column Name="MaritalStatusName" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.usp_getAllMaritalStatusInXML" Method="usp_getAllMaritalStatusInXML">
+    <ElementType Name="usp_getAllMaritalStatusInXMLResult">
+      <Column Name="XML" Type="System.Xml.Linq.XElement" DbType="Xml" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.usp_getAllOccupation" Method="usp_getAllOccupation">
+    <ElementType Name="usp_getAllOccupationResult">
+      <Column Name="OccupationID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="OccupationName" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.usp_getAllOccupationInXML" Method="usp_getAllOccupationInXML">
+    <ElementType Name="usp_getAllOccupationInXMLResult">
+      <Column Name="XML" Type="System.Xml.Linq.XElement" DbType="Xml" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.usp_getAllParish" Method="usp_getAllParish">
+    <ElementType Name="usp_getAllParishResult">
+      <Column Name="ParishID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ParishName" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.usp_getAllParishInXML" Method="usp_getAllParishInXML">
+    <ElementType Name="usp_getAllParishInXMLResult">
+      <Column Name="XML" Type="System.Xml.Linq.XElement" DbType="Xml" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.usp_getAllPostalAreaInXML" Method="usp_getAllPostalAreaInXML">
+    <ElementType Name="usp_getAllPostalAreaInXMLResult">
+      <Column Name="XML" Type="System.Xml.Linq.XElement" DbType="Xml" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.usp_getAllPostalCode" Method="usp_getAllPostalCode">
+    <ElementType Name="usp_getAllPostalCodeResult">
+      <Column Name="PostalAreaName" Type="System.String" DbType="VarChar(200) NOT NULL" CanBeNull="false" />
+      <Column Name="PostalDigit" Type="System.String" DbType="VarChar(200) NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.usp_getAllRace" Method="usp_getAllRace">
+    <ElementType Name="usp_getAllRaceResult">
+      <Column Name="RaceID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="RaceName" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.usp_getAllRaceInXML" Method="usp_getAllRaceInXML">
+    <ElementType Name="usp_getAllRaceInXMLResult">
+      <Column Name="XML" Type="System.Xml.Linq.XElement" DbType="Xml" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.usp_getAllReligion" Method="usp_getAllReligion">
+    <ElementType Name="usp_getAllReligionResult">
+      <Column Name="ReligionID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ReligionName" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.usp_getAllReligionInXML" Method="usp_getAllReligionInXML">
+    <ElementType Name="usp_getAllReligionInXMLResult">
+      <Column Name="XML" Type="System.Xml.Linq.XElement" DbType="Xml" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.usp_getAllRoleInXML" Method="usp_getAllRoleInXML">
+    <ElementType Name="usp_getAllRoleInXMLResult">
+      <Column Name="XML" Type="System.Xml.Linq.XElement" DbType="Xml" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.usp_getAllSalutation" Method="usp_getAllSalutation">
+    <ElementType Name="usp_getAllSalutationResult">
+      <Column Name="SalutationID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="SalutationName" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.usp_getAllSalutationInXML" Method="usp_getAllSalutationInXML">
+    <ElementType Name="usp_getAllSalutationInXMLResult">
+      <Column Name="XML" Type="System.Xml.Linq.XElement" DbType="Xml" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.usp_getAllSchool" Method="usp_getAllSchool">
+    <ElementType Name="usp_getAllSchoolResult">
+      <Column Name="SchoolID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="SchoolName" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.usp_getAllSchoolInXML" Method="usp_getAllSchoolInXML">
+    <ElementType Name="usp_getAllSchoolInXMLResult">
+      <Column Name="XML" Type="System.Xml.Linq.XElement" DbType="Xml" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.usp_getAllStyle" Method="usp_getAllStyle">
+    <ElementType Name="usp_getAllStyleResult">
+      <Column Name="StyleID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="StyleName" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.usp_getAllStyleInXML" Method="usp_getAllStyleInXML">
+    <ElementType Name="usp_getAllStyleInXMLResult">
+      <Column Name="XML" Type="System.Xml.Linq.XElement" DbType="Xml" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.usp_getAllUploadedAttachment" Method="usp_getAllUploadedAttachment">
+    <Parameter Name="nric" Type="System.String" DbType="VarChar(20)" />
+    <ElementType Name="usp_getAllUploadedAttachmentResult">
+      <Column Name="XML" Type="System.Xml.Linq.XElement" DbType="Xml" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.usp_getAppConfig" Method="usp_getAppConfig">
+    <ElementType Name="usp_getAppConfigResult">
+      <Column Name="ConfigName" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="value" Type="System.String" DbType="VarChar(1000) NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.usp_getAppModFuncAccessRights" Method="usp_getAppModFuncAccessRights">
+    <Parameter Name="UserID" Parameter="userID" Type="System.String" DbType="VarChar(50)" />
+    <ElementType Name="usp_getAppModFuncAccessRightsResult">
+      <Column Name="PredcessorID" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="GroupID" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="AppModFuncID" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="AppModFuncName" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="URL" Type="System.String" DbType="VarChar(200) NOT NULL" CanBeNull="false" />
+      <Column Name="Sequence" Type="System.Int32" DbType="Int" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.usp_getCellgroupInfo" Method="usp_getCellgroupInfo">
+    <Parameter Name="cellgroupid" Type="System.Int32" DbType="Int" />
+    <ElementType Name="usp_getCellgroupInfoResult">
+      <Column Name="CellgroupID" Type="System.String" DbType="VarChar(4)" CanBeNull="true" />
+      <Column Name="CellgroupName" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="CellgroupLeader" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="PostalCode" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="StreetAddress" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="BLKHouse" Type="System.String" DbType="VarChar(10) NOT NULL" CanBeNull="false" />
+      <Column Name="Unit" Type="System.String" DbType="VarChar(10) NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.usp_getCourseInfo" Method="usp_getCourseInfo">
+    <Parameter Name="courseid" Type="System.Int32" DbType="Int" />
+    <ElementType Name="usp_getCourseInfoResult">
+      <Column Name="Fee" Type="System.Decimal" DbType="Decimal(5,2) NOT NULL" CanBeNull="false" />
+      <Column Name="CourseDay" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="courseID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="CourseName" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="CourseStartDate" Type="System.String" DbType="VarChar(2000) NOT NULL" CanBeNull="false" />
+      <Column Name="CourseStartTime" Type="System.TimeSpan" DbType="Time NOT NULL" CanBeNull="false" />
+      <Column Name="CourseEndTime" Type="System.TimeSpan" DbType="Time NOT NULL" CanBeNull="false" />
+      <Column Name="courseLocation" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="Name" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="CourseInCharge" Type="System.String" DbType="VarChar(10) NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.usp_getCourseParticipantInformation" Method="usp_getCourseParticipantInformation">
+    <Parameter Name="courseid" Type="System.Int32" DbType="Int" />
+    <Parameter Name="nric" Type="System.String" DbType="VarChar(20)" />
+    <ElementType Name="usp_getCourseParticipantInformationResult">
+      <Column Name="Attendance" Type="System.Xml.Linq.XElement" DbType="Xml" CanBeNull="true" />
+      <Column Name="NRIC" Type="System.String" DbType="VarChar(10) NOT NULL" CanBeNull="false" />
+      <Column Name="EnglishName" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="courseID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="feePaid" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="materialReceived" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.usp_getListofCellgroup" Method="usp_getListofCellgroup">
+    <ElementType Name="usp_getListofCellgroupResult">
+      <Column Name="CellgroupID" Type="System.Byte" DbType="TinyInt NOT NULL" CanBeNull="false" />
+      <Column Name="CellgroupName" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.usp_getListofCourse" Method="usp_getListofCourse">
+    <ElementType Name="usp_getListofCourseResult">
+      <Column Name="courseID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="CourseName" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="CourseStartDate" Type="System.String" DbType="VarChar(8000)" CanBeNull="true" />
+      <Column Name="CourseEndDate" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="CourseStartTime" Type="System.TimeSpan" DbType="Time NOT NULL" CanBeNull="false" />
+      <Column Name="CourseEndTime" Type="System.TimeSpan" DbType="Time NOT NULL" CanBeNull="false" />
+      <Column Name="courseLocation" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="Name" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.usp_getListofCourseParticipants" Method="usp_getListofCourseParticipants">
+    <Parameter Name="courseID" Type="System.Int32" DbType="Int" />
+    <ElementType Name="usp_getListofCourseParticipantsResult">
+      <Column Name="NRIC" Type="System.String" DbType="VarChar(10) NOT NULL" CanBeNull="false" />
+      <Column Name="EnglishName" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="courseID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="feePaid" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="materialReceived" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="Percentage" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Attendance" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.usp_getListofMinistry" Method="usp_getListofMinistry">
+    <ElementType Name="usp_getListofMinistryResult">
+      <Column Name="MinistryID" Type="System.Byte" DbType="TinyInt NOT NULL" CanBeNull="false" />
+      <Column Name="MinistryName" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="MinistryDescription" Type="System.String" DbType="VarChar(2000) NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.usp_getListOfTempMembersForApproval" Method="usp_getListOfTempMembersForApproval">
+    <ElementType Name="usp_getListOfTempMembersForApprovalResult">
+      <Column Name="NRIC" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="VarChar(151) NOT NULL" CanBeNull="false" />
+      <Column Name="DOB" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
+      <Column Name="Gender" Type="System.String" DbType="VarChar(6)" CanBeNull="true" />
+      <Column Name="Nationality" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="MaritalStatus" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+      <Column Name="Email" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="HomeTel" Type="System.String" DbType="VarChar(15) NOT NULL" CanBeNull="false" />
+      <Column Name="MobileTel" Type="System.String" DbType="VarChar(15) NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.usp_getMemberInformationPrinting" Method="usp_getMemberInformationPrinting">
+    <Parameter Name="NRIC" Parameter="nRIC" Type="System.String" DbType="VarChar(10)" />
+    <ElementType Name="usp_getMemberInformationPrintingResult">
+      <Column Name="ParishName" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="CongregationName" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="EnglishName" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="ChineseName" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="DOB" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
+      <Column Name="Gender" Type="System.String" DbType="VarChar(6)" CanBeNull="true" />
+      <Column Name="NRIC" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="MaritalStatus" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+      <Column Name="Nationality" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="Dialect" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="Address1" Type="System.String" DbType="VarChar(108) NOT NULL" CanBeNull="false" />
+      <Column Name="Address2" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="HomeTel" Type="System.String" DbType="VarChar(15) NOT NULL" CanBeNull="false" />
+      <Column Name="MobileTel" Type="System.String" DbType="VarChar(15) NOT NULL" CanBeNull="false" />
+      <Column Name="Languages" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="OccupationName" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="Education" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="BaptismDate" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="BaptismBy" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="BaptismChurch" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="ConfirmDate" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="ConfirmBy" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="ConfirmChurch" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="PreviousChurch" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="Remarks1" Type="System.String" DbType="VarChar(211)" CanBeNull="true" />
+      <Column Name="Remarks2" Type="System.String" DbType="VarChar(1) NOT NULL" CanBeNull="false" />
+      <Column Name="CreatedDate" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
+      <Column Name="Family" Type="System.Xml.Linq.XElement" DbType="Xml NOT NULL" CanBeNull="false" />
+      <Column Name="Child" Type="System.Xml.Linq.XElement" DbType="Xml NOT NULL" CanBeNull="false" />
+      <Column Name="ElectoralRoll" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="MemberDate" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="TransferReason" Type="System.String" DbType="VarChar(1000) NOT NULL" CanBeNull="false" />
+      <Column Name="BaptismByOthers" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="BaptismChurchOthers" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="ConfirmByOthers" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="ConfirmChurchOthers" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="PreviousChurchOthers" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="GUID" Type="System.String" DbType="VarChar(37)" CanBeNull="true" />
+      <Column Name="Filename" Type="System.String" DbType="VarChar(999)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.usp_getMinistryInfo" Method="usp_getMinistryInfo">
+    <Parameter Name="ministryid" Type="System.Int32" DbType="Int" />
+    <ElementType Name="usp_getMinistryInfoResult">
+      <Column Name="MinistryID" Type="System.String" DbType="VarChar(4)" CanBeNull="true" />
+      <Column Name="MinistryName" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="MinistryDescription" Type="System.String" DbType="VarChar(2000) NOT NULL" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="MinistryInCharge" Type="System.String" DbType="VarChar(10) NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.usp_getVisitorInformation" Method="usp_getVisitorInformation">
+    <Parameter Name="NRIC" Parameter="nRIC" Type="System.String" DbType="VarChar(10)" />
+    <ElementType Name="usp_getVisitorInformationResult">
+      <Column Name="EnglishName" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Salutation" Type="System.String" DbType="VarChar(5)" CanBeNull="true" />
+      <Column Name="DOB" Type="System.String" DbType="VarChar(10) NOT NULL" CanBeNull="false" />
+      <Column Name="Gender" Type="System.String" DbType="VarChar(1) NOT NULL" CanBeNull="false" />
+      <Column Name="NRIC" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+      <Column Name="Nationality" Type="System.String" DbType="VarChar(5)" CanBeNull="true" />
+      <Column Name="AddressStreet" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="AddressHouseBlk" Type="System.String" DbType="VarChar(10) NOT NULL" CanBeNull="false" />
+      <Column Name="AddressPostalCode" Type="System.String" DbType="VarChar(6) NOT NULL" CanBeNull="false" />
+      <Column Name="AddressUnit" Type="System.String" DbType="VarChar(10) NOT NULL" CanBeNull="false" />
+      <Column Name="Email" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="Education" Type="System.String" DbType="VarChar(5)" CanBeNull="true" />
+      <Column Name="Occupation" Type="System.String" DbType="VarChar(5)" CanBeNull="true" />
+      <Column Name="Contact" Type="System.String" DbType="VarChar(15) NOT NULL" CanBeNull="false" />
+      <Column Name="Church" Type="System.String" DbType="VarChar(3)" CanBeNull="true" />
+      <Column Name="ChurchOthers" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="CourseAttended" Type="System.Xml.Linq.XElement" DbType="Xml" CanBeNull="true" />
+      <Column Name="History" Type="System.Xml.Linq.XElement" DbType="Xml" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.usp_ManualUpdateAttendance" Method="usp_ManualUpdateAttendance">
+    <Parameter Name="courseid" Type="System.Int32" DbType="Int" />
+    <Parameter Name="nric" Type="System.String" DbType="VarChar(20)" />
+    <Parameter Name="date" Type="System.DateTime" DbType="DateTime" />
+    <Parameter Name="attendance" Type="System.String" DbType="VarChar(10)" />
+    <ElementType Name="usp_ManualUpdateAttendanceResult">
+      <Column Name="Result" Type="System.String" DbType="VarChar(185)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.usp_removeAttachment" Method="usp_removeAttachment">
+    <Parameter Name="AttachmentID" Parameter="attachmentID" Type="System.Int32" DbType="Int" />
+    <Parameter Name="userID" Type="System.String" DbType="VarChar(50)" />
+    <ElementType Name="usp_removeAttachmentResult">
+      <Column Name="" Member="Column1" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.usp_removeCellgroup" Method="usp_removeCellgroup">
+    <Parameter Name="CellgroupID" Parameter="cellgroupID" Type="System.Int32" DbType="Int" />
+    <ElementType Name="usp_removeCellgroupResult">
+      <Column Name="Result" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.usp_removeCourse" Method="usp_removeCourse">
+    <Parameter Name="CourseID" Parameter="courseID" Type="System.Int32" DbType="Int" />
+    <ElementType Name="usp_removeCourseResult">
+      <Column Name="Result" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.usp_removeCourseParticipant" Method="usp_removeCourseParticipant">
+    <Parameter Name="CourseID" Parameter="courseID" Type="System.Int32" DbType="Int" />
+    <Parameter Name="nric" Type="System.String" DbType="VarChar(20)" />
+    <ElementType Name="usp_removeCourseParticipantResult">
+      <Column Name="Result" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.usp_removeMinistry" Method="usp_removeMinistry">
+    <Parameter Name="MinistryID" Parameter="ministryID" Type="System.Int32" DbType="Int" />
+    <ElementType Name="usp_removeMinistryResult">
+      <Column Name="Result" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.usp_removeUser" Method="usp_removeUser">
+    <Parameter Name="USERID" Parameter="uSERID" Type="System.String" DbType="VarChar(50)" />
+    <ElementType Name="usp_removeUserResult">
+      <Column Name="Result" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.usp_searchName" Method="usp_searchName">
+    <Parameter Name="searchText" Type="System.String" DbType="VarChar(100)" />
+    <ElementType Name="usp_searchNameResult">
+      <Column Name="Result" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.usp_searchVisitorsForUpdate" Method="usp_searchVisitorsForUpdate">
+    <Parameter Name="NRIC" Parameter="nRIC" Type="System.String" DbType="VarChar(10)" />
+    <Parameter Name="Name" Parameter="name" Type="System.String" DbType="VarChar(50)" />
+    <ElementType Name="usp_searchVisitorsForUpdateResult">
+      <Column Name="NRIC" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="VarChar(151) NOT NULL" CanBeNull="false" />
+      <Column Name="DOB" Type="System.String" DbType="VarChar(10) NOT NULL" CanBeNull="false" />
+      <Column Name="Gender" Type="System.String" DbType="VarChar(6)" CanBeNull="true" />
+      <Column Name="Nationality" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="Email" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="Contact" Type="System.String" DbType="VarChar(15) NOT NULL" CanBeNull="false" />
+      <Column Name="Email1" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.usp_UpdateBusGroupCluster" Method="usp_UpdateBusGroupCluster">
+    <Parameter Name="xml" Type="System.Xml.Linq.XElement" DbType="Xml" />
+    <ElementType Name="usp_UpdateBusGroupClusterResult">
+      <Column Name="Result" Type="System.String" DbType="VarChar(48) NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.usp_UpdateCellgroup" Method="usp_UpdateCellgroup">
+    <Parameter Name="cellgroupid" Type="System.Int32" DbType="Int" />
+    <Parameter Name="cellgroupname" Type="System.String" DbType="VarChar(50)" />
+    <Parameter Name="incharge" Type="System.String" DbType="VarChar(10)" />
+    <Parameter Name="postalCode" Type="System.Int32" DbType="Int" />
+    <Parameter Name="blkhouse" Type="System.String" DbType="VarChar(10)" />
+    <Parameter Name="streetAddress" Type="System.String" DbType="VarChar(100)" />
+    <Parameter Name="unit" Type="System.String" DbType="VarChar(10)" />
+    <ElementType Name="usp_UpdateCellgroupResult">
+      <Column Name="Result" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.usp_UpdateChurchArea" Method="usp_UpdateChurchArea">
+    <Parameter Name="xml" Type="System.Xml.Linq.XElement" DbType="Xml" />
+    <ElementType Name="usp_UpdateChurchAreaResult">
+      <Column Name="Result" Type="System.String" DbType="VarChar(37) NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.usp_UpdateCityKidsAttendance" Method="usp_UpdateCityKidsAttendance">
+    <Parameter Name="NRIC" Parameter="nRIC" Type="System.String" DbType="VarChar(10)" />
+    <ElementType Name="usp_UpdateCityKidsAttendanceResult">
+      <Column Name="" Member="Column1" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.usp_UpdateClubGroup" Method="usp_UpdateClubGroup">
+    <Parameter Name="xml" Type="System.Xml.Linq.XElement" DbType="Xml" />
+    <ElementType Name="usp_UpdateClubGroupResult">
+      <Column Name="Result" Type="System.String" DbType="VarChar(42) NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.usp_UpdateConfig" Method="usp_UpdateConfig">
+    <Parameter Name="xml" Type="System.Xml.Linq.XElement" DbType="Xml" />
+    <ElementType Name="usp_UpdateConfigResult">
+      <Column Name="Result" Type="System.String" DbType="VarChar(15) NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.usp_UpdateCongregation" Method="usp_UpdateCongregation">
+    <Parameter Name="xml" Type="System.Xml.Linq.XElement" DbType="Xml" />
+    <ElementType Name="usp_UpdateCongregationResult">
+      <Column Name="Result" Type="System.String" DbType="VarChar(45) NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.usp_UpdateCountry" Method="usp_UpdateCountry">
+    <Parameter Name="xml" Type="System.Xml.Linq.XElement" DbType="Xml" />
+    <ElementType Name="usp_UpdateCountryResult">
+      <Column Name="Result" Type="System.String" DbType="VarChar(40) NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.usp_UpdateCourse" Method="usp_UpdateCourse">
+    <Parameter Name="courseid" Type="System.Int32" DbType="Int" />
+    <Parameter Name="coursename" Type="System.String" DbType="VarChar(100)" />
+    <Parameter Name="startdate" Type="System.String" DbType="VarChar(2000)" />
+    <Parameter Name="starttime" Type="System.String" DbType="VarChar(5)" />
+    <Parameter Name="endtime" Type="System.String" DbType="VarChar(5)" />
+    <Parameter Name="incharge" Type="System.String" DbType="VarChar(10)" />
+    <Parameter Name="location" Type="System.Int32" DbType="Int" />
+    <ElementType Name="usp_UpdateCourseResult">
+      <Column Name="Result" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.usp_UpdateCourseAttendance" Method="usp_UpdateCourseAttendance">
+    <Parameter Name="courseid" Type="System.Int32" DbType="Int" />
+    <Parameter Name="nric" Type="System.String" DbType="VarChar(20)" />
+    <Parameter Name="DATE" Parameter="dATE" Type="System.DateTime" DbType="Date" />
+    <ElementType Name="usp_UpdateCourseAttendanceResult">
+      <Column Name="Result" Type="System.String" DbType="VarChar(185)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.usp_UpdateCourseParticipantInformation" Method="usp_UpdateCourseParticipantInformation">
+    <Parameter Name="courseid" Type="System.Int32" DbType="Int" />
+    <Parameter Name="nric" Type="System.String" DbType="VarChar(20)" />
+    <Parameter Name="feepaid" Type="System.String" DbType="VarChar(1)" />
+    <Parameter Name="materialreceived" Type="System.String" DbType="VarChar(1)" />
+    <ElementType Name="usp_UpdateCourseParticipantInformationResult">
+      <Column Name="Result" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.usp_UpdateDialect" Method="usp_UpdateDialect">
+    <Parameter Name="xml" Type="System.Xml.Linq.XElement" DbType="Xml" />
+    <ElementType Name="usp_UpdateDialectResult">
+      <Column Name="Result" Type="System.String" DbType="VarChar(40) NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.usp_UpdateEducation" Method="usp_UpdateEducation">
+    <Parameter Name="xml" Type="System.Xml.Linq.XElement" DbType="Xml" />
+    <ElementType Name="usp_UpdateEducationResult">
+      <Column Name="Result" Type="System.String" DbType="VarChar(42) NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.usp_UpdateFileType" Method="usp_UpdateFileType">
+    <Parameter Name="xml" Type="System.Xml.Linq.XElement" DbType="Xml" />
+    <ElementType Name="usp_UpdateFileTypeResult">
+      <Column Name="Result" Type="System.String" DbType="VarChar(41) NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.usp_UpdateLanguage" Method="usp_UpdateLanguage">
+    <Parameter Name="xml" Type="System.Xml.Linq.XElement" DbType="Xml" />
+    <ElementType Name="usp_UpdateLanguageResult">
+      <Column Name="Result" Type="System.String" DbType="VarChar(41) NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.usp_UpdateMaritalStatus" Method="usp_UpdateMaritalStatus">
+    <Parameter Name="xml" Type="System.Xml.Linq.XElement" DbType="Xml" />
+    <ElementType Name="usp_UpdateMaritalStatusResult">
+      <Column Name="Result" Type="System.String" DbType="VarChar(47) NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.usp_updateMember" Method="usp_updateMember">
+    <Parameter Name="updateXML" Type="System.Xml.Linq.XElement" DbType="Xml" />
+    <ElementType Name="usp_updateMemberResult">
+      <Column Name="Result" Type="System.String" DbType="VarChar(7) NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.usp_UpdateMinistry" Method="usp_UpdateMinistry">
+    <Parameter Name="ministryid" Type="System.Int32" DbType="Int" />
+    <Parameter Name="ministryname" Type="System.String" DbType="VarChar(50)" />
+    <Parameter Name="ministrydescription" Type="System.String" DbType="VarChar(2000)" />
+    <Parameter Name="incharge" Type="System.String" DbType="VarChar(10)" />
+    <ElementType Name="usp_UpdateMinistryResult">
+      <Column Name="Result" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.usp_UpdateNewMember" Method="usp_UpdateNewMember">
+    <Parameter Name="updateXML" Type="System.Xml.Linq.XElement" DbType="Xml" />
+    <ElementType Name="usp_UpdateNewMemberResult">
+      <Column Name="Result" Type="System.String" DbType="VarChar(7) NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.usp_UpdateOccupation" Method="usp_UpdateOccupation">
+    <Parameter Name="xml" Type="System.Xml.Linq.XElement" DbType="Xml" />
+    <ElementType Name="usp_UpdateOccupationResult">
+      <Column Name="Result" Type="System.String" DbType="VarChar(43) NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.usp_UpdateParish" Method="usp_UpdateParish">
+    <Parameter Name="xml" Type="System.Xml.Linq.XElement" DbType="Xml" />
+    <ElementType Name="usp_UpdateParishResult">
+      <Column Name="Result" Type="System.String" DbType="VarChar(39) NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.usp_UpdatePostal" Method="usp_UpdatePostal">
+    <Parameter Name="xml" Type="System.Xml.Linq.XElement" DbType="Xml" />
+    <ElementType Name="usp_UpdatePostalResult">
+      <Column Name="Result" Type="System.String" DbType="VarChar(15) NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.usp_UpdateRace" Method="usp_UpdateRace">
+    <Parameter Name="xml" Type="System.Xml.Linq.XElement" DbType="Xml" />
+    <ElementType Name="usp_UpdateRaceResult">
+      <Column Name="Result" Type="System.String" DbType="VarChar(37) NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.usp_UpdateReligion" Method="usp_UpdateReligion">
+    <Parameter Name="xml" Type="System.Xml.Linq.XElement" DbType="Xml" />
+    <ElementType Name="usp_UpdateReligionResult">
+      <Column Name="Result" Type="System.String" DbType="VarChar(41) NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.usp_UpdateSalutation" Method="usp_UpdateSalutation">
+    <Parameter Name="xml" Type="System.Xml.Linq.XElement" DbType="Xml" />
+    <ElementType Name="usp_UpdateSalutationResult">
+      <Column Name="Result" Type="System.String" DbType="VarChar(43) NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.usp_UpdateSchool" Method="usp_UpdateSchool">
+    <Parameter Name="xml" Type="System.Xml.Linq.XElement" DbType="Xml" />
+    <ElementType Name="usp_UpdateSchoolResult">
+      <Column Name="Result" Type="System.String" DbType="VarChar(39) NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.usp_UpdateStyle" Method="usp_UpdateStyle">
+    <Parameter Name="xml" Type="System.Xml.Linq.XElement" DbType="Xml" />
+    <ElementType Name="usp_UpdateStyleResult">
+      <Column Name="Result" Type="System.String" DbType="VarChar(38) NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.usp_updateTempMember" Method="usp_updateTempMember">
+    <Parameter Name="updateXML" Type="System.Xml.Linq.XElement" DbType="Xml" />
+    <ElementType Name="usp_updateTempMemberResult">
+      <Column Name="Result" Type="System.String" DbType="VarChar(7) NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.usp_UpdateUserInformation" Method="usp_UpdateUserInformation">
+    <Parameter Name="UserID" Parameter="userID" Type="System.String" DbType="VarChar(50)" />
+    <Parameter Name="Name" Parameter="name" Type="System.String" DbType="VarChar(100)" />
+    <Parameter Name="Email" Parameter="email" Type="System.String" DbType="VarChar(100)" />
+    <Parameter Name="Phone" Parameter="phone" Type="System.String" DbType="VarChar(100)" />
+    <Parameter Name="Mobile" Parameter="mobile" Type="System.String" DbType="VarChar(100)" />
+    <Parameter Name="Department" Parameter="department" Type="System.String" DbType="VarChar(100)" />
+    <Parameter Name="NRIC" Parameter="nRIC" Type="System.String" DbType="VarChar(50)" />
+    <Parameter Name="Style" Parameter="style" Type="System.String" DbType="VarChar(2)" />
+    <ElementType Name="usp_UpdateUserInformationResult">
+      <Column Name="Result" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.usp_UpdateUserPassword" Method="usp_UpdateUserPassword">
+    <Parameter Name="UserID" Parameter="userID" Type="System.String" DbType="VarChar(50)" />
+    <Parameter Name="oldPassword" Type="System.String" DbType="VarChar(40)" />
+    <Parameter Name="newPassword" Type="System.String" DbType="VarChar(50)" />
+    <ElementType Name="usp_UpdateUserPasswordResult">
+      <Column Name="Result" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.usp_listOfRoles" Method="usp_listOfRoles">
+    <ElementType Name="usp_listOfRolesResult">
+      <Column Name="RoleID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="RoleName" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.usp_getAllModulesFunctions" Method="usp_getAllModulesFunctions">
+    <ElementType Name="usp_getAllModulesFunctionsResult">
+      <Column Name="Modules" Type="System.Xml.Linq.XElement" DbType="Xml" CanBeNull="true" />
+      <Column Name="Functions" Type="System.Xml.Linq.XElement" DbType="Xml" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.usp_UpdateRoles" Method="usp_UpdateRoles">
+    <Parameter Name="AllRoles" Parameter="allRoles" Type="System.Xml.Linq.XElement" DbType="Xml" />
+    <ElementType Name="usp_UpdateRolesResult">
+      <Column Name="AddedUsers" Type="System.String" DbType="NVarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="FailedRole" Type="System.String" DbType="NVarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="DeletedUsers" Type="System.String" DbType="NVarChar(MAX) NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.usp_UpdateRolesUserID" Method="usp_UpdateRolesUserID">
+    <Parameter Name="UserID" Parameter="userID" Type="System.String" DbType="VarChar(MAX)" />
+    <Parameter Name="Role" Parameter="role" Type="System.String" DbType="VarChar(3)" />
+    <ElementType Name="usp_UpdateRolesUserIDResult">
+      <Column Name="AddedUsers" Type="System.String" DbType="NVarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="UpdatedUsers" Type="System.String" DbType="NVarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="InvalidUsers" Type="System.String" DbType="NVarChar(MAX) NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.usp_getAssignedModulesFunctions" Method="usp_getAssignedModulesFunctions">
+    <Parameter Name="RoleID" Parameter="roleID" Type="System.Int32" DbType="Int" />
+    <ElementType Name="usp_getAssignedModulesFunctionsResult">
+      <Column Name="XML" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.usp_getUsersInRole" Method="usp_getUsersInRole">
+    <Parameter Name="RoleID" Parameter="roleID" Type="System.Int32" DbType="Int" />
+    <ElementType Name="usp_getUsersInRoleResult">
+      <Column Name="Display" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.usp_UpdateAssignedModulesFunctions" Method="usp_UpdateAssignedModulesFunctions">
+    <Parameter Name="XML" Parameter="xML" Type="System.Xml.Linq.XElement" DbType="Xml" />
+    <Parameter Name="RoleID" Parameter="roleID" Type="System.Int32" DbType="Int" />
+    <ElementType Name="usp_UpdateAssignedModulesFunctionsResult">
+      <Column Name="Result" Type="System.String" DbType="VarChar(59) NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.usp_getModuleFunctionsAccessRight" Method="usp_getModuleFunctionsAccessRight">
+    <Parameter Name="UserID" Parameter="userID" Type="System.String" DbType="VarChar(50)" />
+    <ElementType Name="usp_getModuleFunctionsAccessRightResult">
+      <Column Name="FunctionAccessRight" Type="System.Xml.Linq.XElement" DbType="Xml" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.usp_searchMembersForUpdate" Method="usp_searchMembersForUpdate">
+    <Parameter Name="NRIC" Parameter="nRIC" Type="System.String" DbType="VarChar(10)" />
+    <Parameter Name="Name" Parameter="name" Type="System.String" DbType="VarChar(50)" />
+    <Parameter Name="UserID" Parameter="userID" Type="System.String" DbType="VarChar(50)" />
+    <ElementType Name="usp_searchMembersForUpdateResult">
+      <Column Name="NRIC" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="VarChar(151) NOT NULL" CanBeNull="false" />
+      <Column Name="DOB" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
+      <Column Name="Gender" Type="System.String" DbType="VarChar(6)" CanBeNull="true" />
+      <Column Name="Nationality" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="MaritalStatus" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+      <Column Name="Email" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="HomeTel" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="MobileTel" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.usp_resetUserPassword" Method="usp_resetUserPassword">
+    <Parameter Name="UserID" Parameter="userID" Type="System.String" DbType="VarChar(50)" />
+    <Parameter Name="Password" Parameter="password" Type="System.String" DbType="VarChar(40)" />
+    <ElementType Name="usp_resetUserPasswordResult">
+      <Column Name="" Member="Column1" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.usp_getMembersReportingManualSearch" Method="usp_getMembersReportingManualSearch">
+    <Parameter Name="gender" Type="System.String" DbType="VarChar(3)" />
+    <Parameter Name="marriage" Type="System.String" DbType="VarChar(3)" />
+    <Parameter Name="nationality" Type="System.String" DbType="VarChar(3)" />
+    <Parameter Name="dialect" Type="System.String" DbType="VarChar(3)" />
+    <Parameter Name="education" Type="System.String" DbType="VarChar(3)" />
+    <Parameter Name="occupation" Type="System.String" DbType="VarChar(3)" />
+    <Parameter Name="congregation" Type="System.String" DbType="VarChar(3)" />
+    <Parameter Name="language" Type="System.String" DbType="VarChar(3)" />
+    <Parameter Name="cellgroup" Type="System.String" DbType="VarChar(3)" />
+    <Parameter Name="ministry" Type="System.String" DbType="VarChar(3)" />
+    <Parameter Name="batismchurch" Type="System.String" DbType="VarChar(3)" />
+    <Parameter Name="confirmchurch" Type="System.String" DbType="VarChar(3)" />
+    <Parameter Name="previouschurch" Type="System.String" DbType="VarChar(3)" />
+    <Parameter Name="baptismby" Type="System.String" DbType="VarChar(3)" />
+    <Parameter Name="confirmby" Type="System.String" DbType="VarChar(3)" />
+    <Parameter Name="residentalarea" Type="System.String" DbType="VarChar(200)" />
+    <Parameter Name="UserID" Parameter="userID" Type="System.String" DbType="VarChar(50)" />
+    <ElementType Name="usp_getMembersReportingManualSearchResult">
+      <Column Name="CongregationName" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="EnglishName" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="ChineseName" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="DOB" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
+      <Column Name="Gender" Type="System.String" DbType="VarChar(6)" CanBeNull="true" />
+      <Column Name="NRIC" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="MaritalStatus" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+      <Column Name="Nationality" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="Dialect" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="HomeTel" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="MobileTel" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Languages" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="OccupationName" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="Education" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="BaptismDate" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="BaptismBy" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="BaptismChurch" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="ConfirmDate" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="ConfirmBy" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="ConfirmChurch" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="PreviousChurch" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="ElectoralRoll" Type="System.String" DbType="VarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="MemberDate" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="MinistryInvolvement" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="MarriageDurationYears" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Age" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Cellgroup" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Email" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.usp_getMembersReporting" Method="usp_getMembersReporting">
+    <Parameter Name="reportType" Type="System.String" DbType="VarChar(10)" />
+    <Parameter Name="inputA" Type="System.String" DbType="VarChar(100)" />
+    <Parameter Name="inputB" Type="System.String" DbType="VarChar(100)" />
+    <Parameter Name="UserID" Parameter="userID" Type="System.String" DbType="VarChar(50)" />
+    <ElementType Name="usp_getMembersReportingResult">
+      <Column Name="CongregationName" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="EnglishName" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="ChineseName" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="DOB" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
+      <Column Name="Gender" Type="System.String" DbType="VarChar(6)" CanBeNull="true" />
+      <Column Name="NRIC" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="MaritalStatus" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+      <Column Name="Nationality" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="Dialect" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="HomeTel" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="MobileTel" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Languages" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="OccupationName" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="Education" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="BaptismDate" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="BaptismBy" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="BaptismChurch" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="ConfirmDate" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="ConfirmBy" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="ConfirmChurch" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="PreviousChurch" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="ElectoralRoll" Type="System.String" DbType="VarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="MemberDate" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="MinistryInvolvement" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="MarriageDurationYears" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Age" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Cellgroup" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Email" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.usp_getStaffName" Method="usp_getStaffName">
+    <Parameter Name="UserID" Parameter="userID" Type="System.String" DbType="VarChar(50)" />
+    <ElementType Name="usp_getStaffNameResult">
+      <Column Name="Name" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.usp_getAllBusGroupCluster" Method="usp_getAllBusGroupCluster">
+    <ElementType Name="usp_getAllBusGroupClusterResult">
+      <Column Name="BusGroupClusterID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="BusGroupClusterName" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.usp_getAllClubgroup" Method="usp_getAllClubgroup">
+    <ElementType Name="usp_getAllClubgroupResult">
+      <Column Name="ClubGroupID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ClubGroupName" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.usp_getDBBackup" Method="usp_getDBBackup">
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.usp_getCityKidInformation" Method="usp_getCityKidInformation">
+    <Parameter Name="NRIC" Parameter="nRIC" Type="System.String" DbType="VarChar(10)" />
+    <ElementType Name="usp_getCityKidInformationResult">
+      <Column Name="NRIC" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Gender" Type="System.String" DbType="VarChar(1) NOT NULL" CanBeNull="false" />
+      <Column Name="DOB" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
+      <Column Name="HomeTel" Type="System.String" DbType="VarChar(15) NOT NULL" CanBeNull="false" />
+      <Column Name="MobileTel" Type="System.String" DbType="VarChar(15) NOT NULL" CanBeNull="false" />
+      <Column Name="AddressStreet" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="AddressHouseBlk" Type="System.String" DbType="VarChar(7) NOT NULL" CanBeNull="false" />
+      <Column Name="AddressPostalCode" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="AddressUnit" Type="System.String" DbType="VarChar(10) NOT NULL" CanBeNull="false" />
+      <Column Name="Email" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="SpecialNeeds" Type="System.String" DbType="VarChar(1000) NOT NULL" CanBeNull="false" />
+      <Column Name="EmergencyContact" Type="System.String" DbType="VarChar(15) NOT NULL" CanBeNull="false" />
+      <Column Name="EmergencyContactName" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Transport" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="Religion" Type="System.Byte" DbType="TinyInt NOT NULL" CanBeNull="false" />
+      <Column Name="Race" Type="System.Byte" DbType="TinyInt NOT NULL" CanBeNull="false" />
+      <Column Name="Nationality" Type="System.Byte" DbType="TinyInt NOT NULL" CanBeNull="false" />
+      <Column Name="School" Type="System.Byte" DbType="TinyInt NOT NULL" CanBeNull="false" />
+      <Column Name="ClubGroup" Type="System.Byte" DbType="TinyInt NOT NULL" CanBeNull="false" />
+      <Column Name="BusGroupCluster" Type="System.Byte" DbType="TinyInt NOT NULL" CanBeNull="false" />
+      <Column Name="Remarks" Type="System.String" DbType="VarChar(1000) NOT NULL" CanBeNull="false" />
+      <Column Name="Points" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Photo" Type="System.String" DbType="VarChar(1000) NOT NULL" CanBeNull="false" />
+      <Column Name="History" Type="System.Xml.Linq.XElement" DbType="Xml" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.usp_updateCityKid" Method="usp_updateCityKid">
+    <Parameter Name="updateXML" Type="System.Xml.Linq.XElement" DbType="Xml" />
+    <ElementType Name="usp_updateCityKidResult">
+      <Column Name="Result" Type="System.String" DbType="VarChar(7) NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.usp_checkFileInUsed" Method="usp_checkFileInUsed">
+    <Parameter Name="xml" Type="System.Xml.Linq.XElement" DbType="Xml" />
+    <ElementType Name="usp_checkFileInUsedResult">
+      <Column Name="Res" Type="System.Xml.Linq.XElement" DbType="Xml" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.usp_UpdateCityKidsPoints" Method="usp_UpdateCityKidsPoints">
+    <Parameter Name="XML" Parameter="xML" Type="System.Xml.Linq.XElement" DbType="Xml" />
+    <Parameter Name="UserID" Parameter="userID" Type="System.String" DbType="VarChar(50)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.usp_searchCityKidsForUpdate" Method="usp_searchCityKidsForUpdate">
+    <Parameter Name="NRIC" Parameter="nRIC" Type="System.String" DbType="VarChar(10)" />
+    <Parameter Name="Name" Parameter="name" Type="System.String" DbType="VarChar(50)" />
+    <Parameter Name="BusGroup" Parameter="busGroup" Type="System.String" DbType="VarChar(3)" />
+    <Parameter Name="ClubGroup" Parameter="clubGroup" Type="System.String" DbType="VarChar(3)" />
+    <Parameter Name="UserID" Parameter="userID" Type="System.String" DbType="VarChar(50)" />
+    <ElementType Name="usp_searchCityKidsForUpdateResult">
+      <Column Name="NRIC" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="DOB" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
+      <Column Name="Gender" Type="System.String" DbType="VarChar(6)" CanBeNull="true" />
+      <Column Name="Nationality" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="Email" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="HomeTel" Type="System.String" DbType="VarChar(15) NOT NULL" CanBeNull="false" />
+      <Column Name="MobileTel" Type="System.String" DbType="VarChar(15) NOT NULL" CanBeNull="false" />
+      <Column Name="Points" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="ClubGroupName" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="BusGroupClusterName" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.usp_getCityKidSchedule" Method="usp_getCityKidSchedule">
+    <Parameter Name="CourseID" Parameter="courseID" Type="System.Int32" DbType="Int" />
+    <ElementType Name="usp_getCityKidScheduleResult">
+      <Column Name="Schedule" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.usp_updateCityKidSchedule" Method="usp_updateCityKidSchedule">
+    <Parameter Name="CourseID" Parameter="courseID" Type="System.Int32" DbType="Int" />
+    <Parameter Name="Schedule" Parameter="schedule" Type="System.String" DbType="VarChar(MAX)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.usp_getAllFamilyType" Method="usp_getAllFamilyType">
+    <ElementType Name="usp_getAllFamilyTypeResult">
+      <Column Name="FamilyTypeID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="FamilyType" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.usp_getAllFamilyTypeInXML" Method="usp_getAllFamilyTypeInXML">
+    <ElementType Name="usp_getAllFamilyTypeInXMLResult">
+      <Column Name="XML" Type="System.Xml.Linq.XElement" DbType="Xml" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.usp_UpdateFamilyType" Method="usp_UpdateFamilyType">
+    <Parameter Name="xml" Type="System.Xml.Linq.XElement" DbType="Xml" />
+    <ElementType Name="usp_UpdateFamilyTypeResult">
+      <Column Name="Result" Type="System.String" DbType="VarChar(19) NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.usp_getAllStaff" Method="usp_getAllStaff">
+    <ElementType Name="usp_getAllStaffResult">
+      <Column Name="Name" Type="System.String" DbType="VarChar(151)" CanBeNull="true" />
+      <Column Name="USERID" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Email" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="Phone" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="Mobile" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="Department" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="RoleName" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.usp_getAllTextFieldLengthInXML" Method="usp_getAllTextFieldLengthInXML">
+    <ElementType Name="usp_getAllTextFieldLengthInXMLResult">
+      <Column Name="XML" Type="System.Xml.Linq.XElement" DbType="Xml" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.usp_removeMember" Method="usp_removeMember">
+    <Parameter Name="NRIC" Parameter="nRIC" Type="System.String" DbType="VarChar(20)" />
+    <Parameter Name="Type" Parameter="type" Type="System.String" DbType="VarChar(10)" />
+    <ElementType Name="usp_removeMemberResult">
+      <Column Name="Result" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.usp_insertlogging" Method="usp_insertlogging">
+    <Parameter Name="Type" Parameter="type" Type="System.Char" DbType="Char(1)" />
+    <Parameter Name="ActionBy" Parameter="actionBy" Type="System.String" DbType="VarChar(50)" />
+    <Parameter Name="ProgramReference" Parameter="programReference" Type="System.String" DbType="VarChar(100)" />
+    <Parameter Name="Description" Parameter="description" Type="System.String" DbType="VarChar(2000)" />
+    <Parameter Name="DebugLevel" Parameter="debugLevel" Type="System.Int32" DbType="Int" />
+    <Parameter Name="ReferenceType" Parameter="referenceType" Type="System.String" DbType="VarChar(100)" />
+    <Parameter Name="Reference" Parameter="reference" Type="System.String" DbType="VarChar(100)" />
+    <Parameter Name="Updates" Parameter="updates" Type="System.Xml.Linq.XElement" DbType="Xml" />
+    <ElementType Name="usp_insertloggingResult">
+      <Column Name="Result" Type="System.Decimal" DbType="Decimal(38,0)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.usp_getMemberInformation" Method="usp_getMemberInformation">
+    <Parameter Name="NRIC" Parameter="nRIC" Type="System.String" DbType="VarChar(10)" />
+    <Parameter Name="Type" Parameter="type" Type="System.String" DbType="VarChar(10)" />
+    <ElementType Name="usp_getMemberInformationResult">
+      <Column Name="EnglishName" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Salutation" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ChineseName" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="DOB" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
+      <Column Name="Gender" Type="System.String" DbType="VarChar(1) NOT NULL" CanBeNull="false" />
+      <Column Name="NRIC" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+      <Column Name="Nationality" Type="System.Byte" DbType="TinyInt NOT NULL" CanBeNull="false" />
+      <Column Name="Dialect" Type="System.Byte" DbType="TinyInt NOT NULL" CanBeNull="false" />
+      <Column Name="MaritalStatus" Type="System.Byte" DbType="TinyInt NOT NULL" CanBeNull="false" />
+      <Column Name="MarriageDate" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="AddressStreet" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="AddressHouseBlk" Type="System.String" DbType="VarChar(70) NOT NULL" CanBeNull="false" />
+      <Column Name="AddressPostalCode" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="AddressUnit" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="Email" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="Education" Type="System.Byte" DbType="TinyInt NOT NULL" CanBeNull="false" />
+      <Column Name="Language" Type="System.String" DbType="VarChar(200) NOT NULL" CanBeNull="false" />
+      <Column Name="Occupation" Type="System.Byte" DbType="TinyInt NOT NULL" CanBeNull="false" />
+      <Column Name="HomeTel" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="MobileTel" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="BaptismDate" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="BaptismBy" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="BaptismChurch" Type="System.Byte" DbType="TinyInt NOT NULL" CanBeNull="false" />
+      <Column Name="ConfirmDate" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="ConfirmBy" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="ConfirmChurch" Type="System.Byte" DbType="TinyInt NOT NULL" CanBeNull="false" />
+      <Column Name="Family" Type="System.Xml.Linq.XElement" DbType="Xml NOT NULL" CanBeNull="false" />
+      <Column Name="Child" Type="System.Xml.Linq.XElement" DbType="Xml NOT NULL" CanBeNull="false" />
+      <Column Name="CurrentParish" Type="System.Byte" DbType="TinyInt NOT NULL" CanBeNull="false" />
+      <Column Name="ICPhoto" Type="System.String" DbType="VarChar(1000) NOT NULL" CanBeNull="false" />
+      <Column Name="PreviousChurch" Type="System.Byte" DbType="TinyInt NOT NULL" CanBeNull="false" />
+      <Column Name="DeceasedDate" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="CreatedDate" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
+      <Column Name="TransferReason" Type="System.String" DbType="VarChar(1000) NOT NULL" CanBeNull="false" />
+      <Column Name="CellGroup" Type="System.Byte" DbType="TinyInt NOT NULL" CanBeNull="false" />
+      <Column Name="Congregation" Type="System.Byte" DbType="TinyInt NOT NULL" CanBeNull="false" />
+      <Column Name="CarIU" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="Remarks" Type="System.String" DbType="VarChar(1000) NOT NULL" CanBeNull="false" />
+      <Column Name="BaptismByOthers" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="BaptismChurchOthers" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="ConfirmByOthers" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="ConfirmChurchOthers" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="PreviousChurchOthers" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="CourseAttended" Type="System.Xml.Linq.XElement" DbType="Xml" CanBeNull="true" />
+      <Column Name="ElectoralRoll" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="MinistryInvolvement" Type="System.Xml.Linq.XElement" DbType="Xml NOT NULL" CanBeNull="false" />
+      <Column Name="Sponsor1" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="Sponsor2" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="Sponsor2Contact" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="MemberDate" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="TransferTo" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="TransferToDate" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="Sponsor1Name" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="History" Type="System.Xml.Linq.XElement" DbType="Xml" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.usp_searchTempMembers" Method="usp_searchTempMembers">
+    <Parameter Name="NRIC" Parameter="nRIC" Type="System.String" DbType="VarChar(10)" />
+    <Parameter Name="DOB" Parameter="dOB" Type="System.DateTime" DbType="Date" />
+    <ElementType Name="usp_searchTempMembersResult">
+      <Column Name="Congregation" Type="System.Byte" DbType="TinyInt NOT NULL" CanBeNull="false" />
+      <Column Name="MarriageDate" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="Salutation" Type="System.Byte" DbType="TinyInt NOT NULL" CanBeNull="false" />
+      <Column Name="ICPhoto" Type="System.String" DbType="VarChar(1000) NOT NULL" CanBeNull="false" />
+      <Column Name="EnglishName" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="ChineseName" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="NRIC" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="DOB" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
+      <Column Name="Gender" Type="System.String" DbType="VarChar(1) NOT NULL" CanBeNull="false" />
+      <Column Name="MaritalStatus" Type="System.Byte" DbType="TinyInt NOT NULL" CanBeNull="false" />
+      <Column Name="AddressStreet" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="AddressHouseBlk" Type="System.String" DbType="VarChar(7) NOT NULL" CanBeNull="false" />
+      <Column Name="AddressUnit" Type="System.String" DbType="VarChar(10) NOT NULL" CanBeNull="false" />
+      <Column Name="AddressPostalCode" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Nationality" Type="System.Byte" DbType="TinyInt NOT NULL" CanBeNull="false" />
+      <Column Name="Dialect" Type="System.Byte" DbType="TinyInt NOT NULL" CanBeNull="false" />
+      <Column Name="Email" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="Education" Type="System.Byte" DbType="TinyInt NOT NULL" CanBeNull="false" />
+      <Column Name="Language" Type="System.String" DbType="VarChar(200) NOT NULL" CanBeNull="false" />
+      <Column Name="Occupation" Type="System.Byte" DbType="TinyInt NOT NULL" CanBeNull="false" />
+      <Column Name="HomeTel" Type="System.String" DbType="VarChar(15) NOT NULL" CanBeNull="false" />
+      <Column Name="MobileTel" Type="System.String" DbType="VarChar(15) NOT NULL" CanBeNull="false" />
+      <Column Name="BaptismDate" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="BaptismBy" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="BaptismChurch" Type="System.Byte" DbType="TinyInt NOT NULL" CanBeNull="false" />
+      <Column Name="ConfirmBy" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="ConfirmChurch" Type="System.Byte" DbType="TinyInt NOT NULL" CanBeNull="false" />
+      <Column Name="ConfirmDate" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="PreviousChurch" Type="System.Byte" DbType="TinyInt NOT NULL" CanBeNull="false" />
+      <Column Name="Sponsor1" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="Sponsor2" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="Sponsor2Contact" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="Sponsor1Text" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="Sponsor2Text" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="MinistryInterested" Type="System.Xml.Linq.XElement" DbType="Xml NOT NULL" CanBeNull="false" />
+      <Column Name="CellgroupInterested" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="ServeCongregationInterested" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="TithingInterested" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="Family" Type="System.Xml.Linq.XElement" DbType="Xml NOT NULL" CanBeNull="false" />
+      <Column Name="Child" Type="System.Xml.Linq.XElement" DbType="Xml NOT NULL" CanBeNull="false" />
+      <Column Name="TransferReason" Type="System.String" DbType="VarChar(1000) NOT NULL" CanBeNull="false" />
+      <Column Name="BaptismByOthers" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="BaptismChurchOthers" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="ConfirmByOthers" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="ConfirmChurchOthers" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="PreviousChurchOthers" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.usp_getUserInformation" Method="usp_getUserInformation">
+    <Parameter Name="UserID" Parameter="userID" Type="System.String" DbType="VarChar(50)" />
+    <ElementType Name="usp_getUserInformationResult">
+      <Column Name="[XML_F52E2B61-18A1-11d1-B105-00805F49916B]" Member="XML_F52E2B61_18A1_11d1_B105_00805F49916B" Type="System.String" DbType="NText" CanBeNull="true" UpdateCheck="Never" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.usp_getMembersTempReportingManualSearch" Method="usp_getMembersTempReportingManualSearch">
+    <Parameter Name="gender" Type="System.String" DbType="VarChar(3)" />
+    <Parameter Name="marriage" Type="System.String" DbType="VarChar(3)" />
+    <Parameter Name="nationality" Type="System.String" DbType="VarChar(3)" />
+    <Parameter Name="dialect" Type="System.String" DbType="VarChar(3)" />
+    <Parameter Name="education" Type="System.String" DbType="VarChar(3)" />
+    <Parameter Name="occupation" Type="System.String" DbType="VarChar(3)" />
+    <Parameter Name="congregation" Type="System.String" DbType="VarChar(3)" />
+    <Parameter Name="language" Type="System.String" DbType="VarChar(3)" />
+    <Parameter Name="cellgroup" Type="System.String" DbType="VarChar(3)" />
+    <Parameter Name="ministry" Type="System.String" DbType="VarChar(3)" />
+    <Parameter Name="batismchurch" Type="System.String" DbType="VarChar(3)" />
+    <Parameter Name="confirmchurch" Type="System.String" DbType="VarChar(3)" />
+    <Parameter Name="previouschurch" Type="System.String" DbType="VarChar(3)" />
+    <Parameter Name="baptismby" Type="System.String" DbType="VarChar(3)" />
+    <Parameter Name="confirmby" Type="System.String" DbType="VarChar(3)" />
+    <Parameter Name="residentalarea" Type="System.String" DbType="VarChar(200)" />
+    <Parameter Name="UserID" Parameter="userID" Type="System.String" DbType="VarChar(50)" />
+    <ElementType Name="usp_getMembersTempReportingManualSearchResult">
+      <Column Name="CongregationName" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="EnglishName" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="ChineseName" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="DOB" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
+      <Column Name="Gender" Type="System.String" DbType="VarChar(6)" CanBeNull="true" />
+      <Column Name="NRIC" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="MaritalStatus" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+      <Column Name="Nationality" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="Dialect" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="HomeTel" Type="System.String" DbType="VarChar(15) NOT NULL" CanBeNull="false" />
+      <Column Name="MobileTel" Type="System.String" DbType="VarChar(15) NOT NULL" CanBeNull="false" />
+      <Column Name="Languages" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="OccupationName" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="Education" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="BaptismDate" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="BaptismBy" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="BaptismChurch" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="ConfirmDate" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="ConfirmBy" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="ConfirmChurch" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="PreviousChurch" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="ElectoralRoll" Type="System.String" DbType="VarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="MemberDate" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="MinistryInvolvement" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="MarriageDurationYears" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Age" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Cellgroup" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Email" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.usp_addNewCourseVisitorParticipantAndAttendance" Method="usp_addNewCourseVisitorParticipantAndAttendance">
+    <Parameter Name="nric" Type="System.String" DbType="VarChar(10)" />
+    <Parameter Name="course" Type="System.String" DbType="VarChar(10)" />
+    <Parameter Name="salutation" Type="System.String" DbType="VarChar(10)" />
+    <Parameter Name="english_name" Type="System.String" DbType="VarChar(50)" />
+    <Parameter Name="dob" Type="System.DateTime" DbType="Date" />
+    <Parameter Name="gender" Type="System.String" DbType="VarChar(1)" />
+    <Parameter Name="education" Type="System.String" DbType="VarChar(10)" />
+    <Parameter Name="nationality" Type="System.String" DbType="VarChar(10)" />
+    <Parameter Name="occupation" Type="System.String" DbType="VarChar(10)" />
+    <Parameter Name="postal_code" Type="System.String" DbType="VarChar(6)" />
+    <Parameter Name="blk_house" Type="System.String" DbType="VarChar(10)" />
+    <Parameter Name="street_address" Type="System.String" DbType="VarChar(1000)" />
+    <Parameter Name="unit" Type="System.String" DbType="VarChar(10)" />
+    <Parameter Name="contact" Type="System.String" DbType="VarChar(15)" />
+    <Parameter Name="email" Type="System.String" DbType="VarChar(100)" />
+    <Parameter Name="church" Type="System.Int32" DbType="Int" />
+    <Parameter Name="church_others" Type="System.String" DbType="VarChar(100)" />
+    <Parameter Name="UserID" Parameter="userID" Type="System.String" DbType="VarChar(50)" />
+    <ElementType Name="usp_addNewCourseVisitorParticipantAndAttendanceResult">
+      <Column Name="Result" Type="System.String" DbType="VarChar(185)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.usp_addNewCourseVisitorParticipant" Method="usp_addNewCourseVisitorParticipant">
+    <Parameter Name="nric" Type="System.String" DbType="VarChar(10)" />
+    <Parameter Name="course" Type="System.String" DbType="VarChar(10)" />
+    <Parameter Name="salutation" Type="System.String" DbType="VarChar(10)" />
+    <Parameter Name="english_name" Type="System.String" DbType="VarChar(50)" />
+    <Parameter Name="dob" Type="System.DateTime" DbType="Date" />
+    <Parameter Name="gender" Type="System.String" DbType="VarChar(1)" />
+    <Parameter Name="education" Type="System.String" DbType="VarChar(10)" />
+    <Parameter Name="nationality" Type="System.String" DbType="VarChar(10)" />
+    <Parameter Name="occupation" Type="System.String" DbType="VarChar(10)" />
+    <Parameter Name="postal_code" Type="System.String" DbType="VarChar(6)" />
+    <Parameter Name="blk_house" Type="System.String" DbType="VarChar(10)" />
+    <Parameter Name="street_address" Type="System.String" DbType="VarChar(1000)" />
+    <Parameter Name="unit" Type="System.String" DbType="VarChar(10)" />
+    <Parameter Name="contact" Type="System.String" DbType="VarChar(15)" />
+    <Parameter Name="email" Type="System.String" DbType="VarChar(100)" />
+    <Parameter Name="church" Type="System.Int32" DbType="Int" />
+    <Parameter Name="church_others" Type="System.String" DbType="VarChar(100)" />
+    <Parameter Name="UserID" Parameter="userID" Type="System.String" DbType="VarChar(50)" />
+    <ElementType Name="usp_addNewCourseVisitorParticipantResult">
+      <Column Name="Result" Type="System.String" DbType="VarChar(10) NOT NULL" CanBeNull="false" />
+      <Column Name="SalutationName" Type="System.String" DbType="VarChar(1) NOT NULL" CanBeNull="false" />
+      <Column Name="EnglishName" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="CourseName" Type="System.String" DbType="VarChar(1) NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.usp_getAllEmailInXML" Method="usp_getAllEmailInXML">
+    <ElementType Name="usp_getAllEmailInXMLResult">
+      <Column Name="XML" Type="System.Xml.Linq.XElement" DbType="Xml" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.usp_UpdateEmail" Method="usp_UpdateEmail">
+    <Parameter Name="xml" Type="System.Xml.Linq.XElement" DbType="Xml" />
+    <ElementType Name="usp_UpdateEmailResult">
+      <Column Name="Result" Type="System.String" DbType="VarChar(14) NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.usp_getAllEmail" Method="usp_getAllEmail">
+    <ElementType Name="usp_getAllEmailResult">
+      <Column Name="EmailType" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="EmailContent" Type="System.String" DbType="VarChar(MAX) NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+</Database>

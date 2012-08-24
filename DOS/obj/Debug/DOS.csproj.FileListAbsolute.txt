@@ -1,0 +1,76 @@
+c:\users\ks\documents\visual studio 2010\Projects\DOS\DOS\obj\Debug\ResolveAssemblyReference.cache
+c:\users\ks\documents\visual studio 2010\Projects\DOS\DOS\bin\DOS.dll
+c:\users\ks\documents\visual studio 2010\Projects\DOS\DOS\bin\DOS.pdb
+c:\users\ks\documents\visual studio 2010\Projects\DOS\DOS\obj\Debug\DOS.dll
+c:\users\ks\documents\visual studio 2010\Projects\DOS\DOS\obj\Debug\DOS.pdb
+c:\users\ks\documents\visual studio 2010\Projects\DOS\DOS\bin\System.Data.Linq.dll
+C:\Users\ks\Desktop\STAndrewProject_bk_20120525\DOS\DOS\bin\DOS.dll
+C:\Users\ks\Desktop\STAndrewProject_bk_20120525\DOS\DOS\bin\DOS.pdb
+C:\Users\ks\Desktop\STAndrewProject_bk_20120525\DOS\DOS\bin\Microsoft.JScript.dll
+C:\Users\ks\Desktop\STAndrewProject_bk_20120525\DOS\DOS\bin\System.Data.Linq.dll
+C:\Users\ks\Desktop\STAndrewProject_bk_20120525\DOS\DOS\obj\Debug\ResolveAssemblyReference.cache
+C:\Users\ks\Desktop\STAndrewProject_bk_20120525\DOS\DOS\obj\Debug\DOS.dll
+C:\Users\ks\Desktop\STAndrewProject_bk_20120525\DOS\DOS\obj\Debug\DOS.pdb
+C:\Users\gohks\Desktop\STAndrewProject_bk_20120605\DOS\DOS\bin\DOS.dll
+C:\Users\gohks\Desktop\STAndrewProject_bk_20120605\DOS\DOS\bin\DOS.pdb
+C:\Users\gohks\Desktop\STAndrewProject_bk_20120605\DOS\DOS\bin\Microsoft.JScript.dll
+C:\Users\gohks\Desktop\STAndrewProject_bk_20120605\DOS\DOS\bin\System.Data.Linq.dll
+C:\Users\gohks\Desktop\STAndrewProject_bk_20120605\DOS\DOS\obj\Debug\ResolveAssemblyReference.cache
+C:\Users\gohks\Desktop\STAndrewProject_bk_20120605\DOS\DOS\obj\Debug\DOS.dll
+C:\Users\gohks\Desktop\STAndrewProject_bk_20120605\DOS\DOS\obj\Debug\DOS.pdb
+C:\Users\ks\Desktop\STAndrewProject_bk_20120605_a\DOS\DOS\bin\DOS.dll
+C:\Users\ks\Desktop\STAndrewProject_bk_20120605_a\DOS\DOS\bin\DOS.pdb
+C:\Users\ks\Desktop\STAndrewProject_bk_20120605_a\DOS\DOS\bin\Microsoft.JScript.dll
+C:\Users\ks\Desktop\STAndrewProject_bk_20120605_a\DOS\DOS\bin\System.Data.Linq.dll
+C:\Users\ks\Desktop\STAndrewProject_bk_20120605_a\DOS\DOS\obj\Debug\ResolveAssemblyReference.cache
+C:\Users\ks\Desktop\STAndrewProject_bk_20120605_a\DOS\DOS\obj\Debug\DOS.dll
+C:\Users\ks\Desktop\STAndrewProject_bk_20120605_a\DOS\DOS\obj\Debug\DOS.pdb
+C:\Users\ks\Desktop\STAndrewProject_bk_20120613\DOS\DOS\bin\DOS.dll
+C:\Users\ks\Desktop\STAndrewProject_bk_20120613\DOS\DOS\bin\DOS.pdb
+C:\Users\ks\Desktop\STAndrewProject_bk_20120613\DOS\DOS\bin\Microsoft.JScript.dll
+C:\Users\ks\Desktop\STAndrewProject_bk_20120613\DOS\DOS\bin\System.Data.Linq.dll
+C:\Users\ks\Desktop\STAndrewProject_bk_20120613\DOS\DOS\obj\Debug\ResolveAssemblyReference.cache
+C:\Users\ks\Desktop\STAndrewProject_bk_20120613\DOS\DOS\obj\Debug\DOS.dll
+C:\Users\ks\Desktop\STAndrewProject_bk_20120613\DOS\DOS\obj\Debug\DOS.pdb
+C:\Users\ks\Desktop\STAndrewProject_bk_20120615\DOS\DOS\bin\DOS.dll
+C:\Users\ks\Desktop\STAndrewProject_bk_20120615\DOS\DOS\bin\DOS.pdb
+C:\Users\ks\Desktop\STAndrewProject_bk_20120615\DOS\DOS\bin\Microsoft.JScript.dll
+C:\Users\ks\Desktop\STAndrewProject_bk_20120615\DOS\DOS\bin\System.Data.Linq.dll
+C:\Users\ks\Desktop\STAndrewProject_bk_20120615\DOS\DOS\obj\Debug\ResolveAssemblyReference.cache
+C:\Users\ks\Desktop\STAndrewProject_bk_20120615\DOS\DOS\obj\Debug\DOS.dll
+C:\Users\ks\Desktop\STAndrewProject_bk_20120615\DOS\DOS\obj\Debug\DOS.pdb
+C:\Users\ks\Desktop\STAndrewProject_bk_20120626\DOS\DOS\bin\DOS.dll
+C:\Users\ks\Desktop\STAndrewProject_bk_20120626\DOS\DOS\bin\DOS.pdb
+C:\Users\ks\Desktop\STAndrewProject_bk_20120626\DOS\DOS\bin\Microsoft.JScript.dll
+C:\Users\ks\Desktop\STAndrewProject_bk_20120626\DOS\DOS\bin\System.Data.Linq.dll
+C:\Users\ks\Desktop\STAndrewProject_bk_20120626\DOS\DOS\obj\Debug\ResolveAssemblyReference.cache
+C:\Users\ks\Desktop\STAndrewProject_bk_20120626\DOS\DOS\obj\Debug\DOS.dll
+C:\Users\ks\Desktop\STAndrewProject_bk_20120626\DOS\DOS\obj\Debug\DOS.pdb
+C:\Users\ks\Desktop\STAndrewProject_bk_20120707\DOS\DOS\bin\DOS.dll
+C:\Users\ks\Desktop\STAndrewProject_bk_20120707\DOS\DOS\bin\DOS.pdb
+C:\Users\ks\Desktop\STAndrewProject_bk_20120707\DOS\DOS\bin\Microsoft.JScript.dll
+C:\Users\ks\Desktop\STAndrewProject_bk_20120707\DOS\DOS\bin\System.Data.Linq.dll
+C:\Users\ks\Desktop\STAndrewProject_bk_20120707\DOS\DOS\obj\Debug\ResolveAssemblyReference.cache
+C:\Users\ks\Desktop\STAndrewProject_bk_20120707\DOS\DOS\obj\Debug\DOS.dll
+C:\Users\ks\Desktop\STAndrewProject_bk_20120707\DOS\DOS\obj\Debug\DOS.pdb
+C:\Users\ks\Desktop\STAndrewProject_bk_20120712\DOS\DOS\bin\DOS.dll
+C:\Users\ks\Desktop\STAndrewProject_bk_20120712\DOS\DOS\bin\DOS.pdb
+C:\Users\ks\Desktop\STAndrewProject_bk_20120712\DOS\DOS\bin\Microsoft.JScript.dll
+C:\Users\ks\Desktop\STAndrewProject_bk_20120712\DOS\DOS\bin\System.Data.Linq.dll
+C:\Users\ks\Desktop\STAndrewProject_bk_20120712\DOS\DOS\obj\Debug\ResolveAssemblyReference.cache
+C:\Users\ks\Desktop\STAndrewProject_bk_20120712\DOS\DOS\obj\Debug\DOS.dll
+C:\Users\ks\Desktop\STAndrewProject_bk_20120712\DOS\DOS\obj\Debug\DOS.pdb
+C:\Users\ks\Desktop\STAndrewProject_bk_20120726\DOS\DOS\bin\DOS.dll
+C:\Users\ks\Desktop\STAndrewProject_bk_20120726\DOS\DOS\bin\DOS.pdb
+C:\Users\ks\Desktop\STAndrewProject_bk_20120726\DOS\DOS\bin\Microsoft.JScript.dll
+C:\Users\ks\Desktop\STAndrewProject_bk_20120726\DOS\DOS\bin\System.Data.Linq.dll
+C:\Users\ks\Desktop\STAndrewProject_bk_20120726\DOS\DOS\obj\Debug\ResolveAssemblyReference.cache
+C:\Users\ks\Desktop\STAndrewProject_bk_20120726\DOS\DOS\obj\Debug\DOS.dll
+C:\Users\ks\Desktop\STAndrewProject_bk_20120726\DOS\DOS\obj\Debug\DOS.pdb
+C:\Users\ks\Desktop\STAndrewProject_bk_20120823\DOS\DOS\bin\DOS.dll
+C:\Users\ks\Desktop\STAndrewProject_bk_20120823\DOS\DOS\bin\DOS.pdb
+C:\Users\ks\Desktop\STAndrewProject_bk_20120823\DOS\DOS\bin\Microsoft.JScript.dll
+C:\Users\ks\Desktop\STAndrewProject_bk_20120823\DOS\DOS\bin\System.Data.Linq.dll
+C:\Users\ks\Desktop\STAndrewProject_bk_20120823\DOS\DOS\obj\Debug\ResolveAssemblyReference.cache
+C:\Users\ks\Desktop\STAndrewProject_bk_20120823\DOS\DOS\obj\Debug\DOS.dll
+C:\Users\ks\Desktop\STAndrewProject_bk_20120823\DOS\DOS\obj\Debug\DOS.pdb
