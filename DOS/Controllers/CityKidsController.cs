@@ -15,6 +15,12 @@ namespace DOS.Controllers
     public class CityKidsController : MasterPageController
     {
         [ErrorHandler]
+        public ActionResult Index()
+        {
+            return RedirectToAction("newkid", "CityKids");
+        }
+        
+        [ErrorHandler]
         public ActionResult newkid(string message)
         {
             Session["FileIOStream"] = null;

@@ -11,7 +11,7 @@
 <link rel="stylesheet" href="/Content/css/datepicker.css" type="text/css" />
 <script type="text/javascript" src="/Content/scripts/datepicker.js"></script>
 
-<%if (HttpContext.Current.IsDebuggingEnabled){%>
+<%if (!HttpContext.Current.IsDebuggingEnabled){%>
     <script type="text/javascript" src="/Content/scripts/cityKidSchedule.debug.js"></script>
     <script type="text/javascript" src="/Content/scripts/common_function.debug.js"></script>
 <%}else{%>

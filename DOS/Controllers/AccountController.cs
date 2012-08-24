@@ -18,7 +18,7 @@ namespace DOS.Controllers
     {
 
         public IFormsAuthenticationService FormsService { get; set; }
-        public IMembershipService MembershipService { get; set; }
+        //public IMembershipService MembershipService { get; set; }
 
         protected override void Initialize(RequestContext requestContext)
         {
@@ -158,7 +158,7 @@ namespace DOS.Controllers
         [Authorize]
         public ActionResult ChangePassword()
         {
-            ViewData["PasswordLength"] = MembershipService.MinPasswordLength;
+            ViewData["PasswordLength"] = 6;
             return View();
         }
 

@@ -37,7 +37,7 @@
 <script type="text/javascript" src="/Content/scripts/modal.min.js"></script>
 <!-- modal windows scripts   -->
     
-<%if (HttpContext.Current.IsDebuggingEnabled){%>
+<%if (!HttpContext.Current.IsDebuggingEnabled){%>
     <script type="text/javascript" src="/Content/scripts/citykids_membership.debug.js"></script>
     <script type="text/javascript" src="/Content/scripts/common_function.debug.js"></script>
     <script type="text/javascript" src="/Content/scripts/navigateAway.debug.js"></script>

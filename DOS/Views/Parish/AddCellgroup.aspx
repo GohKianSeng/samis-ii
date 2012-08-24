@@ -11,7 +11,7 @@
 <link rel="stylesheet" type="text/css" href="/Content/css/searchsuggest.css">
 <link rel="stylesheet" type="text/css" href="/Content/css/login_view.css">
 
-<%if (HttpContext.Current.IsDebuggingEnabled){%>
+<%if (!HttpContext.Current.IsDebuggingEnabled){%>
     <script type="text/javascript" src="/Content/scripts/addmodifycellgroup.debug.js"></script>
     <script type="text/javascript" src="/Content/scripts/common_function.debug.js"></script>
 <%}else{%>

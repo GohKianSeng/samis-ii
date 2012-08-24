@@ -14,7 +14,7 @@ Settings
     <script type="text/javascript" src="/Content/scripts/jquery.tablesorter.min.js"></script> 
     <!-- Fix header and sorter table scripts   -->
 
-    <%if (HttpContext.Current.IsDebuggingEnabled){%>
+    <%if (!HttpContext.Current.IsDebuggingEnabled){%>
         <script type="text/javascript" src="/Content/scripts/common_function.debug.js"></script>
         <script type="text/javascript" src="/Content/scripts/samis2settings.debug.js"></script>
         

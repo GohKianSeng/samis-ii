@@ -13,7 +13,7 @@
 <script type="text/javascript" src="/Content/scripts/jquery.watermarkinput.min.js"></script>
 <script type="text/javascript" src="/Content/scripts/jquery.cookie.js"></script>
     
-<%if (HttpContext.Current.IsDebuggingEnabled){%>
+<%if (!HttpContext.Current.IsDebuggingEnabled){%>
     <script type="text/javascript" src="/Content/scripts/courseregistration.debug.js"></script>
     <script type="text/javascript" src="/Content/scripts/common_function.debug.js"></script>
     <script type="text/javascript" src="/Content/scripts/navigateAway.debug.js"></script>        

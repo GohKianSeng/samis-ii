@@ -27,6 +27,13 @@ namespace DOS.Controllers
                 else
                     return RedirectToAction("About", "Home");
             }
+            else if (((string)Session["SystemMode"]).ToUpper() == "C3CLUB")
+            {
+                if (!User.Identity.IsAuthenticated)
+                    return RedirectToAction("newkid", "CityKids");
+                else
+                    return RedirectToAction("About", "Home");
+            }
 
             return View();
             
