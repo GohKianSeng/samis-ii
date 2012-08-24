@@ -20,7 +20,7 @@ using System.Web.Routing;
 
 namespace DOS.Controllers
 {
-    [RequireHttps]
+    [RequireHttpsAttribute]
     public abstract class MasterPageController : Controller
     {
         public DOS_DBDataContext sql_conn = new DOS_DBDataContext();
