@@ -13,7 +13,7 @@
 <script type="text/javascript" src="/Content/scripts/jquery.watermarkinput.min.js"></script>
 <script type="text/javascript" src="/Content/scripts/jquery.cookie.js"></script>
     
-<%if (!HttpContext.Current.IsDebuggingEnabled){%>
+<%if (HttpContext.Current.IsDebuggingEnabled){%>
     <script type="text/javascript" src="/Content/scripts/courseregistration.debug.js"></script>
     <script type="text/javascript" src="/Content/scripts/common_function.debug.js"></script>
     <script type="text/javascript" src="/Content/scripts/navigateAway.debug.js"></script>        
@@ -31,7 +31,7 @@
         candidate_occupation.Items.Add(item);
         for (int x = 0; x < res.Count; x++)
         {
-            if (((string)Session["SystemMode"]).ToUpper() != "FULL" && !User.Identity.IsAuthenticated)
+            if (((string)Session["SystemMode"]).ToUpper() != "FULL")
             {
                 item = new ListItem(res.ElementAt(x).OccupationName, res.ElementAt(x).OccupationName);
                 if (((string)ViewData["candidate_occupation"]) == res.ElementAt(x).OccupationName)
@@ -55,7 +55,7 @@
         candidate_education.Items.Add(item);
         for (int x = 0; x < res.Count; x++)
         {
-            if (((string)Session["SystemMode"]).ToUpper() != "FULL" && !User.Identity.IsAuthenticated)
+            if (((string)Session["SystemMode"]).ToUpper() != "FULL")
             {
                 item = new ListItem(res.ElementAt(x).EducationName, res.ElementAt(x).EducationName);
                 if (((string)ViewData["candidate_education"]) == res.ElementAt(x).EducationName)
@@ -93,7 +93,7 @@
         candidate_salutation.Items.Add(item);
         for (int x = 0; x < res.Count; x++)
         {
-            if (((string)Session["SystemMode"]).ToUpper() != "FULL" && !User.Identity.IsAuthenticated)
+            if (((string)Session["SystemMode"]).ToUpper() != "FULL")
             {
                 item = new ListItem(res.ElementAt(x).SalutationName, res.ElementAt(x).SalutationName);
                 if (((string)ViewData["candidate_salutation"]) == res.ElementAt(x).SalutationName)
@@ -129,7 +129,7 @@
                 candidate_nationality.Items.Add(item);
             }
 
-            if (((string)Session["SystemMode"]).ToUpper() != "FULL" && !User.Identity.IsAuthenticated)
+            if (((string)Session["SystemMode"]).ToUpper() != "FULL")
             {
                 item = new ListItem(res.ElementAt(x).CountryName, res.ElementAt(x).CountryName);
                 if (((string)ViewData["candidate_nationality"]) == res.ElementAt(x).CountryName)
@@ -154,7 +154,7 @@
         church.Items.Add(item);
         for (int x = 0; x < res.Count; x++)
         {
-            if (((string)Session["SystemMode"]).ToUpper() != "FULL" && !User.Identity.IsAuthenticated)
+            if (((string)Session["SystemMode"]).ToUpper() != "FULL")
             {
                 item = new ListItem(res.ElementAt(x).ParishName, res.ElementAt(x).ParishName);
                 if (((string)ViewData["candidate_church"]) == res.ElementAt(x).ParishName)
@@ -289,6 +289,10 @@
 
     function getChurchByID(){
         return "<%= church.ClientID %>";
+    }
+
+    function getSystemMode(){
+        return "<%=((string)Session["SystemMode"]).ToUpper() %>";        
     }
 
 </script>

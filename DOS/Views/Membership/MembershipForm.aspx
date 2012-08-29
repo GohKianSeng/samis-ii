@@ -37,7 +37,7 @@
 <script type="text/javascript" src="/Content/scripts/modal.min.js"></script>
 <!-- modal windows scripts   -->
     
-<%if (!HttpContext.Current.IsDebuggingEnabled){%>
+<%if (HttpContext.Current.IsDebuggingEnabled){%>
     <script type="text/javascript" src="/Content/scripts/DOS_membership.debug.js"></script>
     <script type="text/javascript" src="/Content/scripts/common_function.debug.js"></script>
     <script type="text/javascript" src="/Content/scripts/navigateAway.debug.js"></script>
@@ -488,11 +488,11 @@
     }
 
     function getSystemMode(){
-        <%if(Page.User.Identity.IsAuthenticated){ %>
-            return "FULL";
-        <%}else{ %>
-            return "<%=((string)Session["SystemMode"]).ToUpper() %>";
-        <%} %>
+        return "<%=((string)Session["SystemMode"]).ToUpper() %>";        
+    }
+
+    function getFullCheck(){
+        return "<%= ((string)Session["GreenFormFullCheck"]).ToUpper() %>";        
     }
 
     function getSubmitURL(){

@@ -8,7 +8,7 @@
 <link rel="stylesheet" type="text/css" href="/Content/css/login_view.css">
 <script type="text/javascript" src="/Content/scripts/jquery-1.6.4.min.js"></script>
 <script type="text/javascript" src="/Content/scripts/jquery.cookie.js"></script>
-<%if (!HttpContext.Current.IsDebuggingEnabled){%>
+<%if (HttpContext.Current.IsDebuggingEnabled){%>
     <script type="text/javascript" src="/Content/scripts/changepassword.debug.js"></script>
     <script type="text/javascript" src="/Content/scripts/common_function.debug.js"></script>
 <%}else{%>

@@ -26,7 +26,7 @@ namespace DOS.Controllers
             
             if (Request.Params["qqfile"] != null)
             {
-                if (((string)Session["SystemMode"]).ToUpper() != "FUll" && !User.Identity.IsAuthenticated)
+                if (((string)Session["SystemMode"]).ToUpper() != "FULL")
                 {
                     Session["FileIOStream"] = CopyStreamToBytes(Request.InputStream);
                     Session["FileName"] = getFilename();
@@ -41,7 +41,7 @@ namespace DOS.Controllers
             else if (Request.Files.Count > 0)
             {
                 var receivedfile = Request.Files[0];
-                if (((string)Session["SystemMode"]).ToUpper() != "FUll" && !User.Identity.IsAuthenticated)
+                if (((string)Session["SystemMode"]).ToUpper() != "FULL")
                 {
                     Session["FileIOStream"] = CopyStreamToBytes(receivedfile.InputStream);
                     Session["FileName"] = getFilename();
@@ -146,7 +146,7 @@ namespace DOS.Controllers
         {
             try
             {
-                if (((string)Session["SystemMode"]).ToUpper() != "FUll" && !User.Identity.IsAuthenticated)
+                if (((string)Session["SystemMode"]).ToUpper() != "FULL")
                 {
                     return File((byte[])Session["FileIOStream"], MimeType(filename), filename);
                 }
@@ -187,7 +187,7 @@ namespace DOS.Controllers
         {
             try
             {
-                if (((string)Session["SystemMode"]).ToUpper() != "FUll" && !User.Identity.IsAuthenticated)
+                if (((string)Session["SystemMode"]).ToUpper() != "FULL")
                 {
                     return File((byte[])Session["FileIOStream"], MimeType(filename), filename);
                 }
@@ -218,7 +218,7 @@ namespace DOS.Controllers
         {
             try
             {
-                if (((string)Session["SystemMode"]).ToUpper() != "FUll" && !User.Identity.IsAuthenticated)
+                if (((string)Session["SystemMode"]).ToUpper() != "FULL")
                 {
                     return File((byte[])Session["FileIOStream"], MimeType(filename), filename);
                 }

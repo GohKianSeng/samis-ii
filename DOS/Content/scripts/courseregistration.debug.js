@@ -26,7 +26,7 @@ $(document).ready(function () {
     });
     changeChurch();
 
-    if (getCookie('RememberMeCE') == "On") {
+    if (getCookie('RememberMeCE') == "On" && getSystemMode() != "FULL") {
         $("#candidate_nric").val($.cookie('candidate_nric'));
         $("#" + getSalutationID()).val($.cookie(getSalutationID()));
         $("#candidate_english_name").val($.cookie('candidate_english_name'));
@@ -148,7 +148,7 @@ function checkForm(){
         }
     }
 
-    if ($("#RememberMe").is(':checked')) {
+    if ($("#RememberMe").is(':checked') && getSystemMode() != "FULL") {
         $.cookie('candidate_nric', $("#candidate_nric").val(), { expires: 365 });
         $.cookie(getSalutationID(), $("#" + getSalutationID()).val(), { expires: 365 });
         $.cookie('candidate_english_name', $("#candidate_english_name").val(), { expires: 365 });

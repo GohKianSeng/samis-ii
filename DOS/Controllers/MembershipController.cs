@@ -377,7 +377,7 @@ namespace DOS.Controllers
             if (candidate_church.Length == 0)
                 candidate_church = "0";
 
-            if (((string)Session["SystemMode"]).ToUpper() != "FULL" && !User.Identity.IsAuthenticated)
+            if (((string)Session["SystemMode"]).ToUpper() != "FULL")
             {
                 string mailbody = (string)Session["CourseRegistration"];
                 mailbody = mailbody.Replace("[candidate_course_name]",candidate_course_name);
@@ -912,7 +912,7 @@ namespace DOS.Controllers
                 candidate_interested_ministry = "<Ministry />";
             }
             XElement xml = toAddXMLNewMember(User.Identity.Name, candidate_salutation, candidate_photo, candidate_english_name, candidate_unit, candidate_blk_house, candidate_nationality, candidate_dialect, candidate_occupation, baptized_by, baptism_church, confirmation_by, confirmation_church, previous_church_membership, candidate_chinses_name, candidate_nric, candidate_dob, candidate_gender, candidate_marital_status, candidate_street_address, candidate_postal_code, candidate_email, candidate_education, candidate_language, candidate_home_tel, candidate_mobile_tel, candidate_baptism_date, candidate_confirmation_date, candidate_marriage_date, candidate_congregation, sponsor1, sponsor2, XElement.Parse(familylist), XElement.Parse(childlist), XElement.Parse(candidate_interested_ministry), candidate_join_cellgroup, candidate_serve_congregation, candidate_tithing, candidate_transfer_reason, baptized_by_others, baptism_church_others, confirm_by_others, confirmation_church_others, previous_church_membership_others, sponsor2contact);
-            if (((string)Session["SystemMode"]).ToUpper() != "FULL" && !User.Identity.IsAuthenticated)
+            if (((string)Session["SystemMode"]).ToUpper() != "FULL")
             {
                 string mailBody = (string)Session["GreenForm"];
                 mailBody = mailBody.Replace("[Salutation]", Request.Form["SalutationText"]); 
@@ -1227,7 +1227,7 @@ namespace DOS.Controllers
             update.Add(new XElement("MarriageDate", candidate_marriage_date));
             update.Add(new XElement("Nationality", candidate_nationality));
             update.Add(new XElement("Dialect", candidate_dialect));
-            if (((string)Session["SystemMode"]).ToUpper() != "FUll" && !User.Identity.IsAuthenticated)
+            if (((string)Session["SystemMode"]).ToUpper() != "FULL")
             {
                 update.Add(new XElement("Photo", ""));
                 update.Add(new XElement("Sponsor1", ""));

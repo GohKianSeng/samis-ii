@@ -15,7 +15,7 @@ Access Control
     <script type="text/javascript" src="/Content/scripts/jquery.tablesorter.min.js"></script> 
     <!-- Fix header and sorter table scripts   -->
 
-<%if (!HttpContext.Current.IsDebuggingEnabled){%>
+<%if (HttpContext.Current.IsDebuggingEnabled){%>
     <script type="text/javascript" src="/<%= (string)Session["webapplicationname"] %>Content/scripts/common_function.debug.js"></script>
     <script type="text/javascript" src="/<%= (string)Session["webapplicationname"] %>Content/scripts/UserAdmin.debug.js"></script>
 <%}

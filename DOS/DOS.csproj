@@ -293,6 +293,8 @@
     <Content Include="Views\Reporting\Occupation.aspx" />
     <Content Include="Views\Reporting\OccupationList.aspx" />
     <Content Include="Views\Settings\accessControl.aspx" />
+    <Content Include="Views\Settings\viewSessionVariable.aspx" />
+    <Content Include="Views\Settings\webconfig.aspx" />
     <Content Include="Views\Settings\Samis2Settings.aspx" />
     <Content Include="Views\Shared\Agreement.aspx" />
     <Content Include="Views\Shared\downloadMembershipForm.aspx" />
@@ -300,7 +302,9 @@
     <Content Include="Views\Shared\ListOfStaff.aspx" />
     <Content Include="Views\Shared\LogOnUserControl.ascx" />
     <Content Include="Views\Shared\simplehtml.aspx" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>

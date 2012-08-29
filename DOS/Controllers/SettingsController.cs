@@ -641,6 +641,11 @@ namespace DOS.Controllers
             return View("simplehtml");
         }
 
+
+
+
+
+
         /************************************************
          ************************************************
          ************************************************ 
@@ -765,6 +770,12 @@ namespace DOS.Controllers
 
 
 
+
+
+
+
+
+
         /************************************************
          ************************************************
          ************************************************ 
@@ -819,6 +830,36 @@ namespace DOS.Controllers
             }
 
             return RedirectToAction("About", "Home", new { Message = "All unused files has been moved to, " + Session["PermanentDeletedLocation"].ToString() });
+        }
+
+
+
+
+
+
+
+
+
+
+        /************************************************
+         ************************************************
+         ************************************************ 
+         ************************************************
+         *********** View web.Config file ***************
+         ************************************************ 
+         ************************************************ 
+         ************************************************/
+
+        public ActionResult samis2webconfig()
+        {
+            ViewData["xml"] = System.IO.File.ReadAllText(Request.PhysicalApplicationPath + "/Web.config");
+
+            return View("webconfig");
+        }
+
+        public ActionResult samis2sessions()
+        {
+            return View("viewSessionVariable");
         }
     }
 }

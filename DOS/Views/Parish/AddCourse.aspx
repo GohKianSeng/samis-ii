@@ -17,7 +17,7 @@
     <script type="text/javascript" src="/Content/scripts/jquery.ui.core.min.js"></script>
     <script type="text/javascript" src="/Content/scripts/jquery.ui.timepicker.js?v=0.2.9"></script>
 
-<%if (!HttpContext.Current.IsDebuggingEnabled){%>
+<%if (HttpContext.Current.IsDebuggingEnabled){%>
     <script type="text/javascript" src="/Content/scripts/addmodifycourse.debug.js"></script>
     <script type="text/javascript" src="/Content/scripts/common_function.debug.js"></script>
 <%}else{%>

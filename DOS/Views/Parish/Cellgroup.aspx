@@ -8,7 +8,7 @@ Cellgroup Related
 <script type="text/javascript" src="/Content/scripts/jquery-1.6.4.min.js"></script>
 <link rel="stylesheet" type="text/css" href="/Content/css/TabsView.css">
 
-<%if (!HttpContext.Current.IsDebuggingEnabled){%>
+<%if (HttpContext.Current.IsDebuggingEnabled){%>
     
     <script type="text/javascript" src="/Content/scripts/common_function.debug.js"></script>
     <script type="text/javascript" src="/Content/scripts/parish_course.debug.js"></script>

@@ -10,7 +10,7 @@
 <link rel="stylesheet" type="text/css" href="/Content/css/TabsView.css">
 <link rel="stylesheet" type="text/css" href="/Content/css/searchsuggest.css">
 
-<%if (!HttpContext.Current.IsDebuggingEnabled){%>
+<%if (HttpContext.Current.IsDebuggingEnabled){%>
     <script type="text/javascript" src="/Content/scripts/staffUpdateMembership.debug.js"></script>
     <script type="text/javascript" src="/Content/scripts/common_function.debug.js"></script>
     <script type="text/javascript" src="/Content/scripts/DOS_membership.debug.js"></script>
@@ -401,6 +401,16 @@
         }
         return "maxlength=\"255\"";
     }
+
+    string getXMLValue(XElement node, string name)
+    {
+        if (node == null)
+            return "";
+        if (node.Element(name) == null)
+            return "";
+        else
+            return node.Element(name).Value;
+    }
 </script>
 
 <script type="text/javascript">
@@ -596,11 +606,11 @@
     }
 
     function getSystemMode(){
-        <%if(Page.User.Identity.IsAuthenticated){ %>
-            return "FULL";
-        <%}else{ %>
-            return "<%=((string)Session["SystemMode"]).ToUpper() %>";
-        <%} %>
+        return "<%=((string)Session["SystemMode"]).ToUpper() %>";        
+    }
+
+    function getFullCheck(){
+        return "<%= ((string)Session["GreenFormFullCheck"]).ToUpper() %>";        
     }
 </script>
 
@@ -1177,78 +1187,67 @@
 					                                <table class="HistoryTable">
 						                                <tr style=" font-size:12px">
                                                             <td>NRIC:</td>
-                                                            <td><%= row.Element("UpdatedElements").Element("row").Element("NRIC").Value%></td>
+                                                            <td><%= getXMLValue(row.Element("UpdatedElements").Element("row"), "NRIC")%></td>
                                                         </tr>
                                                         <tr style=" font-size:12px">
                                                             <td>Name:</td>
-                                                            <td><%= row.Element("UpdatedElements").Element("row").Element("SalutationName").Value + " " + row.Element("UpdatedElements").Element("row").Element("EnglishName").Value%></td>
+                                                            <td><%= getXMLValue(row.Element("UpdatedElements").Element("row"), "SalutationName") + " " + getXMLValue(row.Element("UpdatedElements").Element("row"), "EnglishName")%></td>
                                                         </tr>
                                                         <tr style=" font-size:12px">
                                                             <td>Gender:</td>
-                                                            <td><%= row.Element("UpdatedElements").Element("row").Element("Gender").Value%></td>
+                                                            <td><%= getXMLValue(row.Element("UpdatedElements").Element("row"), "Gender")%></td>
                                                         </tr>
                                                         <tr style=" font-size:12px">
                                                             <td>Date of Birth:</td>
-                                                            <td><%= row.Element("UpdatedElements").Element("row").Element("DOB").Value%></td>
+                                                            <td><%= getXMLValue(row.Element("UpdatedElements").Element("row"), "DOB")%></td>
                                                         </tr>
                                                         <tr style=" font-size:12px">
                                                             <td>Address:</td>
-                                                            <% if (row.Element("UpdatedElements").Element("row").Element("AddressUnit").Value.Length > 0)
+                                                            <% if (getXMLValue(row.Element("UpdatedElements").Element("row"), "AddressUnit").Length > 0)
                                                                {%>
-                                                                    <td><pre><%= row.Element("UpdatedElements").Element("row").Element("AddressHouseBlk").Value + " " + row.Element("UpdatedElements").Element("row").Element("AddressStreet").Value + "\n" + row.Element("UpdatedElements").Element("row").Element("AddressUnit").Value + "\nSingapore " + row.Element("UpdatedElements").Element("row").Element("AddressPostalCode").Value%></pre></td>
+                                                                    <td><pre><%= getXMLValue(row.Element("UpdatedElements").Element("row"), "AddressHouseBlk") + " " + getXMLValue(row.Element("UpdatedElements").Element("row"), "AddressStreet") + "\n" + getXMLValue(row.Element("UpdatedElements").Element("row"), "AddressUnit") + "\nSingapore " + getXMLValue(row.Element("UpdatedElements").Element("row"), "AddressPostalCode")%></pre></td>
                                                             <% }
                                                                else
                                                                {%>
-                                                                    <td><pre><%= row.Element("UpdatedElements").Element("row").Element("AddressHouseBlk").Value + " " + row.Element("UpdatedElements").Element("row").Element("AddressStreet").Value + "\nSingapore " + row.Element("UpdatedElements").Element("row").Element("AddressPostalCode").Value%></pre></td>
+                                                                    <td><pre><%= getXMLValue(row.Element("UpdatedElements").Element("row"), "AddressHouseBlk") + " " + getXMLValue(row.Element("UpdatedElements").Element("row"), "AddressStreet") + "\nSingapore " + getXMLValue(row.Element("UpdatedElements").Element("row"), "AddressPostalCode")%></pre></td>
                                                                <%}   
                                                             %>
                                                         </tr>
                                                         <tr style=" font-size:12px">
                                                             <td>Nationality:</td>
-                                                            <td><%= row.Element("UpdatedElements").Element("row").Element("Nationality").Value%></td>
+                                                            <td><%= getXMLValue(row.Element("UpdatedElements").Element("row"), "Nationality")%></td>
                                                         </tr>
                                                         <tr style=" font-size:12px">
                                                             <td>Congregation:</td>
-                                                            <td><%= row.Element("UpdatedElements").Element("row").Element("Congregation").Value%></td>
+                                                            <td><%= getXMLValue(row.Element("UpdatedElements").Element("row"), "Congregation")%></td>
                                                         </tr>
                                                         <tr style=" font-size:12px">
                                                             <td>Occupation:</td>
-                                                            <td><%= row.Element("UpdatedElements").Element("row").Element("Occupation").Value%></td>
+                                                            <td><%= getXMLValue(row.Element("UpdatedElements").Element("row"), "Occupation")%></td>
                                                         </tr>
                                                         <tr style=" font-size:12px">
                                                             <td>MaritalStatus:</td>
-                                                            <td><%= row.Element("UpdatedElements").Element("row").Element("MaritalStatus").Value%></td>
+                                                            <td><%= getXMLValue(row.Element("UpdatedElements").Element("row"), "MaritalStatus")%></td>
                                                         </tr>
                                                         <tr style=" font-size:12px">
                                                             <td>Education:</td>
-                                                            <td><%= row.Element("UpdatedElements").Element("row").Element("Education").Value%></td>
+                                                            <td><%= getXMLValue(row.Element("UpdatedElements").Element("row"), "Education")%></td>
                                                         </tr>
                                                         <tr style=" font-size:12px">
                                                             <td>Language:</td>
-                                                            <td><%= row.Element("UpdatedElements").Element("row").Element("Language").Value%></td>
+                                                            <td><%= getXMLValue(row.Element("UpdatedElements").Element("row"), "Language")%></td>
                                                         </tr>
                                                         <tr style=" font-size:12px">
                                                             <td>Sponsor1:</td>
-                                                            <td><% if(row.Element("UpdatedElements").Element("row").Element("Sponsor1") != null){%>
-                                                                   <%= row.Element("UpdatedElements").Element("row").Element("Sponsor1").Value%>
-                                                                <%} %>
-                                                            </td>
+                                                            <td><%= getXMLValue(row.Element("UpdatedElements").Element("row"), "Sponsor1")%></td>
                                                         </tr>
                                                         <tr style=" font-size:12px">
                                                             <td>Sponsor2:</td>
-                                                            <td><% if(row.Element("UpdatedElements").Element("row").Element("Sponsor2") != null){%>
-                                                                   <%= row.Element("UpdatedElements").Element("row").Element("Sponsor2").Value%>
-                                                                <%} %>
-                                                            
-                                                            </td>
+                                                            <td><%= getXMLValue(row.Element("UpdatedElements").Element("row"), "Sponsor2")%></td>
                                                         </tr>
                                                         <tr style=" font-size:12px">
                                                             <td>Sponsor2 Contact:</td>
-                                                            <td><% if(row.Element("UpdatedElements").Element("row").Element("Sponsor2Contact") != null){%>
-                                                                   <%= row.Element("UpdatedElements").Element("row").Element("Sponsor2Contact").Value%>
-                                                                <%} %>
-                                                            
-                                                            </td>
+                                                            <td><%= getXMLValue(row.Element("UpdatedElements").Element("row"), "Sponsor2Contact")%></td>
                                                         </tr>
                                                         <!--tr style=" font-size:12px">
                                                             <td>Photo:</td>
@@ -1278,8 +1277,8 @@
                                                                 {
                                                                 %>
                                                                     <tr style=" font-size:10px">
-                                                                        <td><%= update.Element("FromTo").Elements("Changes").ElementAt(y).Element("ElementName").Value%>:</td>
-                                                                        <td><%= update.Element("FromTo").Elements("Changes").ElementAt(y).Element("To").Value%></td>
+                                                                        <td><%= getXMLValue(update.Element("FromTo").Elements("Changes").ElementAt(y), "ElementName")%>:</td>
+                                                                        <td><%= getXMLValue(update.Element("FromTo").Elements("Changes").ElementAt(y), "To")%></td>
                                                                     </tr>
                                                                 <%                                                                
                                                                 }

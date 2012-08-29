@@ -35,7 +35,7 @@ namespace DOS.Controllers
         {
 
             initializedParameter();
-            if (((string)Session["SystemMode"]).ToUpper() != "FULL" && !User.Identity.IsAuthenticated)
+            if (((string)Session["SystemMode"]).ToUpper() != "FULL")
             {
                 string table = (string)Session["C3ChildrenClub"];
                 table = table.Replace("[NRIC]", Request.Form["kid_nric"]);

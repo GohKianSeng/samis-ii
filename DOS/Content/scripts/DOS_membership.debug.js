@@ -354,99 +354,104 @@ function fillCell(row, cellNumber, text) {
 function basicCheck() {
     var errormsg = "";
 
-    if ($("#" + getSalutationID() + " > option:selected").val() == '')
-        errormsg += "- Salutation is mandatory\n";
-
     if (jQuery.trim($('#candidate_english_name').val()).length == 0)
         errormsg += "- Name in English is mandatory\n";
 
     if (jQuery.trim($('#candidate_nric').val()).length == 0)
         errormsg += "- NRIC is mandatory\n";
 
-    if (jQuery.trim($('#candidate_dob').val()).length == 0)
-        errormsg += "- Date Of Birth is mandatory\n";
-
-    if ($("#candidate_gender > option:selected").val() == '')
-        errormsg += "- Gender is mandatory\n";
-
-    if ($("#" + getMaritalStatusID() + " > option:selected").val() == '')
-        errormsg += "- Marital Status is mandatory\n";
-    else if ($("#" + getMaritalStatusID() + " > option:selected").text() == 'Married' && jQuery.trim($('#candidate_marriage_date').val()).length == 0)
-        errormsg += "- Marriage Date is mandatory\n";
-
-    if (jQuery.trim($('#candidate_street_address').val()).length == 0)
-        errormsg += "- Street Address is mandatory\n";
-
-    if (jQuery.trim($('#candidate_blk_house').val()).length == 0)
-        errormsg += "- Blk/House no. is mandatory\n";
-
-    if (jQuery.trim($('#candidate_postal_code').val()).length == 0)
-        errormsg += "- Postal Code is mandatory\n";
-    else if (isNaN(jQuery.trim($("#candidate_postal_code").val())))
-        errormsg += "- Postal Code is invalid\n";
-
-    if ($("#" + getCandidateCountryID() + "> option:selected").val() == '')
-        errormsg += "- Nationality is mandatory\n";
-
-    if ($("#candidate_education > option:selected").val() == '')
-        errormsg += "- Education is mandatory\n";
-
-    if (selectedlanguges == '')
-        errormsg += "- Language(s) is mandatory\n";
-
-    if ($("#" + getCandidateOccupationID() + "> option:selected").val() == '')
-        errormsg += "- Occupation is mandatory\n";
-
-    if (isValidNumbericWithoutDecimal(jQuery.trim($("#candidate_home_tel").val())) == false && jQuery.trim($("#candidate_home_tel").val()).length != 0) {
-        errormsg += "- Home Tel is invalid\n";
-    }
-
-    if (isValidNumbericWithoutDecimal(jQuery.trim($("#candidate_mobile_tel").val())) == false && jQuery.trim($("#candidate_mobile_tel").val()).length != 0) {
-        errormsg += "- Mobile Tel is invalid\n";
-    }
-
-    if (isValidEmailAddress(jQuery.trim($("#candidate_email").val())) == false && jQuery.trim($("#candidate_email").val()).length != 0) {
-        errormsg += "- Email address is invalid\n";
-    }
-
     if ($("#" + getCongregationID() + "> option:selected").val() == '') {
         errormsg += "- Congregation is mandatory\n";
     }
 
-    if (($("#" + getBaptistByID()).val() == "Others" && jQuery.trim($("#baptized_by_others").val()) == "Name of pastor") || ($("#" + getBaptistByID()).val() == "Others" && jQuery.trim($("#baptized_by_others").val()).length == 0)) {
-        errormsg += "- Please enter the pastor who baptise you.\n";
-    }
+    if ((getSystemMode() != "FULL") || (getSystemMode() == "FULL" && getFullCheck() == "ON")) {
 
-    if (($("#" + changeConfirmBy()).val() == "Others" && jQuery.trim($("#confirm_by_others").val()) == "Name of pastor") || ($("#" + changeConfirmBy()).val() == "Others" && jQuery.trim($("#confirm_by_others").val()).length == 0)) {
-        errormsg += "- Please enter the pastor who confirm you.\n";
-    }
+        if ($("#" + getSalutationID() + " > option:selected").val() == '')
+            errormsg += "- Salutation is mandatory\n";
 
-    if (($("#" + getBaptismChurchID()).val() == "28" && jQuery.trim($("#baptism_church_others").val()) == "Name of church") || ($("#" + getBaptismChurchID()).val() == "28" && jQuery.trim($("#baptism_church_others").val()).length == 0)) {
-        errormsg += "- Please enter the church baptise you in.\n";
-    }
+        if (jQuery.trim($('#candidate_dob').val()).length == 0)
+            errormsg += "- Date Of Birth is mandatory\n";
 
-    if (($("#" + getConfirmChurchID()).val() == "28" && jQuery.trim($("#confirmation_church_others").val()) == "Name of church") || ($("#" + getConfirmChurchID()).val() == "28" && jQuery.trim($("#confirmation_church_others").val()).length == 0)) {
-        errormsg += "- Please enter the church confirm you in.\n";
-    }
+        if ($("#candidate_gender > option:selected").val() == '')
+            errormsg += "- Gender is mandatory\n";
 
-    if (($("#" + getPreviousChurchID()).val() == "28" && jQuery.trim($("#previous_church_membership_others").val()) == "Name of church") || ($("#" + getPreviousChurchID()).val() == "28" && jQuery.trim($("#previous_church_membership_others").val()).length == 0)) {
-        errormsg += "- Please enter the church you are from.\n";
-    }
+        if ($("#" + getMaritalStatusID() + " > option:selected").val() == '')
+            errormsg += "- Marital Status is mandatory\n";
+        else if ($("#" + getMaritalStatusID() + " > option:selected").text() == 'Married' && jQuery.trim($('#candidate_marriage_date').val()).length == 0)
+            errormsg += "- Marriage Date is mandatory\n";
+
+        if (jQuery.trim($('#candidate_street_address').val()).length == 0)
+            errormsg += "- Street Address is mandatory\n";
+
+        if (jQuery.trim($('#candidate_blk_house').val()).length == 0)
+            errormsg += "- Blk/House no. is mandatory\n";
+
+        if (jQuery.trim($('#candidate_postal_code').val()).length == 0)
+            errormsg += "- Postal Code is mandatory\n";
+        else if (isNaN(jQuery.trim($("#candidate_postal_code").val())))
+            errormsg += "- Postal Code is invalid\n";
+
+        if ($("#" + getCandidateCountryID() + "> option:selected").val() == '')
+            errormsg += "- Nationality is mandatory\n";
+
+        if ($("#candidate_education > option:selected").val() == '')
+            errormsg += "- Education is mandatory\n";
+
+        if (selectedlanguges == '')
+            errormsg += "- Language(s) is mandatory\n";
+
+        if ($("#" + getCandidateOccupationID() + "> option:selected").val() == '')
+            errormsg += "- Occupation is mandatory\n";
+
+        if (isValidNumbericWithoutDecimal(jQuery.trim($("#candidate_home_tel").val())) == false && jQuery.trim($("#candidate_home_tel").val()).length != 0) {
+            errormsg += "- Home Tel is invalid\n";
+        }
+
+        if (isValidNumbericWithoutDecimal(jQuery.trim($("#candidate_mobile_tel").val())) == false && jQuery.trim($("#candidate_mobile_tel").val()).length != 0) {
+            errormsg += "- Mobile Tel is invalid\n";
+        }
+
+        if (isValidEmailAddress(jQuery.trim($("#candidate_email").val())) == false && jQuery.trim($("#candidate_email").val()).length != 0) {
+            errormsg += "- Email address is invalid\n";
+        }
+
+        if (($("#" + getBaptistByID()).val() == "Others" && jQuery.trim($("#baptized_by_others").val()) == "Name of pastor") || ($("#" + getBaptistByID()).val() == "Others" && jQuery.trim($("#baptized_by_others").val()).length == 0)) {
+            errormsg += "- Please enter the pastor who baptise you.\n";
+        }
+
+        if (($("#" + changeConfirmBy()).val() == "Others" && jQuery.trim($("#confirm_by_others").val()) == "Name of pastor") || ($("#" + changeConfirmBy()).val() == "Others" && jQuery.trim($("#confirm_by_others").val()).length == 0)) {
+            errormsg += "- Please enter the pastor who confirm you.\n";
+        }
+
+        if (($("#" + getBaptismChurchID()).val() == "28" && jQuery.trim($("#baptism_church_others").val()) == "Name of church") || ($("#" + getBaptismChurchID()).val() == "28" && jQuery.trim($("#baptism_church_others").val()).length == 0)) {
+            errormsg += "- Please enter the church baptise you in.\n";
+        }
+
+        if (($("#" + getConfirmChurchID()).val() == "28" && jQuery.trim($("#confirmation_church_others").val()) == "Name of church") || ($("#" + getConfirmChurchID()).val() == "28" && jQuery.trim($("#confirmation_church_others").val()).length == 0)) {
+            errormsg += "- Please enter the church confirm you in.\n";
+        }
+
+        if (($("#" + getPreviousChurchID()).val() == "28" && jQuery.trim($("#previous_church_membership_others").val()) == "Name of church") || ($("#" + getPreviousChurchID()).val() == "28" && jQuery.trim($("#previous_church_membership_others").val()).length == 0)) {
+            errormsg += "- Please enter the church you are from.\n";
+        }
+
+        if ($("#candidate_sponsor2").val().length == 0) {
+            errormsg += "- Sponsor 2 is mandatory\n";
+        }
+    }    
 
     if (getSystemMode() != "FULL") {
         if ($("#candidate_sponsor1_text").val().length == 0) {
             errormsg += "- Sponsor 1 is mandatory\n";
         }
-    } 
+    }
     else {
-        if ($("#candidate_sponsor1").val().length == 0) {
+        if (getFullCheck() == "ON" && $("#candidate_sponsor1").val().length == 0) {
             errormsg += "- Sponsor 1 is mandatory\n";
-        }
+        }        
     }
 
-    if ($("#candidate_sponsor2").val().length == 0) {
-        errormsg += "- Sponsor 2 is mandatory\n";
-    }
+    
 
     return errormsg;
 }

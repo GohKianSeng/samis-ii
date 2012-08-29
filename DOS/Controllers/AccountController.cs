@@ -10,6 +10,9 @@ using System.Web.Security;
 using DOS.Models;
 using System.Security.Cryptography;
 using System.Text;
+using System.Web.Script.Serialization;
+using DOS.Models.JsonClass;
+using System.Net;
 
 namespace DOS.Controllers
 {
@@ -19,6 +22,8 @@ namespace DOS.Controllers
 
         public IFormsAuthenticationService FormsService { get; set; }
         //public IMembershipService MembershipService { get; set; }
+        static DateTime tokenExpiredTime = DateTime.Now.AddYears(-100);
+        static OneMapToken oneMapToken;
 
         protected override void Initialize(RequestContext requestContext)
         {
@@ -61,6 +66,50 @@ namespace DOS.Controllers
                             string controller = Request.Params["ReturnURL"].Substring(1, Request.Params["ReturnURL"].IndexOf(".mvc")-1);//"/membership.mvc/UpdateMember"
                             string method = Request.Params["ReturnURL"].Substring(Request.Params["ReturnURL"].IndexOf(".mvc/")+5);//"/membership.mvc/UpdateMember"
                             return RedirectToAction(method, controller);
+                        }
+                    }
+
+                    WebClient client = new WebClient();
+                    Session["FileIOStream"] = null;
+                    Session["FileName"] = "";
+                    Session["TextfieldLength"] = sql_conn.usp_getAllTextFieldLengthInXML().ElementAt(0).XML.ToString();
+                    IEnumerable<usp_getAppConfigResult> res = sql_conn.usp_getAppConfig().ToList();
+                    for (int x = 0; x < res.Count(); x++)
+                    {
+
+                        if (res.ElementAt(x).ConfigName == "OneMapTokenURL")
+                        {
+                            String jsonstring = "";
+                            if (tokenExpiredTime != DateTime.Now && IsConnectedToInternet())
+                            {
+                                tokenExpiredTime = DateTime.Now.AddHours(23);
+                                jsonstring = client.DownloadString(res.ElementAt(x).value.Trim());
+                                JavaScriptSerializer ser = new JavaScriptSerializer();
+                                oneMapToken = ser.Deserialize<OneMapToken>(jsonstring);
+                                Session["OneMapToken"] = oneMapToken.GetToken.ElementAt(0).NewToken;
+                            }
+                            else
+                            {
+                                Session["OneMapToken"] = "null";
+                            }
+                        }
+                        else if (res.ElementAt(x).ConfigName == "PostalCodeRetrivalURL")
+                        {
+                            Session[res.ElementAt(x).ConfigName] = res.ElementAt(x).value.Trim().Replace("<KSTOKEN>", (string)Session["OneMapToken"]);
+                        }
+                        else
+                            Session[res.ElementAt(x).ConfigName] = res.ElementAt(x).value.Trim();
+                    }
+                    if (((string)Session["OneMapToken"]).ToString() == "null")
+                    {
+                        Session["AutoPostalCode"] = "Off";
+                    }
+                    if (((string)Session["SystemMode"]).ToUpper() != "FULL")
+                    {
+                        IEnumerable<usp_getAllEmailResult> emailres = sql_conn.usp_getAllEmail().ToList();
+                        for (int x = 0; x < emailres.Count(); x++)
+                        {
+                            Session[emailres.ElementAt(x).EmailType] = emailres.ElementAt(x).EmailContent;
                         }
                     }
 

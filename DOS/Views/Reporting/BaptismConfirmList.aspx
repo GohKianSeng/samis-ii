@@ -2,7 +2,7 @@
 <%@ Import Namespace="DOS.Models" %>
 <%@ Import Namespace="System.IO" %>
 <html>
-<%if (!HttpContext.Current.IsDebuggingEnabled){%>
+<%if (HttpContext.Current.IsDebuggingEnabled){%>
     <script type="text/javascript" src="/Content/scripts/common_function.debug.js"></script>    
 <%}else{%>
     <script type="text/javascript" src="/Content/scripts/common_function.min.js"></script>
