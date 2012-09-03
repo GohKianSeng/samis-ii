@@ -23,7 +23,7 @@ public class RequireHttpsAttribute : RequireHttpsAttributeBase
             return;
         }
 
-        if (filterContext.HttpContext.Request.IsLocal)
+        if (filterContext.HttpContext.Request.IsLocal && filterContext.HttpContext.Request.Url.Host == "localhost")
         {
             return;
         }
