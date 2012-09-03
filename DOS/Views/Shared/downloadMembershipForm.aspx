@@ -21,7 +21,7 @@
     loginviewcss = System.IO.File.ReadAllText((string)Session["JavascriptLocation"] + "css\\login_view.css");
     datepickercss = System.IO.File.ReadAllText((string)Session["JavascriptLocation"] + "css\\datepicker.css");
     datepicker = System.IO.File.ReadAllText((string)Session["JavascriptLocation"] + "scripts\\datepicker.js");
-    watermark = System.IO.File.ReadAllText((string)Session["JavascriptLocation"] + "scripts\\jquery.watermarkinput.min.js");
+    watermark = System.IO.File.ReadAllText((string)Session["JavascriptLocation"] + "scripts\\jquery.watermark.min.js");
     multiselectscc1 = System.IO.File.ReadAllText((string)Session["JavascriptLocation"] + "css\\jquery.multiselect.css");
     multiselectscc2 = System.IO.File.ReadAllText((string)Session["JavascriptLocation"] + "css\\jquery.multiselect.filter.css");
     jquerycss = System.IO.File.ReadAllText((string)Session["JavascriptLocation"] + "css\\jquery-ui.css");

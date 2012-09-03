@@ -22,7 +22,7 @@
     <script type="text/javascript" src="/Content/scripts/navigateAway.min.js"></script>
 <%}%>
 
-<script type="text/javascript" src="/Content/scripts/jquery.watermarkinput.min.js"></script>
+<script type="text/javascript" src="/Content/scripts/jquery.watermark.min.js"></script>
 
 <!-- history script   -->
 <link rel="stylesheet" type="text/css" href="/Content/css/ITSCHistory.css" />

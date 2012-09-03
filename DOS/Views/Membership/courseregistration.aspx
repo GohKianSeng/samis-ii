@@ -10,7 +10,7 @@
 <link rel="stylesheet" href="/Content/css/datepicker.css" type="text/css" />
 <link rel="stylesheet" type="text/css" href="/Content/css/searchsuggest.css">
 <script type="text/javascript" src="/Content/scripts/datepicker.js"></script>
-<script type="text/javascript" src="/Content/scripts/jquery.watermarkinput.min.js"></script>
+<script type="text/javascript" src="/Content/scripts/jquery.watermark.min.js"></script>
 <script type="text/javascript" src="/Content/scripts/jquery.cookie.js"></script>
     
 <%if (HttpContext.Current.IsDebuggingEnabled){%>

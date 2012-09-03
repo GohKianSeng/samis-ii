@@ -187,7 +187,9 @@ function searchSuggestCallback(data) {
             photo = xmlDoc.getElementsByTagName("found")[i].getElementsByTagName("ICPhoto")[0].childNodes[0].nodeValue;
         var name = xmlDoc.getElementsByTagName("found")[i].getElementsByTagName("Name")[0].childNodes[0].nodeValue;
         var nric = xmlDoc.getElementsByTagName("found")[i].getElementsByTagName("NRIC")[0].childNodes[0].nodeValue;
-        var email = xmlDoc.getElementsByTagName("found")[i].getElementsByTagName("Email")[0].childNodes[0].nodeValue;
+        var email = "";
+        if (xmlDoc.getElementsByTagName("found")[i].getElementsByTagName("Email")[0].childNodes.length > 0)
+            email = xmlDoc.getElementsByTagName("found")[i].getElementsByTagName("Email")[0].childNodes[0].nodeValue;
         
         var url = "/Content/images/empty_profile_pix.gif";
         if (photo.length > 0) {

@@ -74,3 +74,10 @@ C:\Users\ks\Desktop\STAndrewProject_bk_20120823\DOS\DOS\bin\System.Data.Linq.dll
 C:\Users\ks\Desktop\STAndrewProject_bk_20120823\DOS\DOS\obj\Debug\ResolveAssemblyReference.cache
 C:\Users\ks\Desktop\STAndrewProject_bk_20120823\DOS\DOS\obj\Debug\DOS.dll
 C:\Users\ks\Desktop\STAndrewProject_bk_20120823\DOS\DOS\obj\Debug\DOS.pdb
+C:\Users\ks\Desktop\STAndrewProject_bk_20120830\DOS\DOS\bin\DOS.dll
+C:\Users\ks\Desktop\STAndrewProject_bk_20120830\DOS\DOS\bin\DOS.pdb
+C:\Users\ks\Desktop\STAndrewProject_bk_20120830\DOS\DOS\bin\Microsoft.JScript.dll
+C:\Users\ks\Desktop\STAndrewProject_bk_20120830\DOS\DOS\bin\System.Data.Linq.dll
+C:\Users\ks\Desktop\STAndrewProject_bk_20120830\DOS\DOS\obj\Debug\ResolveAssemblyReference.cache
+C:\Users\ks\Desktop\STAndrewProject_bk_20120830\DOS\DOS\obj\Debug\DOS.dll
+C:\Users\ks\Desktop\STAndrewProject_bk_20120830\DOS\DOS\obj\Debug\DOS.pdb

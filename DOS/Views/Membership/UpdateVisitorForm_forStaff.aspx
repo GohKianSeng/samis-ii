@@ -51,7 +51,7 @@
 <!-- Fix header and sorter table scripts   -->    
 
 <!-- watermark scripts   --> 
-<script type="text/javascript" src="/Content/scripts/jquery.watermarkinput.min.js"></script>
+<script type="text/javascript" src="/Content/scripts/jquery.watermark.min.js"></script>
 <!-- watermark scripts   --> 
 
 <script language="C#" runat="server">
