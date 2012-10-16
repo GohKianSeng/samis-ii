@@ -20,6 +20,7 @@
 
 <script type="text/javascript">
     function reloadList() {
+        document.getElementById("displayloading").style.display = "block";
         $("#MemberlistIframe").get(0).contentWindow.reloadCase($("#bapconid").val());
     }
 </script>    
@@ -41,6 +42,11 @@
                                 <option value="BapNotCon">Baptised, Not Confirm</option>
                                 <option value="BapAndCon">Baptised & Confirmed</option>                                
                             </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td id="displayloading" style="width: 160px; display:none">
+                            <img src="/Content/images/loading.gif" /> Loading... Please wait.
                         </td>
                     </tr>
                 </table>

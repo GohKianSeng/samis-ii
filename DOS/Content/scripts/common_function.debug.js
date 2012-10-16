@@ -155,6 +155,11 @@ function searchSuggest(delay, textinput, searchsuggest, hidden) {
         }
 
         if (str.length > 1) {
+
+            var dom = document.getElementById(searchsuggestid);
+            dom.style.display = "block";
+            dom.innerHTML = '<img src="/Content/images/loading.gif" /> Loading. Please wait......';
+
             $.post('/parish.mvc/searchforInCharge',
                 { name: $("#" + textinputid).val() },
                 function (data) {
@@ -171,6 +176,18 @@ function searchSuggest(delay, textinput, searchsuggest, hidden) {
 }
 
 function searchSuggestCallback(data) {
+    var dom = document.getElementById(searchsuggestid);
+    
+
+    if (jQuery.trim(data).length <= 0) {
+        dom.style.display = "none";
+        alert("Sorry no such member found. Please search again.");
+        return;
+    }
+
+
+    dom.style.display = "block";
+    dom.innerHTML = '';
     var xmlDoc = stringToXML(data);
 
     var dom = document.getElementById(searchsuggestid);
@@ -201,7 +218,7 @@ function searchSuggestCallback(data) {
         var suggest = '<div onmouseover="javascript:suggestOver(this);" ';
         suggest += 'onmouseout="javascript:suggestOut(this);" ';
         suggest += 'onclick="javascript:setSearchSuggest(\'' + nric + '\',\'' + name + '\');" ';
-        suggest += 'class="suggest_link"><table style="width:100%"><tr><td style="width:70px;text-align:center"><img style="width:auto;height:50px" src="' + url + '"></td><td>' + name + '<br/>' + email + '</td></tr></table></div>';
+        suggest += 'class="suggest_link"><table style="width:100%"><tr><td style="width:70px;text-align:center"><img style="width:auto;height:50px" src="' + url + '" /></td><td>' + name + '<br/>' + email + '</td></tr></table></div>';
         dom.innerHTML += suggest;
     }
 }
@@ -372,10 +389,14 @@ function loadAddressFromPostalCode(postalcode) {
         { postalCode: postalcode },
             function (data) {
                 var parsedJSON = jQuery.parseJSON(data);
-                $("#candidate_blk_house").val(parsedJSON.GeocodeInfo[0].BLOCK);
-                $("#candidate_street_address").val(parsedJSON.GeocodeInfo[0].ROAD);
-                $("#hidden_candidate_blk_house").val(parsedJSON.GeocodeInfo[0].BLOCK);
-                $("#hidden_candidate_street_address").val(parsedJSON.GeocodeInfo[0].ROAD);
+                $("#candidate_blk_house").val(parsedJSON.BLOCK);
+                $("#candidate_street_address").val(parsedJSON.ROAD);
+                $("#hidden_candidate_blk_house").val(parsedJSON.BLOCK);
+                $("#hidden_candidate_street_address").val(parsedJSON.ROAD);
+//                $("#candidate_blk_house").val(parsedJSON.GeocodeInfo[0].BLOCK);
+//                $("#candidate_street_address").val(parsedJSON.GeocodeInfo[0].ROAD);
+//                $("#hidden_candidate_blk_house").val(parsedJSON.GeocodeInfo[0].BLOCK);
+//                $("#hidden_candidate_street_address").val(parsedJSON.GeocodeInfo[0].ROAD);
             }
         );
     }

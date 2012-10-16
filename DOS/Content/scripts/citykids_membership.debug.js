@@ -79,51 +79,54 @@ function basicCheck() {
     if (jQuery.trim($('#kid_nric').val()).length == 0)
         errormsg += "- NRIC is mandatory\n";
 
-    if (jQuery.trim($('#kid_dob').val()).length == 0)
-        errormsg += "- Date Of Birth is mandatory\n";
 
-    if ($("#kid_gender > option:selected").val() == '')
-        errormsg += "- Gender is mandatory\n";
+    if ((getSystemMode() != "FULL") || (getSystemMode() == "FULL" && getFullCheck() == "ON")) {
+        if (jQuery.trim($('#kid_dob').val()).length == 0)
+            errormsg += "- Date Of Birth is mandatory\n";
 
-    if ($("#" + getNationalityID() + " > option:selected").val() == '')
-        errormsg += "- Nationality is mandatory\n";
+        if ($("#kid_gender > option:selected").val() == '')
+            errormsg += "- Gender is mandatory\n";
 
-    if ($("#" + getRaceID() + " > option:selected").val() == '')
-        errormsg += "- Race is mandatory\n";
+        if ($("#" + getNationalityID() + " > option:selected").val() == '')
+            errormsg += "- Nationality is mandatory\n";
 
-    if (jQuery.trim($('#candidate_street_address').val()).length == 0)
-        errormsg += "- Street Address is mandatory\n";
+        if ($("#" + getRaceID() + " > option:selected").val() == '')
+            errormsg += "- Race is mandatory\n";
 
-    if (jQuery.trim($('#candidate_blk_house').val()).length == 0)
-        errormsg += "- Blk/House no. is mandatory\n";
+        if (jQuery.trim($('#candidate_street_address').val()).length == 0)
+            errormsg += "- Street Address is mandatory\n";
 
-    if (jQuery.trim($('#candidate_postal_code').val()).length == 0)
-        errormsg += "- Postal Code is mandatory\n";
-    else if (isNaN(jQuery.trim($("#candidate_postal_code").val())))
-        errormsg += "- Postal Code is invalid\n";
+        if (jQuery.trim($('#candidate_blk_house').val()).length == 0)
+            errormsg += "- Blk/House no. is mandatory\n";
 
-    if ($("#" + getSchoolID() + " > option:selected").val() == '')
-        errormsg += "- School is mandatory\n";
+        if (jQuery.trim($('#candidate_postal_code').val()).length == 0)
+            errormsg += "- Postal Code is mandatory\n";
+        else if (isNaN(jQuery.trim($("#candidate_postal_code").val())))
+            errormsg += "- Postal Code is invalid\n";
 
-    if (jQuery.trim($('#kid_NOK_contact').val()).length == 0)
-        errormsg += "- Next Of Kin Contact is mandatory\n";
-    else if (isValidNumbericWithoutDecimal(jQuery.trim($("#kid_NOK_contact").val())) == false && jQuery.trim($("#kid_NOK_contact").val()).length != 0) {
-        errormsg += "- Next Of Kin Contact is invalid\n";
-    }
+        if ($("#" + getSchoolID() + " > option:selected").val() == '')
+            errormsg += "- School is mandatory\n";
 
-    if (jQuery.trim($('#kid_NOK_relationship').val()).length == 0)
-        errormsg += "- Next Of Kin Name is mandatory\n";    
+        if (jQuery.trim($('#kid_NOK_contact').val()).length == 0)
+            errormsg += "- Next Of Kin Contact is mandatory\n";
+        else if (isValidNumbericWithoutDecimal(jQuery.trim($("#kid_NOK_contact").val())) == false && jQuery.trim($("#kid_NOK_contact").val()).length != 0) {
+            errormsg += "- Next Of Kin Contact is invalid\n";
+        }
 
-    if (isValidEmailAddress(jQuery.trim($("#kid_email").val())) == false && jQuery.trim($("#kid_email").val()).length != 0) {
-        errormsg += "- Email address is invalid\n";
-    }
+        if (jQuery.trim($('#kid_NOK_relationship').val()).length == 0)
+            errormsg += "- Next Of Kin Name is mandatory\n";
 
-    if (isValidNumbericWithoutDecimal(jQuery.trim($("#kid_home_tel").val())) == false && jQuery.trim($("#kid_home_tel").val()).length != 0) {
-        errormsg += "- Home Tel is invalid\n";
-    }
+        if (isValidEmailAddress(jQuery.trim($("#kid_email").val())) == false && jQuery.trim($("#kid_email").val()).length != 0) {
+            errormsg += "- Email address is invalid\n";
+        }
 
-    if (isValidNumbericWithoutDecimal(jQuery.trim($("#kid_mobile_tel").val())) == false && jQuery.trim($("#kid_mobile_tel").val()).length != 0) {
-        errormsg += "- Mobile Tel  is invalid\n";
+        if (isValidNumbericWithoutDecimal(jQuery.trim($("#kid_home_tel").val())) == false && jQuery.trim($("#kid_home_tel").val()).length != 0) {
+            errormsg += "- Home Tel is invalid\n";
+        }
+
+        if (isValidNumbericWithoutDecimal(jQuery.trim($("#kid_mobile_tel").val())) == false && jQuery.trim($("#kid_mobile_tel").val()).length != 0) {
+            errormsg += "- Mobile Tel  is invalid\n";
+        }
     }
 
     return errormsg;

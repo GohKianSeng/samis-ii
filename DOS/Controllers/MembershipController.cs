@@ -9,6 +9,7 @@ using System.Xml.Linq;
 using System.Net;
 using System.Net.Mail;
 using System.IO;
+using System.Web.Script.Serialization;
 
 namespace DOS.Controllers
 {
@@ -225,12 +226,51 @@ namespace DOS.Controllers
         [AcceptVerbs(HttpVerbs.Post)]
         public ActionResult PostalCodeToAddress(string postalCode)
         {
-            WebClient client = new WebClient();
-            string jsonstring = client.DownloadString((string)Session["PostalCodeRetrivalURL"] + postalCode);
+            //onemap api
+            //WebClient client = new WebClient();
+            //string jsonstring = client.DownloadString((string)Session["PostalCodeRetrivalURL"] + postalCode);
 
-            ViewData["result"] = jsonstring;
-            return View("simplehtml");
-            //return this.Json(jsonstring, JsonRequestBehavior.AllowGet);
+            //ViewData["result"] = jsonstring;
+            //return View("simplehtml");
+            
+            //google api
+            WebClient client = new WebClient();
+            GoogleGeoCodeResponse googlemap;
+            string jsonstring;
+            string searchURL = "http://maps.googleapis.com/maps/api/geocode/json?sensor=false&region=sg&address=Singapore " + postalCode;
+            jsonstring = client.DownloadString(searchURL);
+
+            JavaScriptSerializer ser = new JavaScriptSerializer();
+            googlemap = ser.Deserialize<GoogleGeoCodeResponse>(jsonstring);
+            string lookUpAddress = "http://maps.googleapis.com/maps/api/geocode/json?sensor=false&latlng=" + googlemap.results[0].geometry.location.lat + "," + googlemap.results[0].geometry.location.lng;
+
+            jsonstring = client.DownloadString(lookUpAddress);
+            googlemap = ser.Deserialize<GoogleGeoCodeResponse>(jsonstring);
+            results AddressResult = new results();
+            if (googlemap.status == "OK")
+            {
+                for (int x = 0; x < googlemap.results.Length; x++)
+                {
+                    if (googlemap.results[x].types[0] == "street_address")
+                    {
+                        for(int y=0; y<googlemap.results[x].address_components.Length; y++){
+                            if (googlemap.results[x].address_components[y].types[0] == "street_number")
+                            {
+                                AddressResult.BLOCK = googlemap.results[x].address_components[y].long_name;                                
+                            }
+                            else if (googlemap.results[x].address_components[y].types[0] == "route")
+                            {
+                                AddressResult.ROAD = googlemap.results[x].address_components[y].long_name;                               
+                            }
+                        }
+                    }
+                }
+            }
+
+
+            ser = new JavaScriptSerializer();
+            ViewData["result"] = ser.Serialize(AddressResult);
+            return View("simplehtml");            
         }
 
         [ErrorHandler]        

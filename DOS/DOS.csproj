@@ -77,6 +77,7 @@
     <Compile Include="Controllers\CityKidsController.cs" />
     <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\ErrorHandler.cs" />
+    <Compile Include="Controllers\GoogleMapClass.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\MasterPageController.cs" />
     <Compile Include="Controllers\MembershipController.cs" />
@@ -117,6 +118,7 @@
     <Content Include="Content\css\TablesView.css" />
     <Content Include="Content\css\TabsView.css" />
     <Content Include="Content\css\TopMenu.css" />
+    <Content Include="Content\images\apple-touch-icon.png" />
     <Content Include="Content\images\loading.gif" />
     <Content Include="Content\images\add.png" />
     <Content Include="Content\images\asc.gif" />

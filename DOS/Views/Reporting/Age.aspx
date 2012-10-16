@@ -17,6 +17,7 @@
 
 <script type="text/javascript">
     function reloadAgeList() {
+        document.getElementById("displayloading").style.display = "block";
         if (jQuery.trim($("#agefrom").val()).length <= 0 || jQuery.trim($("#ageto").val()).length <= 0) {
             return;
         }
@@ -56,6 +57,13 @@
                         <td style="width: 98%">
                             <br>
                             <input type="button" onclick="reloadAgeList();" value="Reload"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td />
+                        <td />
+                        <td id="displayloading" style="width: 160px; display:none">
+                            <img src="/Content/images/loading.gif" /> Loading... Please wait.
                         </td>
                     </tr>
                 </table>

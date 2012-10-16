@@ -2,6 +2,7 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
+<link rel="apple-touch-icon" href="/Content/images/apple-touch-icon.png"/>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Login</title>
 <link rel="stylesheet" type="text/css" href="/Content/css/login_view.css" media="all">

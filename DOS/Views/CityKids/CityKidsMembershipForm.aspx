@@ -201,7 +201,15 @@
     
     function changeHiddenText(obj, hidden){
         $("#"+hidden).val(obj.options[obj.selectedIndex].text);
-    }    
+    }
+
+    function getSystemMode(){
+        return "<%=((string)Session["SystemMode"]).ToUpper() %>";        
+    }
+
+    function getFullCheck(){
+        return "<%= ((string)Session["GreenFormFullCheck"]).ToUpper() %>";        
+    }
 </script>
 
 

@@ -21,6 +21,7 @@
     $(document).ready(function () {
         $("table").tablesorter({ dateFormat: "uk" });
         $(".tablesorter tr:even").addClass("alt");
+        parent.document.getElementById("displayloading").style.display = "none";
     });
 
     function reloadCase(from, to) {

@@ -35,6 +35,7 @@
     }
 
     function reloadList() {
+        document.getElementById("displayloading").style.display = "block";
         $("#MemberlistIframe").get(0).contentWindow.reloadCase($("#" + getMaritalStatusID()).val());
     }
 </script>    
@@ -52,6 +53,11 @@
                             Marital Status<br>
                             <asp:DropDownList  style=" width:130px" onchange="reloadList()" class="element select medium" OnLoad="loadmaritalstatus" name="marital_status" ID="marital_status" runat="server">
                             </asp:DropDownList>                            
+                        </td>
+                    </tr>
+                    <tr>
+                        <td id="displayloading" style="width: 160px; display:none">
+                            <img src="/Content/images/loading.gif" /> Loading... Please wait.
                         </td>
                     </tr>
                 </table>

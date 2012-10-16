@@ -184,6 +184,7 @@
 
 <script type="text/javascript">
     function reloadManualSearchList() {
+        document.getElementById("displayloading").style.display = "block";
         $("#MemberlistIframe").get(0).contentWindow.reloadCase($("#" + getGenderID()).val(), $("#" + getMarriageID()).val(), $("#" + getNationality()).val(), $("#" + getDialectID()).val(), $("#" + getEducationID()).val(), $("#" + getOccupationID()).val(), $("#" + getCongregationID()).val(), $("#" + getLanguageID()).val(), $("#" + getCellgroupID()).val(), $("#" + getMinistryID()).val(), $("#" + getBaptismChurchID()).val(), $("#" + getConfirmChurchID()).val(), $("#" + getPreviousChurchID()).val(), $("#" + getBaptismByID()).val(), $("#" + getConfirmByID()).val(), $("#" + getResidentalAreaID()).val()); 
     }
 
@@ -338,6 +339,11 @@
                         <td>
                             <br />  
                             <input type="button" onclick="reloadManualSearchList();" value="Reload"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td id="displayloading" style="width: 160px; display:none">
+                            <img src="/Content/images/loading.gif" /> Loading... Please wait.
                         </td>
                     </tr>
                 </table>

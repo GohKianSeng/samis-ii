@@ -35,6 +35,7 @@
 
 <script type="text/javascript">
     function reloadList() {
+        document.getElementById("displayloading").style.display = "block";
         $("#MemberlistIframe").get(0).contentWindow.reloadCase($("#" + getDropdownlistID()).val());
     }
 
@@ -56,6 +57,11 @@
                             Cellgroup<br>
                             <asp:DropDownList style=" width:150px" onchange="reloadList()" OnLoad="loadCellgroup" name="cellgroup" ID="cellgroup" runat="server">
                             </asp:DropDownList>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td id="displayloading" style="width: 160px; display:none">
+                            <img src="/Content/images/loading.gif" /> Loading... Please wait.
                         </td>
                     </tr>
                 </table>

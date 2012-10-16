@@ -2,9 +2,10 @@
 <%@ Import Namespace="DOS.Models"%>
 <%@ Import Namespace="System.Xml.Linq" %>
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" />
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
 <head>
+<link rel="apple-touch-icon" href="/Content/images/apple-touch-icon.png"/>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <title><asp:ContentPlaceHolder ID="TitleContent" runat="server" /> - SAMIS II</title>
     <link rel="stylesheet" type="text/css" href="/Content/css/TopMenu.css" />

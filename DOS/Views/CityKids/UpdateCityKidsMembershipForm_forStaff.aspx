@@ -266,6 +266,14 @@
     function getSchoolID(){
         return "<%= kid_school.ClientID%>";
     }
+
+    function getSystemMode(){
+        return "<%=((string)Session["SystemMode"]).ToUpper() %>";        
+    }
+
+    function getFullCheck(){
+        return "<%= ((string)Session["GreenFormFullCheck"]).ToUpper() %>";        
+    }
 </script>
 
 <form AUTOCOMPLETE="off" id="registration_form" action="/CityKids.mvc/submitUpdateKidForm" enctype="multipart/form-data" runat="server">
