@@ -63,30 +63,19 @@ namespace DOS
             IEnumerable<usp_getAppConfigResult> res = sql_conn.usp_getAppConfig().ToList();
             for (int x = 0; x < res.Count(); x++)
             {
-
+                //Not using onemap.sg api. using googlemap api instead.
                 if (res.ElementAt(x).ConfigName == "OneMapTokenURL")
                 {
-                    String jsonstring = "";
-                    if (tokenExpiredTime != DateTime.Now && IsConnectedToInternet())
-                    {
-                        tokenExpiredTime = DateTime.Now.AddHours(23);
-                        jsonstring = client.DownloadString(res.ElementAt(x).value.Trim());
-                        JavaScriptSerializer ser = new JavaScriptSerializer();
-                        oneMapToken = ser.Deserialize<OneMapToken>(jsonstring);
-                        Session["OneMapToken"] = oneMapToken.GetToken.ElementAt(0).NewToken;
-                    }
-                    else
-                    {
-                        Session["OneMapToken"] = "null";
-                    }
+                    getOneMapToken(res.ElementAt(x).value.Trim());                    
                 }
                 else if (res.ElementAt(x).ConfigName == "PostalCodeRetrivalURL")
                 {
                     Session[res.ElementAt(x).ConfigName] = res.ElementAt(x).value.Trim().Replace("<KSTOKEN>", (string)Session["OneMapToken"]);
                 }
                 else
-                    Session[res.ElementAt(x).ConfigName] = res.ElementAt(x).value.Trim();
+                Session[res.ElementAt(x).ConfigName] = res.ElementAt(x).value.Trim();
             }
+            //not using onemap.sg api, using googlemap instead
             if (((string)Session["OneMapToken"]).ToString() == "null")
             {
                 Session["AutoPostalCode"] = "Off";
@@ -98,6 +87,26 @@ namespace DOS
                 {
                     Session[emailres.ElementAt(x).EmailType] = emailres.ElementAt(x).EmailContent;
                 }
+            }
+        }
+
+        private void getOneMapToken(string OneMapTokenURL)
+        {
+            try
+            {
+                WebClient client = new WebClient();
+                tokenExpiredTime = DateTime.Now.AddHours(23);
+                string jsonstring = client.DownloadString(OneMapTokenURL);
+                JavaScriptSerializer ser = new JavaScriptSerializer();
+                oneMapToken = ser.Deserialize<OneMapToken>(jsonstring);
+                if (oneMapToken.GetToken.ElementAt(0).NewToken == null)
+                    Session["OneMapToken"] = "null";
+                else
+                    Session["OneMapToken"] = oneMapToken.GetToken.ElementAt(0).NewToken;
+            }
+            catch (Exception e)
+            {
+                Session["OneMapToken"] = "null";
             }
         }
 

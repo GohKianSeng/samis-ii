@@ -79,19 +79,7 @@ namespace DOS.Controllers
 
                         if (res.ElementAt(x).ConfigName == "OneMapTokenURL")
                         {
-                            String jsonstring = "";
-                            if (tokenExpiredTime != DateTime.Now && IsConnectedToInternet())
-                            {
-                                tokenExpiredTime = DateTime.Now.AddHours(23);
-                                jsonstring = client.DownloadString(res.ElementAt(x).value.Trim());
-                                JavaScriptSerializer ser = new JavaScriptSerializer();
-                                oneMapToken = ser.Deserialize<OneMapToken>(jsonstring);
-                                Session["OneMapToken"] = oneMapToken.GetToken.ElementAt(0).NewToken;
-                            }
-                            else
-                            {
-                                Session["OneMapToken"] = "null";
-                            }
+                            getOneMapToken(res.ElementAt(x).value.Trim());                        
                         }
                         else if (res.ElementAt(x).ConfigName == "PostalCodeRetrivalURL")
                         {
@@ -124,6 +112,26 @@ namespace DOS.Controllers
 
             // If we got this far, something failed, redisplay form
             return View(model);
+        }
+
+        private void getOneMapToken(string OneMapTokenURL)
+        {
+            try
+            {
+                WebClient client = new WebClient();
+                tokenExpiredTime = DateTime.Now.AddHours(23);
+                string jsonstring = client.DownloadString(OneMapTokenURL);
+                JavaScriptSerializer ser = new JavaScriptSerializer();
+                oneMapToken = ser.Deserialize<OneMapToken>(jsonstring);
+                if (oneMapToken.GetToken.ElementAt(0).NewToken == null)
+                    Session["OneMapToken"] = "null";
+                else
+                    Session["OneMapToken"] = oneMapToken.GetToken.ElementAt(0).NewToken;
+            }
+            catch (Exception e)
+            {
+                Session["OneMapToken"] = "null";
+            }
         }
 
         [ErrorHandler]

@@ -389,14 +389,15 @@ function loadAddressFromPostalCode(postalcode) {
         { postalCode: postalcode },
             function (data) {
                 var parsedJSON = jQuery.parseJSON(data);
-                $("#candidate_blk_house").val(parsedJSON.BLOCK);
-                $("#candidate_street_address").val(parsedJSON.ROAD);
-                $("#hidden_candidate_blk_house").val(parsedJSON.BLOCK);
-                $("#hidden_candidate_street_address").val(parsedJSON.ROAD);
-//                $("#candidate_blk_house").val(parsedJSON.GeocodeInfo[0].BLOCK);
-//                $("#candidate_street_address").val(parsedJSON.GeocodeInfo[0].ROAD);
-//                $("#hidden_candidate_blk_house").val(parsedJSON.GeocodeInfo[0].BLOCK);
-//                $("#hidden_candidate_street_address").val(parsedJSON.GeocodeInfo[0].ROAD);
+                if (parsedJSON.BLOCK == null || parsedJSON.ROAD == null) {
+                    alert("Invalid Postal Code.");
+                }
+                else {
+                    $("#candidate_blk_house").val(parsedJSON.BLOCK);
+                    $("#candidate_street_address").val(parsedJSON.ROAD);
+                    $("#hidden_candidate_blk_house").val(parsedJSON.BLOCK);
+                    $("#hidden_candidate_street_address").val(parsedJSON.ROAD);
+                }
             }
         );
     }

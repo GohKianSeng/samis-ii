@@ -222,25 +222,14 @@ namespace DOS.Controllers
             return View("Agreement");
         }
 
-        [ErrorHandler]
-        [AcceptVerbs(HttpVerbs.Post)]
-        public ActionResult PostalCodeToAddress(string postalCode)
-        {
-            //onemap api
-            //WebClient client = new WebClient();
-            //string jsonstring = client.DownloadString((string)Session["PostalCodeRetrivalURL"] + postalCode);
-
-            //ViewData["result"] = jsonstring;
-            //return View("simplehtml");
-            
-            //google api
+        private results getGooglePostalCodeResult(string postalCode){
+            JavaScriptSerializer ser = new JavaScriptSerializer();
             WebClient client = new WebClient();
             GoogleGeoCodeResponse googlemap;
             string jsonstring;
             string searchURL = "http://maps.googleapis.com/maps/api/geocode/json?sensor=false&region=sg&address=Singapore " + postalCode;
             jsonstring = client.DownloadString(searchURL);
 
-            JavaScriptSerializer ser = new JavaScriptSerializer();
             googlemap = ser.Deserialize<GoogleGeoCodeResponse>(jsonstring);
             string lookUpAddress = "http://maps.googleapis.com/maps/api/geocode/json?sensor=false&latlng=" + googlemap.results[0].geometry.location.lat + "," + googlemap.results[0].geometry.location.lng;
 
@@ -253,24 +242,53 @@ namespace DOS.Controllers
                 {
                     if (googlemap.results[x].types[0] == "street_address")
                     {
-                        for(int y=0; y<googlemap.results[x].address_components.Length; y++){
+                        for (int y = 0; y < googlemap.results[x].address_components.Length; y++)
+                        {
                             if (googlemap.results[x].address_components[y].types[0] == "street_number")
                             {
-                                AddressResult.BLOCK = googlemap.results[x].address_components[y].long_name;                                
+                                AddressResult.BLOCK = googlemap.results[x].address_components[y].long_name;
                             }
                             else if (googlemap.results[x].address_components[y].types[0] == "route")
                             {
-                                AddressResult.ROAD = googlemap.results[x].address_components[y].long_name;                               
+                                AddressResult.ROAD = googlemap.results[x].address_components[y].long_name;
                             }
                         }
                     }
                 }
             }
 
+            return AddressResult;
+        }
 
-            ser = new JavaScriptSerializer();
-            ViewData["result"] = ser.Serialize(AddressResult);
-            return View("simplehtml");            
+        [ErrorHandler]
+        [AcceptVerbs(HttpVerbs.Post)]
+        public ActionResult PostalCodeToAddress(string postalCode)
+        {
+            try
+            {
+                JavaScriptSerializer ser = new JavaScriptSerializer();
+                OneMapResponse onemap;
+                //onemap api
+                WebClient clientaa = new WebClient();
+                results AddressResult = new results();
+                string jsonstringOneMap = clientaa.DownloadString((string)Session["PostalCodeRetrivalURL"] + postalCode);
+                onemap = ser.Deserialize<OneMapResponse>(jsonstringOneMap);
+
+                if (onemap != null)
+                {
+                    AddressResult.BLOCK = onemap.GeocodeInfo.ElementAt(0).BLOCK;
+                    AddressResult.ROAD = onemap.GeocodeInfo.ElementAt(0).ROAD;
+                }
+
+                ViewData["result"] = ser.Serialize(AddressResult);
+                return View("simplehtml");
+            }
+            catch (Exception e)
+            {
+                JavaScriptSerializer ser = new JavaScriptSerializer();
+                ViewData["result"] = ser.Serialize(getGooglePostalCodeResult(postalCode));
+                return View("simplehtml");                
+            }
         }
 
         [ErrorHandler]        
