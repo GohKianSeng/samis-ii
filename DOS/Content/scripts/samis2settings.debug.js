@@ -21,17 +21,18 @@
     parseXML('FileType', 'FileTypeXML', 'FileTypeTable', 'FileTypelist', 'FileTypeID', 'FileTypeName');
     parseXML('FamilyType', 'FamilyTypeXML', 'FamilyTypeTable', 'FamilyTypelist', 'FamilyTypeID', 'FamilyTypeName');
     parseXML('School', 'SchoolXML', 'SchoolTable', 'Schoollist', 'SchoolID', 'SchoolName');
+    parseXML('Congregation', 'CongregationXML', 'CongregationTable', 'Congregationlist', 'CongregationID', 'CongregationName');
+    parseXML('Country', 'CountryXML', 'CountryTable', 'Countrylist', 'CountryID', 'CountryName');
+    parseXML('Dialect', 'DialectXML', 'DialectTable', 'Dialectlist', 'DialectID', 'DialectName');
+    parseXML('Education', 'EducationXML', 'EducationTable', 'Educationlist', 'EducationID', 'EducationName');
+    parseXML('Language', 'LanguageXML', 'LanguageTable', 'Languagelist', 'LanguageID', 'LanguageName');
+    parseXML('MaritalStatus', 'MaritalStatusXML', 'MaritalStatusTable', 'MaritalStatuslist', 'MaritalStatusID', 'MaritalStatusName');
+    parseXML('Occupation', 'OccupationXML', 'OccupationTable', 'Occupationlist', 'OccupationID', 'OccupationName');
+    parseXML('Parish', 'ParishXML', 'ParishTable', 'Parishlist', 'ParishID', 'ParishName');
+    parseXML('Salutation', 'SalutationXML', 'SalutationTable', 'Salutationlist', 'SalutationID', 'SalutationName');
+    parseXML('Style', 'StyleXML', 'StyleTable', 'Stylelist', 'StyleID', 'StyleName');
 
-    parseCongregationXML();
-    parseCountryXML();
-    parseDialectXML();
-    parseEducationXML();
-    parseLanguageXML();
-    parseMaritalStatusXML();
-    parseOccupationXML();
-    parseParishXML();
-    parseSalutationXML();
-    parseStyleXML();
+    parseExternalDBXML();
     parseConfigXML();
     parseEmailXML();
     parsePostalXML();
@@ -49,245 +50,90 @@ function setActiveTab(tabname) {
 }
 
 ///////////////////////////////////
-//// Congregation /////////////////
+//// External DB //////////////////
 ///////////////////////////////////
 
-function parseCongregationXML() {
-    var congregationxml = stringToXML(unescape($("#CongregationXML").val()));
-    var con = congregationxml.getElementsByTagName("Congregation");
-    for (x = 0; x < con.length; x++) {
-        if (x == 0) {
-            $("#CongregationTable").find("tr:gt(0)").remove();
-            totalCongregation = 0;
-            Congregationarray = new Array();
-        }
-        var id = con[x].getElementsByTagName("CongregationID")[0].childNodes[0].nodeValue;
-        var name = con[x].getElementsByTagName("CongregationName")[0].childNodes[0].nodeValue;
-        addNewCongregation(id, name);
-    }
-
-    var result = congregationxml.getElementsByTagName("Result")[0];
-    if (result != null) {
-        alert(congregationxml.getElementsByTagName("Result")[0].childNodes[0].nodeValue);
-    }
-}
-
-var totalCongregation = 0;
-var Congregationarray = new Array();
-
-function addNewCongregation(id_input, name_input) {
-    totalCongregation++;
-    Congregationarray.push(totalCongregation.toString());
-    $('#Congregationlist').val(Congregationarray.toString());
-
-    var table = document.getElementById("CongregationTable");
-    var row = table.insertRow(1);
-    var Congregationno = totalCongregation;
-
-    var id = '<input style=" width:40px;" readonly="readonly" id="CongregationID_' + Congregationno.toString() + '" name="CongregationID_' + Congregationno.toString() + '" type="text" maxlength="10" value=""/>';
-    var name = '<input style=" width:100%;" id="CongregationName_' + Congregationno.toString() + '" name="CongregationName_' + Congregationno.toString() + '" type="text" maxlength="100" value=""/></div>';
-
-    fillCell(row, 0, '<img onclick="removeSelectedCongregation(this);" border="0" src="/Content/images/remove.png" width="20" height="20" style="cursor:pointer" title="Remove"  alt="Remove"/>');
-    fillCell(row, 1, id);
-    fillCell(row, 2, name);
-
-    $("#CongregationID_" + Congregationno.toString()).val(id_input);
-    $("#CongregationName_" + Congregationno.toString()).val(name_input);
-}
-
-function addCongregation() {
-    addNewCongregation('New', '');
-}
-
-function removeSelectedCongregation(obj) {
-    var r = confirm("Are you sure to delete this?")
-    if (r == false) {
-        return;
-    }    
-
-    var delRow = obj.parentNode.parentNode;
-    var tbl = delRow.parentNode.parentNode;
-    var rIndex = delRow.sectionRowIndex;
-    var rowArray = new Array(delRow);
-    for (var i = 0; i < rowArray.length; i++) {
-        var rIndex = rowArray[i].sectionRowIndex;
-        var currentTime = new Date();
-        var time = currentTime.getMilliseconds();
-        rowArray[i].parentNode.deleteRow(rIndex);
-    }
-    Congregationarray.splice(rIndex - 1, 1);
-    $('#Congregationlist').val(Congregationarray.toString());
-}
-
-function checkAndSubmitCongregation() {
-    var xmlstring = "";
-    for (var x = 0; x < Congregationarray.length; x++) {
-        if (jQuery.trim($("#CongregationName_" + Congregationarray[x]).val()).length <= 0) {
-            alert("#" + (x + 1).toString() + ", Congregation Name cannot be blank");
-            return;
-        }
-
-        xmlstring += "<Congregation><CongregationID>" + $("#CongregationID_" + Congregationarray[x]).val() + "</CongregationID><CongregationName>" + $("#CongregationName_" + Congregationarray[x]).val() + "</CongregationName></Congregation>";
-    }
-
-    xmlstring = "<ChurchCongregation>" + xmlstring + "</ChurchCongregation>"
-
-    $.post('/settings.mvc/updateCongregation',
-        { xml: escape(xmlstring) },
-        function (data) {
-            $("#CongregationXML").val(unescape(data));
-            parseCongregationXML();
+function SyncAllSettings() {
+    $("#syncimg").show("slow");
+    $("#syncMessage").html("Synchronizing. Please wait......");
+    $("#syncMessageDiv").show("slow");
+    $.post('/settings.mvc/SyncAllSettings',
+        function (result) {
+            checkSyncAllSettings();
         }
     );
 }
 
+var checkSyncTimer = null;
 
-///////////////////////////////////
-//// Country      /////////////////
-///////////////////////////////////
-
-function parseCountryXML() {
-    var countryxml = stringToXML(unescape($("#CountryXML").val()));
-    var cou = countryxml.getElementsByTagName("Country");
-    for (x = 0; x < cou.length; x++) {
-        if (x == 0) {
-            $("#CountryTable").find("tr:gt(0)").remove();
-            totalCountry = 0;
-            Countryarray = new Array();
+function checkSyncAllSettings() {    
+    $.post('/settings.mvc/checkSyncAllSettings',
+        function (result) {
+            if (jQuery.trim(result) == "Updated") {
+                $("#syncimg").hide("slow");
+                $("#syncMessage").html("Data Synchronized. &nbsp;");
+                clearTimeout(checkSyncTimer);
+            }
+            else if (jQuery.trim(result) == "Error") {
+                $("#syncimg").hide("slow");
+                $("#syncMessage").html("Error Synchronizing. &nbsp;");
+                clearTimeout(checkSyncTimer);
+            }
+            else {
+                checkSyncTimer = setTimeout("checkSyncAllSettings()", 1000);
+            }
         }
-        var id = cou[x].getElementsByTagName("CountryID")[0].childNodes[0].nodeValue;
-        var name = cou[x].getElementsByTagName("CountryName")[0].childNodes[0].nodeValue;
-        addNewCountry(id, name);
+    );
+}
+
+function parseExternalDBXML() {
+    var externalxml = stringToXML(unescape($("#ExternalDBXML").val()));
+    var external = externalxml.getElementsByTagName("Site");
+    for (x = 0; x < external.length; x++) {
+        if (x == 0) {
+            $("#ExternalDBTable").find("tr:gt(0)").remove();
+            totalExternalDB = 0;
+            ExternalDBarray = new Array();
+        }
+        var id = external[x].getElementsByTagName("ExternalDBID")[0].childNodes[0].nodeValue;
+        var name = external[x].getElementsByTagName("ExternalSiteName")[0].childNodes[0].nodeValue;
+        var ip = external[x].getElementsByTagName("ExternalDBIP")[0].childNodes[0].nodeValue;
+        addNewExternalDB(id, name, ip);
     }
 
-    var result = countryxml.getElementsByTagName("Result")[0];
+    var result = externalxml.getElementsByTagName("Result")[0];
     if (result != null) {
-        alert(countryxml.getElementsByTagName("Result")[0].childNodes[0].nodeValue);
+        alert(externalxml.getElementsByTagName("Result")[0].childNodes[0].nodeValue);
     }
 }
 
-var totalCountry = 0;
-var Countryarray = new Array();
+var totalExternalDB = 0;
+var ExternalDBarray = new Array();
 
-function addNewCountry(id_input, name_input) {
-    totalCountry++;
-    Countryarray.push(totalCountry.toString());
-    $('#Congregationlist').val(Countryarray.toString());
+function addNewExternalDB(id_input, name_input, ip_input) {
+    totalExternalDB++;
+    ExternalDBarray.push(totalExternalDB.toString());
+    $('#ExternalDBlist').val(ExternalDBarray.toString());
 
-    var table = document.getElementById("CountryTable");
-    var row = table.insertRow(1);
-    var Countryno = totalCountry;
+    var table = document.getElementById("ExternalDBTable");
+    var row = table.insertRow(table.rows.length);
+    var ExternalDBno = totalExternalDB;
 
-    var id = '<input style=" width:40px;" readonly="readonly" id="CountryID_' + Countryno.toString() + '" name="CountryID_' + Countryno.toString() + '" type="text" maxlength="10" value=""/>';
-    var name = '<input style=" width:100%;" id="CountryName_' + Countryno.toString() + '" name="CountryName_' + Countryno.toString() + '" type="text" maxlength="100" value=""/></div>';
-
-    fillCell(row, 0, '<img onclick="removeSelectedCountry(this);" border="0" src="/Content/images/remove.png" width="20" height="20" style="cursor:pointer" title="Remove"  alt="Remove"/>');
-    fillCell(row, 1, id);
-    fillCell(row, 2, name);
-
-    $("#CountryID_" + Countryno.toString()).val(id_input);
-    $("#CountryName_" + Countryno.toString()).val(name_input);
-}
-
-function addCountry() {
-    addNewCountry('New', '');
-}
-
-function removeSelectedCountry(obj) {
-    var r = confirm("Are you sure to delete this?")
-    if (r == false) {
-        return;
-    }
+    var id = '<input style=" width:40px;" readonly="readonly" id="ExternalDBID_' + ExternalDBno.toString() + '" name="ExternalDBID_' + ExternalDBno.toString() + '" type="text" maxlength="10" value=""/>';
+    var name = '<input style=" width:100%;" id="ExternalDBName_' + ExternalDBno.toString() + '" name="ExternalDBName_' + ExternalDBno.toString() + '" type="text" maxlength="200" value=""/></div>';
+    var ip = '<input style=" width:100%;" id="ExternalDBIP_' + ExternalDBno.toString() + '" name="ExternalDBIP_' + ExternalDBno.toString() + '" type="text" maxlength="200" value=""/></div>';
     
-    var delRow = obj.parentNode.parentNode;
-    var tbl = delRow.parentNode.parentNode;
-    var rIndex = delRow.sectionRowIndex;
-    var rowArray = new Array(delRow);
-    for (var i = 0; i < rowArray.length; i++) {
-        var rIndex = rowArray[i].sectionRowIndex;
-        var currentTime = new Date();
-        var time = currentTime.getMilliseconds();
-        rowArray[i].parentNode.deleteRow(rIndex);
-    }
-    Countryarray.splice(rIndex - 1, 1);
-    $('#Countrylist').val(Countryarray.toString());
-}
-
-function checkAndSubmitCountry() {
-    var xmlstring = "";
-    for (var x = 0; x < Countryarray.length; x++) {
-        if (jQuery.trim($("#CountryName_" + Countryarray[x]).val()).length <= 0) {
-            alert("#" + (x + 1).toString() + ", Country Name cannot be blank");
-            return;
-        }
-
-        xmlstring += "<Country><CountryID>" + $("#CountryID_" + Countryarray[x]).val() + "</CountryID><CountryName>" + $("#CountryName_" + Countryarray[x]).val() + "</CountryName></Country>";
-    }
-
-    xmlstring = "<ChurchCountry>" + xmlstring + "</ChurchCountry>"
-
-    $.post('/settings.mvc/updateCountry',
-        { xml: escape(xmlstring) },
-        function (data) {
-            $("#CountryXML").val(unescape(data));
-            parseCountryXML();
-        }
-    );
-}
-
-
-///////////////////////////////////
-//// Dialect      /////////////////
-///////////////////////////////////
-
-function parseDialectXML() {
-    var dialectxml = stringToXML(unescape($("#DialectXML").val()));
-    var dia = dialectxml.getElementsByTagName("Dialect");
-    for (x = 0; x < dia.length; x++) {
-        if (x == 0) {
-            $("#DialectTable").find("tr:gt(0)").remove();
-            totalDialect = 0;
-            Dialectarray = new Array();
-        }
-        var id = dia[x].getElementsByTagName("DialectID")[0].childNodes[0].nodeValue;
-        var name = dia[x].getElementsByTagName("DialectName")[0].childNodes[0].nodeValue;
-        addNewDialect(id, name);
-    }
-
-    var result = dialectxml.getElementsByTagName("Result")[0];
-    if (result != null) {
-        alert(dialectxml.getElementsByTagName("Result")[0].childNodes[0].nodeValue);
-    }
-}
-
-var totalDialect = 0;
-var Dialectarray = new Array();
-
-function addNewDialect(id_input, name_input) {
-    totalDialect++;
-    Dialectarray.push(totalDialect.toString());
-    $('#Dialectlist').val(Dialectarray.toString());
-
-    var table = document.getElementById("DialectTable");
-    var row = table.insertRow(1);
-    var Dialectno = totalDialect;
-
-    var id = '<input style=" width:40px;" readonly="readonly" id="DialectID_' + Dialectno.toString() + '" name="DialectID_' + Dialectno.toString() + '" type="text" maxlength="10" value=""/>';
-    var name = '<input style=" width:100%;" id="DialectName_' + Dialectno.toString() + '" name="DialectName_' + Dialectno.toString() + '" type="text" maxlength="100" value=""/></div>';
-
-    fillCell(row, 0, '<img onclick="removeSelectedDialect(this);" border="0" src="/Content/images/remove.png" width="20" height="20" style="cursor:pointer" title="Remove"  alt="Remove"/>');
+    fillCell(row, 0, '<img onclick="removeSelectedExternalDB(this);" border="0" src="/Content/images/remove.png" width="20" height="20" style="cursor:pointer" title="Remove"  alt="Remove"/>');
     fillCell(row, 1, id);
     fillCell(row, 2, name);
-
-    $("#DialectID_" + Dialectno.toString()).val(id_input);
-    $("#DialectName_" + Dialectno.toString()).val(name_input);
+    fillCell(row, 3, ip);
+    
+    $("#ExternalDBID_" + ExternalDBno.toString()).val(id_input);
+    $("#ExternalDBName_" + ExternalDBno.toString()).val(name_input);
+    $("#ExternalDBIP_" + ExternalDBno.toString()).val(ip_input);    
 }
 
-function addDialect() {
-    addNewDialect('New', '');
-}
-
-function removeSelectedDialect(obj) {
+function removeSelectedExternalDB(obj) {
     var r = confirm("Are you sure to delete this?")
     if (r == false) {
         return;
@@ -303,689 +149,37 @@ function removeSelectedDialect(obj) {
         var time = currentTime.getMilliseconds();
         rowArray[i].parentNode.deleteRow(rIndex);
     }
-    Dialectarray.splice(rIndex - 1, 1);
-    $('#Dialectlist').val(Dialectarray.toString());
+    ExternalDBarray.splice(rIndex - 1, 1);
+    $('#ExternalDBlist').val(Stylearray.toString());
 }
 
-function checkAndSubmitDialect() {
+function addExternalDB(obj){
+    addNewExternalDB('New', '', '', '', '');
+    var objDiv = obj.parentNode.parentNode.parentNode.parentNode.parentNode;
+    objDiv.scrollTop = objDiv.scrollHeight;
+}
+
+function checkAndSubmitExternalDB() {
     var xmlstring = "";
-    for (var x = 0; x < Dialectarray.length; x++) {
-        if (jQuery.trim($("#DialectName_" + Countryarray[x]).val()).length <= 0) {
-            alert("#" + (x + 1).toString() + ", Dialect Name cannot be blank");
+    for (var x = 0; x < ExternalDBarray.length; x++) {
+        if (jQuery.trim($("#ExternalDBName_" + ExternalDBarray[x]).val()).length <= 0 || jQuery.trim($("#ExternalDBIP_" + ExternalDBarray[x]).val()).length <= 0) {
+            alert("#" + (x + 1).toString() + ",all value cannot be blank");
             return;
         }
 
-        xmlstring += "<Dialect><DialectID>" + $("#DialectID_" + Dialectarray[x]).val() + "</DialectID><DialectName>" + $("#DialectName_" + Dialectarray[x]).val() + "</DialectName></Dialect>";
+        xmlstring += "<ExternalDB><ExternalDBID>" + $("#ExternalDBID_" + ExternalDBarray[x]).val() + "</ExternalDBID><ExternalDBIP>" + encodeURIComponent($("#ExternalDBIP_" + ExternalDBarray[x]).val()) + "</ExternalDBIP><ExternalDBName>" + encodeURIComponent($("#ExternalDBName_" + ExternalDBarray[x]).val()) + "</ExternalDBName></ExternalDB>";
     }
 
-    xmlstring = "<ChurchDialect>" + xmlstring + "</ChurchDialect>"
+    xmlstring = "<ChurchExternalDB>" + xmlstring + "</ChurchExternalDB>"
 
-    $.post('/settings.mvc/updateDialect',
+    $.post('/settings.mvc/updateExternalDB',
         { xml: escape(xmlstring) },
         function (data) {
-            $("#DialectXML").val(unescape(data));
-            parseDialectXML();
+            $("#ExternalDBXML").val(unescape(data));
+            parseExternalDBXML();
         }
     );
 }
-
-
-///////////////////////////////////
-//// Education    /////////////////
-///////////////////////////////////
-
-function parseEducationXML() {
-    var educationxml = stringToXML(unescape($("#EducationXML").val()));
-    var edu = educationxml.getElementsByTagName("Education");
-    for (x = 0; x < edu.length; x++) {
-        if (x == 0) {
-            $("#EducationTable").find("tr:gt(0)").remove();
-            totalEducation = 0;
-            Educationarray = new Array();
-        }
-        var id = edu[x].getElementsByTagName("EducationID")[0].childNodes[0].nodeValue;
-        var name = edu[x].getElementsByTagName("EducationName")[0].childNodes[0].nodeValue;
-        addNewEducation(id, name);
-    }
-
-    var result = educationxml.getElementsByTagName("Result")[0];
-    if (result != null) {
-        alert(educationxml.getElementsByTagName("Result")[0].childNodes[0].nodeValue);
-    }
-}
-
-var totalEducation = 0;
-var Educationarray = new Array();
-
-function addNewEducation(id_input, name_input) {
-    totalEducation++;
-    Educationarray.push(totalEducation.toString());
-    $('#Educationlist').val(Educationarray.toString());
-
-    var table = document.getElementById("EducationTable");
-    var row = table.insertRow(1);
-    var Educationno = totalEducation;
-
-    var id = '<input style=" width:40px;" readonly="readonly" id="EducationID_' + Educationno.toString() + '" name="EducationID_' + Educationno.toString() + '" type="text" maxlength="10" value=""/>';
-    var name = '<input style=" width:100%;" id="EducationName_' + Educationno.toString() + '" name="EducationName_' + Educationno.toString() + '" type="text" maxlength="100" value=""/></div>';
-
-    fillCell(row, 0, '<img onclick="removeSelectedEducation(this);" border="0" src="/Content/images/remove.png" width="20" height="20" style="cursor:pointer" title="Remove"  alt="Remove"/>');
-    fillCell(row, 1, id);
-    fillCell(row, 2, name);
-
-    $("#EducationID_" + Educationno.toString()).val(id_input);
-    $("#EducationName_" + Educationno.toString()).val(name_input);
-}
-
-function addEducation() {
-    addNewEducation('New', '');
-}
-
-function removeSelectedEducation(obj) {
-    var r = confirm("Are you sure to delete this?")
-    if (r == false) {
-        return;
-    }
-
-    var delRow = obj.parentNode.parentNode;
-    var tbl = delRow.parentNode.parentNode;
-    var rIndex = delRow.sectionRowIndex;
-    var rowArray = new Array(delRow);
-    for (var i = 0; i < rowArray.length; i++) {
-        var rIndex = rowArray[i].sectionRowIndex;
-        var currentTime = new Date();
-        var time = currentTime.getMilliseconds();
-        rowArray[i].parentNode.deleteRow(rIndex);
-    }
-    Educationarray.splice(rIndex - 1, 1);
-    $('#Educationlist').val(Educationarray.toString());
-}
-
-function checkAndSubmitEducation() {
-    var xmlstring = "";
-    for (var x = 0; x < Educationarray.length; x++) {
-        if (jQuery.trim($("#EducationName_" + Educationarray[x]).val()).length <= 0) {
-            alert("#" + (x + 1).toString() + ", Education Name cannot be blank");
-            return;
-        }
-
-        xmlstring += "<Education><EducationID>" + $("#EducationID_" + Educationarray[x]).val() + "</EducationID><EducationName>" + $("#EducationName_" + Educationarray[x]).val() + "</EducationName></Education>";
-    }
-
-    xmlstring = "<ChurchEducation>" + xmlstring + "</ChurchEducation>"
-
-    $.post('/settings.mvc/updateEducation',
-        { xml: escape(xmlstring) },
-        function (data) {
-            $("#EducationXML").val(unescape(data));
-            parseEducationXML();
-        }
-    );
-}
-
-
-///////////////////////////////////
-//// Language    //////////////////
-///////////////////////////////////
-
-function parseLanguageXML() {
-    var languagexml = stringToXML(unescape($("#LanguageXML").val()));
-    var lang = languagexml.getElementsByTagName("Language");
-    for (x = 0; x < lang.length; x++) {
-        if (x == 0) {
-            $("#LanguageTable").find("tr:gt(0)").remove();
-            totalLanguage = 0;
-            Languagearray = new Array();
-        }
-        var id = lang[x].getElementsByTagName("LanguageID")[0].childNodes[0].nodeValue;
-        var name = lang[x].getElementsByTagName("LanguageName")[0].childNodes[0].nodeValue;
-        addNewLanguage(id, name);
-    }
-
-    var result = languagexml.getElementsByTagName("Result")[0];
-    if (result != null) {
-        alert(languagexml.getElementsByTagName("Result")[0].childNodes[0].nodeValue);
-    }
-}
-
-var totalLanguage = 0;
-var Languagearray = new Array();
-
-function addNewLanguage(id_input, name_input) {
-    totalLanguage++;
-    Languagearray.push(totalLanguage.toString());
-    $('#Languagelist').val(Languagearray.toString());
-
-    var table = document.getElementById("LanguageTable");
-    var row = table.insertRow(1);
-    var Languageno = totalLanguage;
-
-    var id = '<input style=" width:40px;" readonly="readonly" id="LanguageID_' + Languageno.toString() + '" name="LanguageID_' + Languageno.toString() + '" type="text" maxlength="10" value=""/>';
-    var name = '<input style=" width:100%;" id="LanguageName_' + Languageno.toString() + '" name="LanguageName_' + Languageno.toString() + '" type="text" maxlength="100" value=""/></div>';
-
-    fillCell(row, 0, '<img onclick="removeSelectedLanguage(this);" border="0" src="/Content/images/remove.png" width="20" height="20" style="cursor:pointer" title="Remove"  alt="Remove"/>');
-    fillCell(row, 1, id);
-    fillCell(row, 2, name);
-
-    $("#LanguageID_" + Languageno.toString()).val(id_input);
-    $("#LanguageName_" + Languageno.toString()).val(name_input);
-}
-
-function addLanguage() {
-    addNewLanguage('New', '');
-}
-
-function removeSelectedLanguage(obj) {
-    var r = confirm("Are you sure to delete this?")
-    if (r == false) {
-        return;
-    }
-
-    var delRow = obj.parentNode.parentNode;
-    var tbl = delRow.parentNode.parentNode;
-    var rIndex = delRow.sectionRowIndex;
-    var rowArray = new Array(delRow);
-    for (var i = 0; i < rowArray.length; i++) {
-        var rIndex = rowArray[i].sectionRowIndex;
-        var currentTime = new Date();
-        var time = currentTime.getMilliseconds();
-        rowArray[i].parentNode.deleteRow(rIndex);
-    }
-    Languagearray.splice(rIndex - 1, 1);
-    $('#Languagelist').val(Languagearray.toString());
-}
-
-function checkAndSubmitLanguage() {
-    var xmlstring = "";
-    for (var x = 0; x < Languagearray.length; x++) {
-        if (jQuery.trim($("#LanguageName_" + Languagearray[x]).val()).length <= 0) {
-            alert("#" + (x + 1).toString() + ", Language Name cannot be blank");
-            return;
-        }
-
-        xmlstring += "<Language><LanguageID>" + $("#LanguageID_" + Languagearray[x]).val() + "</LanguageID><LanguageName>" + $("#LanguageName_" + Languagearray[x]).val() + "</LanguageName></Language>";
-    }
-
-    xmlstring = "<ChurchLanguage>" + xmlstring + "</ChurchLanguage>"
-
-    $.post('/settings.mvc/updateLanguage',
-        { xml: escape(xmlstring) },
-        function (data) {
-            $("#LanguageXML").val(unescape(data));
-            parseLanguageXML();
-        }
-    );
-}
-
-
-///////////////////////////////////
-//// Marital Status////////////////
-///////////////////////////////////
-
-function parseMaritalStatusXML() {
-    var maritalstatusxml = stringToXML(unescape($("#MaritalStatusXML").val()));
-    var mar = maritalstatusxml.getElementsByTagName("MaritalStatus");
-    for (x = 0; x < mar.length; x++) {
-        if (x == 0) {
-            $("#MaritalStatusTable").find("tr:gt(0)").remove();
-            totalMaritalStatus = 0;
-            MaritalStatusarray = new Array();
-        }
-        var id = mar[x].getElementsByTagName("MaritalStatusID")[0].childNodes[0].nodeValue;
-        var name = mar[x].getElementsByTagName("MaritalStatusName")[0].childNodes[0].nodeValue;
-        addNewMaritalStatus(id, name);
-    }
-
-    var result = maritalstatusxml.getElementsByTagName("Result")[0];
-    if (result != null) {
-        alert(maritalstatusxml.getElementsByTagName("Result")[0].childNodes[0].nodeValue);
-    }
-}
-
-var totalMaritalStatus = 0;
-var MaritalStatusarray = new Array();
-
-function addNewMaritalStatus(id_input, name_input) {
-    totalMaritalStatus++;
-    MaritalStatusarray.push(totalMaritalStatus.toString());
-    $('#MaritalStatuslist').val(MaritalStatusarray.toString());
-
-    var table = document.getElementById("MaritalStatusTable");
-    var row = table.insertRow(1);
-    var MaritalStatusno = totalMaritalStatus;
-
-    var id = '<input style=" width:40px;" readonly="readonly" id="MaritalStatusID_' + MaritalStatusno.toString() + '" name="MaritalStatusID_' + MaritalStatusno.toString() + '" type="text" maxlength="10" value=""/>';
-    var name = '<input style=" width:100%;" id="MaritalStatusName_' + MaritalStatusno.toString() + '" name="MaritalStatusName_' + MaritalStatusno.toString() + '" type="text" maxlength="100" value=""/></div>';
-
-    fillCell(row, 0, '<img onclick="removeSelectedMaritalStatus(this);" border="0" src="/Content/images/remove.png" width="20" height="20" style="cursor:pointer" title="Remove"  alt="Remove"/>');
-    fillCell(row, 1, id);
-    fillCell(row, 2, name);
-
-    $("#MaritalStatusID_" + MaritalStatusno.toString()).val(id_input);
-    $("#MaritalStatusName_" + MaritalStatusno.toString()).val(name_input);
-}
-
-function addMaritalStatus() {
-    addNewMaritalStatus('New', '');
-}
-
-function removeSelectedMaritalStatus(obj) {
-    var r = confirm("Are you sure to delete this?")
-    if (r == false) {
-        return;
-    }
-
-    var delRow = obj.parentNode.parentNode;
-    var tbl = delRow.parentNode.parentNode;
-    var rIndex = delRow.sectionRowIndex;
-    var rowArray = new Array(delRow);
-    for (var i = 0; i < rowArray.length; i++) {
-        var rIndex = rowArray[i].sectionRowIndex;
-        var currentTime = new Date();
-        var time = currentTime.getMilliseconds();
-        rowArray[i].parentNode.deleteRow(rIndex);
-    }
-    MaritalStatusarray.splice(rIndex - 1, 1);
-    $('#MaritalStatuslist').val(Languagearray.toString());
-}
-
-function checkAndSubmitMaritalStatus() {
-    var xmlstring = "";
-    for (var x = 0; x < MaritalStatusarray.length; x++) {
-        if (jQuery.trim($("#MaritalStatusName_" + MaritalStatusarray[x]).val()).length <= 0) {
-            alert("#" + (x + 1).toString() + ", Marital Status Name cannot be blank");
-            return;
-        }
-
-        xmlstring += "<MaritalStatus><MaritalStatusID>" + $("#MaritalStatusID_" + MaritalStatusarray[x]).val() + "</MaritalStatusID><MaritalStatusName>" + $("#MaritalStatusName_" + MaritalStatusarray[x]).val() + "</MaritalStatusName></MaritalStatus>";
-    }
-
-    xmlstring = "<ChurchMaritalStatus>" + xmlstring + "</ChurchMaritalStatus>"
-
-    $.post('/settings.mvc/updateMaritalStatus',
-        { xml: escape(xmlstring) },
-        function (data) {
-            $("#MaritalStatusXML").val(unescape(data));
-            parseMaritalStatusXML();
-        }
-    );
-}
-
-
-///////////////////////////////////
-//// Occupation ///////////////////
-///////////////////////////////////
-
-function parseOccupationXML() {
-    var occupationxml = stringToXML(unescape($("#OccupationXML").val()));
-    var occ = occupationxml.getElementsByTagName("Occupation");
-    for (x = 0; x < occ.length; x++) {
-        if (x == 0) {
-            $("#OccupationTable").find("tr:gt(0)").remove();
-            totalOccupation = 0;
-            Occupationarray = new Array();
-        }
-        var id = occ[x].getElementsByTagName("OccupationID")[0].childNodes[0].nodeValue;
-        var name = occ[x].getElementsByTagName("OccupationName")[0].childNodes[0].nodeValue;
-        addNewOccupation(id, name);
-    }
-
-    var result = occupationxml.getElementsByTagName("Result")[0];
-    if (result != null) {
-        alert(occupationxml.getElementsByTagName("Result")[0].childNodes[0].nodeValue);
-    }
-}
-
-var totalOccupation = 0;
-var Occupationarray = new Array();
-
-function addNewOccupation(id_input, name_input) {
-    totalOccupation++;
-    Occupationarray.push(totalOccupation.toString());
-    $('#Occupationlist').val(Occupationarray.toString());
-
-    var table = document.getElementById("OccupationTable");
-    var row = table.insertRow(1);
-    var Occupationno = totalOccupation;
-
-    var id = '<input style=" width:40px;" readonly="readonly" id="OccupationID_' + Occupationno.toString() + '" name="OccupationID_' + Occupationno.toString() + '" type="text" maxlength="10" value=""/>';
-    var name = '<input style=" width:100%;" id="OccupationName_' + Occupationno.toString() + '" name="OccupationName_' + Occupationno.toString() + '" type="text" maxlength="100" value=""/></div>';
-
-    fillCell(row, 0, '<img onclick="removeSelectedOccupation(this);" border="0" src="/Content/images/remove.png" width="20" height="20" style="cursor:pointer" title="Remove"  alt="Remove"/>');
-    fillCell(row, 1, id);
-    fillCell(row, 2, name);
-
-    $("#OccupationID_" + Occupationno.toString()).val(id_input);
-    $("#OccupationName_" + Occupationno.toString()).val(name_input);
-}
-
-function addOccupation() {
-    addNewOccupation('New', '');
-}
-
-function removeSelectedOccupation(obj) {
-    var r = confirm("Are you sure to delete this?")
-    if (r == false) {
-        return;
-    }
-
-    var delRow = obj.parentNode.parentNode;
-    var tbl = delRow.parentNode.parentNode;
-    var rIndex = delRow.sectionRowIndex;
-    var rowArray = new Array(delRow);
-    for (var i = 0; i < rowArray.length; i++) {
-        var rIndex = rowArray[i].sectionRowIndex;
-        var currentTime = new Date();
-        var time = currentTime.getMilliseconds();
-        rowArray[i].parentNode.deleteRow(rIndex);
-    }
-    Occupationarray.splice(rIndex - 1, 1);
-    $('#Occupationlist').val(Occupationarray.toString());
-}
-
-function checkAndSubmitOccupation() {
-    var xmlstring = "";
-    for (var x = 0; x < Occupationarray.length; x++) {
-        if (jQuery.trim($("#OccupationName_" + Occupationarray[x]).val()).length <= 0) {
-            alert("#" + (x + 1).toString() + ", Occupation Name cannot be blank");
-            return;
-        }
-
-        xmlstring += "<Occupation><OccupationID>" + $("#OccupationID_" + Occupationarray[x]).val() + "</OccupationID><OccupationName>" + $("#OccupationName_" + Occupationarray[x]).val() + "</OccupationName></Occupation>";
-    }
-
-    xmlstring = "<ChurchOccupation>" + xmlstring + "</ChurchOccupation>"
-
-    $.post('/settings.mvc/updateOccupation',
-        { xml: escape(xmlstring) },
-        function (data) {
-            $("#OccupationXML").val(unescape(data));
-            parseOccupationXML();
-        }
-    );
-}
-
-
-///////////////////////////////////
-//// Parish ///////////////////////
-///////////////////////////////////
-
-function parseParishXML() {
-    var parishxml = stringToXML(unescape($("#ParishXML").val()));
-    var par = parishxml.getElementsByTagName("Parish");
-    for (x = 0; x < par.length; x++) {
-        if (x == 0) {
-            $("#ParishTable").find("tr:gt(0)").remove();
-            totalParish = 0;
-            Parisharray = new Array();
-        }
-        var id = par[x].getElementsByTagName("ParishID")[0].childNodes[0].nodeValue;
-        var name = par[x].getElementsByTagName("ParishName")[0].childNodes[0].nodeValue;
-        addNewParish(id, name);
-    }
-
-    var result = parishxml.getElementsByTagName("Result")[0];
-    if (result != null) {
-        alert(parishxml.getElementsByTagName("Result")[0].childNodes[0].nodeValue);
-    }
-}
-
-var totalParish = 0;
-var Parisharray = new Array();
-
-function addNewParish(id_input, name_input) {
-    totalParish++;
-    Parisharray.push(totalParish.toString());
-    $('#Parishlist').val(Parisharray.toString());
-
-    var table = document.getElementById("ParishTable");
-    var row = table.insertRow(1);
-    var Parishno = totalParish;
-
-    var id = '<input style=" width:40px;" readonly="readonly" id="ParishID_' + Parishno.toString() + '" name="ParishID_' + Parishno.toString() + '" type="text" maxlength="10" value=""/>';
-    var name = '<input style=" width:100%;" id="ParishName_' + Parishno.toString() + '" name="ParishName_' + Parishno.toString() + '" type="text" maxlength="100" value=""/></div>';
-
-    fillCell(row, 0, '<img onclick="removeSelectedParish(this);" border="0" src="/Content/images/remove.png" width="20" height="20" style="cursor:pointer" title="Remove"  alt="Remove"/>');
-    fillCell(row, 1, id);
-    fillCell(row, 2, name);
-
-    $("#ParishID_" + Parishno.toString()).val(id_input);
-    $("#ParishName_" + Parishno.toString()).val(name_input);
-}
-
-function addParish() {
-    addNewParish('New', '');
-}
-
-function removeSelectedParish(obj) {
-    var r = confirm("Are you sure to delete this?")
-    if (r == false) {
-        return;
-    }
-
-    var delRow = obj.parentNode.parentNode;
-    var tbl = delRow.parentNode.parentNode;
-    var rIndex = delRow.sectionRowIndex;
-    var rowArray = new Array(delRow);
-    for (var i = 0; i < rowArray.length; i++) {
-        var rIndex = rowArray[i].sectionRowIndex;
-        var currentTime = new Date();
-        var time = currentTime.getMilliseconds();
-        rowArray[i].parentNode.deleteRow(rIndex);
-    }
-    Parisharray.splice(rIndex - 1, 1);
-    $('#Parishlist').val(Parisharray.toString());
-}
-
-function checkAndSubmitParish() {
-    var xmlstring = "";
-    for (var x = 0; x < Parisharray.length; x++) {
-        if (jQuery.trim($("#ParishName_" + Parisharray[x]).val()).length <= 0) {
-            alert("#" + (x + 1).toString() + ", Parish Name cannot be blank");
-            return;
-        }
-
-        xmlstring += "<Parish><ParishID>" + $("#ParishID_" + Parisharray[x]).val() + "</ParishID><ParishName>" + $("#ParishName_" + Parisharray[x]).val() + "</ParishName></Parish>";
-    }
-
-    xmlstring = "<ChurchParish>" + xmlstring + "</ChurchParish>"
-
-    $.post('/settings.mvc/updateParish',
-        { xml: escape(xmlstring) },
-        function (data) {
-            $("#ParishXML").val(unescape(data));
-            parseParishXML();
-        }
-    );
-}
-
-///////////////////////////////////
-//// Salutation ///////////////////
-///////////////////////////////////
-
-function parseSalutationXML() {
-    var salutationxml = stringToXML(unescape($("#SalutationXML").val()));
-    var sal = salutationxml.getElementsByTagName("Salutation");
-    for (x = 0; x < sal.length; x++) {
-        if (x == 0) {
-            $("#SalutationTable").find("tr:gt(0)").remove();
-            totalSalutation = 0;
-            Salutationarray = new Array();
-        }
-        var id = sal[x].getElementsByTagName("SalutationID")[0].childNodes[0].nodeValue;
-        var name = sal[x].getElementsByTagName("SalutationName")[0].childNodes[0].nodeValue;
-        addNewSalutation(id, name);
-    }
-
-    var result = salutationxml.getElementsByTagName("Result")[0];
-    if (result != null) {
-        alert(salutationxml.getElementsByTagName("Result")[0].childNodes[0].nodeValue);
-    }
-}
-
-var totalSalutation = 0;
-var Salutationarray = new Array();
-
-function addNewSalutation(id_input, name_input) {
-    totalSalutation++;
-    Salutationarray.push(totalSalutation.toString());
-    $('#Salutationlist').val(Salutationarray.toString());
-
-    var table = document.getElementById("SalutationTable");
-    var row = table.insertRow(1);
-    var Salutationo = totalSalutation;
-
-    var id = '<input style=" width:40px;" readonly="readonly" id="SalutationID_' + Salutationo.toString() + '" name="SalutationID_' + Salutationo.toString() + '" type="text" maxlength="10" value=""/>';
-    var name = '<input style=" width:100%;" id="SalutationName_' + Salutationo.toString() + '" name="SalutationName_' + Salutationo.toString() + '" type="text" maxlength="100" value=""/></div>';
-
-    fillCell(row, 0, '<img onclick="removeSelectedSalutation(this);" border="0" src="/Content/images/remove.png" width="20" height="20" style="cursor:pointer" title="Remove"  alt="Remove"/>');
-    fillCell(row, 1, id);
-    fillCell(row, 2, name);
-
-    $("#SalutationID_" + Salutationo.toString()).val(id_input);
-    $("#SalutationName_" + Salutationo.toString()).val(name_input);
-}
-
-function addSalutation() {
-    addNewSalutation('New', '');
-}
-
-function removeSelectedSalutation(obj) {
-    var r = confirm("Are you sure to delete this?")
-    if (r == false) {
-        return;
-    }
-
-    var delRow = obj.parentNode.parentNode;
-    var tbl = delRow.parentNode.parentNode;
-    var rIndex = delRow.sectionRowIndex;
-    var rowArray = new Array(delRow);
-    for (var i = 0; i < rowArray.length; i++) {
-        var rIndex = rowArray[i].sectionRowIndex;
-        var currentTime = new Date();
-        var time = currentTime.getMilliseconds();
-        rowArray[i].parentNode.deleteRow(rIndex);
-    }
-    Salutationarray.splice(rIndex - 1, 1);
-    $('#Salutationlist').val(Salutationarray.toString());
-}
-
-function checkAndSubmitSalutation() {
-    var xmlstring = "";
-    for (var x = 0; x < Salutationarray.length; x++) {
-        if (jQuery.trim($("#SalutationName_" + Salutationarray[x]).val()).length <= 0) {
-            alert("#" + (x + 1).toString() + ", Salutation Name cannot be blank");
-            return;
-        }
-
-        xmlstring += "<Salutation><SalutationID>" + $("#SalutationID_" + Salutationarray[x]).val() + "</SalutationID><SalutationName>" + $("#SalutationName_" + Salutationarray[x]).val() + "</SalutationName></Salutation>";
-    }
-
-    xmlstring = "<ChurchSalutation>" + xmlstring + "</ChurchSalutation>"
-
-    $.post('/settings.mvc/updateSalutation',
-        { xml: escape(xmlstring) },
-        function (data) {
-            $("#SalutationXML").val(unescape(data));
-            parseSalutationXML();
-        }
-    );
-}
-
-
-///////////////////////////////////
-//// Style ////////////////////////
-///////////////////////////////////
-
-function parseStyleXML() {
-    var stylexml = stringToXML(unescape($("#StyleXML").val()));
-    var sty = stylexml.getElementsByTagName("Style");
-    for (x = 0; x < sty.length; x++) {
-        if (x == 0) {
-            $("#StyleTable").find("tr:gt(0)").remove();
-            totalStyle = 0;
-            Stylearray = new Array();
-        }
-        var id = sty[x].getElementsByTagName("StyleID")[0].childNodes[0].nodeValue;
-        var name = sty[x].getElementsByTagName("StyleName")[0].childNodes[0].nodeValue;
-        addNewStyle(id, name);
-    }
-
-    var result = stylexml.getElementsByTagName("Result")[0];
-    if (result != null) {
-        alert(stylexml.getElementsByTagName("Result")[0].childNodes[0].nodeValue);
-    }
-}
-
-var totalStyle = 0;
-var Stylearray = new Array();
-
-function addNewStyle(id_input, name_input) {
-    totalStyle++;
-    Stylearray.push(totalStyle.toString());
-    $('#Salutationlist').val(Stylearray.toString());
-
-    var table = document.getElementById("StyleTable");
-    var row = table.insertRow(1);
-    var Styleno = totalStyle;
-
-    var id = '<input style=" width:40px;" readonly="readonly" id="StyleID_' + Styleno.toString() + '" name="StyleID_' + Styleno.toString() + '" type="text" maxlength="10" value=""/>';
-    var name = '<input style=" width:100%;" id="StyleName_' + Styleno.toString() + '" name="StyleName_' + Styleno.toString() + '" type="text" maxlength="100" value=""/></div>';
-
-    fillCell(row, 0, '<img onclick="removeSelectedStyle(this);" border="0" src="/Content/images/remove.png" width="20" height="20" style="cursor:pointer" title="Remove"  alt="Remove"/>');
-    fillCell(row, 1, id);
-    fillCell(row, 2, name);
-
-    $("#StyleID_" + Styleno.toString()).val(id_input);
-    $("#StyleName_" + Styleno.toString()).val(name_input);
-}
-
-function addStyle() {
-    addNewStyle('New', '');
-}
-
-function removeSelectedStyle(obj) {
-    var r = confirm("Are you sure to delete this?")
-    if (r == false) {
-        return;
-    }
-
-    var delRow = obj.parentNode.parentNode;
-    var tbl = delRow.parentNode.parentNode;
-    var rIndex = delRow.sectionRowIndex;
-    var rowArray = new Array(delRow);
-    for (var i = 0; i < rowArray.length; i++) {
-        var rIndex = rowArray[i].sectionRowIndex;
-        var currentTime = new Date();
-        var time = currentTime.getMilliseconds();
-        rowArray[i].parentNode.deleteRow(rIndex);
-    }
-    Stylearray.splice(rIndex - 1, 1);
-    $('#Stylelist').val(Stylearray.toString());
-}
-
-function checkAndSubmitStyle() {
-    var xmlstring = "";
-    for (var x = 0; x < Stylearray.length; x++) {
-        if (jQuery.trim($("#StyleName_" + Stylearray[x]).val()).length <= 0) {
-            alert("#" + (x + 1).toString() + ", Style Name cannot be blank");
-            return;
-        }
-
-        xmlstring += "<Style><StyleID>" + $("#StyleID_" + Stylearray[x]).val() + "</StyleID><StyleName>" + $("#StyleName_" + Stylearray[x]).val() + "</StyleName></Style>";
-    }
-
-    xmlstring = "<ChurchStyle>" + xmlstring + "</ChurchStyle>"
-
-    $.post('/settings.mvc/updateStyle',
-        { xml: escape(xmlstring) },
-        function (data) {
-            $("#StyleXML").val(unescape(data));
-            parseStyleXML();
-        }
-    );
-}
-
 
 ///////////////////////////////////
 //// Config ///////////////////////
@@ -1133,27 +327,6 @@ function checkAndSubmitEmail() {
     );
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 ///////////////////////////////////
 //// Postal ///////////////////////
 ///////////////////////////////////
@@ -1182,8 +355,10 @@ function parsePostalXML() {
 var totalPostal = 0;
 var Postalarray = new Array();
 
-function addPostal() {
+function addPostal(obj) {
     addNewPostal('New', '', '');
+    var objDiv = obj.parentNode.parentNode.parentNode.parentNode.parentNode;
+    objDiv.scrollTop = objDiv.scrollHeight;
 }
 
 function addNewPostal(id_input, name_input, value_input) {
@@ -1192,7 +367,7 @@ function addNewPostal(id_input, name_input, value_input) {
     $('#Postallist').val(Postalarray.toString());
 
     var table = document.getElementById("PostalTable");
-    var row = table.insertRow(1);
+    var row = table.insertRow(table.rows.length);
     var Postalno = totalPostal;
 
     var id = '<input style=" width:40px;" readonly="readonly" id="PostalID_' + Postalno.toString() + '" name="PostalID_' + Postalno.toString() + '" type="text" maxlength="10" value=""/>';
@@ -1226,7 +401,7 @@ function removeSelectedPostal(obj) {
         rowArray[i].parentNode.deleteRow(rIndex);
     }
     Postalarray.splice(rIndex - 1, 1);
-    $('#Postallist').val(Stylearray.toString());
+    $('#Postallist').val(Postalarray.toString());
 }
 
 function checkAndSubmitPostal() {
@@ -1278,6 +453,8 @@ function checkAndSubmitPostal() {
 
 
 
+    var totalCongregation = 0;
+    var Congregationarray = new Array();
 
     var totalChurchArea = 0;
     var ChurchAreaarray = new Array();
@@ -1303,12 +480,79 @@ function checkAndSubmitPostal() {
     var totalFamilyType = 0;
     var FamilyTypearray = new Array();
 
+    var totalCountry = 0;
+    var Countryarray = new Array();
+
+    var totalDialect = 0;
+    var Dialectarray = new Array();
+
+    var totalEducation = 0;
+    var Educationarray = new Array();
+
+    var totalLanguage = 0;
+    var Languagearray = new Array();
+
+    var totalMaritalStatus = 0;
+    var MaritalStatusarray = new Array();
+
+    var totalOccupation = 0;
+    var Occupationarray = new Array();
+
+    var totalParish = 0;
+    var Parisharray = new Array();
+
+    var totalSalutation = 0;
+    var Salutationarray = new Array();
+
+    var totalStyle = 0;
+    var Stylearray = new Array();
+
     ///////////////////////////////////////////////////////////////////////////
 
     function resetVariable(type) {
-        if (type == "BusGroupCluster") {
+        if (type == "Country") {
+            totalCountry = 0;
+            Countryarray = new Array();
+        }
+        else if (type == "Style") {
+            totalStyle = 0;
+            Stylearray = new Array();
+        }
+        else if (type == "Salutation") {
+            totalSalutation = 0;
+            Salutationarray = new Array();
+        }
+        else if (type == "Parish") {
+            totalParish = 0;
+            Parisharray = new Array();
+        }
+        else if (type == "Occupation") {
+            totalOccupation = 0;
+            Occupationarray = new Array();
+        }
+        else if (type == "MaritalStatus") {
+            totalMaritalStatus = 0;
+            MaritalStatusarray = new Array();
+        }
+        else if (type == "Language") {
+            totalLanguage = 0;
+            Languagearray = new Array();
+        }
+        else if (type == "Education") {
+            totalEducation = 0;
+            Educationarray = new Array();
+        }
+        else if (type == "Dialect") {
+            totalDialect = 0;
+            Dialectarray = new Array();
+        }
+        else if (type == "BusGroupCluster") {
             totalBusGroupCluster = 0;
             BusGroupClusterarray = new Array();
+        }
+        else if (type == "Congregation") {
+            totalCongregation = 0;
+            Congregationarray = new Array();
         }
         else if (type == "ChurchArea") {
             totalChurchArea = 0;
@@ -1343,10 +587,60 @@ function checkAndSubmitPostal() {
     ////////////////////////////////////////////////////////////////////////
 
     function pushValue(type, listID) {
-        if (type == "BusGroupCluster") {
+        if (type == "Country") {
+            totalCountry++;
+            Countryarray.push(totalCountry.toString());
+            $('#' + listID).val(totalCountry.toString());
+        }
+        else if (type == "Style") {
+            totalStyle++;
+            Stylearray.push(totalStyle.toString());
+            $('#' + listID).val(totalStyle.toString());
+        }
+        else if (type == "Salutation") {
+            totalSalutation++;
+            Salutationarray.push(totalSalutation.toString());
+            $('#' + listID).val(totalSalutation.toString());
+        }
+        else if (type == "Parish") {
+            totalParish++;
+            Parisharray.push(totalParish.toString());
+            $('#' + listID).val(totalParish.toString());
+        }
+        else if (type == "Occupation") {
+            totalOccupation++;
+            Occupationarray.push(totalOccupation.toString());
+            $('#' + listID).val(totalOccupation.toString());
+        }
+        else if (type == "MaritalStatus") {
+            totalMaritalStatus++;
+            MaritalStatusarray.push(totalMaritalStatus.toString());
+            $('#' + listID).val(totalMaritalStatus.toString());
+        }
+        else if (type == "Language") {
+            totalLanguage++;
+            Languagearray.push(totalLanguage.toString());
+            $('#' + listID).val(totalLanguage.toString());
+        }
+        else if (type == "Education") {
+            totalEducation++;
+            Educationarray.push(totalEducation.toString());
+            $('#' + listID).val(totalEducation.toString());
+        }
+        else if (type == "Dialect") {
+            totalDialect++;
+            Dialectarray.push(totalDialect.toString());
+            $('#' + listID).val(totalDialect.toString());
+        }
+        else if (type == "BusGroupCluster") {
             totalBusGroupCluster++;
             BusGroupClusterarray.push(totalBusGroupCluster.toString());
             $('#' + listID).val(totalBusGroupCluster.toString());
+        }
+        else if (type == "Congregation") {
+            totalCongregation++;
+            Congregationarray.push(totalCongregation.toString());
+            $('#' + listID).val(totalCongregation.toString());
         }
         else if (type == "ChurchArea") {
             totalChurchArea++;
@@ -1391,6 +685,36 @@ function checkAndSubmitPostal() {
         if (type == "BusGroupCluster") {
             return totalBusGroupCluster;
         }
+        else if (type == "Style") {
+            return totalStyle;
+        }
+        else if (type == "Salutation") {
+            return totalSalutation;
+        }
+        else if (type == "Parish") {
+            return totalParish;
+        }
+        else if (type == "Occupation") {
+            return totalOccupation;
+        }
+        else if (type == "MaritalStatus") {
+            return totalMaritalStatus;
+        }
+        else if (type == "Language") {
+            return totalLanguage;
+        }
+        else if (type == "Education") {
+            return totalEducation;
+        }
+        else if (type == "Dialect") {
+            return totalDialect;
+        }
+        else if (type == "Country") {
+            return totalCountry;
+        }
+        else if (type == "Congregation") {
+            return totalCongregation;
+        }
         else if (type == "ChurchArea") {
             return totalChurchArea;
         }
@@ -1419,6 +743,36 @@ function checkAndSubmitPostal() {
     function removeArray(type, rIndex) {
         if (type == "BusGroupCluster") {
             BusGroupClusterarray.splice(rIndex - 1, 1);
+        }
+        else if (type == "Style") {
+            Stylearray.splice(rIndex - 1, 1);
+        }
+        else if (type == "Salutation") {
+            Salutationarray.splice(rIndex - 1, 1);
+        }
+        else if (type == "Parish") {
+            Parisharray.splice(rIndex - 1, 1);
+        }
+        else if (type == "Occupation") {
+            Occupationarray.splice(rIndex - 1, 1);
+        }
+        else if (type == "MaritalStatus") {
+            MaritalStatusarray.splice(rIndex - 1, 1);
+        }
+        else if (type == "Language") {
+            Languagearray.splice(rIndex - 1, 1);
+        }
+        else if (type == "Education") {
+            Educationarray.splice(rIndex - 1, 1);
+        }
+        else if (type == "Country") {
+            Countryarray.splice(rIndex - 1, 1);
+        }
+        else if (type == "Dialect") {
+            Dialectarray.splice(rIndex - 1, 1);
+        }
+        else if (type == "Congregation") {
+            Congregationarray.splice(rIndex - 1, 1);
         }
         else if (type == "ChurchArea") {
             ChurchAreaarray.splice(rIndex - 1, 1);
@@ -1449,6 +803,37 @@ function checkAndSubmitPostal() {
         if (type == "BusGroupCluster") {
             return BusGroupClusterarray.toString();
         }
+
+        else if (type == "Style") {
+            return Stylearray.toString();
+        }
+        else if (type == "Salutation") {
+            return Salutationarray.toString();
+        }
+        else if (type == "Parish") {
+            return Parisharray.toString();
+        }
+        else if (type == "Occupation") {
+            return Occupationarray.toString();
+        }
+        else if (type == "MaritalStatus") {
+            return MaritalStatusarray.toString();
+        }
+        else if (type == "Language") {
+            return Languagearray.toString();
+        }
+        else if (type == "Education") {
+            return Educationarray.toString();
+        }
+        else if (type == "Dialect") {
+            return Dialectarray.toString();
+        }
+        else if (type == "Country") {
+            return Countryarray.toString();
+        }
+        else if (type == "Congregation") {
+            return Congregationarray.toString();
+        }
         else if (type == "ChurchArea") {
             return ChurchAreaarray.toString();
         }
@@ -1478,6 +863,36 @@ function checkAndSubmitPostal() {
         if (type == "BusGroupCluster") {
             return BusGroupClusterarray.length;
         }
+        else if (type == "Style") {
+            return Stylearray.length;
+        }
+        else if (type == "Salutation") {
+            return Salutationarray.length;
+        }
+        else if (type == "Parish") {
+            return Parisharray.length;
+        }
+        else if (type == "Occupation") {
+            return Occupationarray.length;
+        }
+        else if (type == "MaritalStatus") {
+            return MaritalStatusarray.length;
+        }
+        else if (type == "Language") {
+            return Languagearray.length;
+        }
+        else if (type == "Education") {
+            return Educationarray.length;
+        }
+        else if (type == "Country") {
+            return Countryarray.length;
+        }
+        else if (type == "Dialect") {
+            return Dialectarray.length;
+        }
+        else if (type == "Congregation") {
+            return Congregationarray.length;
+        }
         else if (type == "ChurchArea") {
             return ChurchAreaarray.length;
         }
@@ -1506,6 +921,36 @@ function checkAndSubmitPostal() {
     function getArrayIndexOf(type, index) {
         if (type == "BusGroupCluster") {
             return BusGroupClusterarray[index];
+        }
+        else if (type == "Style") {
+            return Stylearray[index];
+        }
+        else if (type == "Salutation") {
+            return Salutationarray[index];
+        }
+        else if (type == "Parish") {
+            return Parisharray[index];
+        }
+        else if (type == "Occupation") {
+            return Occupationarray[index];
+        }
+        else if (type == "MaritalStatus") {
+            return MaritalStatusarray[index];
+        }
+        else if (type == "Language") {
+            return Languagearray[index];
+        }
+        else if (type == "Education") {
+            return Educationarray[index];
+        }
+        else if (type == "Dialect") {
+            return Dialectarray[index];
+        }
+        else if (type == "Country") {
+            return Countryarray[index];
+        }
+        else if (type == "Congregation") {
+            return Congregationarray[index];
         }
         else if (type == "ChurchArea") {
             return ChurchAreaarray[index];
@@ -1560,7 +1005,7 @@ function checkAndSubmitPostal() {
         pushValue(type, listID);
 
         var table = document.getElementById(tableID);
-        var row = table.insertRow(1);
+        var row = table.insertRow(table.rows.length);
         var no = getCurrentTotal(type);
 
         var id = '<input style=" width:40px;" readonly="readonly" id="' + textfieldID + '_' + no.toString() + '" name="' + textfieldID + '_' + no.toString() + '" type="text" maxlength="10" value=""/>';
@@ -1574,8 +1019,10 @@ function checkAndSubmitPostal() {
         $("#" + textfieldName + "_" + no.toString()).val(Namevalue);
     }
 
-    function addType(type, listID, tableID, textfieldID, textfieldName) {
+    function addType(obj, type, listID, tableID, textfieldID, textfieldName) {
         addNewType(type, 'New', '', listID, tableID, textfieldID, textfieldName);
+        var objDiv = obj.parentNode.parentNode.parentNode.parentNode.parentNode;
+        objDiv.scrollTop = objDiv.scrollHeight;
     }
 
     function removeSelectedRow(obj, type, listID) {

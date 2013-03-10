@@ -47,6 +47,7 @@ Settings
             <li><a href="#tab18">Race</a></li>
             <li><a href="#tab19">Religion</a></li>
             <li><a href="#tab20">School</a></li>
+            <li><a href="#tab23">External Site</a></li>
         </ul>
         <div class="tab_container">
             <div id="tab1" class="tab_content" style="height:70%">
@@ -58,7 +59,7 @@ Settings
                     <table class="tablesorter" id="ChurchAreaTable" style=" width:60%; padding:0; margin-left:0%; margin-right:0%">
 			                <thead>
 			                <tr class="header">
-                                <td class="nosorting" width="1%" nowrap="nowrap"><img onclick="addType('ChurchArea', 'ChurchArealist', 'ChurchAreaTable', 'ChurchAreaID', 'ChurchAreaName');" border="0" src="/Content/images/add.png" width="20" height="20" style="cursor:pointer" title="Add"  alt="Add"/></td>
+                                <td class="nosorting" width="1%" nowrap="nowrap"><img onclick="addType(this, 'ChurchArea', 'ChurchArealist', 'ChurchAreaTable', 'ChurchAreaID', 'ChurchAreaName');" border="0" src="/Content/images/add.png" width="20" height="20" style="cursor:pointer" title="Add"  alt="Add"/></td>
 				                <td class="nosorting" width="1%" nowrap="nowrap">Church Area ID</td>
 				                <td class="nosorting" width="8%" nowrap="nowrap">Church Area Name</td>
 		                </thead>
@@ -72,12 +73,12 @@ Settings
                <br /><br /><br /><br />
                 <input type="hidden" id="Congregationlist" name="Congregationlist" value="0">
                 <input type="hidden" id="CongregationXML" name="CongregationXML" value="<%= System.Uri.EscapeDataString((string)ViewData["congregationxml"]) %>">
-                <input type="button" id="updateCongregationButton" onclick="checkAndSubmitCongregation();" value="Update" />
+                <input type="button" id="updateCongregationButton" onclick="checkAndSubmit('Congregation', 'CongregationXML', 'CongregationTable', 'Congregationlist', 'CongregationID', 'CongregationName', 'ChurchCongregation', 'Congregation', 'CongregationID', 'CongregationName');" value="Update" />
                 <div style=" overflow:auto; height:80%">
                     <table class="tablesorter" id="CongregationTable" style=" width:60%; padding:0; margin-left:0%; margin-right:0%">
 			                <thead>
 			                <tr class="header">
-                                <td class="nosorting" width=1% nowrap="nowrap"><img onclick="addCongregation();" border="0" src="/Content/images/add.png" width="20" height="20" style="cursor:pointer" title="Add"  alt="Add"/></td>
+                                <td class="nosorting" width=1% nowrap="nowrap"><img onclick="addType(this, 'Congregation', 'Congregationlist', 'CongregationTable', 'CongregationID', 'CongregationName');" border="0" src="/Content/images/add.png" width="20" height="20" style="cursor:pointer" title="Add"  alt="Add"/></td>
 				                <td class="nosorting" width="1%" nowrap="nowrap">Congregation ID</td>
 				                <td class="nosorting" width="8%" nowrap="nowrap">Congregation Name</td>
 		                </thead>
@@ -91,12 +92,12 @@ Settings
                 <br /><br /><br /><br />
                 <input type="hidden" id="Countrylist" name="Countrylist" value="0">
                 <input type="hidden" id="CountryXML" name="CountryXML" value="<%= System.Uri.EscapeDataString((string)ViewData["countryxml"]) %>">
-                <input type="button" id="updateCountryButton" onclick="checkAndSubmitCountry();" value="Update" />
+                <input type="button" id="updateCountryButton" onclick="checkAndSubmit('Country', 'CountryXML', 'CountryTable', 'Countrylist', 'CountryID', 'CountryName', 'ChurchCountry', 'Country', 'CountryID', 'CountryName');" value="Update" />
                 <div style=" overflow:auto; height:80%">
                     <table class="tablesorter" id="CountryTable" style=" width:60%; padding:0; margin-left:0%; margin-right:0%">
 			                <thead>
 			                <tr class="header">
-                                <td class="nosorting" width=1% nowrap="nowrap"><img onclick="addCountry();" border="0" src="/Content/images/add.png" width="20" height="20" style="cursor:pointer" title="Add"  alt="Add"/></td>
+                                <td class="nosorting" width=1% nowrap="nowrap"><img onclick="addType(this, 'Country', 'Countrylist', 'CountryTable', 'CountryID', 'CountryName');" border="0" src="/Content/images/add.png" width="20" height="20" style="cursor:pointer" title="Add"  alt="Add"/></td>
 				                <td class="nosorting" width="1%" nowrap="nowrap">Country ID</td>
 				                <td class="nosorting" width="8%" nowrap="nowrap">Country Name</td>
 		                </thead>
@@ -109,12 +110,12 @@ Settings
                 <br /><br /><br /><br />
                 <input type="hidden" id="Dialectlist" name="Dialectlist" value="0">
                 <input type="hidden" id="DialectXML" name="DialectXML" value="<%= System.Uri.EscapeDataString((string)ViewData["dialectxml"]) %>">
-                <input type="button" id="updateDialectButton" onclick="checkAndSubmitDialect();" value="Update" />
+                <input type="button" id="updateDialectButton" onclick="checkAndSubmit('Dialect', 'DialectXML', 'DialectTable', 'Dialectlist', 'DialectID', 'DialectName', 'ChurchDialect', 'Dialect', 'DialectID', 'DialectName');" value="Update" />
                 <div style=" overflow:auto; height:80%">
                     <table class="tablesorter" id="DialectTable" style=" width:60%; padding:0; margin-left:0%; margin-right:0%">
 			                <thead>
 			                <tr class="header">
-                                <td class="nosorting" width=1% nowrap="nowrap"><img onclick="addDialect();" border="0" src="/Content/images/add.png" width="20" height="20" style="cursor:pointer" title="Add"  alt="Add"/></td>
+                                <td class="nosorting" width=1% nowrap="nowrap"><img onclick="addType(this, 'Dialect', 'Dialectlist', 'DialectTable', 'DialectID', 'DialectName');" border="0" src="/Content/images/add.png" width="20" height="20" style="cursor:pointer" title="Add"  alt="Add"/></td>
 				                <td class="nosorting" width="1%" nowrap="nowrap">Dialect ID</td>
 				                <td class="nosorting" width="8%" nowrap="nowrap">Dialect Name</td>
 		                </thead>
@@ -127,12 +128,12 @@ Settings
                 <br /><br /><br /><br />
                 <input type="hidden" id="Educationlist" name="Educationlist" value="0">
                 <input type="hidden" id="EducationXML" name="EducationXML" value="<%= System.Uri.EscapeDataString((string)ViewData["educationxml"]) %>">
-                <input type="button" id="updateEducationButton" onclick="checkAndSubmitEducation();" value="Update" />
+                <input type="button" id="updateEducationButton" onclick="checkAndSubmit('Education', 'EducationXML', 'EducationTable', 'Educationlist', 'EducationID', 'EducationName', 'ChurchEducation', 'Education', 'EducationID', 'EducationName');" value="Update" />
                 <div style=" overflow:auto; height:80%">
                     <table class="tablesorter" id="EducationTable" style=" width:60%; padding:0; margin-left:0%; margin-right:0%">
 			                <thead>
 			                <tr class="header">
-                                <td class="nosorting" width=1% nowrap="nowrap"><img onclick="addEducation();" border="0" src="/Content/images/add.png" width="20" height="20" style="cursor:pointer" title="Add"  alt="Add"/></td>
+                                <td class="nosorting" width=1% nowrap="nowrap"><img onclick="addType(this, 'Education', 'Educationlist', 'EducationTable', 'EducationID', 'EducationName');" border="0" src="/Content/images/add.png" width="20" height="20" style="cursor:pointer" title="Add"  alt="Add"/></td>
 				                <td class="nosorting" width="1%" nowrap="nowrap">Education ID</td>
 				                <td class="nosorting" width="8%" nowrap="nowrap">Education Name</td>
 		                </thead>
@@ -171,7 +172,7 @@ Settings
                     <table class="tablesorter" id="FileTypeTable" style=" width:60%; padding:0; margin-left:0%; margin-right:0%">
 			                <thead>
 			                <tr class="header">
-                                <td class="nosorting" width=1% nowrap="nowrap"><img onclick="addType('FileType', 'FileTypelist', 'FileTypeTable', 'FileTypeID', 'FileTypeName');" border="0" src="/Content/images/add.png" width="20" height="20" style="cursor:pointer" title="Add"  alt="Add"/></td>
+                                <td class="nosorting" width=1% nowrap="nowrap"><img onclick="addType(this, 'FileType', 'FileTypelist', 'FileTypeTable', 'FileTypeID', 'FileTypeName');" border="0" src="/Content/images/add.png" width="20" height="20" style="cursor:pointer" title="Add"  alt="Add"/></td>
 				                <td class="nosorting" width="1%" nowrap="nowrap">File Type ID</td>
 				                <td class="nosorting" width="8%" nowrap="nowrap">File Type Name</td>
 		                </thead>
@@ -189,7 +190,7 @@ Settings
                     <table class="tablesorter" id="FamilyTypeTable" style=" width:60%; padding:0; margin-left:0%; margin-right:0%">
 			                <thead>
 			                <tr class="header">
-                                <td class="nosorting" width=1% nowrap="nowrap"><img onclick="addType('FamilyType', 'FamilyTypelist', 'FamilyTypeTable', 'FamilyTypeID', 'FamilyTypeName');" border="0" src="/Content/images/add.png" width="20" height="20" style="cursor:pointer" title="Add"  alt="Add"/></td>
+                                <td class="nosorting" width=1% nowrap="nowrap"><img onclick="addType(this, 'FamilyType', 'FamilyTypelist', 'FamilyTypeTable', 'FamilyTypeID', 'FamilyTypeName');" border="0" src="/Content/images/add.png" width="20" height="20" style="cursor:pointer" title="Add"  alt="Add"/></td>
 				                <td class="nosorting" width="1%" nowrap="nowrap">Family Type ID</td>
 				                <td class="nosorting" width="8%" nowrap="nowrap">Family Type Name</td>
 		                </thead>
@@ -198,18 +199,16 @@ Settings
 		            </table>
                 </div>   
             </div>
-
-
             <div id="tab6" class="tab_content" style="height:70%">
                 <br /><br /><br /><br />
                 <input type="hidden" id="Languagelist" name="Languagelist" value="0">
                 <input type="hidden" id="LanguageXML" name="LanguageXML" value="<%= System.Uri.EscapeDataString((string)ViewData["languagexml"]) %>">
-                <input type="button" id="updateLanguageButton" onclick="checkAndSubmitLanguage();" value="Update" />
+                <input type="button" id="updateLanguageButton" onclick="checkAndSubmit('Language', 'LanguageXML', 'LanguageTable', 'Languagelist', 'LanguageID', 'LanguageName', 'ChurchLanguage', 'Language', 'LanguageID', 'LanguageName');" value="Update" />
                 <div style=" overflow:auto; height:80%">
                     <table class="tablesorter" id="LanguageTable" style=" width:60%; padding:0; margin-left:0%; margin-right:0%">
 			                <thead>
 			                <tr class="header">
-                                <td class="nosorting" width=1% nowrap="nowrap"><img onclick="addLanguage();" border="0" src="/Content/images/add.png" width="20" height="20" style="cursor:pointer" title="Add"  alt="Add"/></td>
+                                <td class="nosorting" width=1% nowrap="nowrap"><img onclick="addType(this, 'Language', 'Languagelist', 'LanguageTable', 'LanguageID', 'LanguageName');" border="0" src="/Content/images/add.png" width="20" height="20" style="cursor:pointer" title="Add"  alt="Add"/></td>
 				                <td class="nosorting" width="1%" nowrap="nowrap">Language ID</td>
 				                <td class="nosorting" width="8%" nowrap="nowrap">Language Name</td>
 		                </thead>
@@ -222,12 +221,12 @@ Settings
                <br /><br /><br /><br />
                 <input type="hidden" id="MaritalStatuslist" name="MaritalStatuslist" value="0">
                 <input type="hidden" id="MaritalStatusXML" name="MaritalStatusXML" value="<%= System.Uri.EscapeDataString((string)ViewData["maritalsStatusxml"]) %>">
-                <input type="button" id="updateMaritalStatusButton" onclick="checkAndSubmitMaritalStatus();" value="Update" />
+                <input type="button" id="updateMaritalStatusButton" onclick="checkAndSubmit('MaritalStatus', 'MaritalStatusXML', 'MaritalStatusTable', 'MaritalStatuslist', 'MaritalStatusID', 'MaritalStatusName', 'ChurchMaritalStatus', 'MaritalStatus', 'MaritalStatusID', 'MaritalStatusName');" value="Update" />
                 <div style=" overflow:auto; height:80%">
                     <table class="tablesorter" id="MaritalStatusTable" style=" width:60%; padding:0; margin-left:0%; margin-right:0%">
 			                <thead>
 			                <tr class="header">
-                                <td class="nosorting" width=1% nowrap="nowrap"><img onclick="addMaritalStatus();" border="0" src="/Content/images/add.png" width="20" height="20" style="cursor:pointer" title="Add"  alt="Add"/></td>
+                                <td class="nosorting" width=1% nowrap="nowrap"><img onclick="addType(this, 'MaritalStatus', 'MaritalStatuslist', 'MaritalStatusTable', 'MaritalStatusID', 'MaritalStatusName');" border="0" src="/Content/images/add.png" width="20" height="20" style="cursor:pointer" title="Add"  alt="Add"/></td>
 				                <td class="nosorting" width="1%" nowrap="nowrap">Marital Status ID</td>
 				                <td class="nosorting" width="8%" nowrap="nowrap">Marital Status Name</td>
 		                </thead>
@@ -240,12 +239,12 @@ Settings
                 <br /><br /><br /><br />
                 <input type="hidden" id="Occupationlist" name="Occupationlist" value="0">
                 <input type="hidden" id="OccupationXML" name="OccupationXML" value="<%= System.Uri.EscapeDataString((string)ViewData["occupationxml"]) %>">
-                <input type="button" id="updateOccupationButton" onclick="checkAndSubmitOccupation();" value="Update" />
+                <input type="button" id="updateOccupationButton" onclick="checkAndSubmit('Occupation', 'OccupationXML', 'OccupationTable', 'Occupationlist', 'OccupationID', 'OccupationName', 'ChurchOccupation', 'Occupation', 'OccupationID', 'OccupationName');" value="Update" />
                 <div style=" overflow:auto; height:80%">
                     <table class="tablesorter" id="OccupationTable" style=" width:60%; padding:0; margin-left:0%; margin-right:0%">
 			                <thead>
 			                <tr class="header">
-                                <td class="nosorting" width=1% nowrap="nowrap"><img onclick="addOccupation();" border="0" src="/Content/images/add.png" width="20" height="20" style="cursor:pointer" title="Add"  alt="Add"/></td>
+                                <td class="nosorting" width=1% nowrap="nowrap"><img onclick="addType(this, 'Occupation', 'Occupationlist', 'OccupationTable', 'OccupationID', 'OccupationName');" border="0" src="/Content/images/add.png" width="20" height="20" style="cursor:pointer" title="Add"  alt="Add"/></td>
 				                <td class="nosorting" width="1%" nowrap="nowrap">Occupation ID</td>
 				                <td class="nosorting" width="8%" nowrap="nowrap">Occupation Name</td>
 		                </thead>
@@ -258,12 +257,12 @@ Settings
                 <br /><br /><br /><br />
                 <input type="hidden" id="Parishlist" name="Parishlist" value="0">
                 <input type="hidden" id="ParishXML" name="ParishXML" value="<%= System.Uri.EscapeDataString((string)ViewData["parishxml"]) %>">
-                <input type="button" id="updateParishButton" onclick="checkAndSubmitParish();" value="Update" />
+                <input type="button" id="updateParishButton" onclick="checkAndSubmit('Parish', 'ParishXML', 'ParishTable', 'Parishlist', 'ParishID', 'ParishName', 'ChurchParish', 'Parish', 'ParishID', 'ParishName');" value="Update" />
                 <div style=" overflow:auto; height:80%">
                     <table class="tablesorter" id="ParishTable" style=" width:60%; padding:0; margin-left:0%; margin-right:0%">
 			                <thead>
 			                <tr class="header">
-                                <td class="nosorting" width=1% nowrap="nowrap"><img onclick="addParish();" border="0" src="/Content/images/add.png" width="20" height="20" style="cursor:pointer" title="Add"  alt="Add"/></td>
+                                <td class="nosorting" width=1% nowrap="nowrap"><img onclick="addType(this, 'Parish', 'Parishlist', 'ParishTable', 'ParishID', 'ParishName');" border="0" src="/Content/images/add.png" width="20" height="20" style="cursor:pointer" title="Add"  alt="Add"/></td>
 				                <td class="nosorting" width="1%" nowrap="nowrap">Parish ID</td>
 				                <td class="nosorting" width="8%" nowrap="nowrap">Parish Name</td>
 		                </thead>
@@ -276,12 +275,12 @@ Settings
                 <br /><br /><br /><br />
                 <input type="hidden" id="Salutationlist" name="Salutationlist" value="0">
                 <input type="hidden" id="SalutationXML" name="SalutationXML" value="<%= System.Uri.EscapeDataString((string)ViewData["salutationxml"]) %>">
-                <input type="button" id="updateSalutationButton" onclick="checkAndSubmitSalutation();" value="Update" />
+                <input type="button" id="updateSalutationButton" onclick="checkAndSubmit('Salutation', 'SalutationXML', 'SalutationTable', 'Salutationlist', 'SalutationID', 'SalutationName', 'ChurchSalutation', 'Salutation', 'SalutationID', 'SalutationName');" value="Update" />
                 <div style=" overflow:auto; height:80%">
                     <table class="tablesorter" id="SalutationTable" style=" width:60%; padding:0; margin-left:0%; margin-right:0%">
 			                <thead>
 			                <tr class="header">
-                                <td class="nosorting" width=1% nowrap="nowrap"><img onclick="addSalutation();" border="0" src="/Content/images/add.png" width="20" height="20" style="cursor:pointer" title="Add"  alt="Add"/></td>
+                                <td class="nosorting" width=1% nowrap="nowrap"><img onclick="addType(this, 'Salutation', 'Salutationlist', 'SalutationTable', 'SalutationID', 'SalutationName');" border="0" src="/Content/images/add.png" width="20" height="20" style="cursor:pointer" title="Add"  alt="Add"/></td>
 				                <td class="nosorting" width="1%" nowrap="nowrap">Salutation ID</td>
 				                <td class="nosorting" width="8%" nowrap="nowrap">Salutation Name</td>
 		                </thead>
@@ -294,12 +293,12 @@ Settings
                 <br /><br /><br /><br />
                 <input type="hidden" id="Stylelist" name="Stylelist" value="0">
                 <input type="hidden" id="StyleXML" name="StyleXML" value="<%= System.Uri.EscapeDataString((string)ViewData["stylexml"]) %>">
-                <input type="button" id="updateStyleButton" onclick="checkAndSubmitStyle();" value="Update" />
+                <input type="button" id="updateStyleButton" onclick="checkAndSubmit('Style', 'StyleXML', 'StyleTable', 'Stylelist', 'StyleID', 'StyleName', 'ChurchStyle', 'Style', 'StyleID', 'StyleName');" value="Update" />
                 <div style=" overflow:auto; height:80%">
                     <table class="tablesorter" id="StyleTable" style=" width:60%; padding:0; margin-left:0%; margin-right:0%">
 			                <thead>
 			                <tr class="header">
-                                <td class="nosorting" width=1% nowrap="nowrap"><img onclick="addStyle();" border="0" src="/Content/images/add.png" width="20" height="20" style="cursor:pointer" title="Add"  alt="Add"/></td>
+                                <td class="nosorting" width=1% nowrap="nowrap"><img onclick="addType(this, 'Style', 'Stylelist', 'StyleTable', 'StyleID', 'StyleName');" border="0" src="/Content/images/add.png" width="20" height="20" style="cursor:pointer" title="Add"  alt="Add"/></td>
 				                <td class="nosorting" width="1%" nowrap="nowrap">Style ID</td>
 				                <td class="nosorting" width="8%" nowrap="nowrap">Style Name</td>
 		                </thead>
@@ -338,7 +337,7 @@ Settings
                     <table class="tablesorter" id="PostalTable" style=" width:100%; padding:0; margin-left:0%; margin-right:0%">
 			                <thead>
 			                <tr class="header">
-                                <td class="nosorting" width=1% nowrap="nowrap"><img onclick="addPostal();" border="0" src="/Content/images/add.png" width="20" height="20" style="cursor:pointer" title="Add"  alt="Add"/></td>
+                                <td class="nosorting" width=1% nowrap="nowrap"><img onclick="addPostal(this);" border="0" src="/Content/images/add.png" width="20" height="20" style="cursor:pointer" title="Add"  alt="Add"/></td>
                                 <td class="nosorting" width="1%" nowrap="nowrap">District</td>
                                 <td class="nosorting" width="20%" nowrap="nowrap">Postal Area</td>
 				                <td class="nosorting" width="80%" nowrap="nowrap">Postal Code</td>
@@ -359,7 +358,7 @@ Settings
                     <table class="tablesorter" id="BusGroupClusterTable" style=" width:60%; padding:0; margin-left:0%; margin-right:0%">
 			                <thead>
 			                <tr class="header">
-                                <td class="nosorting" width=1% nowrap="nowrap"><img onclick="addType('BusGroupCluster', 'BusGroupClusterlist', 'BusGroupClusterTable', 'BusGroupClusterID', 'BusGroupClusterName');" border="0" src="/Content/images/add.png" width="20" height="20" style="cursor:pointer" title="Add"  alt="Add"/></td>
+                                <td class="nosorting" width=1% nowrap="nowrap"><img onclick="addType(this, 'BusGroupCluster', 'BusGroupClusterlist', 'BusGroupClusterTable', 'BusGroupClusterID', 'BusGroupClusterName');" border="0" src="/Content/images/add.png" width="20" height="20" style="cursor:pointer" title="Add"  alt="Add"/></td>
 				                <td class="nosorting" width="1%" nowrap="nowrap">Bus Group Cluster ID</td>
 				                <td class="nosorting" width="8%" nowrap="nowrap">Bus Group Cluster Name</td>
 		                </thead>
@@ -377,7 +376,7 @@ Settings
                     <table class="tablesorter" id="ClubGroupTable" style=" width:60%; padding:0; margin-left:0%; margin-right:0%">
 			                <thead>
 			                <tr class="header">
-                                <td class="nosorting" width=1% nowrap="nowrap"><img onclick="addType('ClubGroup', 'ClubGrouplist', 'ClubGroupTable', 'ClubGroupID', 'ClubGroupName');" border="0" src="/Content/images/add.png" width="20" height="20" style="cursor:pointer" title="Add"  alt="Add"/></td>
+                                <td class="nosorting" width=1% nowrap="nowrap"><img onclick="addType(this, 'ClubGroup', 'ClubGrouplist', 'ClubGroupTable', 'ClubGroupID', 'ClubGroupName');" border="0" src="/Content/images/add.png" width="20" height="20" style="cursor:pointer" title="Add"  alt="Add"/></td>
 				                <td class="nosorting" width="1%" nowrap="nowrap">Club Group ID</td>
 				                <td class="nosorting" width="8%" nowrap="nowrap">Club Group Name</td>
 		                </thead>
@@ -395,7 +394,7 @@ Settings
                     <table class="tablesorter" id="RaceTable" style=" width:60%; padding:0; margin-left:0%; margin-right:0%">
 			                <thead>
 			                <tr class="header">
-                                <td class="nosorting" width=1% nowrap="nowrap"><img onclick="addType('Race', 'Racelist', 'RaceTable', 'RaceID', 'RaceName');" border="0" src="/Content/images/add.png" width="20" height="20" style="cursor:pointer" title="Add"  alt="Add"/></td>
+                                <td class="nosorting" width=1% nowrap="nowrap"><img onclick="addType(this, 'Race', 'Racelist', 'RaceTable', 'RaceID', 'RaceName');" border="0" src="/Content/images/add.png" width="20" height="20" style="cursor:pointer" title="Add"  alt="Add"/></td>
 				                <td class="nosorting" width="1%" nowrap="nowrap">Race ID</td>
 				                <td class="nosorting" width="8%" nowrap="nowrap">Race Name</td>
 		                </thead>
@@ -413,7 +412,7 @@ Settings
                     <table class="tablesorter" id="ReligionTable" style=" width:60%; padding:0; margin-left:0%; margin-right:0%">
 			                <thead>
 			                <tr class="header">
-                                <td class="nosorting" width=1% nowrap="nowrap"><img onclick="addType('Religion', 'Religionlist', 'ReligionTable', 'ReligionID', 'ReligionName');" border="0" src="/Content/images/add.png" width="20" height="20" style="cursor:pointer" title="Add"  alt="Add"/></td>
+                                <td class="nosorting" width=1% nowrap="nowrap"><img onclick="addType(this, 'Religion', 'Religionlist', 'ReligionTable', 'ReligionID', 'ReligionName');" border="0" src="/Content/images/add.png" width="20" height="20" style="cursor:pointer" title="Add"  alt="Add"/></td>
 				                <td class="nosorting" width="1%" nowrap="nowrap">Religion ID</td>
 				                <td class="nosorting" width="8%" nowrap="nowrap">Religion Name</td>
 		                </thead>
@@ -431,7 +430,7 @@ Settings
                     <table class="tablesorter" id="SchoolTable" style=" width:60%; padding:0; margin-left:0%; margin-right:0%">
 			                <thead>
 			                <tr class="header">
-                                <td class="nosorting" width=1% nowrap="nowrap"><img onclick="addType('School', 'Schoollist', 'SchoolTable', 'SchoolID', 'SchoolName');" border="0" src="/Content/images/add.png" width="20" height="20" style="cursor:pointer" title="Add"  alt="Add"/></td>
+                                <td class="nosorting" width=1% nowrap="nowrap"><img onclick="addType(this, 'School', 'Schoollist', 'SchoolTable', 'SchoolID', 'SchoolName');" border="0" src="/Content/images/add.png" width="20" height="20" style="cursor:pointer" title="Add"  alt="Add"/></td>
 				                <td class="nosorting" width="1%" nowrap="nowrap">School ID</td>
 				                <td class="nosorting" width="8%" nowrap="nowrap">School Name</td>
 		                </thead>
@@ -440,7 +439,32 @@ Settings
 		            </table>
                 </div>   
             </div>
-
+            <div id="tab23" class="tab_content" style="height:70%">
+                <br /><br /><br /><br />
+                <input type="hidden" id="ExternalDBlist" name="ExternalDBlist" value="0">
+                <input type="hidden" id="ExternalDBXML" name="ExternalDBXML" value="<%= System.Uri.EscapeDataString((string)ViewData["externaldbxml"]) %>">
+                
+                
+                <table style=" width:100%; padding:0; margin-left:0%; margin-right:0%">
+                    <tr>
+                        <td><input type="button" id="updateExternalDBButton" onclick="checkAndSubmitExternalDB()" value="Update" /></td>
+                        <td><div style=""><input style="float: right;" type="button" id="Button7" onclick="SyncAllSettings()" value="Sync All" /><div style="float: right; display:none" id="syncMessageDiv"><img id="syncimg" align="top" height="20px" style="" src="/Content/images/loading.gif" /> <label style=" color:Red" id="syncMessage">Synchronizing. Please wait......</label></div></div></td>
+                    </tr>
+                </table>
+                <div style=" overflow:auto; height:80%">
+                    <table class="tablesorter" id="ExternalDBTable" style=" width:100%; padding:0; margin-left:0%; margin-right:0%">
+			                <thead>
+			                <tr class="header">
+                                <td class="nosorting" width=1% nowrap="nowrap"><img onclick="addExternalDB(this);" border="0" src="/Content/images/add.png" width="20" height="20" style="cursor:pointer" title="Add"  alt="Add"/></td>
+				                <td class="nosorting" width="1%" nowrap="nowrap">ID</td>
+				                <td class="nosorting" width="20%" nowrap="nowrap">External DB Name</td>
+                                <td class="nosorting" width="50%" nowrap="nowrap">External DB IP</td>
+		                </thead>
+		                <tbody>
+			            </tbody>
+		            </table>
+                </div>   
+            </div>
 
 
 

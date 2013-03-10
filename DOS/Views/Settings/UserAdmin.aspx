@@ -7,25 +7,13 @@ Access Control
 
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
 
-<script type="text/javascript" src="/Content/scripts/jquery-1.7.1.min.js"></script>
+<script type="text/javascript" src="/Content/scripts/jquery-1.6.4.min.js"></script>
 <link rel="stylesheet" type="text/css" href="/Content/css/TabsView.css">
 
     <!-- Fix header and sorter table scripts   -->
     <link rel="stylesheet" type="text/css" href="/Content/css/TablesView.css" />
     <script type="text/javascript" src="/Content/scripts/jquery.tablesorter.min.js"></script> 
     <!-- Fix header and sorter table scripts   -->
-
-    <!-- multiselect list box scripts   -->
-    <script src="/Content/scripts/jquery.multiselectListBox.js" type="text/javascript"></script>
-    <link href="/Content/css/multiselectListBox.css" media="screen" rel="stylesheet" type="text/css">
-    <!-- multiselect list box scripts   -->
-
-    <!-- modal windows scripts   -->
-    <link rel="stylesheet" href="/Content/css/dhtmlwindow.css" type="text/css" />
-    <script type="text/javascript" src="/Content/scripts/dhtmlwindow.min.js"></script>
-    <link rel="stylesheet" href="/Content/css/modal.css" type="text/css" />
-    <script type="text/javascript" src="/Content/scripts/modal.min.js"></script>
-    <!-- modal windows scripts   -->
 
 <%if (HttpContext.Current.IsDebuggingEnabled){%>
     <script type="text/javascript" src="/<%= (string)Session["webapplicationname"] %>Content/scripts/common_function.debug.js"></script>
@@ -36,18 +24,7 @@ else{%>
     <script type="text/javascript" src="/<%= (string)Session["webapplicationname"] %>Content/scripts/UserAdmin.min.js"></script>
 <%}%>
 
-    <style>
-        div.popuptooltip {
-            display: none;
-            position: absolute;
-            width: 280px;
-            padding: 10px;
-            background: #eeeeee;
-            color: #000000;
-            border: 1px solid #1a1a1a;
-            font-size: 90%;
-          }
-    </style>
+
 
 <script type="text/javascript">
     function getselected_name_userid() {
@@ -70,8 +47,24 @@ else{%>
         return "<%=(string) ViewData["tab"] %>";
     }
 
+    function getAvailableModulesListBox(){
+        return "<%=AvailableModulesListBox.ClientID %>";
+    }
+
     function getStaffListBox(){
         return "<%=staffList.ClientID %>";
+    }
+
+    function getAssignedModulesListBox(){
+        return "<%=AssignedModulesListBox.ClientID %>";
+    }
+
+    function getAvailableFunctionsListBox(){
+        return "<%=AvailableFunctionsListBox.ClientID %>";
+    }
+
+    function getAssignedFunctionsListBox(){
+        return "<%=AssignedFunctionsListBox.ClientID %>";
     }
 
     function getModuleFunctionRoles(){
@@ -82,9 +75,6 @@ else{%>
         return "<%=usersListBox.ClientID %>";
     }
     
-    function getHelpIconSrc(){
-        return "/Content/images/help-icon.png"
-    }
 </script>
 
 <script language="C#" runat="server">
@@ -110,17 +100,13 @@ else{%>
             
         }
     }
-
-    void loadRolesForModules(Object Sender, EventArgs e)
-    {
-        IEnumerable<usp_listOfRolesResult> res = (IEnumerable<usp_listOfRolesResult>)ViewData["listofroles"];
-
-        for (int x = 0; x < res.Count(); x++)
-        {
-            ModuleFunctionRoles.Items.Add(new ListItem(res.ElementAt(x).RoleName, res.ElementAt(x).RoleID.ToString()));
-        }
-    }
 </script>
+
+
+
+    <!-- ajaxsearch caller & workgroup script   -->
+    <link rel="stylesheet" type="text/css" href="/<%= (string)Session["webapplicationname"] %>Content/css/CallerSearch_Listsearchextender.css" />
+    <!-- ajaxsearch caller & workgroup script   -->
 
 <input type="hidden" id="name_userID_XML" name="name_userID_XML" value="" />
 <input type="hidden" id="TicketNumber" name="TicketNumber" value="" />
@@ -131,7 +117,7 @@ else{%>
         <ul class="tabs">
             <li><a href="#tab1">Add/Update User(s)</a></li>
             <li><a href="#tab2">Add/Remove Roles(s)</a></li>
-            <li><a href="#tab5">Function(s) Maintenance</a></li>
+            <li><a href="#tab3">Add/Remove Modules(s)</a></li>
         </ul>
         <div class="tab_container">
             <div id="tab1" class="tab_content">
@@ -231,73 +217,62 @@ else{%>
 				        </td>
                     </tr>
                 </table>
-            </div>            
-            <div id="tab5" class="tab_content">
-                <table id="ITSCTable" cellspacing="0">
+            </div>
+            <div id="tab3" class="tab_content">
+                <table id="ITSCTable" cellspacing="0" width="100%" border=0>
                     <tr style="height:1px">
-                        <td>
+                        <td colspan="5">
                             Role<br>
-                            <asp:DropDownList id="ModuleFunctionRoles" OnLoad="loadRolesForModules" onchange="changeModuleFunctionRole(this);" runat="server">
-                            </asp:DropDownList>&nbsp;&nbsp;&nbsp;&nbsp;
-                            <label id="ModuleFunctionMsg" style=" color:Red" />
-                        </td>
-                        <td>
-                            <img src="/Content/images/add.png" onclick="addNewRow();" style=" cursor:pointer" title="Add a new Role" />
-                            <img src="/Content/images/remove.png" onclick="DeleteRow();" style=" cursor:pointer" title="Remove this Role" />
-                            <img src="/Content/images/edit-icon.png" onclick="renameExistingRole();" style=" cursor:pointer" title="Rename this role" />
+                            <asp:DropDownList id="ModuleFunctionRoles" onchange="changeModuleFunctionRole(this);" runat="server">
+                            </asp:DropDownList>
                         </td>
                     </tr>
                     <tr style="height:150px">
-                        <td style="width:70%;">
-                            <select multiple="multiple" id="AvailableModuleFunctionListBox">                                
-                            </select>
-
-                            <div id="AllToolTip">
-                                <%
-                                    XElement modules = XElement.Parse((string)ViewData["AllModules"]);
-                                    XElement functions = XElement.Parse((string)ViewData["AllFunctions"]);
-                                    for (int x = 0; x < functions.Elements("Function").Count(); x++)
-                                    {
-
-                                        string currentFunctionID = functions.Elements("Function").ElementAt(x).Element("functionID").Value;
-                                        string currentFunctionName = functions.Elements("Function").ElementAt(x).Element("FunctionName").Value;
-                                        string currentFunctionDescription = functions.Elements("Function").ElementAt(x).Element("Description").Value;
-                                        
-                                        %><div class="popuptooltip" id="pop_function_<%=currentFunctionID%>">
-                                            <h3><%=currentFunctionName%></h3>
-                                            <hr />
-                                            <%=currentFunctionDescription%>
-                                          </div><%
-                                    }
-                                    for (int x = 0; x < modules.Elements("Module").Count(); x++)
-                                    {
-
-                                        string currentModuleID = modules.Elements("Module").ElementAt(x).Element("AppModFuncID").Value.Replace('.','_');
-                                        string currentModuleName = modules.Elements("Module").ElementAt(x).Element("AppModFuncName").Value;
-                                        string currentModuleDescription = modules.Elements("Module").ElementAt(x).Element("Description").Value;
-                                        
-                                        %><div class="popuptooltip" id="pop_module_<%=currentModuleID%>">
-                                            <h3><%=currentModuleName%></h3>
-                                            <hr />
-                                            <%=currentModuleDescription%>
-                                          </div><%
-                                    }
-                                    
-                                %>
-                            </div>
+				        <td style="width:300px;">
+					        Available Modules<br>
+                            <asp:ListBox id="AvailableModulesListBox" rows="3" runat="server" Width="300px" Height="150px">
+                            </asp:ListBox>					        
+				        </td>
+                        <td style="width:10px">
+                            <br><br>
+                            <input type=button value="->" onclick="AddModule()">
+                            <br>
+                            <input type=button value="<-" onclick="RemoveModule()">
                         </td>
-                        <td style="width:30%">
-                            List of users (Display Only)<br />
-                            <asp:ListBox id="usersListBox" rows="20" runat="server" Width="100%" Height="70%">
+                        <td style="width:300px">
+                            Assigned Modules<br>
+                            <asp:ListBox id="AssignedModulesListBox" rows="3" runat="server" Width="300px" Height="150px">
                             </asp:ListBox>
-                            <br />
-                            <div style=" height:30%">
-                                <label id="modulefunctionresult"></label>                            
-                            </div>
-                        </td>  
-                    </tr>                    
+                        </td>
+                        <td rowspan="3" style="width:300px">
+                            <label id="modulefunctionresult"></label>
+                        </td>
+                        <td rowspan="3">
+                            List of users (Display Only)<br />
+                            <asp:ListBox id="usersListBox" rows="20" runat="server" Width="100%" Height="90%">
+                            </asp:ListBox>
+                        </td>                         
                     <tr>
-                        <td colspan="2">
+                    <tr style="height:150px">
+				        <td style="width:300px;">
+					        Available Functions<br>
+                            <asp:ListBox id="AvailableFunctionsListBox" rows="3" runat="server" Width="300px" Height="150px">
+                            </asp:ListBox>					        
+				        </td>
+                        <td style="width:10px">
+                            <br><br>
+                            <input type=button value="->" onclick="AddFunction()">
+                            <br>
+                            <input type=button value="<-" onclick="RemoveFunction()">
+                        </td>
+                        <td style="width:300px">
+                            Assigned Functions<br>
+                            <asp:ListBox id="AssignedFunctionsListBox" rows="3" runat="server" Width="300px" Height="150px">
+                            </asp:ListBox>
+                        </td>                                                
+                    <tr>
+                    <tr>
+                        <td colspan="5">
 					        <input type=button value="Submit" onclick="submitUpdateModulesFunctions();"><input type=button value="Reset" onclick="ResetUpdateModulesFunctions();">
 				        </td>                        
                     </tr>

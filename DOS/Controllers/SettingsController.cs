@@ -7,16 +7,167 @@ using DOS.Controllers;
 using DOS.Models;
 using System.Xml.Linq;
 using System.IO;
+using System.Net;
+using System.Diagnostics;
+using System.Threading;
 
 namespace DOS.Controllers
 {
     [HandleError]
     public class SettingsController : MasterPageController
     {
+        static string serverSideProcessMsg = "";
+
         [ErrorHandler]
-        [Authorize]        
+        [Authorize]
+        [AcceptVerbs(HttpVerbs.Post)]
+        public ActionResult SyncAllSettings()
+        {
+            serverSideProcessMsg = "";
+            Thread t1 = new Thread(ExecuteSyncDBJob);
+            t1.Start();
+            return View("simplehtml");
+        }
+
+        private void ExecuteSyncDBJob(object args)
+        {
+            XElement xmlDoc = sql_conn.usp_GetAllSettingsInXML().ElementAt(0).XML;
+            IEnumerable<usp_getAllSettingResult> res = sql_conn.usp_getAllSetting().ToList();
+            for (int x = 0; x < res.Count(); x++)
+            {
+                string url = "https://" + res.ElementAt(x).ExternalDBIP + "/settings.mvc/SyncxmlDoc";
+                if(HttpPost(url, xmlDoc.ToString()) == "Error"){
+                    serverSideProcessMsg = "Error";
+                    return;
+                }
+            }
+            
+            serverSideProcessMsg = "Updated";
+        }
+
+        public static string HttpPost(string url, string files)
+        {
+            string boundary = "----------------------------" + DateTime.Now.Ticks.ToString("x");
+
+            HttpWebRequest httpWebRequest2 = (HttpWebRequest)WebRequest.Create(url);
+            httpWebRequest2.ContentType = "multipart/form-data; boundary=" + boundary;
+            httpWebRequest2.Method = "POST";
+            httpWebRequest2.KeepAlive = true;
+            httpWebRequest2.Credentials = System.Net.CredentialCache.DefaultCredentials;
+
+
+
+            Stream memStream = new System.IO.MemoryStream();
+
+            byte[] boundarybytes = System.Text.Encoding.ASCII.GetBytes("\r\n--" + boundary + "\r\n");
+
+
+            string formdataTemplate = "\r\n--" + boundary + "\r\nContent-Disposition: form-data; name=\"{0}\";\r\n\r\n{1}";
+
+
+            string formitem = string.Format(formdataTemplate, "UserID", "samissync");
+            byte[] formitembytes = System.Text.Encoding.UTF8.GetBytes(formitem);
+            memStream.Write(formitembytes, 0, formitembytes.Length);
+
+            formitem = string.Format(formdataTemplate, "Password", "Fe6eyuf3a2U8hah");
+            formitembytes = System.Text.Encoding.UTF8.GetBytes(formitem);
+            memStream.Write(formitembytes, 0, formitembytes.Length);
+
+
+
+            memStream.Write(boundarybytes, 0, boundarybytes.Length);
+
+            string headerTemplate = "Content-Disposition: form-data; name=\"{0}\"; filename=\"{1}\"\r\n Content-Type: application/octet-stream\r\n\r\n";
+
+            string header = string.Format(headerTemplate, "", "");
+
+            byte[] headerbytes = System.Text.Encoding.UTF8.GetBytes(header);
+
+            memStream.Write(headerbytes, 0, headerbytes.Length);
+
+
+
+            byte[] buffer = System.Text.Encoding.ASCII.GetBytes(HttpUtility.UrlEncode(files.Replace("\n", "").Replace("\r", "")));
+            memStream.Write(buffer, 0, buffer.Length);
+
+            memStream.Write(boundarybytes, 0, boundarybytes.Length);
+
+
+            httpWebRequest2.ContentLength = memStream.Length;
+
+            Stream requestStream = httpWebRequest2.GetRequestStream();
+
+            memStream.Position = 0;
+            byte[] tempBuffer = new byte[memStream.Length];
+            memStream.Read(tempBuffer, 0, tempBuffer.Length);
+            memStream.Close();
+            requestStream.Write(tempBuffer, 0, tempBuffer.Length);
+            requestStream.Close();
+
+
+            WebResponse webResponse2 = httpWebRequest2.GetResponse();
+            System.IO.StreamReader sr = new System.IO.StreamReader(webResponse2.GetResponseStream());
+            string result = sr.ReadToEnd().Trim();
+
+            webResponse2.Close();
+            httpWebRequest2 = null;
+            webResponse2 = null;
+
+            return result;
+        }
+
+        public ActionResult checkSyncAllSettings()
+        {
+            ViewData["result"] = serverSideProcessMsg;
+            return View("simplehtml");
+        }
+
+        [ErrorHandler]
+        [AcceptVerbs(HttpVerbs.Post)]
+        public ActionResult SyncxmlDoc(string xmlDoc)
+        {
+            if (Request.Files.Count == 1)
+            {
+                Stream input = Request.Files[0].InputStream;
+                byte[] buffer = new byte[Request.Files[0].ContentLength];
+                int len;
+                string value = "";
+                while ((len = input.Read(buffer, 0, buffer.Length)) > 0)
+                {
+                    value += System.Text.ASCIIEncoding.ASCII.GetString(buffer);
+                }
+                XElement xml = XElement.Parse(HttpUtility.UrlDecode(value));
+                string userid = Request.Form["UserID"];
+                string password = Request.Form["Password"];
+
+                if (userid == "samissync" && password == "Fe6eyuf3a2U8hah")
+                    sql_conn.usp_SyncAllSettings(xml);
+                else
+                {
+                    ViewData["result"] = "Error";
+                    return View("simplehtml");
+                }
+            }
+            else
+            {
+                ViewData["result"] = "Error";
+                return View("simplehtml");
+            }
+
+            ViewData["result"] = "Updated";
+            return View("simplehtml");
+        }
+
+        [ErrorHandler]
+        [Authorize]
         public ActionResult Samis2Settings()
         {
+            IEnumerable<usp_getAllExternalDBInXMLResult> ext = sql_conn.usp_getAllExternalDBInXML().ToList();
+            if (ext.Count() == 0)
+                ViewData["externaldbxml"] = "<ExternalDB />";
+            else if (ext.Count() > 0)
+                ViewData["externaldbxml"] = ext.ElementAt(0).XML.ToString();
+
             IEnumerable<usp_getAllChurchAreaInXMLResult> ca = sql_conn.usp_getAllChurchAreaInXML().ToList();
             if (ca.Count() == 0)
                 ViewData["churchareaxml"] = "<ChurchArea />";
@@ -496,6 +647,39 @@ namespace DOS.Controllers
         [ErrorHandler]
         [Authorize]
         [AcceptVerbs(HttpVerbs.Post)]
+        public ActionResult updateExternalDB(string xml)
+        {
+            XElement xmldoc = XElement.Parse(HttpUtility.UrlDecode(xml));
+            XElement input = new XElement("ChurchExternalDB");
+
+            for (int x = 0; x < xmldoc.Elements("ExternalDB").Count(); x++)
+            {
+                XElement post = new XElement("ExternalDB");
+                post.Add(new XElement("ExternalDBID", HttpUtility.UrlDecode(xmldoc.Elements("ExternalDB").ElementAt(x).Element("ExternalDBID").Value)));
+                post.Add(new XElement("ExternalDBIP", HttpUtility.UrlDecode(xmldoc.Elements("ExternalDB").ElementAt(x).Element("ExternalDBIP").Value)));
+                post.Add(new XElement("ExternalDBName", HttpUtility.UrlDecode(xmldoc.Elements("ExternalDB").ElementAt(x).Element("ExternalDBName").Value)));
+                input.Add(post);
+            }
+
+
+            string result = sql_conn.usp_UpdateExternalDB(input).ElementAt(0).Result;
+
+            IEnumerable<usp_getAllExternalDBInXMLResult> ext = sql_conn.usp_getAllExternalDBInXML().ToList();
+            if (ext.Count() == 0)
+                ViewData["externaldbxml"] = "<ExternalDB />";
+            else if (ext.Count() > 0)
+                ViewData["externaldbxml"] = ext.ElementAt(0).XML.ToString();
+
+            xmldoc = XElement.Parse((string)ViewData["externaldbxml"]);
+            xmldoc.Add(new XElement("Result", result));
+
+            ViewData["result"] = System.Uri.EscapeDataString(xmldoc.ToString());
+            return View("simplehtml");
+        }
+
+        [ErrorHandler]
+        [Authorize]
+        [AcceptVerbs(HttpVerbs.Post)]
         public ActionResult updateFileType(string xml)
         {
             XElement xmldoc = XElement.Parse(HttpUtility.UrlDecode(xml));
@@ -754,14 +938,15 @@ namespace DOS.Controllers
         public ActionResult updateAssignedModuleFunction(string xml, string roleid)
         {
             XElement modulefunctionXML = XElement.Parse(HttpUtility.UrlDecode(xml));
-            ViewData["result"] = sql_conn.usp_UpdateAssignedModulesFunctions(modulefunctionXML, int.Parse(roleid)).ElementAt(0).Result + " as of " + DateTime.Now.ToString("dd/MM/yyyy hh:mm:ss");
-            Session["AccessRight"] = sql_conn.usp_getModuleFunctionsAccessRight(User.Identity.Name).ElementAt(0).FunctionAccessRight;
+
+            ViewData["result"] = sql_conn.usp_UpdateAssignedModulesFunctions(modulefunctionXML, User.Identity.Name).ElementAt(0).Result + " as of " + DateTime.Now.ToString("dd/MM/yyyy hh:mm:ss");
             return View("simplehtml");
         }
 
         [ErrorHandler]
         [Authorize]
-        public FilePathResult samis2backup(){
+        public FilePathResult samis2backup()
+        {
 
             sql_conn.usp_getDBBackup();
             string filename = (string)Session["DBBackupLocation"];
@@ -769,9 +954,31 @@ namespace DOS.Controllers
         }
 
 
+        public ActionResult displayNewRole(string random)
+        {
+            ViewData["iframename"] = "iframe" + random;
+            ViewData["siteURL"] = "/settings.mvc/DisplayCreateNewRole";
+            return View("displayModalClose");
+        }
 
+        public ActionResult DisplayCreateNewRole()
+        {
+            ViewData["rolename"] = "";
+            return View();
+        }
 
+        public ActionResult renameRole(string random, string rolename)
+        {
+            ViewData["iframename"] = "iframe" + random;
+            ViewData["siteURL"] = "/settings.mvc/DisplayRenameRole?rolename=" + rolename;
+            return View("displayModalClose");
+        }
 
+        public ActionResult DisplayRenameRole(string rolename)
+        {
+            ViewData["rolename"] = rolename;
+            return View("DisplayCreateNewRole");
+        }
 
 
 

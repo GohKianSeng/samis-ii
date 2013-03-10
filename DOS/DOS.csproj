@@ -114,11 +114,14 @@
     <Content Include="Content\css\jquery.ui.timepicker.css" />
     <Content Include="Content\css\login_view.css" />
     <Content Include="Content\css\modal.css" />
+    <Content Include="Content\css\multiselectListBox.css" />
     <Content Include="Content\css\searchsuggest.css" />
     <Content Include="Content\css\TablesView.css" />
     <Content Include="Content\css\TabsView.css" />
     <Content Include="Content\css\TopMenu.css" />
     <Content Include="Content\images\apple-touch-icon.png" />
+    <Content Include="Content\images\edit-icon.png" />
+    <Content Include="Content\images\help-icon.png" />
     <Content Include="Content\images\loading.gif" />
     <Content Include="Content\images\add.png" />
     <Content Include="Content\images\asc.gif" />
@@ -147,6 +150,7 @@
     <Content Include="Content\images\empty_profile_pix.gif" />
     <Content Include="Content\images\field.png" />
     <Content Include="Content\images\ictemp.jpg" />
+    <Content Include="Content\images\switch.png" />
     <Content Include="Content\images\T-icon.png" />
     <Content Include="Content\images\menubg_0a_blue.jpg" />
     <Content Include="Content\images\menubg_0_blue.jpg" />
@@ -196,6 +200,8 @@
     <Content Include="Content\scripts\courseregistration.min.js" />
     <Content Include="Content\scripts\DOS_membership.min.js" />
     <Content Include="Content\scripts\fileuploader.js" />
+    <Content Include="Content\scripts\jquery-1.7.1.min.js" />
+    <Content Include="Content\scripts\jquery.multiselectListBox.js" />
     <Content Include="Content\scripts\jquery.watermark.min.js" />
     <Content Include="Content\scripts\logon.min.js" />
     <Content Include="Content\scripts\navigateAway.debug.js" />
@@ -295,10 +301,13 @@
     <Content Include="Views\Reporting\Occupation.aspx" />
     <Content Include="Views\Reporting\OccupationList.aspx" />
     <Content Include="Views\Settings\accessControl.aspx" />
+    <Content Include="Views\Settings\DisplayCreateNewRole.aspx" />
+    <Content Include="Views\Settings\UserAdmin.aspx" />
     <Content Include="Views\Settings\viewSessionVariable.aspx" />
     <Content Include="Views\Settings\webconfig.aspx" />
     <Content Include="Views\Settings\Samis2Settings.aspx" />
     <Content Include="Views\Shared\Agreement.aspx" />
+    <Content Include="Views\Shared\displayModalClose.aspx" />
     <Content Include="Views\Shared\downloadMembershipForm.aspx" />
     <Content Include="Views\Shared\Error.aspx" />
     <Content Include="Views\Shared\ListOfStaff.aspx" />

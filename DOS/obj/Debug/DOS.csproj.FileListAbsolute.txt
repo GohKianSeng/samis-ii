@@ -102,10 +102,3 @@ C:\Users\ks\Desktop\SAMIS_SVN\samis-ii\DOS\bin\System.Data.Linq.dll
 C:\Users\ks\Desktop\SAMIS_SVN\samis-ii\DOS\obj\Debug\ResolveAssemblyReference.cache
 C:\Users\ks\Desktop\SAMIS_SVN\samis-ii\DOS\obj\Debug\DOS.dll
 C:\Users\ks\Desktop\SAMIS_SVN\samis-ii\DOS\obj\Debug\DOS.pdb
-C:\Users\ks\Desktop\samis-ii\DOS\bin\DOS.dll
-C:\Users\ks\Desktop\samis-ii\DOS\bin\DOS.pdb
-C:\Users\ks\Desktop\samis-ii\DOS\bin\Microsoft.JScript.dll
-C:\Users\ks\Desktop\samis-ii\DOS\bin\System.Data.Linq.dll
-C:\Users\ks\Desktop\samis-ii\DOS\obj\Debug\ResolveAssemblyReference.cache
-C:\Users\ks\Desktop\samis-ii\DOS\obj\Debug\DOS.dll
-C:\Users\ks\Desktop\samis-ii\DOS\obj\Debug\DOS.pdb

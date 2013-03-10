@@ -80,7 +80,7 @@ public class ErrorHandler : HandleErrorAttribute
 
         if (IsConnectedToInternet())
         {
-            smtpclient.Send(mail);
+            //smtpclient.Send(mail);
             return true;
         }
         return false;

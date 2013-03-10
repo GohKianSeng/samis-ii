@@ -3,12 +3,12 @@ function LeavingCurrentPage() {
 }
 
 window.onload = function () {
-    $('form').change(function () {
-        window.onbeforeunload = LeavingCurrentPage;
-    });
+//    $('form').change(function () {
+//        window.onbeforeunload = LeavingCurrentPage;
+//    });
 
-    $('form').submit(function () {
-        window.onbeforeunload = null;
-    });
+//    $('form').submit(function () {
+//        window.onbeforeunload = null;
+//    });
 };
 

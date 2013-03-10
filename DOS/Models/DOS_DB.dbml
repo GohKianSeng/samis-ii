@@ -771,12 +771,6 @@
       <Column Name="RoleName" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
     </ElementType>
   </Function>
-  <Function Name="dbo.usp_getAllModulesFunctions" Method="usp_getAllModulesFunctions">
-    <ElementType Name="usp_getAllModulesFunctionsResult">
-      <Column Name="Modules" Type="System.Xml.Linq.XElement" DbType="Xml" CanBeNull="true" />
-      <Column Name="Functions" Type="System.Xml.Linq.XElement" DbType="Xml" CanBeNull="true" />
-    </ElementType>
-  </Function>
   <Function Name="dbo.usp_UpdateRoles" Method="usp_UpdateRoles">
     <Parameter Name="AllRoles" Parameter="allRoles" Type="System.Xml.Linq.XElement" DbType="Xml" />
     <ElementType Name="usp_UpdateRolesResult">
@@ -804,13 +798,6 @@
     <Parameter Name="RoleID" Parameter="roleID" Type="System.Int32" DbType="Int" />
     <ElementType Name="usp_getUsersInRoleResult">
       <Column Name="Display" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
-    </ElementType>
-  </Function>
-  <Function Name="dbo.usp_UpdateAssignedModulesFunctions" Method="usp_UpdateAssignedModulesFunctions">
-    <Parameter Name="XML" Parameter="xML" Type="System.Xml.Linq.XElement" DbType="Xml" />
-    <Parameter Name="RoleID" Parameter="roleID" Type="System.Int32" DbType="Int" />
-    <ElementType Name="usp_UpdateAssignedModulesFunctionsResult">
-      <Column Name="Result" Type="System.String" DbType="VarChar(59) NOT NULL" CanBeNull="false" />
     </ElementType>
   </Function>
   <Function Name="dbo.usp_getModuleFunctionsAccessRight" Method="usp_getModuleFunctionsAccessRight">
@@ -1310,6 +1297,46 @@
     <ElementType Name="usp_getAllEmailResult">
       <Column Name="EmailType" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
       <Column Name="EmailContent" Type="System.String" DbType="VarChar(MAX) NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.usp_SyncAllSettings" Method="usp_SyncAllSettings">
+    <Parameter Name="XML" Parameter="xML" Type="System.Xml.Linq.XElement" DbType="Xml" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.usp_getAllExternalDBInXML" Method="usp_getAllExternalDBInXML">
+    <ElementType Name="usp_getAllExternalDBInXMLResult">
+      <Column Name="XML" Type="System.Xml.Linq.XElement" DbType="Xml" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.usp_UpdateExternalDB" Method="usp_UpdateExternalDB">
+    <Parameter Name="xml" Type="System.Xml.Linq.XElement" DbType="Xml" />
+    <ElementType Name="usp_UpdateExternalDBResult">
+      <Column Name="Result" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.usp_getAllSetting" Method="usp_getAllSetting">
+    <ElementType Name="usp_getAllSettingResult">
+      <Column Name="ExternalDBID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="ExternalSiteName" Type="System.String" DbType="VarChar(200) NOT NULL" CanBeNull="false" />
+      <Column Name="ExternalDBIP" Type="System.String" DbType="VarChar(200) NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.usp_GetAllSettingsInXML" Method="usp_GetAllSettingsInXML">
+    <ElementType Name="usp_GetAllSettingsInXMLResult">
+      <Column Name="XML" Type="System.Xml.Linq.XElement" DbType="Xml" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.usp_getAllModulesFunctions" Method="usp_getAllModulesFunctions">
+    <ElementType Name="usp_getAllModulesFunctionsResult">
+      <Column Name="Modules" Type="System.Xml.Linq.XElement" DbType="Xml" CanBeNull="true" />
+      <Column Name="Functions" Type="System.Xml.Linq.XElement" DbType="Xml" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.usp_UpdateAssignedModulesFunctions" Method="usp_UpdateAssignedModulesFunctions">
+    <Parameter Name="XML" Parameter="xML" Type="System.Xml.Linq.XElement" DbType="Xml" />
+    <Parameter Name="Verifier" Parameter="verifier" Type="System.String" DbType="VarChar(50)" />
+    <ElementType Name="usp_UpdateAssignedModulesFunctionsResult">
+      <Column Name="Result" Type="System.String" DbType="VarChar(13) NOT NULL" CanBeNull="false" />
     </ElementType>
   </Function>
 </Database>

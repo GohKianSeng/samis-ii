@@ -435,7 +435,7 @@
                         <td colspan="2">
                             <li style="width:90px" id="li11" >
 		                            <label class="description" for="element_9">教会<br>
-                                    Church</label>
+                                    Church<span style="color:red;">*</span></label>
 		                            <div>
                                         <asp:DropDownList  style="width:300px" onchange="changeChurch();" OnLoad="loadParish" class="element select medium" name="church" ID="church" runat="server">
                                         </asp:DropDownList>

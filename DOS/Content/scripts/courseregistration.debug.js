@@ -106,7 +106,7 @@ function checkForm(){
         if($("#" + getCourseID() + " > option:selected").val() == '')
             errormsg += "- Course is mandatory\n";
         if (jQuery.trim($('#candidate_nric').val()).length == 0)
-            errormsg += "- NRIC is mandatory\n";        
+            errormsg += "- NRIC is mandatory\n";
     }
     else {
 
@@ -133,7 +133,10 @@ function checkForm(){
         }
 
         if (jQuery.trim($("#candidate_postal_code").val()).length > 0 && isNaN(jQuery.trim($("#candidate_postal_code").val())))
-            errormsg += "- Postal Code is invalid\n";       
+            errormsg += "- Postal Code is invalid\n";
+
+        if (jQuery.trim($('#' + getChurchByID()).val()).length == 0)
+            errormsg += "- Church is mandatory\n";       
 
     }
 
