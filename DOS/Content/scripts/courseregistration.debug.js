@@ -38,8 +38,10 @@ $(document).ready(function () {
         $("#" + getChurchByID()).val($.cookie(getChurchByID()));
         $("#candidate_postal_code").val($.cookie('candidate_postal_code'));
         $("#candidate_blk_house").val($.cookie('candidate_blk_house'));
+        $("#hidden_candidate_blk_house").val($.cookie('candidate_blk_house'));
         $("#candidate_unit").val($.cookie('candidate_unit'));
         $("#candidate_street_address").val($.cookie('candidate_street_address'));
+        $("#hidden_candidate_street_address").val($.cookie('candidate_street_address'));
         $("#candidate_contact").val($.cookie('candidate_contact'));
         $("#candidate_email").val($.cookie('candidate_email'));
         $('#RememberMe').attr('checked', 'checked');
@@ -145,13 +147,7 @@ function checkForm(){
 	    return;
 	}
     
-    if (validateNRIC(jQuery.trim($("#candidate_nric").val().toUpperCase())) == false) {
-        if (!confirm("NRIC, " + $("#candidate_nric").val() + ", entered seem to be invalid. Are you sure it is correct?")) {
-            return;
-        }
-    }
-
-    if ($("#RememberMe").is(':checked') && getSystemMode() != "FULL") {
+   if ($("#RememberMe").is(':checked') && getSystemMode() != "FULL") {
         $.cookie('candidate_nric', $("#candidate_nric").val(), { expires: 365 });
         $.cookie(getSalutationID(), $("#" + getSalutationID()).val(), { expires: 365 });
         $.cookie('candidate_english_name', $("#candidate_english_name").val(), { expires: 365 });
@@ -190,8 +186,19 @@ function checkForm(){
         $.cookie('RememberMeCE', null, { expires: 365 });
     }
 
-    $("#candidate_course_name").val($("#" + getCourseID() + " > option:selected").text());
-    document.getElementById("maindiv").style.display = "none";
-    document.getElementById("loadingdiv").style.display = "block";    
-	$("#" + getFormID()).submit();
+
+    domwindow = dhtmlmodal.open("Agreement", 'ajax', "/membership.mvc/displayCourseAgreement", "Agreement", 'width=800px,height=300px,center=1,resize=1,scrolling=1');
+    domwindow.onclose = function () { //Define custom code to run when window is closed
+        if (agreeordisagree == 'agree') {
+            $("#candidate_course_name").val($("#" + getCourseID() + " > option:selected").text());
+            document.getElementById("maindiv").style.display = "none";
+            document.getElementById("loadingdiv").style.display = "block";
+            $("#" + getFormID()).submit();
+        }
+        return true;
+    }
+
+        
 }
+
+var agreeordisagree = "disagree";

@@ -21,7 +21,15 @@
     <script type="text/javascript" src="/Content/scripts/courseregistration.min.js"></script>
     <script type="text/javascript" src="/Content/scripts/common_function.min.js"></script>
     <script type="text/javascript" src="/Content/scripts/navigateAway.min.js"></script>
-<%}%>    
+<%}%>
+
+<!-- modal windows scripts   -->
+<link rel="stylesheet" href="/Content/css/dhtmlwindow.css" type="text/css" />
+<script type="text/javascript" src="/Content/scripts/dhtmlwindow.min.js"></script>
+<link rel="stylesheet" href="/Content/css/modal.css" type="text/css" />
+<script type="text/javascript" src="/Content/scripts/modal.min.js"></script>
+<!-- modal windows scripts   -->
+    
 <script language="C#" runat="server">
 
     void loadOccpation(Object Sender, EventArgs e)
@@ -31,20 +39,20 @@
         candidate_occupation.Items.Add(item);
         for (int x = 0; x < res.Count; x++)
         {
-            if (((string)Session["SystemMode"]).ToUpper() != "FULL")
-            {
-                item = new ListItem(res.ElementAt(x).OccupationName, res.ElementAt(x).OccupationName);
-                if (((string)ViewData["candidate_occupation"]) == res.ElementAt(x).OccupationName)
-                    item.Selected = true;
-                candidate_occupation.Items.Add(item);
-            }
-            else
-            {
-                item = new ListItem(res.ElementAt(x).OccupationName, res.ElementAt(x).OccupationID.ToString());
+            //if (((string)Session["SystemMode"]).ToUpper() != "FULL")
+            //{
+            //    item = new ListItem(res.ElementAt(x).OccupationName, res.ElementAt(x).OccupationName);
+            //    if (((string)ViewData["candidate_occupation"]) == res.ElementAt(x).OccupationName)
+            //        item.Selected = true;
+            //    candidate_occupation.Items.Add(item);
+            //}
+            //else
+            //{
+                item = new ListItem(res.ElementAt(x).OccupationName, res.ElementAt(x).OccupationID.ToString() + "~" + res.ElementAt(x).OccupationName);
                 if (((string)ViewData["candidate_occupation"]) == res.ElementAt(x).OccupationID.ToString())
                     item.Selected = true;
                 candidate_occupation.Items.Add(item);
-            }
+            //}
         }
     }
 
@@ -55,20 +63,20 @@
         candidate_education.Items.Add(item);
         for (int x = 0; x < res.Count; x++)
         {
-            if (((string)Session["SystemMode"]).ToUpper() != "FULL")
-            {
-                item = new ListItem(res.ElementAt(x).EducationName, res.ElementAt(x).EducationName);
-                if (((string)ViewData["candidate_education"]) == res.ElementAt(x).EducationName)
-                    item.Selected = true;
-                candidate_education.Items.Add(item);
-            }
-            else
-            {
-                item = new ListItem(res.ElementAt(x).EducationName, res.ElementAt(x).EducationID.ToString());
+            //if (((string)Session["SystemMode"]).ToUpper() != "FULL")
+            //{
+            //    item = new ListItem(res.ElementAt(x).EducationName, res.ElementAt(x).EducationName);
+            //    if (((string)ViewData["candidate_education"]) == res.ElementAt(x).EducationName)
+            //        item.Selected = true;
+            //    candidate_education.Items.Add(item);
+            //}
+            //else
+            //{
+                item = new ListItem(res.ElementAt(x).EducationName, res.ElementAt(x).EducationID.ToString() + "~" + res.ElementAt(x).EducationName);
                 if (((string)ViewData["candidate_education"]) == res.ElementAt(x).EducationID.ToString())
                     item.Selected = true;
                 candidate_education.Items.Add(item);
-            }
+            //}
         }
     }
 
@@ -93,20 +101,20 @@
         candidate_salutation.Items.Add(item);
         for (int x = 0; x < res.Count; x++)
         {
-            if (((string)Session["SystemMode"]).ToUpper() != "FULL")
-            {
-                item = new ListItem(res.ElementAt(x).SalutationName, res.ElementAt(x).SalutationName);
-                if (((string)ViewData["candidate_salutation"]) == res.ElementAt(x).SalutationName)
-                    item.Selected = true;
-                candidate_salutation.Items.Add(item);
-            }
-            else
-            {
-                item = new ListItem(res.ElementAt(x).SalutationName, res.ElementAt(x).SalutationID.ToString());
+            //if (((string)Session["SystemMode"]).ToUpper() != "FULL")
+            //{
+            //    item = new ListItem(res.ElementAt(x).SalutationName, res.ElementAt(x).SalutationName);
+            //    if (((string)ViewData["candidate_salutation"]) == res.ElementAt(x).SalutationName)
+            //        item.Selected = true;
+            //    candidate_salutation.Items.Add(item);
+            //}
+            //else
+            //{
+                item = new ListItem(res.ElementAt(x).SalutationName, res.ElementAt(x).SalutationID.ToString() + "~" + res.ElementAt(x).SalutationName);
                 if (((string)ViewData["candidate_salutation"]) == res.ElementAt(x).SalutationID.ToString())
                     item.Selected = true;
                 candidate_salutation.Items.Add(item);
-            }
+            //}
         }
     }
 
@@ -129,21 +137,21 @@
                 candidate_nationality.Items.Add(item);
             }
 
-            if (((string)Session["SystemMode"]).ToUpper() != "FULL")
-            {
-                item = new ListItem(res.ElementAt(x).CountryName, res.ElementAt(x).CountryName);
-                if (((string)ViewData["candidate_nationality"]) == res.ElementAt(x).CountryName)
-                    item.Selected = true;
-                candidate_nationality.Items.Add(item);
-            }
-            else
-            {
+            //if (((string)Session["SystemMode"]).ToUpper() != "FULL")
+            //{
+            //    item = new ListItem(res.ElementAt(x).CountryName, res.ElementAt(x).CountryName);
+            //    if (((string)ViewData["candidate_nationality"]) == res.ElementAt(x).CountryName)
+            //        item.Selected = true;
+            //    candidate_nationality.Items.Add(item);
+            //}
+            //else
+            //{
 
-                item = new ListItem(res.ElementAt(x).CountryName, res.ElementAt(x).CountryID.ToString());
+                item = new ListItem(res.ElementAt(x).CountryName, res.ElementAt(x).CountryID.ToString() + "~" + res.ElementAt(x).CountryName);
                 if (((string)ViewData["candidate_nationality"]) == res.ElementAt(x).CountryID.ToString())
                     item.Selected = true;
                 candidate_nationality.Items.Add(item);
-            }
+            //}
         }
     }
 
@@ -154,20 +162,20 @@
         church.Items.Add(item);
         for (int x = 0; x < res.Count; x++)
         {
-            if (((string)Session["SystemMode"]).ToUpper() != "FULL")
-            {
-                item = new ListItem(res.ElementAt(x).ParishName, res.ElementAt(x).ParishName);
-                if (((string)ViewData["candidate_church"]) == res.ElementAt(x).ParishName)
-                    item.Selected = true;
-                church.Items.Add(item);
-            }
-            else
-            {
-                item = new ListItem(res.ElementAt(x).ParishName, res.ElementAt(x).ParishID.ToString());
+            //if (((string)Session["SystemMode"]).ToUpper() != "FULL")
+            //{
+            //    item = new ListItem(res.ElementAt(x).ParishName, res.ElementAt(x).ParishName);
+            //    if (((string)ViewData["candidate_church"]) == res.ElementAt(x).ParishName)
+            //        item.Selected = true;
+            //    church.Items.Add(item);
+            //}
+            //else
+            //{
+            item = new ListItem(res.ElementAt(x).ParishName, res.ElementAt(x).ParishID.ToString() + "~" + res.ElementAt(x).ParishName);
                 if (res.ElementAt(x).ParishID.ToString() == (string)ViewData["candidate_church"])
                     item.Selected = true;
                 church.Items.Add(item);
-            }            
+            //}            
         }
     }
 
@@ -457,7 +465,7 @@
                                 <div class="left">
 			                        <input style=" width:100px"  id="candidate_blk_house" name="candidate_blk_house" class="element text medium" <%=getTextfieldLength("tb_visitors","AddressHouseBlk")%> value="<%= (string)ViewData["candidate_blk_house"] %>" <%=getAutoPostalCode() %> type="text" size="20" >
 		                            <label class="makesmall" for="element_5_6">BLK / House</label>
-                                    <input type="hidden" id="hidden_candidate_blk_house" name="candidate_blk_house" value="<%= (string)ViewData["candidate_blk_house"] %>" <%=getAutoPostalCodeHiddenField()%> />
+                                    <input type="hidden" id="hidden_candidate_blk_house" name="hidden_candidate_blk_house" value="<%= (string)ViewData["candidate_blk_house"] %>" <%=getAutoPostalCodeHiddenField()%> />
 		                        </div>
 		                        <div class="right">
                                     <input style=" width:100px" id="candidate_unit" name="candidate_unit" class="element text medium" <%=getTextfieldLength("tb_visitors","AddressUnit")%> value="<%= (string)ViewData["candidate_unit"] %>" type="text" size="20">
@@ -466,7 +474,7 @@
                                 <div>
 			                        <input style=" width:350px" id="candidate_street_address" name="candidate_street_address" class="element text medium" <%=getTextfieldLength("tb_visitors","AddressStreet")%> value="<%= (string)ViewData["candidate_street_address"] %>" <%=getAutoPostalCode() %> type="text" size="20" >
 			                        <label class="makesmall" for="element_5_1">Street Address</label>
-                                    <input type="hidden" id="hidden_candidate_street_address" name="candidate_street_address" value="<%= (string)ViewData["candidate_street_address"] %>" <%=getAutoPostalCodeHiddenField()%> />
+                                    <input type="hidden" id="hidden_candidate_street_address" name="hidden_candidate_street_address" value="<%= (string)ViewData["candidate_street_address"] %>" <%=getAutoPostalCodeHiddenField()%> />
 		                        </div> 
 		                        </li>
                         </td>

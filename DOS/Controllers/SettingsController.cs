@@ -10,6 +10,7 @@ using System.IO;
 using System.Net;
 using System.Diagnostics;
 using System.Threading;
+using System.Net.Mail;
 
 namespace DOS.Controllers
 {
@@ -25,27 +26,108 @@ namespace DOS.Controllers
         {
             serverSideProcessMsg = "";
             Thread t1 = new Thread(ExecuteSyncDBJob);
-            t1.Start();
+            t1.Start(new string[] { 
+                Session["ErrorRecipients"].ToString(),
+                Session["SMTPAccount"].ToString(),
+                Session["SMTPAddress"].ToString(),
+                Session["SMTPAccountPassword"].ToString(),
+            });
             return View("simplehtml");
         }
 
         private void ExecuteSyncDBJob(object args)
         {
+            string[] obj = (string[])args;
+
             XElement xmlDoc = sql_conn.usp_GetAllSettingsInXML().ElementAt(0).XML;
             IEnumerable<usp_getAllSettingResult> res = sql_conn.usp_getAllSetting().ToList();
-            for (int x = 0; x < res.Count(); x++)
+            serverSideProcessMsg = "10";
+            int count = 10;
+            
+            string url = "https://" + res.ElementAt(0).ExternalDBIP;
+            for (int b = 0; b < xmlDoc.Elements().Count(); b++)
             {
-                string url = "https://" + res.ElementAt(x).ExternalDBIP + "/settings.mvc/SyncxmlDoc";
-                if(HttpPost(url, xmlDoc.ToString()) == "Error"){
+                XElement temp = new XElement("All");
+                temp.Add(xmlDoc.Elements().ElementAt(b));
+                string updateResult = HttpPost(url + "/settings.mvc/SyncxmlDoc", temp.ToString(), xmlDoc.Elements().ElementAt(b).Name.ToString());
+                if (updateResult == "Error")
+                {
                     serverSideProcessMsg = "Error";
                     return;
                 }
+                count++; count++;
+                serverSideProcessMsg = count.ToString();
             }
-            
+            count = 50;
+            serverSideProcessMsg = "50";
+
+            XElement tempRec = new XElement("All");
+            tempRec.Add(new XElement("userid", "getallrecords"));
+            tempRec.Add(new XElement("password", "t@@uyawamuv7darachu$ran2dewa#rE-h3sec3a?an9za_uwRepr8?ab#s9u+$#t"));
+
+            string recResult = HttpPost(url + "/settings.mvc/GetVisitorMemberForSync", tempRec.ToString(), "nil");
+            IEnumerable<usp_SyncVisitorAndMembersResult> syncRes = sql_conn.usp_SyncVisitorAndMembers(XElement.Parse(recResult)).ToList();
+            int countincrement = 50 / syncRes.Count();
+            for (int y = 0; y < syncRes.Count(); y++)
+            {
+                if (syncRes.ElementAt(y).Type == "New" && (bool)syncRes.ElementAt(y).Successful)
+                {
+                    downloadAndDeleteRemoteStorageFile(syncRes.ElementAt(y).PhotoFile, url);
+                    new WebClient().DownloadString(url + "/settings.mvc/SyncDeleteMember?NRIC=" + syncRes.ElementAt(y).NRIC);
+                }
+                else if (syncRes.ElementAt(y).Type == "Update" && (bool)syncRes.ElementAt(y).Successful)
+                {
+                    new WebClient().DownloadString(url + "/settings.mvc/SyncDeleteVisitor?NRIC=" + syncRes.ElementAt(y).NRIC);
+                }
+                count = count + countincrement;
+                serverSideProcessMsg = count.ToString();
+                if (!(bool)syncRes.ElementAt(y).Successful)
+                {
+                    SendSyncDataEmail(recResult, syncRes.ElementAt(y).NRIC, obj[0], obj[1], obj[2], obj[3]);
+                }
+            }
+
+
+            serverSideProcessMsg = "100";
+            System.Threading.Thread.Sleep(2000);
             serverSideProcessMsg = "Updated";
         }
 
-        public static string HttpPost(string url, string files)
+        private void SendSyncDataEmail(string xml, string nric, string ErrorRecipient, string SMTPAccount, string SMTPAddress, string SMTPAccountPassword)
+        {
+            MailMessage mail = new MailMessage();
+            mail.IsBodyHtml = false;
+
+            mail.From = new MailAddress(SMTPAccount);
+            string[] emailTo = ErrorRecipient.Split(';');
+            for (int x = 0; x < emailTo.Length; x++)
+            {
+                if (emailTo[x].Trim().Length != 0)
+                    mail.To.Add("<" + emailTo[x].Trim() + ">");
+            }
+
+            mail.Subject = "SAMIS Sync Data Error, NRIC: " + nric;        // put subject here	        
+            mail.Body = xml;
+
+            SmtpClient smtpclient = new SmtpClient(SMTPAddress);
+            smtpclient.Credentials = new NetworkCredential(SMTPAccount, SMTPAccountPassword);
+            smtpclient.EnableSsl = true;
+            smtpclient.Port = 587;
+
+            smtpclient.Send(mail);
+        }
+        
+
+        private void downloadAndDeleteRemoteStorageFile(string filename, string host)
+        {
+            
+            WebClient client = new WebClient();
+            client.DownloadFile(host + "/UploadFile.mvc/downloadPhoto?guid=&filename=" + filename, "C:\\tempfile\\icphoto\\" + filename);
+            client.DownloadString(host + "/UploadFile.mvc/deleteRemoteStoragePhoto?filename=" + filename);
+            
+        }
+
+        public static string HttpPost(string url, string files, string type)
         {
             string boundary = "----------------------------" + DateTime.Now.Ticks.ToString("x");
 
@@ -73,7 +155,9 @@ namespace DOS.Controllers
             formitembytes = System.Text.Encoding.UTF8.GetBytes(formitem);
             memStream.Write(formitembytes, 0, formitembytes.Length);
 
-
+            formitem = string.Format(formdataTemplate, "SyncType", type);
+            formitembytes = System.Text.Encoding.UTF8.GetBytes(formitem);
+            memStream.Write(formitembytes, 0, formitembytes.Length);
 
             memStream.Write(boundarybytes, 0, boundarybytes.Length);
 
@@ -116,6 +200,18 @@ namespace DOS.Controllers
             return result;
         }
 
+        public ActionResult SyncDeleteMember(string NRIC)
+        {
+            sql_conn.usp_removeMember(NRIC, "Temp");
+            return View("simplehtml");
+        }
+
+        public ActionResult SyncDeleteVisitor(string NRIC)
+        {
+            sql_conn.usp_removeMember(NRIC, "Visitor");
+            return View("simplehtml");
+        }
+
         public ActionResult checkSyncAllSettings()
         {
             ViewData["result"] = serverSideProcessMsg;
@@ -139,9 +235,82 @@ namespace DOS.Controllers
                 XElement xml = XElement.Parse(HttpUtility.UrlDecode(value));
                 string userid = Request.Form["UserID"];
                 string password = Request.Form["Password"];
+                string SyncType = Request.Form["SyncType"];
 
                 if (userid == "samissync" && password == "Fe6eyuf3a2U8hah")
-                    sql_conn.usp_SyncAllSettings(xml);
+                {
+                    string result = "";
+                    switch (SyncType)
+                    {
+                        case "AllChurchArea":
+                            result = sql_conn.usp_SyncAllSettings_Area(xml).ElementAt(0).Result;
+                            break;
+                        case "AllCongregation":
+                            result = sql_conn.usp_SyncAllSettings_Congregation(xml).ElementAt(0).Result;
+                            break;
+                        case "AllCountry":
+                            result = sql_conn.usp_SyncAllSettings_Country(xml).ElementAt(0).Result;
+                            break;
+                        case "AllDialect":
+                            result = sql_conn.usp_SyncAllSettings_Dialect(xml).ElementAt(0).Result;
+                            break;
+                        case "AllEducation":
+                            result = sql_conn.usp_SyncAllSettings_Education(xml).ElementAt(0).Result;
+                            break;
+                        case "AllFileType":
+                            result = sql_conn.usp_SyncAllSettings_FileType(xml).ElementAt(0).Result;
+                            break;
+                        case "AllFamilyType":
+                            result = sql_conn.usp_SyncAllSettings_FamilyType(xml).ElementAt(0).Result;
+                            break;
+                        case "AllLanguage":
+                            result = sql_conn.usp_SyncAllSettings_Language(xml).ElementAt(0).Result;
+                            break;
+                        case "AllMaritalStatus":
+                            result = sql_conn.usp_SyncAllSettings_MaritalStatus(xml).ElementAt(0).Result;
+                            break;
+                        case "AllOccupation":
+                            result = sql_conn.usp_SyncAllSettings_Occupation(xml).ElementAt(0).Result;
+                            break;
+                        case "AllParish":
+                            result = sql_conn.usp_SyncAllSettings_Parish(xml).ElementAt(0).Result;
+                            break;
+                        case "AllSalutation":
+                            result = sql_conn.usp_SyncAllSettings_Salutation(xml).ElementAt(0).Result;
+                            break;
+                        case "AllStyle":
+                            result = sql_conn.usp_SyncAllSettings_Style(xml).ElementAt(0).Result;
+                            break;
+                        case "AllPostalArea":
+                            result = sql_conn.usp_SyncAllSettings_PostalArea(xml).ElementAt(0).Result;
+                            break;
+                        case "AllBusGroupCluster":
+                            result = sql_conn.usp_SyncAllSettings_BusGroupCluster(xml).ElementAt(0).Result;
+                            break;
+                        case "AllClubGroup":
+                            result = sql_conn.usp_SyncAllSettings_ClubGroup(xml).ElementAt(0).Result;
+                            break;
+                        case "AllRace":
+                            result = sql_conn.usp_SyncAllSettings_Race(xml).ElementAt(0).Result;
+                            break;
+                        case "AllReligion":
+                            result = sql_conn.usp_SyncAllSettings_Religion(xml).ElementAt(0).Result;
+                            break;
+                        case "AllSchool":
+                            result = sql_conn.usp_SyncAllSettings_School(xml).ElementAt(0).Result;
+                            break;
+                        case "AllCourse":
+                            result = sql_conn.usp_SyncAllSettings_Course(xml).ElementAt(0).Result;
+                            break;
+                    }
+
+                    if (result != "Updated")
+                    {
+                        ViewData["result"] = "Error";
+                        return View("simplehtml");
+                    }
+
+                }
                 else
                 {
                     ViewData["result"] = "Error";
@@ -155,6 +324,41 @@ namespace DOS.Controllers
             }
 
             ViewData["result"] = "Updated";
+            return View("simplehtml");
+        }
+
+        [ErrorHandler]
+        public ActionResult GetVisitorMemberForSync(string xmlDoc)
+        {
+            XElement records = new XElement("empty");
+            if (Request.Files.Count == 1)
+            {
+                Stream input = Request.Files[0].InputStream;
+                byte[] buffer = new byte[Request.Files[0].ContentLength];
+                int len;
+                string value = "";
+                while ((len = input.Read(buffer, 0, buffer.Length)) > 0)
+                {
+                    value += System.Text.ASCIIEncoding.ASCII.GetString(buffer);
+                }
+                XElement xml = XElement.Parse(HttpUtility.UrlDecode(value));
+                string userid = Request.Form["UserID"];
+                string password = Request.Form["Password"];
+                string SyncType = Request.Form["SyncType"];
+
+                string recordUserid = xml.Element("userid").Value;
+                string recordpassword = xml.Element("password").Value;
+
+                if (userid == "samissync" && password == "Fe6eyuf3a2U8hah" && recordUserid == "getallrecords" && recordpassword == "t@@uyawamuv7darachu$ran2dewa#rE-h3sec3a?an9za_uwRepr8?ab#s9u+$#t")
+                {
+                    records = sql_conn.usp_getRecordForSync().ElementAt(0).SyncData;
+                }
+
+            }
+
+
+
+            ViewData["result"] = records.ToString();
             return View("simplehtml");
         }
 

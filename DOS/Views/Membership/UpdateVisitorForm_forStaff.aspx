@@ -328,7 +328,7 @@
                     </tr>
                     <tr>
                         <td colspan="2">
-                            <table class="noborderstyle" border=0>
+                            <table class="noborderstyle">
                                 <tr>
                                     <td colspan="3">
                                         <label class="description" for="element_5">
@@ -369,8 +369,8 @@
                                 <table border="1" id="VisitorCaseTable" style=" width:80%; padding:0; margin-left:0%; margin-right:0%;">
 			                        <thead>
 			                            <tr class="header">
-                                            <th width=8% nowrap="nowrap" style="font-size:12px">Date</th>
-				                            <th width=3% nowrap="nowrap" style="font-size:12px">Attended</th>				        
+                                            <th width="60px" nowrap="nowrap" style="font-size:12px">Date</th>
+				                            <th width="60px" nowrap="nowrap" style="font-size:12px">Attended</th>				        
                                         </tr>
 		                            </thead>
 		                            <tbody>
@@ -531,7 +531,7 @@
         
         
         <div style="clear:both; width:180px; text-align:left; padding-left:15px"><br />
-            <% if (canAccess("Update Participant")){%>
+            <% if (canAccess("Update Visitor")){%>
                 <input id="Submit" onclick="checkAndSubmit();" type="button" value="Update" />        
             <%}else{%>
                 <input id="Button1" disabled="disabled" type="button" value="Update" />

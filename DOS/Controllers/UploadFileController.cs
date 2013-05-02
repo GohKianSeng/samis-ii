@@ -11,6 +11,9 @@ using DOS.Models;
 using System.Security.Cryptography;
 using System.Text;
 using System.IO;
+using CloudinaryDotNet.Actions;
+using CloudinaryDotNet;
+using System.Net;
 
 namespace DOS.Controllers
 {
@@ -22,42 +25,48 @@ namespace DOS.Controllers
         [ErrorHandler]
         public ActionResult SaveFile(string guid)
         {
-            string saveas = Session["temp_uploadfilesavedlocation"].ToString() + "temp_" + guid + "_" + getFilename();
-            
-            if (Request.Params["qqfile"] != null)
+            string filename = getFilename();
+            if (Request.Params["qqfile"] != null)//for firefox n chrome
             {
-                if (((string)Session["SystemMode"]).ToUpper() != "FULL")
-                {
-                    Session["FileIOStream"] = CopyStreamToBytes(Request.InputStream);
-                    Session["FileName"] = getFilename();
+                if (SaveFileNow(filename, Request.InputStream.Length, Request.InputStream, guid))
                     ViewData["result"] = "1";
-                }
-                else{
-                    Stream file = System.IO.File.OpenWrite(saveas);
-                    CopyStreamToFile(Request.InputStream, file);
-                    ViewData["result"] = "1";
-                }
-            }
-            else if (Request.Files.Count > 0)
-            {
-                var receivedfile = Request.Files[0];
-                if (((string)Session["SystemMode"]).ToUpper() != "FULL")
-                {
-                    Session["FileIOStream"] = CopyStreamToBytes(receivedfile.InputStream);
-                    Session["FileName"] = getFilename();
-                    ViewData["result"] = "1";
-                }
                 else
-                {
-                    receivedfile.SaveAs(saveas);
+                    ViewData["result"] = "0";
+            }
+            else if (Request.Files.Count > 0)// for IE
+            {
+                if (SaveFileNow(filename, Request.Files[0].InputStream.Length, Request.Files[0].InputStream, guid))
                     ViewData["result"] = "1";
-                }
+                else
+                    ViewData["result"] = "0";                                
             }
 
             return View("simplehtml");
         }
 
-        public string getFilename()
+        private bool SaveFileNow(string filename, long length, Stream input, string guid)
+        {
+            Session["FileIOStream"] = CopyStreamToBytes(input, length);
+            Session["FileName"] = filename;
+            Session["GUID"] = guid;
+
+            if (Session["RemoteStorage"].ToString().ToUpper() == "ON")
+            {
+                MemoryStream memoryStream = new MemoryStream((byte[])Session["FileIOStream"]);
+                if (new RemoteStorage((string)Session["StorageCloudName"], (string)Session["StorageAccessKey"], (string)Session["StorageSecretKey"]).saveToRemoteStorage("temp_" + guid + "_" + filename, (byte[])Session["FileIOStream"]))
+                    return true;
+                else
+                    return false;
+            }
+            else
+            {
+                string saveas = Session["temp_uploadfilesavedlocation"].ToString() + "temp_" + guid + "_" + filename;
+                CopyBytesToFile((byte[])Session["FileIOStream"], saveas);
+                return true;
+            }
+        }
+
+        private string getFilename()
         {
             if (Request.Params["qqfile"] != null)
                 return Request.Params["qqfile"];
@@ -69,21 +78,16 @@ namespace DOS.Controllers
             return "";
         }
 
-        public void CopyStreamToFile(Stream input, Stream filename)
+        public void CopyBytesToFile(byte[] input, string filename)
         {
-            byte[] buffer = new byte[Request.ContentLength];
-            int len;
-            while ((len = input.Read(buffer, 0, buffer.Length)) > 0)
-            {
-                filename.Write(buffer, 0, len);
-            }
-            filename.Close();
-            input.Close();
+            FileStream _FileStream = new FileStream(filename, System.IO.FileMode.Create, System.IO.FileAccess.Write);
+            _FileStream.Write(input, 0, input.Length);
+            _FileStream.Close();           
         }
 
-        public byte[] CopyStreamToBytes(Stream input)
+        public byte[] CopyStreamToBytes(Stream input, long length)
         {
-            byte[] buffer = new byte[Request.ContentLength];
+            byte[] buffer = new byte[length];
             int len;
             while ((len = input.Read(buffer, 0, buffer.Length)) > 0)
             {
@@ -187,13 +191,17 @@ namespace DOS.Controllers
         {
             try
             {
-                if (((string)Session["SystemMode"]).ToUpper() != "FULL")
+                if (guid == (string)Session["GUID"] && filename == (string)Session["FileName"])
                 {
                     return File((byte[])Session["FileIOStream"], MimeType(filename), filename);
                 }
+                
+                if (Session["RemoteStorage"].ToString().ToUpper() == "ON")
+                {
+                    return File(new RemoteStorage((string)Session["StorageCloudName"], (string)Session["StorageAccessKey"], (string)Session["StorageSecretKey"]).loadDataFromRemoteStorage(filename, guid), MimeType(filename), filename);
+                }
                 else
                 {
-
                     filename = HttpUtility.UrlDecode(filename);
                     string path1 = Session["icphotolocation"].ToString() + guid + "_" + filename;
                     string path2 = Session["temp_uploadfilesavedlocation"].ToString() + "temp_" + guid + "_" + filename;
@@ -206,6 +214,7 @@ namespace DOS.Controllers
                         return null;
                     }
                 }
+                
             }
             catch (Exception e)
             {
@@ -218,25 +227,17 @@ namespace DOS.Controllers
         {
             try
             {
-                if (((string)Session["SystemMode"]).ToUpper() != "FULL")
-                {
-                    return File((byte[])Session["FileIOStream"], MimeType(filename), filename);
-                }
+                filename = HttpUtility.UrlDecode(filename);
+                string path1 = Session["icphotolocation"].ToString() + filename;
+                string path2 = Session["temp_uploadfilesavedlocation"].ToString() + "temp_" +  filename;
+                if (System.IO.File.Exists(path1))
+                    return File(ReadFile(path1), MimeType(filename), filename);
+                else if (System.IO.File.Exists(path2))
+                    return File(ReadFile(path2), MimeType(filename), filename);
                 else
                 {
-
-                    filename = HttpUtility.UrlDecode(filename);
-                    string path1 = Session["icphotolocation"].ToString() + filename;
-                    string path2 = Session["temp_uploadfilesavedlocation"].ToString() + "temp_" +  filename;
-                    if (System.IO.File.Exists(path1))
-                        return File(ReadFile(path1), MimeType(filename), filename);
-                    else if (System.IO.File.Exists(path2))
-                        return File(ReadFile(path2), MimeType(filename), filename);
-                    else
-                    {
-                        return null;
-                    }
-                }
+                    return null;
+                }                
             }
             catch (Exception e)
             {
@@ -244,7 +245,20 @@ namespace DOS.Controllers
             }
         }
 
-        
+        [ErrorHandler]
+        public ActionResult deleteRemoteStoragePhoto(string filename)
+        {
+            try
+            {
+                new RemoteStorage((string)Session["StorageCloudName"], (string)Session["StorageAccessKey"], (string)Session["StorageSecretKey"]).deleteDataFromRemoteStorage(filename);
+                ViewData["result"] = "OK";
+                return View("simplehtml");
+            }
+            catch (Exception e)
+            {
+                return null;
+            }
+        }
 
         public byte[] ReadFile(string filePath)
         {

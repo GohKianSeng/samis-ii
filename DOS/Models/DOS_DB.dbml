@@ -11,12 +11,6 @@
       <Column Name="Result" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
     </ElementType>
   </Function>
-  <Function Name="dbo.usp_updateVistor" Method="usp_updateVistor">
-    <Parameter Name="updateXML" Type="System.Xml.Linq.XElement" DbType="Xml" />
-    <ElementType Name="usp_updateVistorResult">
-      <Column Name="Result" Type="System.String" DbType="VarChar(7) NOT NULL" CanBeNull="false" />
-    </ElementType>
-  </Function>
   <Function Name="dbo.usp_addNewCityKid" Method="usp_addNewCityKid">
     <Parameter Name="newXML" Type="System.Xml.Linq.XElement" DbType="Xml" />
     <ElementType Name="usp_addNewCityKidResult">
@@ -50,12 +44,6 @@
     <Parameter Name="courseid" Type="System.Int32" DbType="Int" />
     <ElementType Name="usp_addNewCourseMemberParticipantAndAttendanceResult">
       <Column Name="Result" Type="System.String" DbType="VarChar(185)" CanBeNull="true" />
-    </ElementType>
-  </Function>
-  <Function Name="dbo.usp_addNewMember" Method="usp_addNewMember">
-    <Parameter Name="newXML" Type="System.Xml.Linq.XElement" DbType="Xml" />
-    <ElementType Name="usp_addNewMemberResult">
-      <Column Name="Result" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
     </ElementType>
   </Function>
   <Function Name="dbo.usp_addNewMinistry" Method="usp_addNewMinistry">
@@ -1256,32 +1244,6 @@
       <Column Name="Result" Type="System.String" DbType="VarChar(185)" CanBeNull="true" />
     </ElementType>
   </Function>
-  <Function Name="dbo.usp_addNewCourseVisitorParticipant" Method="usp_addNewCourseVisitorParticipant">
-    <Parameter Name="nric" Type="System.String" DbType="VarChar(10)" />
-    <Parameter Name="course" Type="System.String" DbType="VarChar(10)" />
-    <Parameter Name="salutation" Type="System.String" DbType="VarChar(10)" />
-    <Parameter Name="english_name" Type="System.String" DbType="VarChar(50)" />
-    <Parameter Name="dob" Type="System.DateTime" DbType="Date" />
-    <Parameter Name="gender" Type="System.String" DbType="VarChar(1)" />
-    <Parameter Name="education" Type="System.String" DbType="VarChar(10)" />
-    <Parameter Name="nationality" Type="System.String" DbType="VarChar(10)" />
-    <Parameter Name="occupation" Type="System.String" DbType="VarChar(10)" />
-    <Parameter Name="postal_code" Type="System.String" DbType="VarChar(6)" />
-    <Parameter Name="blk_house" Type="System.String" DbType="VarChar(10)" />
-    <Parameter Name="street_address" Type="System.String" DbType="VarChar(1000)" />
-    <Parameter Name="unit" Type="System.String" DbType="VarChar(10)" />
-    <Parameter Name="contact" Type="System.String" DbType="VarChar(15)" />
-    <Parameter Name="email" Type="System.String" DbType="VarChar(100)" />
-    <Parameter Name="church" Type="System.Int32" DbType="Int" />
-    <Parameter Name="church_others" Type="System.String" DbType="VarChar(100)" />
-    <Parameter Name="UserID" Parameter="userID" Type="System.String" DbType="VarChar(50)" />
-    <ElementType Name="usp_addNewCourseVisitorParticipantResult">
-      <Column Name="Result" Type="System.String" DbType="VarChar(10) NOT NULL" CanBeNull="false" />
-      <Column Name="SalutationName" Type="System.String" DbType="VarChar(1) NOT NULL" CanBeNull="false" />
-      <Column Name="EnglishName" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
-      <Column Name="CourseName" Type="System.String" DbType="VarChar(1) NOT NULL" CanBeNull="false" />
-    </ElementType>
-  </Function>
   <Function Name="dbo.usp_getAllEmailInXML" Method="usp_getAllEmailInXML">
     <ElementType Name="usp_getAllEmailInXMLResult">
       <Column Name="XML" Type="System.Xml.Linq.XElement" DbType="Xml" CanBeNull="true" />
@@ -1337,6 +1299,164 @@
     <Parameter Name="Verifier" Parameter="verifier" Type="System.String" DbType="VarChar(50)" />
     <ElementType Name="usp_UpdateAssignedModulesFunctionsResult">
       <Column Name="Result" Type="System.String" DbType="VarChar(13) NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.usp_addNewMember" Method="usp_addNewMember">
+    <Parameter Name="newXML" Type="System.Xml.Linq.XElement" DbType="Xml" />
+    <Parameter Name="Result" Parameter="result" Type="System.String" DbType="VarChar(10)" Direction="InOut" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.usp_updateVistor" Method="usp_updateVistor">
+    <Parameter Name="updateXML" Type="System.Xml.Linq.XElement" DbType="Xml" />
+    <Parameter Name="Result" Parameter="result" Type="System.String" DbType="VarChar(20)" Direction="InOut" />
+    <ElementType Name="usp_updateVistorResult">
+      <Column Name="Result" Type="System.Decimal" DbType="Decimal(38,0)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.usp_addNewCourseVisitorParticipant" Method="usp_addNewCourseVisitorParticipant">
+    <Parameter Name="Visitor" Parameter="visitor" Type="System.Xml.Linq.XElement" DbType="Xml" />
+    <Parameter Name="course" Type="System.String" DbType="VarChar(10)" />
+    <Parameter Name="FinalResult" Parameter="finalResult" Type="System.String" DbType="VarChar(10)" Direction="InOut" />
+    <Parameter Name="FinalSalutation" Parameter="finalSalutation" Type="System.String" DbType="VarChar(10)" Direction="InOut" />
+    <Parameter Name="FinalEnglishName" Parameter="finalEnglishName" Type="System.String" DbType="VarChar(50)" Direction="InOut" />
+    <Parameter Name="FinalCourseName" Parameter="finalCourseName" Type="System.String" DbType="VarChar(100)" Direction="InOut" />
+    <ElementType Name="usp_addNewCourseVisitorParticipantResult">
+      <Column Name="Result" Type="System.Decimal" DbType="Decimal(38,0)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.usp_getRecordForSync" Method="usp_getRecordForSync">
+    <ElementType Name="usp_getRecordForSyncResult">
+      <Column Name="SyncData" Type="System.Xml.Linq.XElement" DbType="Xml" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.usp_SyncAllSettings_Area" Method="usp_SyncAllSettings_Area">
+    <Parameter Name="XML" Parameter="xML" Type="System.Xml.Linq.XElement" DbType="Xml" />
+    <ElementType Name="usp_SyncAllSettings_AreaResult">
+      <Column Name="Result" Type="System.String" DbType="VarChar(7) NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.usp_SyncAllSettings_Style" Method="usp_SyncAllSettings_Style">
+    <Parameter Name="XML" Parameter="xML" Type="System.Xml.Linq.XElement" DbType="Xml" />
+    <ElementType Name="usp_SyncAllSettings_StyleResult">
+      <Column Name="Result" Type="System.String" DbType="VarChar(7) NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.usp_SyncAllSettings_BusGroupCluster" Method="usp_SyncAllSettings_BusGroupCluster">
+    <Parameter Name="XML" Parameter="xML" Type="System.Xml.Linq.XElement" DbType="Xml" />
+    <ElementType Name="usp_SyncAllSettings_BusGroupClusterResult">
+      <Column Name="Result" Type="System.String" DbType="VarChar(7) NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.usp_SyncAllSettings_ClubGroup" Method="usp_SyncAllSettings_ClubGroup">
+    <Parameter Name="XML" Parameter="xML" Type="System.Xml.Linq.XElement" DbType="Xml" />
+    <ElementType Name="usp_SyncAllSettings_ClubGroupResult">
+      <Column Name="Result" Type="System.String" DbType="VarChar(7) NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.usp_SyncAllSettings_Congregation" Method="usp_SyncAllSettings_Congregation">
+    <Parameter Name="XML" Parameter="xML" Type="System.Xml.Linq.XElement" DbType="Xml" />
+    <ElementType Name="usp_SyncAllSettings_CongregationResult">
+      <Column Name="Result" Type="System.String" DbType="VarChar(7) NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.usp_SyncAllSettings_Country" Method="usp_SyncAllSettings_Country">
+    <Parameter Name="XML" Parameter="xML" Type="System.Xml.Linq.XElement" DbType="Xml" />
+    <ElementType Name="usp_SyncAllSettings_CountryResult">
+      <Column Name="Result" Type="System.String" DbType="VarChar(7) NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.usp_SyncAllSettings_Course" Method="usp_SyncAllSettings_Course">
+    <Parameter Name="XML" Parameter="xML" Type="System.Xml.Linq.XElement" DbType="Xml" />
+    <ElementType Name="usp_SyncAllSettings_CourseResult">
+      <Column Name="Result" Type="System.String" DbType="VarChar(7) NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.usp_SyncAllSettings_Dialect" Method="usp_SyncAllSettings_Dialect">
+    <Parameter Name="XML" Parameter="xML" Type="System.Xml.Linq.XElement" DbType="Xml" />
+    <ElementType Name="usp_SyncAllSettings_DialectResult">
+      <Column Name="Result" Type="System.String" DbType="VarChar(7) NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.usp_SyncAllSettings_Education" Method="usp_SyncAllSettings_Education">
+    <Parameter Name="XML" Parameter="xML" Type="System.Xml.Linq.XElement" DbType="Xml" />
+    <ElementType Name="usp_SyncAllSettings_EducationResult">
+      <Column Name="Result" Type="System.String" DbType="VarChar(7) NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.usp_SyncAllSettings_FamilyType" Method="usp_SyncAllSettings_FamilyType">
+    <Parameter Name="XML" Parameter="xML" Type="System.Xml.Linq.XElement" DbType="Xml" />
+    <ElementType Name="usp_SyncAllSettings_FamilyTypeResult">
+      <Column Name="Result" Type="System.String" DbType="VarChar(7) NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.usp_SyncAllSettings_FileType" Method="usp_SyncAllSettings_FileType">
+    <Parameter Name="XML" Parameter="xML" Type="System.Xml.Linq.XElement" DbType="Xml" />
+    <ElementType Name="usp_SyncAllSettings_FileTypeResult">
+      <Column Name="Result" Type="System.String" DbType="VarChar(7) NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.usp_SyncAllSettings_Language" Method="usp_SyncAllSettings_Language">
+    <Parameter Name="XML" Parameter="xML" Type="System.Xml.Linq.XElement" DbType="Xml" />
+    <ElementType Name="usp_SyncAllSettings_LanguageResult">
+      <Column Name="Result" Type="System.String" DbType="VarChar(7) NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.usp_SyncAllSettings_MaritalStatus" Method="usp_SyncAllSettings_MaritalStatus">
+    <Parameter Name="XML" Parameter="xML" Type="System.Xml.Linq.XElement" DbType="Xml" />
+    <ElementType Name="usp_SyncAllSettings_MaritalStatusResult">
+      <Column Name="Result" Type="System.String" DbType="VarChar(7) NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.usp_SyncAllSettings_Occupation" Method="usp_SyncAllSettings_Occupation">
+    <Parameter Name="XML" Parameter="xML" Type="System.Xml.Linq.XElement" DbType="Xml" />
+    <ElementType Name="usp_SyncAllSettings_OccupationResult">
+      <Column Name="Result" Type="System.String" DbType="VarChar(7) NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.usp_SyncAllSettings_Parish" Method="usp_SyncAllSettings_Parish">
+    <Parameter Name="XML" Parameter="xML" Type="System.Xml.Linq.XElement" DbType="Xml" />
+    <ElementType Name="usp_SyncAllSettings_ParishResult">
+      <Column Name="Result" Type="System.String" DbType="VarChar(7) NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.usp_SyncAllSettings_PostalArea" Method="usp_SyncAllSettings_PostalArea">
+    <Parameter Name="XML" Parameter="xML" Type="System.Xml.Linq.XElement" DbType="Xml" />
+    <ElementType Name="usp_SyncAllSettings_PostalAreaResult">
+      <Column Name="Result" Type="System.String" DbType="VarChar(7) NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.usp_SyncAllSettings_Race" Method="usp_SyncAllSettings_Race">
+    <Parameter Name="XML" Parameter="xML" Type="System.Xml.Linq.XElement" DbType="Xml" />
+    <ElementType Name="usp_SyncAllSettings_RaceResult">
+      <Column Name="Result" Type="System.String" DbType="VarChar(7) NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.usp_SyncAllSettings_Religion" Method="usp_SyncAllSettings_Religion">
+    <Parameter Name="XML" Parameter="xML" Type="System.Xml.Linq.XElement" DbType="Xml" />
+    <ElementType Name="usp_SyncAllSettings_ReligionResult">
+      <Column Name="Result" Type="System.String" DbType="VarChar(7) NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.usp_SyncAllSettings_Salutation" Method="usp_SyncAllSettings_Salutation">
+    <Parameter Name="XML" Parameter="xML" Type="System.Xml.Linq.XElement" DbType="Xml" />
+    <ElementType Name="usp_SyncAllSettings_SalutationResult">
+      <Column Name="Result" Type="System.String" DbType="VarChar(7) NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.usp_SyncAllSettings_School" Method="usp_SyncAllSettings_School">
+    <Parameter Name="XML" Parameter="xML" Type="System.Xml.Linq.XElement" DbType="Xml" />
+    <ElementType Name="usp_SyncAllSettings_SchoolResult">
+      <Column Name="Result" Type="System.String" DbType="VarChar(7) NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.usp_SyncVisitorAndMembers" Method="usp_SyncVisitorAndMembers">
+    <Parameter Name="XML" Parameter="xML" Type="System.Xml.Linq.XElement" DbType="Xml" />
+    <ElementType Name="usp_SyncVisitorAndMembersResult">
+      <Column Name="NRIC" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="Type" Type="System.String" DbType="VarChar(7)" CanBeNull="true" />
+      <Column Name="XML" Type="System.Xml.Linq.XElement" DbType="Xml" CanBeNull="true" />
+      <Column Name="Successful" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="PhotoFile" Type="System.String" DbType="VarChar(1000)" CanBeNull="true" />
     </ElementType>
   </Function>
 </Database>

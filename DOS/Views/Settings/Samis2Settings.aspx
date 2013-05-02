@@ -23,6 +23,9 @@ Settings
         <script type="text/javascript" src="/Content/scripts/samis2settings.min.js"></script>
     <%}%>
 
+    <script type="text/javascript" src="/Content/scripts/progressbar_min.js"></script>
+    <link rel="stylesheet" type="text/css" href="/Content/css/progressbar.css" />    
+
     <form AUTOCOMPLETE="off" action="" enctype="multipart/form-data" runat="server">
     <div class="container" style="width:830px">
         <ul class="tabs">
@@ -449,6 +452,13 @@ Settings
                     <tr>
                         <td><input type="button" id="updateExternalDBButton" onclick="checkAndSubmitExternalDB()" value="Update" /></td>
                         <td><div style=""><input style="float: right;" type="button" id="Button7" onclick="SyncAllSettings()" value="Sync All" /><div style="float: right; display:none" id="syncMessageDiv"><img id="syncimg" align="top" height="20px" style="" src="/Content/images/loading.gif" /> <label style=" color:Red" id="syncMessage">Synchronizing. Please wait......</label></div></div></td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <div id="progressDIV" style="width: 100%; height: 100%; margin: 0px auto;display:none">
+                                <div id="my_progress_bar_1" style="position: relative; top: 45%; margin: 0px auto;"></div>
+                            </div>
+                        </td>
                     </tr>
                 </table>
                 <div style=" overflow:auto; height:80%">

@@ -69,13 +69,6 @@ namespace DOS.Models
 			return ((ISingleResult<usp_addNewCellgroupResult>)(result.ReturnValue));
 		}
 		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.usp_updateVistor")]
-		public ISingleResult<usp_updateVistorResult> usp_updateVistor([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Xml")] System.Xml.Linq.XElement updateXML)
-		{
-			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), updateXML);
-			return ((ISingleResult<usp_updateVistorResult>)(result.ReturnValue));
-		}
-		
 		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.usp_addNewCityKid")]
 		public ISingleResult<usp_addNewCityKidResult> usp_addNewCityKid([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Xml")] System.Xml.Linq.XElement newXML)
 		{
@@ -102,13 +95,6 @@ namespace DOS.Models
 		{
 			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), nRIC, courseid);
 			return ((ISingleResult<usp_addNewCourseMemberParticipantAndAttendanceResult>)(result.ReturnValue));
-		}
-		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.usp_addNewMember")]
-		public ISingleResult<usp_addNewMemberResult> usp_addNewMember([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Xml")] System.Xml.Linq.XElement newXML)
-		{
-			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), newXML);
-			return ((ISingleResult<usp_addNewMemberResult>)(result.ReturnValue));
 		}
 		
 		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.usp_addNewMinistry")]
@@ -1052,31 +1038,6 @@ namespace DOS.Models
 			return ((ISingleResult<usp_addNewCourseVisitorParticipantAndAttendanceResult>)(result.ReturnValue));
 		}
 		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.usp_addNewCourseVisitorParticipant")]
-		public ISingleResult<usp_addNewCourseVisitorParticipantResult> usp_addNewCourseVisitorParticipant(
-					[global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(10)")] string nric, 
-					[global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(10)")] string course, 
-					[global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(10)")] string salutation, 
-					[global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(50)")] string english_name, 
-					[global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Date")] System.Nullable<System.DateTime> dob, 
-					[global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(1)")] string gender, 
-					[global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(10)")] string education, 
-					[global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(10)")] string nationality, 
-					[global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(10)")] string occupation, 
-					[global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(6)")] string postal_code, 
-					[global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(10)")] string blk_house, 
-					[global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(1000)")] string street_address, 
-					[global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(10)")] string unit, 
-					[global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(15)")] string contact, 
-					[global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(100)")] string email, 
-					[global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> church, 
-					[global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(100)")] string church_others, 
-					[global::System.Data.Linq.Mapping.ParameterAttribute(Name="UserID", DbType="VarChar(50)")] string userID)
-		{
-			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), nric, course, salutation, english_name, dob, gender, education, nationality, occupation, postal_code, blk_house, street_address, unit, contact, email, church, church_others, userID);
-			return ((ISingleResult<usp_addNewCourseVisitorParticipantResult>)(result.ReturnValue));
-		}
-		
 		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.usp_getAllEmailInXML")]
 		public ISingleResult<usp_getAllEmailInXMLResult> usp_getAllEmailInXML()
 		{
@@ -1146,6 +1107,187 @@ namespace DOS.Models
 			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), xML, verifier);
 			return ((ISingleResult<usp_UpdateAssignedModulesFunctionsResult>)(result.ReturnValue));
 		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.usp_addNewMember")]
+		public int usp_addNewMember([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Xml")] System.Xml.Linq.XElement newXML, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Result", DbType="VarChar(10)")] ref string result)
+		{
+			IExecuteResult result1 = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), newXML, result);
+			result = ((string)(result1.GetParameterValue(1)));
+			return ((int)(result1.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.usp_updateVistor")]
+		public ISingleResult<usp_updateVistorResult> usp_updateVistor([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Xml")] System.Xml.Linq.XElement updateXML, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Result", DbType="VarChar(20)")] ref string result)
+		{
+			IExecuteResult result1 = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), updateXML, result);
+			result = ((string)(result1.GetParameterValue(1)));
+			return ((ISingleResult<usp_updateVistorResult>)(result1.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.usp_addNewCourseVisitorParticipant")]
+		public ISingleResult<usp_addNewCourseVisitorParticipantResult> usp_addNewCourseVisitorParticipant([global::System.Data.Linq.Mapping.ParameterAttribute(Name="Visitor", DbType="Xml")] System.Xml.Linq.XElement visitor, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(10)")] string course, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="FinalResult", DbType="VarChar(10)")] ref string finalResult, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="FinalSalutation", DbType="VarChar(10)")] ref string finalSalutation, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="FinalEnglishName", DbType="VarChar(50)")] ref string finalEnglishName, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="FinalCourseName", DbType="VarChar(100)")] ref string finalCourseName)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), visitor, course, finalResult, finalSalutation, finalEnglishName, finalCourseName);
+			finalResult = ((string)(result.GetParameterValue(2)));
+			finalSalutation = ((string)(result.GetParameterValue(3)));
+			finalEnglishName = ((string)(result.GetParameterValue(4)));
+			finalCourseName = ((string)(result.GetParameterValue(5)));
+			return ((ISingleResult<usp_addNewCourseVisitorParticipantResult>)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.usp_getRecordForSync")]
+		public ISingleResult<usp_getRecordForSyncResult> usp_getRecordForSync()
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())));
+			return ((ISingleResult<usp_getRecordForSyncResult>)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.usp_SyncAllSettings_Area")]
+		public ISingleResult<usp_SyncAllSettings_AreaResult> usp_SyncAllSettings_Area([global::System.Data.Linq.Mapping.ParameterAttribute(Name="XML", DbType="Xml")] System.Xml.Linq.XElement xML)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), xML);
+			return ((ISingleResult<usp_SyncAllSettings_AreaResult>)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.usp_SyncAllSettings_Style")]
+		public ISingleResult<usp_SyncAllSettings_StyleResult> usp_SyncAllSettings_Style([global::System.Data.Linq.Mapping.ParameterAttribute(Name="XML", DbType="Xml")] System.Xml.Linq.XElement xML)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), xML);
+			return ((ISingleResult<usp_SyncAllSettings_StyleResult>)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.usp_SyncAllSettings_BusGroupCluster")]
+		public ISingleResult<usp_SyncAllSettings_BusGroupClusterResult> usp_SyncAllSettings_BusGroupCluster([global::System.Data.Linq.Mapping.ParameterAttribute(Name="XML", DbType="Xml")] System.Xml.Linq.XElement xML)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), xML);
+			return ((ISingleResult<usp_SyncAllSettings_BusGroupClusterResult>)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.usp_SyncAllSettings_ClubGroup")]
+		public ISingleResult<usp_SyncAllSettings_ClubGroupResult> usp_SyncAllSettings_ClubGroup([global::System.Data.Linq.Mapping.ParameterAttribute(Name="XML", DbType="Xml")] System.Xml.Linq.XElement xML)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), xML);
+			return ((ISingleResult<usp_SyncAllSettings_ClubGroupResult>)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.usp_SyncAllSettings_Congregation")]
+		public ISingleResult<usp_SyncAllSettings_CongregationResult> usp_SyncAllSettings_Congregation([global::System.Data.Linq.Mapping.ParameterAttribute(Name="XML", DbType="Xml")] System.Xml.Linq.XElement xML)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), xML);
+			return ((ISingleResult<usp_SyncAllSettings_CongregationResult>)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.usp_SyncAllSettings_Country")]
+		public ISingleResult<usp_SyncAllSettings_CountryResult> usp_SyncAllSettings_Country([global::System.Data.Linq.Mapping.ParameterAttribute(Name="XML", DbType="Xml")] System.Xml.Linq.XElement xML)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), xML);
+			return ((ISingleResult<usp_SyncAllSettings_CountryResult>)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.usp_SyncAllSettings_Course")]
+		public ISingleResult<usp_SyncAllSettings_CourseResult> usp_SyncAllSettings_Course([global::System.Data.Linq.Mapping.ParameterAttribute(Name="XML", DbType="Xml")] System.Xml.Linq.XElement xML)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), xML);
+			return ((ISingleResult<usp_SyncAllSettings_CourseResult>)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.usp_SyncAllSettings_Dialect")]
+		public ISingleResult<usp_SyncAllSettings_DialectResult> usp_SyncAllSettings_Dialect([global::System.Data.Linq.Mapping.ParameterAttribute(Name="XML", DbType="Xml")] System.Xml.Linq.XElement xML)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), xML);
+			return ((ISingleResult<usp_SyncAllSettings_DialectResult>)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.usp_SyncAllSettings_Education")]
+		public ISingleResult<usp_SyncAllSettings_EducationResult> usp_SyncAllSettings_Education([global::System.Data.Linq.Mapping.ParameterAttribute(Name="XML", DbType="Xml")] System.Xml.Linq.XElement xML)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), xML);
+			return ((ISingleResult<usp_SyncAllSettings_EducationResult>)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.usp_SyncAllSettings_FamilyType")]
+		public ISingleResult<usp_SyncAllSettings_FamilyTypeResult> usp_SyncAllSettings_FamilyType([global::System.Data.Linq.Mapping.ParameterAttribute(Name="XML", DbType="Xml")] System.Xml.Linq.XElement xML)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), xML);
+			return ((ISingleResult<usp_SyncAllSettings_FamilyTypeResult>)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.usp_SyncAllSettings_FileType")]
+		public ISingleResult<usp_SyncAllSettings_FileTypeResult> usp_SyncAllSettings_FileType([global::System.Data.Linq.Mapping.ParameterAttribute(Name="XML", DbType="Xml")] System.Xml.Linq.XElement xML)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), xML);
+			return ((ISingleResult<usp_SyncAllSettings_FileTypeResult>)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.usp_SyncAllSettings_Language")]
+		public ISingleResult<usp_SyncAllSettings_LanguageResult> usp_SyncAllSettings_Language([global::System.Data.Linq.Mapping.ParameterAttribute(Name="XML", DbType="Xml")] System.Xml.Linq.XElement xML)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), xML);
+			return ((ISingleResult<usp_SyncAllSettings_LanguageResult>)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.usp_SyncAllSettings_MaritalStatus")]
+		public ISingleResult<usp_SyncAllSettings_MaritalStatusResult> usp_SyncAllSettings_MaritalStatus([global::System.Data.Linq.Mapping.ParameterAttribute(Name="XML", DbType="Xml")] System.Xml.Linq.XElement xML)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), xML);
+			return ((ISingleResult<usp_SyncAllSettings_MaritalStatusResult>)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.usp_SyncAllSettings_Occupation")]
+		public ISingleResult<usp_SyncAllSettings_OccupationResult> usp_SyncAllSettings_Occupation([global::System.Data.Linq.Mapping.ParameterAttribute(Name="XML", DbType="Xml")] System.Xml.Linq.XElement xML)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), xML);
+			return ((ISingleResult<usp_SyncAllSettings_OccupationResult>)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.usp_SyncAllSettings_Parish")]
+		public ISingleResult<usp_SyncAllSettings_ParishResult> usp_SyncAllSettings_Parish([global::System.Data.Linq.Mapping.ParameterAttribute(Name="XML", DbType="Xml")] System.Xml.Linq.XElement xML)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), xML);
+			return ((ISingleResult<usp_SyncAllSettings_ParishResult>)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.usp_SyncAllSettings_PostalArea")]
+		public ISingleResult<usp_SyncAllSettings_PostalAreaResult> usp_SyncAllSettings_PostalArea([global::System.Data.Linq.Mapping.ParameterAttribute(Name="XML", DbType="Xml")] System.Xml.Linq.XElement xML)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), xML);
+			return ((ISingleResult<usp_SyncAllSettings_PostalAreaResult>)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.usp_SyncAllSettings_Race")]
+		public ISingleResult<usp_SyncAllSettings_RaceResult> usp_SyncAllSettings_Race([global::System.Data.Linq.Mapping.ParameterAttribute(Name="XML", DbType="Xml")] System.Xml.Linq.XElement xML)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), xML);
+			return ((ISingleResult<usp_SyncAllSettings_RaceResult>)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.usp_SyncAllSettings_Religion")]
+		public ISingleResult<usp_SyncAllSettings_ReligionResult> usp_SyncAllSettings_Religion([global::System.Data.Linq.Mapping.ParameterAttribute(Name="XML", DbType="Xml")] System.Xml.Linq.XElement xML)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), xML);
+			return ((ISingleResult<usp_SyncAllSettings_ReligionResult>)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.usp_SyncAllSettings_Salutation")]
+		public ISingleResult<usp_SyncAllSettings_SalutationResult> usp_SyncAllSettings_Salutation([global::System.Data.Linq.Mapping.ParameterAttribute(Name="XML", DbType="Xml")] System.Xml.Linq.XElement xML)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), xML);
+			return ((ISingleResult<usp_SyncAllSettings_SalutationResult>)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.usp_SyncAllSettings_School")]
+		public ISingleResult<usp_SyncAllSettings_SchoolResult> usp_SyncAllSettings_School([global::System.Data.Linq.Mapping.ParameterAttribute(Name="XML", DbType="Xml")] System.Xml.Linq.XElement xML)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), xML);
+			return ((ISingleResult<usp_SyncAllSettings_SchoolResult>)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.usp_SyncVisitorAndMembers")]
+		public ISingleResult<usp_SyncVisitorAndMembersResult> usp_SyncVisitorAndMembers([global::System.Data.Linq.Mapping.ParameterAttribute(Name="XML", DbType="Xml")] System.Xml.Linq.XElement xML)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), xML);
+			return ((ISingleResult<usp_SyncVisitorAndMembersResult>)(result.ReturnValue));
+		}
 	}
 	
 	public partial class usp_addNewCellgroupResult
@@ -1159,32 +1301,6 @@ namespace DOS.Models
 		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Result", DbType="Int NOT NULL")]
 		public int Result
-		{
-			get
-			{
-				return this._Result;
-			}
-			set
-			{
-				if ((this._Result != value))
-				{
-					this._Result = value;
-				}
-			}
-		}
-	}
-	
-	public partial class usp_updateVistorResult
-	{
-		
-		private string _Result;
-		
-		public usp_updateVistorResult()
-		{
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Result", DbType="VarChar(7) NOT NULL", CanBeNull=false)]
-		public string Result
 		{
 			get
 			{
@@ -1343,32 +1459,6 @@ namespace DOS.Models
 		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Result", DbType="VarChar(185)")]
 		public string Result
-		{
-			get
-			{
-				return this._Result;
-			}
-			set
-			{
-				if ((this._Result != value))
-				{
-					this._Result = value;
-				}
-			}
-		}
-	}
-	
-	public partial class usp_addNewMemberResult
-	{
-		
-		private int _Result;
-		
-		public usp_addNewMemberResult()
-		{
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Result", DbType="Int NOT NULL")]
-		public int Result
 		{
 			get
 			{
@@ -11322,86 +11412,6 @@ namespace DOS.Models
 		}
 	}
 	
-	public partial class usp_addNewCourseVisitorParticipantResult
-	{
-		
-		private string _Result;
-		
-		private string _SalutationName;
-		
-		private string _EnglishName;
-		
-		private string _CourseName;
-		
-		public usp_addNewCourseVisitorParticipantResult()
-		{
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Result", DbType="VarChar(10) NOT NULL", CanBeNull=false)]
-		public string Result
-		{
-			get
-			{
-				return this._Result;
-			}
-			set
-			{
-				if ((this._Result != value))
-				{
-					this._Result = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_SalutationName", DbType="VarChar(1) NOT NULL", CanBeNull=false)]
-		public string SalutationName
-		{
-			get
-			{
-				return this._SalutationName;
-			}
-			set
-			{
-				if ((this._SalutationName != value))
-				{
-					this._SalutationName = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_EnglishName", DbType="VarChar(50)")]
-		public string EnglishName
-		{
-			get
-			{
-				return this._EnglishName;
-			}
-			set
-			{
-				if ((this._EnglishName != value))
-				{
-					this._EnglishName = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CourseName", DbType="VarChar(1) NOT NULL", CanBeNull=false)]
-		public string CourseName
-		{
-			get
-			{
-				return this._CourseName;
-			}
-			set
-			{
-				if ((this._CourseName != value))
-				{
-					this._CourseName = value;
-				}
-			}
-		}
-	}
-	
 	public partial class usp_getAllEmailInXMLResult
 	{
 		
@@ -11703,6 +11713,702 @@ namespace DOS.Models
 				if ((this._Result != value))
 				{
 					this._Result = value;
+				}
+			}
+		}
+	}
+	
+	public partial class usp_updateVistorResult
+	{
+		
+		private System.Nullable<decimal> _Result;
+		
+		public usp_updateVistorResult()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Result", DbType="Decimal(38,0)")]
+		public System.Nullable<decimal> Result
+		{
+			get
+			{
+				return this._Result;
+			}
+			set
+			{
+				if ((this._Result != value))
+				{
+					this._Result = value;
+				}
+			}
+		}
+	}
+	
+	public partial class usp_addNewCourseVisitorParticipantResult
+	{
+		
+		private System.Nullable<decimal> _Result;
+		
+		public usp_addNewCourseVisitorParticipantResult()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Result", DbType="Decimal(38,0)")]
+		public System.Nullable<decimal> Result
+		{
+			get
+			{
+				return this._Result;
+			}
+			set
+			{
+				if ((this._Result != value))
+				{
+					this._Result = value;
+				}
+			}
+		}
+	}
+	
+	public partial class usp_getRecordForSyncResult
+	{
+		
+		private System.Xml.Linq.XElement _SyncData;
+		
+		public usp_getRecordForSyncResult()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_SyncData", DbType="Xml")]
+		public System.Xml.Linq.XElement SyncData
+		{
+			get
+			{
+				return this._SyncData;
+			}
+			set
+			{
+				if ((this._SyncData != value))
+				{
+					this._SyncData = value;
+				}
+			}
+		}
+	}
+	
+	public partial class usp_SyncAllSettings_AreaResult
+	{
+		
+		private string _Result;
+		
+		public usp_SyncAllSettings_AreaResult()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Result", DbType="VarChar(7) NOT NULL", CanBeNull=false)]
+		public string Result
+		{
+			get
+			{
+				return this._Result;
+			}
+			set
+			{
+				if ((this._Result != value))
+				{
+					this._Result = value;
+				}
+			}
+		}
+	}
+	
+	public partial class usp_SyncAllSettings_StyleResult
+	{
+		
+		private string _Result;
+		
+		public usp_SyncAllSettings_StyleResult()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Result", DbType="VarChar(7) NOT NULL", CanBeNull=false)]
+		public string Result
+		{
+			get
+			{
+				return this._Result;
+			}
+			set
+			{
+				if ((this._Result != value))
+				{
+					this._Result = value;
+				}
+			}
+		}
+	}
+	
+	public partial class usp_SyncAllSettings_BusGroupClusterResult
+	{
+		
+		private string _Result;
+		
+		public usp_SyncAllSettings_BusGroupClusterResult()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Result", DbType="VarChar(7) NOT NULL", CanBeNull=false)]
+		public string Result
+		{
+			get
+			{
+				return this._Result;
+			}
+			set
+			{
+				if ((this._Result != value))
+				{
+					this._Result = value;
+				}
+			}
+		}
+	}
+	
+	public partial class usp_SyncAllSettings_ClubGroupResult
+	{
+		
+		private string _Result;
+		
+		public usp_SyncAllSettings_ClubGroupResult()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Result", DbType="VarChar(7) NOT NULL", CanBeNull=false)]
+		public string Result
+		{
+			get
+			{
+				return this._Result;
+			}
+			set
+			{
+				if ((this._Result != value))
+				{
+					this._Result = value;
+				}
+			}
+		}
+	}
+	
+	public partial class usp_SyncAllSettings_CongregationResult
+	{
+		
+		private string _Result;
+		
+		public usp_SyncAllSettings_CongregationResult()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Result", DbType="VarChar(7) NOT NULL", CanBeNull=false)]
+		public string Result
+		{
+			get
+			{
+				return this._Result;
+			}
+			set
+			{
+				if ((this._Result != value))
+				{
+					this._Result = value;
+				}
+			}
+		}
+	}
+	
+	public partial class usp_SyncAllSettings_CountryResult
+	{
+		
+		private string _Result;
+		
+		public usp_SyncAllSettings_CountryResult()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Result", DbType="VarChar(7) NOT NULL", CanBeNull=false)]
+		public string Result
+		{
+			get
+			{
+				return this._Result;
+			}
+			set
+			{
+				if ((this._Result != value))
+				{
+					this._Result = value;
+				}
+			}
+		}
+	}
+	
+	public partial class usp_SyncAllSettings_CourseResult
+	{
+		
+		private string _Result;
+		
+		public usp_SyncAllSettings_CourseResult()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Result", DbType="VarChar(7) NOT NULL", CanBeNull=false)]
+		public string Result
+		{
+			get
+			{
+				return this._Result;
+			}
+			set
+			{
+				if ((this._Result != value))
+				{
+					this._Result = value;
+				}
+			}
+		}
+	}
+	
+	public partial class usp_SyncAllSettings_DialectResult
+	{
+		
+		private string _Result;
+		
+		public usp_SyncAllSettings_DialectResult()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Result", DbType="VarChar(7) NOT NULL", CanBeNull=false)]
+		public string Result
+		{
+			get
+			{
+				return this._Result;
+			}
+			set
+			{
+				if ((this._Result != value))
+				{
+					this._Result = value;
+				}
+			}
+		}
+	}
+	
+	public partial class usp_SyncAllSettings_EducationResult
+	{
+		
+		private string _Result;
+		
+		public usp_SyncAllSettings_EducationResult()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Result", DbType="VarChar(7) NOT NULL", CanBeNull=false)]
+		public string Result
+		{
+			get
+			{
+				return this._Result;
+			}
+			set
+			{
+				if ((this._Result != value))
+				{
+					this._Result = value;
+				}
+			}
+		}
+	}
+	
+	public partial class usp_SyncAllSettings_FamilyTypeResult
+	{
+		
+		private string _Result;
+		
+		public usp_SyncAllSettings_FamilyTypeResult()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Result", DbType="VarChar(7) NOT NULL", CanBeNull=false)]
+		public string Result
+		{
+			get
+			{
+				return this._Result;
+			}
+			set
+			{
+				if ((this._Result != value))
+				{
+					this._Result = value;
+				}
+			}
+		}
+	}
+	
+	public partial class usp_SyncAllSettings_FileTypeResult
+	{
+		
+		private string _Result;
+		
+		public usp_SyncAllSettings_FileTypeResult()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Result", DbType="VarChar(7) NOT NULL", CanBeNull=false)]
+		public string Result
+		{
+			get
+			{
+				return this._Result;
+			}
+			set
+			{
+				if ((this._Result != value))
+				{
+					this._Result = value;
+				}
+			}
+		}
+	}
+	
+	public partial class usp_SyncAllSettings_LanguageResult
+	{
+		
+		private string _Result;
+		
+		public usp_SyncAllSettings_LanguageResult()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Result", DbType="VarChar(7) NOT NULL", CanBeNull=false)]
+		public string Result
+		{
+			get
+			{
+				return this._Result;
+			}
+			set
+			{
+				if ((this._Result != value))
+				{
+					this._Result = value;
+				}
+			}
+		}
+	}
+	
+	public partial class usp_SyncAllSettings_MaritalStatusResult
+	{
+		
+		private string _Result;
+		
+		public usp_SyncAllSettings_MaritalStatusResult()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Result", DbType="VarChar(7) NOT NULL", CanBeNull=false)]
+		public string Result
+		{
+			get
+			{
+				return this._Result;
+			}
+			set
+			{
+				if ((this._Result != value))
+				{
+					this._Result = value;
+				}
+			}
+		}
+	}
+	
+	public partial class usp_SyncAllSettings_OccupationResult
+	{
+		
+		private string _Result;
+		
+		public usp_SyncAllSettings_OccupationResult()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Result", DbType="VarChar(7) NOT NULL", CanBeNull=false)]
+		public string Result
+		{
+			get
+			{
+				return this._Result;
+			}
+			set
+			{
+				if ((this._Result != value))
+				{
+					this._Result = value;
+				}
+			}
+		}
+	}
+	
+	public partial class usp_SyncAllSettings_ParishResult
+	{
+		
+		private string _Result;
+		
+		public usp_SyncAllSettings_ParishResult()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Result", DbType="VarChar(7) NOT NULL", CanBeNull=false)]
+		public string Result
+		{
+			get
+			{
+				return this._Result;
+			}
+			set
+			{
+				if ((this._Result != value))
+				{
+					this._Result = value;
+				}
+			}
+		}
+	}
+	
+	public partial class usp_SyncAllSettings_PostalAreaResult
+	{
+		
+		private string _Result;
+		
+		public usp_SyncAllSettings_PostalAreaResult()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Result", DbType="VarChar(7) NOT NULL", CanBeNull=false)]
+		public string Result
+		{
+			get
+			{
+				return this._Result;
+			}
+			set
+			{
+				if ((this._Result != value))
+				{
+					this._Result = value;
+				}
+			}
+		}
+	}
+	
+	public partial class usp_SyncAllSettings_RaceResult
+	{
+		
+		private string _Result;
+		
+		public usp_SyncAllSettings_RaceResult()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Result", DbType="VarChar(7) NOT NULL", CanBeNull=false)]
+		public string Result
+		{
+			get
+			{
+				return this._Result;
+			}
+			set
+			{
+				if ((this._Result != value))
+				{
+					this._Result = value;
+				}
+			}
+		}
+	}
+	
+	public partial class usp_SyncAllSettings_ReligionResult
+	{
+		
+		private string _Result;
+		
+		public usp_SyncAllSettings_ReligionResult()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Result", DbType="VarChar(7) NOT NULL", CanBeNull=false)]
+		public string Result
+		{
+			get
+			{
+				return this._Result;
+			}
+			set
+			{
+				if ((this._Result != value))
+				{
+					this._Result = value;
+				}
+			}
+		}
+	}
+	
+	public partial class usp_SyncAllSettings_SalutationResult
+	{
+		
+		private string _Result;
+		
+		public usp_SyncAllSettings_SalutationResult()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Result", DbType="VarChar(7) NOT NULL", CanBeNull=false)]
+		public string Result
+		{
+			get
+			{
+				return this._Result;
+			}
+			set
+			{
+				if ((this._Result != value))
+				{
+					this._Result = value;
+				}
+			}
+		}
+	}
+	
+	public partial class usp_SyncAllSettings_SchoolResult
+	{
+		
+		private string _Result;
+		
+		public usp_SyncAllSettings_SchoolResult()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Result", DbType="VarChar(7) NOT NULL", CanBeNull=false)]
+		public string Result
+		{
+			get
+			{
+				return this._Result;
+			}
+			set
+			{
+				if ((this._Result != value))
+				{
+					this._Result = value;
+				}
+			}
+		}
+	}
+	
+	public partial class usp_SyncVisitorAndMembersResult
+	{
+		
+		private string _NRIC;
+		
+		private string _Type;
+		
+		private System.Xml.Linq.XElement _XML;
+		
+		private System.Nullable<bool> _Successful;
+		
+		private string _PhotoFile;
+		
+		public usp_SyncVisitorAndMembersResult()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_NRIC", DbType="VarChar(20)")]
+		public string NRIC
+		{
+			get
+			{
+				return this._NRIC;
+			}
+			set
+			{
+				if ((this._NRIC != value))
+				{
+					this._NRIC = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Type", DbType="VarChar(7)")]
+		public string Type
+		{
+			get
+			{
+				return this._Type;
+			}
+			set
+			{
+				if ((this._Type != value))
+				{
+					this._Type = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_XML", DbType="Xml")]
+		public System.Xml.Linq.XElement XML
+		{
+			get
+			{
+				return this._XML;
+			}
+			set
+			{
+				if ((this._XML != value))
+				{
+					this._XML = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Successful", DbType="Bit")]
+		public System.Nullable<bool> Successful
+		{
+			get
+			{
+				return this._Successful;
+			}
+			set
+			{
+				if ((this._Successful != value))
+				{
+					this._Successful = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PhotoFile", DbType="VarChar(1000)")]
+		public string PhotoFile
+		{
+			get
+			{
+				return this._PhotoFile;
+			}
+			set
+			{
+				if ((this._PhotoFile != value))
+				{
+					this._PhotoFile = value;
 				}
 			}
 		}

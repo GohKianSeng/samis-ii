@@ -17,7 +17,7 @@ $(document).ready(function () {
         $("#candidate_language").val(selectedlanguges);
         $("#LanguageText").val("");
         for (var x = 0; x < selectedlanguges.length; x++) {
-            $("#LanguageText").val(this.options[selectedlanguges[x]].text + ", " + $("#LanguageText").val() );
+            $("#LanguageText").val(this.options[selectedlanguges[x]].text + ", " + $("#LanguageText").val());
         }
     });
 
@@ -118,21 +118,22 @@ $(document).ready(function () {
     changePreviousChurch();
 
     if (!isOffline()) {
-        uploader = new qq.FileUploader({
-            element: document.getElementById('candidate_photofile'),
-            action: '/uploadfile.mvc/SaveFile',
-            allowedExtensions: ['jpg', 'jpeg', 'jpe', 'png', 'gif'],
-            sizeLimit: 100000,
-            params: {
-                guid: getGUID()
-            },
-            onComplete: function (id, fileName, responseJSON) {
-                if (jQuery.trim(responseJSON) == "1") {
-                    reloadICPhoto(fileName, getGUID());
-                    $("#candidate_photo").val(getGUID() + "_" + fileName);
-                }
-            }
-        });
+
+                uploader = new qq.FileUploader({
+                    element: document.getElementById('candidate_photofile'),
+                    action: '/uploadfile.mvc/SaveFile',
+                    allowedExtensions: ['jpg', 'jpeg', 'jpe', 'png', 'gif'],
+                    sizeLimit: 100000,
+                    params: {
+                        guid: getGUID()
+                    },
+                    onComplete: function (id, fileName, responseJSON) {
+                        if (jQuery.trim(responseJSON) == "1") {
+                            reloadICPhoto(fileName, getGUID());
+                            $("#candidate_photo").val(getGUID() + "_" + fileName);
+                        }
+                    }
+                });
 
 
 
@@ -480,7 +481,7 @@ function checkForm(){
 	}
 
 	if (!isOffline()) {
-	    domwindow = dhtmlmodal.open("Agreement", 'ajax', "/membership.mvc/displayAgreement", "Agreement", 'width=600px,height=300px,center=1,resize=1,scrolling=1');
+	    domwindow = dhtmlmodal.open("Agreement", 'ajax', "/membership.mvc/displayAgreement", "Agreement", 'width=800px,height=600px,center=1,resize=1,scrolling=1');
 	    domwindow.onclose = function () { //Define custom code to run when window is closed
 	        if (agreeordisagree == 'agree') {
 	            document.getElementById("maindiv").style.display = "none";

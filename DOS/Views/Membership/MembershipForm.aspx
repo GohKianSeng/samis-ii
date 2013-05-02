@@ -672,17 +672,17 @@
 		            </li>
             </td>
             <td rowspan="2" width="180">
+                
                 <div>
                 <label class="description" for="element_5" nowarp="nowarp">身份证/护照照片<br>
 					IC/Passport Photo</label>
-                <!--input type="file" id="candidate_photofile" name="candidate_photofile" style="width:100%" /-->
+                    <!--input type="file" id="candidate_photofile" name="candidate_photofile" style="width:100%" /-->
                     <div id="candidate_photofile" >
                         <noscript>
                             <p>Please enable JavaScript to use file uploader.</p>
                             <!-- or put a simple form for upload here -->
                         </noscript>
                     </div>
-
                 </div>
             </td>
             <td rowspan="2" width="280">

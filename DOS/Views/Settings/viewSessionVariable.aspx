@@ -26,6 +26,7 @@
                     %><tr><td style="width:100px"><%=name%></td><td></td></tr><%
                 }
             }
+            %><tr><td style="width:100px">PhysicalApplicationPath</td><td><%= this.Request.PhysicalApplicationPath %></td></tr><%
          %>
          </table>        
 	</div>

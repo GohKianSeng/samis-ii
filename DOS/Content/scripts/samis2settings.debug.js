@@ -36,7 +36,25 @@
     parseConfigXML();
     parseEmailXML();
     parsePostalXML();
+
+    myProgressBar = new ProgressBar("my_progress_bar_1", {
+        borderRadius: 10,
+        width: 300,
+        height: 20,
+        maxValue: 100,
+        labelText: "{value,0} % completed",
+        orientation: ProgressBar.Orientation.Horizontal,
+        direction: ProgressBar.Direction.LeftToRight,
+        animationStyle: ProgressBar.AnimationStyle.LeftToRight1,
+        animationSpeed: 1.5,
+        imageUrl: '/Content/images/v_fg12.png',
+        backgroundUrl: '/Content/images/h_bg2.png',
+        markerUrl: '/Content/images/marker2.png'
+    });
+    myProgressBar.setValue(0);   
 });
+
+var myProgressBar;
 
 function setActiveTab(tabname) {
     if (tabname == "Church Area") {
@@ -54,6 +72,7 @@ function setActiveTab(tabname) {
 ///////////////////////////////////
 
 function SyncAllSettings() {
+    $("#progressDIV").show();
     $("#syncimg").show("slow");
     $("#syncMessage").html("Synchronizing. Please wait......");
     $("#syncMessageDiv").show("slow");
@@ -66,7 +85,7 @@ function SyncAllSettings() {
 
 var checkSyncTimer = null;
 
-function checkSyncAllSettings() {    
+function checkSyncAllSettings() {
     $.post('/settings.mvc/checkSyncAllSettings',
         function (result) {
             if (jQuery.trim(result) == "Updated") {
@@ -80,6 +99,9 @@ function checkSyncAllSettings() {
                 clearTimeout(checkSyncTimer);
             }
             else {
+                if (jQuery.trim(result).length > 0) {
+                    myProgressBar.setValue(parseInt(jQuery.trim(result)));
+                }
                 checkSyncTimer = setTimeout("checkSyncAllSettings()", 1000);
             }
         }
