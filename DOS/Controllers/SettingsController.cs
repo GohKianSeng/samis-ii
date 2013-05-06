@@ -67,23 +67,26 @@ namespace DOS.Controllers
 
             string recResult = HttpPost(url + "/settings.mvc/GetVisitorMemberForSync", tempRec.ToString(), "nil");
             IEnumerable<usp_SyncVisitorAndMembersResult> syncRes = sql_conn.usp_SyncVisitorAndMembers(XElement.Parse(recResult)).ToList();
-            int countincrement = 50 / syncRes.Count();
-            for (int y = 0; y < syncRes.Count(); y++)
+            if (syncRes.Count() > 0)
             {
-                if (syncRes.ElementAt(y).Type == "New" && (bool)syncRes.ElementAt(y).Successful)
+                int countincrement = 50 / syncRes.Count();
+                for (int y = 0; y < syncRes.Count(); y++)
                 {
-                    downloadAndDeleteRemoteStorageFile(syncRes.ElementAt(y).PhotoFile, url);
-                    new WebClient().DownloadString(url + "/settings.mvc/SyncDeleteMember?NRIC=" + syncRes.ElementAt(y).NRIC);
-                }
-                else if (syncRes.ElementAt(y).Type == "Update" && (bool)syncRes.ElementAt(y).Successful)
-                {
-                    new WebClient().DownloadString(url + "/settings.mvc/SyncDeleteVisitor?NRIC=" + syncRes.ElementAt(y).NRIC);
-                }
-                count = count + countincrement;
-                serverSideProcessMsg = count.ToString();
-                if (!(bool)syncRes.ElementAt(y).Successful)
-                {
-                    SendSyncDataEmail(recResult, syncRes.ElementAt(y).NRIC, obj[0], obj[1], obj[2], obj[3]);
+                    if (syncRes.ElementAt(y).Type == "New" && (bool)syncRes.ElementAt(y).Successful)
+                    {
+                        downloadAndDeleteRemoteStorageFile(syncRes.ElementAt(y).PhotoFile, url);
+                        new WebClient().DownloadString(url + "/settings.mvc/SyncDeleteMember?NRIC=" + syncRes.ElementAt(y).NRIC);
+                    }
+                    else if (syncRes.ElementAt(y).Type == "Update" && (bool)syncRes.ElementAt(y).Successful)
+                    {
+                        new WebClient().DownloadString(url + "/settings.mvc/SyncDeleteVisitor?NRIC=" + syncRes.ElementAt(y).NRIC);
+                    }
+                    count = count + countincrement;
+                    serverSideProcessMsg = count.ToString();
+                    if (!(bool)syncRes.ElementAt(y).Successful)
+                    {
+                        SendSyncDataEmail(recResult, syncRes.ElementAt(y).NRIC, obj[0], obj[1], obj[2], obj[3]);
+                    }
                 }
             }
 
