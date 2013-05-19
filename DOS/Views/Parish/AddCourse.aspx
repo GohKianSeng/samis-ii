@@ -47,6 +47,27 @@
         }
     }
 
+    void loadAdditionalInfo(Object Sender, EventArgs e)
+    {
+        int selected = 1;
+        if (((string)ViewData["type"]) == "update")
+        {
+            usp_getCourseInfoResult sel = (usp_getCourseInfoResult)ViewData["courseinformation"];
+            selected = sel.AdditionalQuestion;
+        }
+
+        List<usp_getAllCourseAdditionalInfoResult> res = (List<usp_getAllCourseAdditionalInfoResult>)ViewData["listofadditionalinfo"];
+        ListItem item = new ListItem("", "");
+        AdditionalInfo.Items.Add(item);
+        for (int x = 0; x < res.Count; x++)
+        {
+            item = new ListItem(res.ElementAt(x).AgreementType, res.ElementAt(x).AgreementID.ToString());
+            if (res.ElementAt(x).AgreementID == selected)
+                item.Selected = true;
+            AdditionalInfo.Items.Add(item);
+        }
+    }
+    
     string getCourseName()
     {
         if (((string)ViewData["type"]) == "update")
@@ -57,6 +78,16 @@
         return "";
     }
 
+    string getLastRegistrationDate()
+    {
+        if (((string)ViewData["type"]) == "update")
+        {
+            usp_getCourseInfoResult res = (usp_getCourseInfoResult)ViewData["courseinformation"];
+            return ((DateTime)res.LastRegistrationDate).ToString("dd/MM/yyyy");
+        }
+        return "";
+    }
+    
     string getCourseStartDate()
     {
         if (((string)ViewData["type"]) == "update")
@@ -155,6 +186,10 @@
         return "<%= coursearea.ClientID%>"
     }
 
+    function getAdditionalAgreementID() {
+        return "<%= AdditionalInfo.ClientID%>"
+    }
+
     function getFormID() {
         return "<%=form.ClientID %>";
     }
@@ -182,15 +217,24 @@
                     Course Name<br />
                     <input id="coursename" name="coursename" class="element text medium" type="text" <%=getTextfieldLength("tb_course","CourseName")%> value="<%= getCourseName()%>"/> 
                 </td>
-                <td colspan="2">
+                <td>
                     Date Schedules<br />
                     <input readonly="readonly" style=" width:250px" id="startdate" name="startdate" type="text" value="<%= getCourseStartDate()%>"/> 
+                </td>
+                <td>
+                    Last Registration Date<br />
+                    <input readonly="readonly" id="lastRegistrationDate" name="lastRegistrationDate" class="element text medium" type="text" value="<%= getLastRegistrationDate()%>"/>
                 </td>
             </tr>
             <tr>
                 <td>
                     Venue<br />
                     <asp:DropDownList style=" width:150px;" class="element select medium" OnLoad="loadarea" name="courseArea" ID="coursearea" runat="server">
+                    </asp:DropDownList>
+                </td>
+                <td>
+                    Additional Information<br />
+                    <asp:DropDownList style=" width:250px;" class="element select medium" OnLoad="loadAdditionalInfo" name="AdditionalInfo" ID="AdditionalInfo" runat="server">
                     </asp:DropDownList>
                 </td>
                 <td>
@@ -201,17 +245,7 @@
                             $('#timestart').timepicker();
                         });
                     </script>
-                </td>
-                <td>
-                    To Time<br />
-                    <input readonly="readonly" id="timeend" name="timeend" class="element text medium" type="text" maxlength="10" value="<%= getCourseEndTime()%>"/> 
-                    <script type="text/javascript">
-                        $(document).ready(function () {
-                            $('#timeend').timepicker();
-                        });
-                    </script>
-                </td>
-                
+                </td>                                
             </tr>
             <tr>
                 <td>
@@ -223,6 +257,15 @@
                     <input type="hidden" id="incharge" name="incharge" value="<%= getInchargeNRIC()%>" />
                     <input AUTOCOMPLETE = "off" style=" width:200px" id="inchargeinput" type="text" onkeyup="searchSuggest(1000, 'inchargeinput', 'search_suggest_incharge', 'incharge');" <%=getTextfieldLength("tb_members","EnglishName")%> value="<%= getInchargeName()%>"/> 
                     <div id="search_suggest_incharge" style="border:1px solid black; position:absolute; z-index:99999; display:none; height:200px; overflow:auto; width:370px"></div>
+                </td>
+                <td>
+                    To Time<br />
+                    <input readonly="readonly" id="timeend" name="timeend" class="element text medium" type="text" maxlength="10" value="<%= getCourseEndTime()%>"/> 
+                    <script type="text/javascript">
+                        $(document).ready(function () {
+                            $('#timeend').timepicker();
+                        });
+                    </script>
                 </td>
             </tr>
             <tr>

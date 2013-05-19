@@ -51,6 +51,7 @@ Settings
             <li><a href="#tab19">Religion</a></li>
             <li><a href="#tab20">School</a></li>
             <li><a href="#tab23">External Site</a></li>
+            <li><a href="#tab24">Additional Information</a></li>
         </ul>
         <div class="tab_container">
             <div id="tab1" class="tab_content" style="height:70%">
@@ -475,7 +476,27 @@ Settings
 		            </table>
                 </div>   
             </div>
-
+            <div id="tab24" class="tab_content" style="height:70%">
+                <br /><br /><br /><br />
+                <input type="hidden" id="AdditionalInfolist" name="AdditionalInfolist" value="0">
+                <input type="hidden" id="AdditionalInfoXML" name="AdditionalInfoXML" value="<%= System.Uri.EscapeDataString((string)ViewData["additionalinfoxml"]) %>">
+                <label style=" color:red">Warning, modify the below setting might cause SAMIS II to malfunction.<br />Please restart your browser to let the changes take effect.</label><br /><br />
+                <input type="button" id="Button8" onclick="checkAndSubmitAdditionalInfo();" value="Update" />                
+                <div style=" overflow:auto; height:75%">
+                    <table class="tablesorter" id="AdditionalInfoTable" style=" width:100%; padding:0; margin-left:0%; margin-right:0%">
+			                <thead>
+			                <tr class="header">
+                                <td class="nosorting" width="1%" nowrap="nowrap">ID</td>
+                                <td class="nosorting" width="20%" nowrap="nowrap">Additional Information Type</td>
+				                <td class="nosorting" width="80%" nowrap="nowrap">Additional Information Content</td>
+                            </tr>
+		                </thead>
+		                <tbody>
+                            
+			            </tbody>
+		            </table>
+                </div>
+            </div>
 
 
         </div>  

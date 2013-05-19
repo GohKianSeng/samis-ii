@@ -36,6 +36,7 @@
     parseConfigXML();
     parseEmailXML();
     parsePostalXML();
+    parseAdditionalInfoXML();
 
     myProgressBar = new ProgressBar("my_progress_bar_1", {
         borderRadius: 10,
@@ -278,6 +279,78 @@ function checkAndSubmitConfig() {
 
 
 ///////////////////////////////////
+//// Additional Info///////////////
+///////////////////////////////////
+
+function parseAdditionalInfoXML() {
+    var additionalinfoxml = stringToXML(unescape($("#AdditionalInfoXML").val()));
+    var additionalinfo = additionalinfoxml.getElementsByTagName("AdditionalInfo");
+    for (x = 0; x < additionalinfo.length; x++) {
+        if (x == 0) {
+            $("#AdditionalInfoTable").find("tr:gt(0)").remove();
+            totalAdditionalInfo = 0;
+            AdditionalInfoarray = new Array();
+        }
+        var value = $(additionalinfo[x]).find("AgreementHTML").text();
+        var id = additionalinfo[x].getElementsByTagName("AgreementID")[0].childNodes[0].nodeValue;
+        var name = additionalinfo[x].getElementsByTagName("AgreementType")[0].childNodes[0].nodeValue;
+        addNewAdditionalInfo(id, name, value);
+    }
+
+    var result = additionalinfoxml.getElementsByTagName("Result")[0];
+    if (result != null) {
+        alert(additionalinfoxml.getElementsByTagName("Result")[0].childNodes[0].nodeValue);
+    }
+}
+
+var totalAdditionalInfo = 0;
+var AdditionalInfoarray = new Array();
+
+function addNewAdditionalInfo(id_input, name_input, value_input) {
+    totalAdditionalInfo++;
+    AdditionalInfoarray.push(totalAdditionalInfo.toString());
+    $('#AdditionalInfolist').val(AdditionalInfoarray.toString());
+
+    var table = document.getElementById("AdditionalInfoTable");
+    var row = table.insertRow(1);
+    var AdditionalInfono = totalAdditionalInfo;
+
+    var id = '<input style=" width:40px;" readonly="readonly" id="AgreementID_' + AdditionalInfono.toString() + '" name="AgreementID_' + AdditionalInfono.toString() + '" type="text" maxlength="10" value=""/>';
+    var name = '<input style=" width:100%;" id="AgreementType_' + AdditionalInfono.toString() + '" name="AgreementType_' + AdditionalInfono.toString() + '" type="text" maxlength="100" value=""/></div>';
+    var value = '<textarea cols="80" rows="6" id="AgreementHTML_' + AdditionalInfono.toString() + '" name="AgreementHTML_' + AdditionalInfono.toString() + '"></textarea></div>';
+    
+    fillCell(row, 0, id);
+    fillCell(row, 1, name);
+    fillCell(row, 2, value);
+
+    $("#AgreementID_" + AdditionalInfono.toString()).val(id_input);
+    $("#AgreementType_" + AdditionalInfono.toString()).val(name_input);
+    $("#AgreementHTML_" + AdditionalInfono.toString()).val(unescape(value_input));
+}
+
+function checkAndSubmitAdditionalInfo() {
+    var xmlstring = "";
+    for (var x = 0; x < AdditionalInfoarray.length; x++) {
+        if (jQuery.trim($("#AgreementHTML_" + AdditionalInfoarray[x]).val()).length <= 0) {
+            alert("#" + (x + 1).toString() + ", HTML Content cannot be blank");
+            return;
+        }
+
+        xmlstring += "<AdditionalInfo><AgreementType>" + $("#AgreementType_" + AdditionalInfoarray[x]).val() + "</AgreementType><AgreementID>" + $("#AgreementID_" + AdditionalInfoarray[x]).val() + "</AgreementID><AgreementHTML>" + encodeURIComponent($("#AgreementHTML_" + AdditionalInfoarray[x]).val()) + "</AgreementHTML></AdditionalInfo>";
+    }
+
+    xmlstring = "<ChurchAdditionalInfo>" + xmlstring + "</ChurchAdditionalInfo>"
+
+    $.post('/settings.mvc/updateAdditionalInfo',
+        { xml: escape(xmlstring) },
+        function (data) {
+            $("#AdditionalInfoXML").val(unescape(data));
+            parseAdditionalInfoXML();
+        }
+    );
+}
+
+///////////////////////////////////
 //// Email ////////////////////////
 ///////////////////////////////////
 
@@ -292,7 +365,7 @@ function parseEmailXML() {
         }
         var value = $(email[x]).find("EmailContent").text();
         var id = email[x].getElementsByTagName("EmailID")[0].childNodes[0].nodeValue;
-        var name = email[x].getElementsByTagName("EmailType")[0].childNodes[0].nodeValue;        
+        var name = email[x].getElementsByTagName("EmailType")[0].childNodes[0].nodeValue;
         addNewEmail(id, name, value);
     }
 
@@ -317,7 +390,7 @@ function addNewEmail(id_input, name_input, value_input) {
     var id = '<input style=" width:40px;" readonly="readonly" id="EmailID_' + Emailno.toString() + '" name="EmailID_' + Emailno.toString() + '" type="text" maxlength="10" value=""/>';
     var name = '<input style=" width:100%;" readonly="readonly" id="EmailType_' + Emailno.toString() + '" name="EmailType_' + Emailno.toString() + '" type="text" maxlength="100" value=""/></div>';
     var value = '<textarea cols="80" rows="6" id="EmailContent_' + Emailno.toString() + '" name="EmailContent_' + Emailno.toString() + '"></textarea></div>';
-    
+
     fillCell(row, 0, id);
     fillCell(row, 1, name);
     fillCell(row, 2, value);

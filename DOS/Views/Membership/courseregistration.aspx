@@ -84,6 +84,7 @@
     {
         List<usp_getListofCourseResult> res = (List<usp_getListofCourseResult>)ViewData["listofcourse"];
         ListItem item = new ListItem("", "");
+        string displayDate = "<div style='display:none'>";
         candidate_course.Items.Add(item);
         for (int x = 0; x < res.Count; x++)
         {
@@ -91,7 +92,10 @@
             if (((string)ViewData["candidate_course"]) == res.ElementAt(x).courseID.ToString())
                 item.Selected = true;
             candidate_course.Items.Add(item);
+
+            displayDate += "<label id='courseInfo_" + res.ElementAt(x).courseID.ToString() + "'>" + res.ElementAt(x).CourseStartDate + "</label>";    
         }
+        ViewData["displayCourseInfo"] = displayDate + "</div>";
     }
 
     void loadSalutation(Object Sender, EventArgs e)
@@ -318,7 +322,8 @@
 	<div style=" width:800px" id="form_container">
 	
 		<form AUTOCOMPLETE="off" runat="server" id="registration_form" class="appnitro"  method="post" action="" enctype="multipart/form-data">
-		<div class="form_description">
+		<input type="hidden" value="" id="EncodedAdditionalInformation" name="EncodedAdditionalInformation"/>
+        <div class="form_description">
 			<h3>Course Registration <%if((string)ViewData["ad"] == "_ad") %><%= " & And Attendance Taking" %></h3> <span style="color:red;"><%= (string)ViewData["errormsg"] %></span>
 		</div>						
 			<ul >
@@ -343,7 +348,7 @@
 		                        <label class="description" for="element_4">课程<br>
                                 Course Interested <span style="color:red;">*</span></label>
 		                        <div>
-			                        <asp:DropDownList  style=" width:200px" class="element select medium" OnLoad="loadcourse" name="candidate_course" ID="candidate_course" runat="server">
+			                        <asp:DropDownList  style=" width:200px" class="element select medium" onChange="onChangeCourse(this);" OnLoad="loadcourse" name="candidate_course" ID="candidate_course" runat="server">
                                     </asp:DropDownList>
                                     <input type="hidden" id="candidate_course_name" name="candidate_course_name" value="" />
 		                        </div> 
@@ -362,6 +367,9 @@
                 </table>
                 <div id="visitor" <%=isOn()%>>
                     <table width="800" border="0">
+                    <tr>
+                        <td colspan="4" style=" color: Gray; font-size:smaller; font-style:italic"><label id="courseDisplayDate"></label></td>
+                    </tr>
                     <tr>
                         <td width="180">
                             <li style="width:110px" id="li3" >
@@ -522,4 +530,6 @@
 	</div>
 	<img style=" width:800px" id="bottom" src="/Content/images/bottom.png" alt="">
 	</div>
+
+    <%=ViewData["displayCourseInfo"]%>
 </asp:Content>

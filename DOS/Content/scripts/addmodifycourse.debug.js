@@ -8,6 +8,14 @@ $(document).ready(function () {
         })
     });
 
+    $('#lastRegistrationDate').datepick({ maxDate: +99, dateFormat: 'dd/mm/yyyy', pickerClass: 'datepick-jumps',
+        renderer: $.extend({}, $.datepick.defaultRenderer,
+        { picker: $.datepick.defaultRenderer.picker.
+            replace(/\{link:prev\}/, '{link:prevJump}{link:prev}').
+            replace(/\{link:next\}/, '{link:nextJump}{link:next}')
+        })
+    });
+
     $("#" + getFormID()).attr("action", unescape(getSubmitURL()));
     $('#submitFormButton').click(function () {
         var msg = checkForm();
@@ -28,6 +36,12 @@ function checkForm() {
     }
     if (jQuery.trim($("#startdate").val()).length == 0) {
         errormsg += "- Start date is mandatory.\n";
+    }
+    if (jQuery.trim($("#lastRegistrationDate").val()).length == 0) {
+        errormsg += "- Last Registration is mandatory.\n";
+    }
+    if (jQuery.trim($("#" + getAdditionalAgreementID()).val()).length == 0) {
+        errormsg += "- Additional Information is mandatory.\n";
     }
     if (jQuery.trim($("#timestart").val()).length == 0) {
         errormsg += "- Start time is mandatory.\n";

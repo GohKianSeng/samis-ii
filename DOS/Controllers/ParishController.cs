@@ -132,6 +132,7 @@ namespace DOS.Controllers
                 ViewData["type"] = "update";
             }
             ViewData["listofchurcharea"] = sql_conn.usp_getAllChurchArea().ToList();
+            ViewData["listofadditionalinfo"] = sql_conn.usp_getAllCourseAdditionalInfo().ToList();
             ViewData["hidemenu"] = "true";
             return View();
         }
@@ -145,13 +146,15 @@ namespace DOS.Controllers
             string timestart = Request.Form["timestart"];
             string timeend = Request.Form["timeend"];
             string courseArea = Request.Form["aspnet_variable$MainContent$courseArea"];
+            string additionalAgreement = Request.Form["aspnet_variable$MainContent$AdditionalInfo"];
+            string lastRegistrationDate = Request.Form["lastRegistrationDate"];
             string incharge = Request.Form["incharge"];
             decimal fee = 0;
             int res;
             if(decimal.TryParse(Request.Form["fee"], out fee))
-                res = sql_conn.usp_addNewCourse(coursename, startdate, timestart, timeend, incharge, int.Parse(courseArea), fee).ElementAt(0).Result;
+                res = sql_conn.usp_addNewCourse(coursename, startdate, timestart, timeend, incharge, int.Parse(courseArea), fee, int.Parse(additionalAgreement), DateTime.ParseExact(lastRegistrationDate, "dd/MM/yyyy", null)).ElementAt(0).Result;
             else
-                res = sql_conn.usp_addNewCourse(coursename, startdate, timestart, timeend, incharge, int.Parse(courseArea), (decimal)0).ElementAt(0).Result;
+                res = sql_conn.usp_addNewCourse(coursename, startdate, timestart, timeend, incharge, int.Parse(courseArea), (decimal)0, int.Parse(additionalAgreement), DateTime.ParseExact(lastRegistrationDate, "dd/MM/yyyy", null)).ElementAt(0).Result;
             if (res == 1)
             {
                 ViewData["errormsg"] = "Course added.";
@@ -162,6 +165,7 @@ namespace DOS.Controllers
 
             ViewData["hidemenu"] = "true";
             ViewData["listofchurcharea"] = sql_conn.usp_getAllChurchArea().ToList();
+            ViewData["listofadditionalinfo"] = sql_conn.usp_getAllCourseAdditionalInfo().ToList();
             return View("addcourse");
         }
 
@@ -192,13 +196,16 @@ namespace DOS.Controllers
             string timestart = Request.Form["timestart"];
             string timeend = Request.Form["timeend"];
             string courseArea = Request.Form["aspnet_variable$MainContent$courseArea"];
+            string additionalAgreement = Request.Form["aspnet_variable$MainContent$AdditionalInfo"];
+            string lastRegistrationDate = Request.Form["lastRegistrationDate"];
             string incharge = Request.Form["incharge"];
 
-            int res = sql_conn.usp_UpdateCourse(int.Parse(courseid), coursename, startdate, timestart, timeend, incharge, int.Parse(courseArea)).ElementAt(0).Result;
+            int res = sql_conn.usp_UpdateCourse(int.Parse(courseid), coursename, startdate, timestart, timeend, incharge, int.Parse(courseArea), int.Parse(additionalAgreement), DateTime.ParseExact(lastRegistrationDate, "dd/MM/yyyy", null)).ElementAt(0).Result;
 
             ViewData["courseinformation"] = sql_conn.usp_getCourseInfo(int.Parse(courseid)).ElementAt(0);
             ViewData["type"] = "update";
             ViewData["listofchurcharea"] = sql_conn.usp_getAllChurchArea().ToList();
+            ViewData["listofadditionalinfo"] = sql_conn.usp_getAllCourseAdditionalInfo().ToList();
             ViewData["hidemenu"] = "true";
             if (res == 1)
             {

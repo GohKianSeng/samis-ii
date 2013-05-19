@@ -105,6 +105,11 @@
             </td>                     
         </tr>
         <tr>
+            <td colspan="4" style="border: 1px dotted">
+                <%= ((usp_getCourseParticipantInformationResult)ViewData["participantinformation"]).AdditionalInformation.ToString() %>
+            </td>
+        </tr>
+        <tr>
             <td colspan="2">
                 Attendance<br />
                 <table class="tablesorter" width="70%" id="MemberCaseTable" style=" width:100%; padding:0; margin-left:0%; margin-right:0%;">

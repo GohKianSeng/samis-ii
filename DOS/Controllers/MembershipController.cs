@@ -232,9 +232,19 @@ namespace DOS.Controllers
         }
 
         [ErrorHandler]
-        public ActionResult displayCourseAgreement()
+        public ActionResult displayCourseAgreement(string id)
         {
-            return View("CourseAgreement");
+            usp_getCourseAdditionalInformationResult res = sql_conn.usp_getCourseAdditionalInformation(int.Parse(id)).ElementAt(0);
+            ViewData["result"] = res.AgreementHTML;
+            return View("simplehtml");
+        }
+
+        [ErrorHandler]
+        public ActionResult displayCourseAgreementFrame(string id, string random)
+        {
+            ViewData["iframename"] = random;
+            ViewData["siteURL"] = "./displayCourseAgreement?id=" + id;
+            return View("displayModalClose");
         }
 
         private results getGooglePostalCodeResult(string postalCode){
@@ -408,6 +418,7 @@ namespace DOS.Controllers
             string candidate_nationality = Request.Form["aspnet_variable$MainContent$candidate_nationality"];
             string candidate_occupation = Request.Form["aspnet_variable$MainContent$candidate_occupation"];
             string candidate_postal_code = Request.Form["candidate_postal_code"];
+            string decodedAdditionalInformation = HttpUtility.UrlDecode(Request.Form["EncodedAdditionalInformation"]);
             string candidate_blk_house;
             if (Request.Form["candidate_blk_house"] != null)
                 candidate_blk_house = Request.Form["candidate_blk_house"];
@@ -425,6 +436,8 @@ namespace DOS.Controllers
             string candidate_church = Request.Form["aspnet_variable$MainContent$church"];
             string candidate_church_others = Request.Form["church_others"];
             string candidate_course_name = Request.Form["candidate_course_name"];
+
+            XElement additionalInfo = XElement.Parse(decodedAdditionalInformation);
 
             ViewData["candidate_course_name"] = candidate_course_name;
             ViewData["existingmember"] = existingmember;
@@ -475,6 +488,13 @@ namespace DOS.Controllers
                 mailbody = mailbody.Replace("[candidate_email]",candidate_email);
                 mailbody = mailbody.Replace("[candidate_unit]",candidate_unit);
                 mailbody = mailbody.Replace("[candidate_street_address]",candidate_street_address);
+                mailbody = mailbody.Replace("[AdditionalInformation]",decodedAdditionalInformation);
+                string age = "";
+                if (candidate_dob.Length > 0)
+                {
+                    age = (DateTime.Now.Year - DateTime.ParseExact(candidate_dob, "dd/MM/yyyy", null).Year).ToString();
+                }
+                mailbody = mailbody.Replace("[Age]", age);
 
                 MailMessage mail = new MailMessage();
                 mail.IsBodyHtml = true;
@@ -502,14 +522,13 @@ namespace DOS.Controllers
             }
 
             XElement visitorxml = toUpdateXMLVisitor("Unspecified", candidate_nric, candidate_nric, candidate_salutation.Split('~')[0], candidate_english_name, candidate_unit, candidate_blk_house, candidate_nationality.Split('~')[0], candidate_occupation.Split('~')[0], candidate_dob, candidate_gender, candidate_street_address, candidate_postal_code, candidate_email, candidate_education.Split('~')[0], candidate_contact, candidate_church.Split('~')[0], candidate_church_others);
-
             if (existingmember == "null")
             {
-                sql_conn.usp_addNewCourseVisitorParticipant(visitorxml, candidate_course, ref result, ref sal, ref name, ref course);                
+                sql_conn.usp_addNewCourseVisitorParticipant(visitorxml, candidate_course, ref result, ref sal, ref name, ref course, additionalInfo);                
             }
             else
             {
-                mem = sql_conn.usp_addNewCourseMemberParticipant(candidate_nric, int.Parse(candidate_course)).ElementAt(0);
+                mem = sql_conn.usp_addNewCourseMemberParticipant(candidate_nric, int.Parse(candidate_course), additionalInfo).ElementAt(0);
                 sal = mem.SalutationName;
                 name = mem.EnglishName;
                 course = mem.CourseName;
@@ -1286,6 +1305,24 @@ namespace DOS.Controllers
             return View("simplehtml");
         }
 
+        public ActionResult submitExtraCourseQuestion()
+        {
+            string temp = "<div>";
+            for (int x = 0; x < Request.Form.Count; x++)
+            {
+                string sss = Request.Form.Keys[x].ToString();
+                if (sss.StartsWith("extra_"))
+                {
+                    temp += sss.Substring(6) + ":<br />";
+                    temp += Request.Form[sss] + "<br /><br />";
+                }
+            }
+            temp += "</div>";
+
+            ViewData["result"] = Microsoft.JScript.GlobalObject.escape(temp);
+            return View("CourseAgreement");
+
+        }
 
 
 

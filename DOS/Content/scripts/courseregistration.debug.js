@@ -24,7 +24,6 @@ $(document).ready(function () {
 
         }
     });
-    changeChurch();
 
     if (getCookie('RememberMeCE') == "On" && getSystemMode() != "FULL") {
         $("#candidate_nric").val($.cookie('candidate_nric'));
@@ -45,9 +44,15 @@ $(document).ready(function () {
         $("#candidate_contact").val($.cookie('candidate_contact'));
         $("#candidate_email").val($.cookie('candidate_email'));
         $('#RememberMe').attr('checked', 'checked');
-    }
+        $("#church_others").val($.cookie('candidate_churchOthers'));
 
+    }
+    changeChurch();
 });
+
+function onChangeCourse(obj) {
+    $("#courseDisplayDate").html("Course schedule: <br />" + $("#courseInfo_" + $(obj).val()).html());
+}
 
 function PostalCodeKeyup(e) {
     if (jQuery.trim($("#candidate_postal_code").val()).length != 6) {
@@ -91,7 +96,7 @@ function loadAddressFromPostalCode(postalcode) {
 }
 
 function changeChurch() {
-    if ($("#" + getChurchByID()).val() == "28") {
+    if ($("#" + getChurchByID()).val() == "28" || $("#" + getChurchByID()).val() == "28~Others") {
         $("#church_others").show();
         $("#church_others").watermark("Name of church");
     }
@@ -164,7 +169,7 @@ function checkForm(){
         $.cookie('candidate_contact', $("#candidate_contact").val(), { expires: 365 });
         $.cookie('candidate_email', $("#candidate_email").val(), { expires: 365 });
         $.cookie('RememberMeCE', "On", { expires: 365 });
-
+        $.cookie('candidate_churchOthers', $("#church_others").val(), { expires: 365 });
         
     }
     else {
@@ -184,15 +189,17 @@ function checkForm(){
         $.cookie('candidate_contact', null, { expires: 365 });
         $.cookie('candidate_email', null, { expires: 365 });
         $.cookie('RememberMeCE', null, { expires: 365 });
+        $.cookie('candidate_churchOthers', null, { expires: 365 });
     }
 
-
-    domwindow = dhtmlmodal.open("Agreement", 'ajax', "/membership.mvc/displayCourseAgreement", "Agreement", 'width=800px,height=300px,center=1,resize=1,scrolling=1');
+    var random = Math.random() * 11;
+    domwindow = dhtmlmodal.open("Agreement", 'ajax', "/membership.mvc/displayCourseAgreementFrame?random=" + random.toString() + "&id=" + $("#" + getCourseID() + " > option:selected").val(), "Agreement", 'width=800px,height=300px,center=1,resize=1,scrolling=1');
     domwindow.onclose = function () { //Define custom code to run when window is closed
         if (agreeordisagree == 'agree') {
             $("#candidate_course_name").val($("#" + getCourseID() + " > option:selected").text());
             document.getElementById("maindiv").style.display = "none";
             document.getElementById("loadingdiv").style.display = "block";
+            $("#EncodedAdditionalInformation").val(window.frames[random.toString()].document.getElementById('agreementxml').value);
             $("#" + getFormID()).submit();
         }
         return true;

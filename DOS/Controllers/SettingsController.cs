@@ -123,7 +123,9 @@ namespace DOS.Controllers
 
         private void downloadAndDeleteRemoteStorageFile(string filename, string host)
         {
-            
+            if (filename.Length <= 0)
+                return;
+
             WebClient client = new WebClient();
             client.DownloadFile(host + "/UploadFile.mvc/downloadPhoto?guid=&filename=" + filename, "C:\\tempfile\\icphoto\\" + filename);
             client.DownloadString(host + "/UploadFile.mvc/deleteRemoteStoragePhoto?filename=" + filename);
@@ -304,6 +306,12 @@ namespace DOS.Controllers
                             break;
                         case "AllCourse":
                             result = sql_conn.usp_SyncAllSettings_Course(xml).ElementAt(0).Result;
+                            break;
+                        case "AllChurchAgreement":
+                            result = sql_conn.usp_SyncAllSettings_AdditionalInformation(xml).ElementAt(0).Result;
+                            break;
+                        case "AllChurchEmail":
+                            result = sql_conn.usp_SyncAllSettings_EmailContent(xml).ElementAt(0).Result;
                             break;
                     }
 
@@ -520,6 +528,25 @@ namespace DOS.Controllers
             else if (familyty.Count() > 0)
                 ViewData["familytypexml"] = familyty.ElementAt(0).XML.ToString();
 
+
+            IEnumerable<usp_getAllCourseAdditionalInfoInXMLResult> tAdditionalInfoContent = sql_conn.usp_getAllCourseAdditionalInfoInXML().ToList();
+            XElement AdditionalInfoContent = new XElement("ChurchAdditionalInfo");
+            if (tAdditionalInfoContent.Count() == 0)
+                ViewData["additionalinfoxml"] = "<ChurchAdditionalInfo />";
+            else if (tAdditionalInfoContent.Count() > 0)
+            {
+                XElement temp = tAdditionalInfoContent.ElementAt(0).XML;
+                for (int x = 0; x < temp.Elements("AdditionalInfo").Count(); x++)
+                {
+                    XElement additionalInfo = new XElement("AdditionalInfo");
+                    additionalInfo.Add(new XElement("AgreementID", temp.Elements("AdditionalInfo").ElementAt(x).Element("AgreementID").Value));
+                    additionalInfo.Add(new XElement("AgreementType", temp.Elements("AdditionalInfo").ElementAt(x).Element("AgreementType").Value));
+                    additionalInfo.Add(new XElement("AgreementHTML", System.Uri.EscapeDataString(temp.Elements("AdditionalInfo").ElementAt(x).Element("AgreementHTML").Value)));
+                    AdditionalInfoContent.Add(additionalInfo);
+                }
+
+                ViewData["additionalinfoxml"] = AdditionalInfoContent.ToString();
+            }
             return View();
         }
 
@@ -812,6 +839,39 @@ namespace DOS.Controllers
                 ViewData["emailxml"] = email.ElementAt(0).XML.ToString();
 
             xmldoc = XElement.Parse((string)ViewData["emailxml"]);
+            xmldoc.Add(new XElement("Result", result));
+
+            ViewData["result"] = System.Uri.EscapeDataString(xmldoc.ToString());
+            return View("simplehtml");
+        }
+
+        [ErrorHandler]
+        [Authorize]
+        [AcceptVerbs(HttpVerbs.Post)]
+        public ActionResult updateAdditionalInfo(string xml)
+        {
+            XElement xmldoc = XElement.Parse(HttpUtility.UrlDecode(xml));
+            XElement input = new XElement("ChurchAdditionalInfo");
+
+            for (int x = 0; x < xmldoc.Elements("AdditionalInfo").Count(); x++)
+            {
+                XElement conf = new XElement("AdditionalInfo");
+                conf.Add(new XElement("AgreementID", HttpUtility.UrlDecode(xmldoc.Elements("AdditionalInfo").ElementAt(x).Element("AgreementID").Value)));
+                conf.Add(new XElement("AgreementType", HttpUtility.UrlDecode(xmldoc.Elements("AdditionalInfo").ElementAt(x).Element("AgreementType").Value)));
+                conf.Add(new XElement("AgreementHTML", HttpUtility.UrlDecode(xmldoc.Elements("AdditionalInfo").ElementAt(x).Element("AgreementHTML").Value)));
+                input.Add(conf);
+            }
+
+
+            string result = sql_conn.usp_UpdateAdditionalInfo(input).ElementAt(0).Result;
+
+            IEnumerable<usp_getAllCourseAdditionalInfoInXMLResult> additionalinfo = sql_conn.usp_getAllCourseAdditionalInfoInXML().ToList();
+            if (additionalinfo.Count() == 0)
+                ViewData["additionalinfoxml"] = "<ChurchAdditionalInfo />";
+            else if (additionalinfo.Count() > 0)
+                ViewData["additionalinfoxml"] = additionalinfo.ElementAt(0).XML.ToString();
+
+            xmldoc = XElement.Parse((string)ViewData["additionalinfoxml"]);
             xmldoc.Add(new XElement("Result", result));
 
             ViewData["result"] = System.Uri.EscapeDataString(xmldoc.ToString());
