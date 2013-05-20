@@ -45,7 +45,7 @@ $(document).ready(function () {
         $("#candidate_email").val($.cookie('candidate_email'));
         $('#RememberMe').attr('checked', 'checked');
         $("#church_others").val($.cookie('candidate_churchOthers'));
-
+        $("#" + getCongregationID()).val($.cookie('candidate_congregation'));        
     }
     changeChurch();
 });
@@ -104,6 +104,14 @@ function changeChurch() {
         $("#church_others").val('');
         $("#church_others").hide();
     }
+
+    if ($("#" + getChurchByID()).val().split('~')[0] == getCurrentParish()) {
+        $("#congregationDiv").show();
+    }
+    else {
+        $("#congregationDiv").hide();
+        $("#" + getCongregationID()).val("");
+    }
 }
 
 function checkForm(){
@@ -143,8 +151,11 @@ function checkForm(){
             errormsg += "- Postal Code is invalid\n";
 
         if (jQuery.trim($('#' + getChurchByID()).val()).length == 0)
-            errormsg += "- Church is mandatory\n";       
+            errormsg += "- Church is mandatory\n";
 
+        if ($("#" + getChurchByID()).val().split('~')[0] == getCurrentParish() && $("#" + getCongregationID()).val() == "") {
+            errormsg += "- Congregation is mandatory\n";
+        }
     }
 
     if (errormsg.length > 0) {
@@ -170,6 +181,7 @@ function checkForm(){
         $.cookie('candidate_email', $("#candidate_email").val(), { expires: 365 });
         $.cookie('RememberMeCE', "On", { expires: 365 });
         $.cookie('candidate_churchOthers', $("#church_others").val(), { expires: 365 });
+        $.cookie('candidate_congregation', $("#" + getCongregationID()).val(), { expires: 365 });
         
     }
     else {
@@ -190,6 +202,7 @@ function checkForm(){
         $.cookie('candidate_email', null, { expires: 365 });
         $.cookie('RememberMeCE', null, { expires: 365 });
         $.cookie('candidate_churchOthers', null, { expires: 365 });
+        $.cookie('candidate_congregation', null, { expires: 365 });
     }
 
     var random = Math.random() * 11;

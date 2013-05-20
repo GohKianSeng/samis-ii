@@ -436,6 +436,7 @@ namespace DOS.Controllers
             string candidate_church = Request.Form["aspnet_variable$MainContent$church"];
             string candidate_church_others = Request.Form["church_others"];
             string candidate_course_name = Request.Form["candidate_course_name"];
+            string candidate_Congregation = Request.Form["aspnet_variable$MainContent$Congregation"];
 
             XElement additionalInfo = XElement.Parse(decodedAdditionalInformation);
 
@@ -489,6 +490,7 @@ namespace DOS.Controllers
                 mailbody = mailbody.Replace("[candidate_unit]",candidate_unit);
                 mailbody = mailbody.Replace("[candidate_street_address]",candidate_street_address);
                 mailbody = mailbody.Replace("[AdditionalInformation]",decodedAdditionalInformation);
+                mailbody = mailbody.Replace("[Congregation]", candidate_Congregation);
                 string age = "";
                 if (candidate_dob.Length > 0)
                 {

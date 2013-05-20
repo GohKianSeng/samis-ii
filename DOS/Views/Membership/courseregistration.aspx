@@ -32,6 +32,18 @@
     
 <script language="C#" runat="server">
 
+    void loadCongregation(Object Sender, EventArgs e)
+    {
+        List<usp_getAllCongregationResult> res = (List<usp_getAllCongregationResult>)ViewData["congregationlist"];
+        ListItem item = new ListItem("", "");
+        Congregation.Items.Add(item);
+        for (int x = 0; x < res.Count; x++)
+        {
+            item = new ListItem(res.ElementAt(x).CongregationName, res.ElementAt(x).CongregationName);
+            Congregation.Items.Add(item);
+        }
+    }
+
     void loadOccpation(Object Sender, EventArgs e)
     {
         List<usp_getAllOccupationResult> res = (List<usp_getAllOccupationResult>)ViewData["occupationlist"];
@@ -256,6 +268,10 @@
 </script>
 
 <script type="text/javascript">
+    function getCurrentParish(){
+        return "<%= Session["currentparish"]%>";
+    }
+    
     function getDateRangeString(){
         return '<%=DateTime.Now.Year - 100%>:<%=DateTime.Now.Year%>';
     }
@@ -289,6 +305,10 @@
     function getFormID() {
         return "<%= registration_form.ClientID %>";
     }
+    function getCongregationID(){
+        return "<%= Congregation.ClientID%>";
+    }
+
     function getSubmitURL(){
         return "/membership.mvc/submitcourseregistration<%=isAD() %>";
     }
@@ -459,6 +479,16 @@
                                                                                 
 			                    </div> 
 		                    </li>
+                        </td>
+                        <td colspan="2">
+                            <li style="width:90px; display:none" id="congregationDiv">
+                                <label class="description" for="element_9">堂会<br>
+                                Congregation<span style="color:red;">*</span></label>
+		                        <div>
+                                    <asp:DropDownList  style="width:300px" onchange="changeChurch();" OnLoad="loadCongregation" class="element select medium" name="church" ID="Congregation" runat="server">
+                                    </asp:DropDownList>                                
+                                </div>
+                            </li>
                         </td>
                     </tr>
                     <tr>
