@@ -96,7 +96,7 @@ function loadAddressFromPostalCode(postalcode) {
 }
 
 function changeChurch() {
-    if ($("#" + getChurchByID()).val() == "28" || $("#" + getChurchByID()).val() == "28~Others") {
+    if ($("#" + getChurchByID()).val().split('~')[0] == getOtherParish()) {
         $("#church_others").show();
         $("#church_others").watermark("Name of church");
     }
@@ -152,6 +152,10 @@ function checkForm(){
 
         if (jQuery.trim($('#' + getChurchByID()).val()).length == 0)
             errormsg += "- Church is mandatory\n";
+
+        if ($("#" + getChurchByID()).val().split('~')[0] == getOtherParish() && $("#church_others").val() == "") {
+            errormsg += "- Name of church is mandatory\n";
+        }
 
         if ($("#" + getChurchByID()).val().split('~')[0] == getCurrentParish() && $("#" + getCongregationID()).val() == "") {
             errormsg += "- Congregation is mandatory\n";

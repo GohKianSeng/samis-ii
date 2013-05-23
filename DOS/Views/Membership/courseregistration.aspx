@@ -272,6 +272,10 @@
         return "<%= Session["currentparish"]%>";
     }
     
+    function getOtherParish(){
+        return "<%= Session["OtherChurchParish"]%>";
+    }
+
     function getDateRangeString(){
         return '<%=DateTime.Now.Year - 100%>:<%=DateTime.Now.Year%>';
     }

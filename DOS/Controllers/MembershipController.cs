@@ -491,6 +491,11 @@ namespace DOS.Controllers
                 mailbody = mailbody.Replace("[candidate_street_address]",candidate_street_address);
                 mailbody = mailbody.Replace("[AdditionalInformation]",decodedAdditionalInformation);
                 mailbody = mailbody.Replace("[Congregation]", candidate_Congregation);
+                if(candidate_church.StartsWith((string)Session["OtherChurchParish"]))
+                    mailbody = mailbody.Replace("[combine_church]", candidate_church_others);
+                else
+                    mailbody = mailbody.Replace("[combine_church]", candidate_church);
+
                 string age = "";
                 if (candidate_dob.Length > 0)
                 {
