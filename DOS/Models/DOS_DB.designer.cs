@@ -1330,6 +1330,14 @@ namespace DOS.Models
 			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), xML);
 			return ((ISingleResult<usp_SyncAllSettings_AdditionalInformationResult>)(result.ReturnValue));
 		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.usp_getCourseReport")]
+		public ISingleResult<usp_getCourseReportResult> usp_getCourseReport([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> courseID, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="TotalDay", DbType="Int")] ref System.Nullable<int> totalDay)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), courseID, totalDay);
+			totalDay = ((System.Nullable<int>)(result.GetParameterValue(1)));
+			return ((ISingleResult<usp_getCourseReportResult>)(result.ReturnValue));
+		}
 	}
 	
 	public partial class usp_addNewCellgroupResult
@@ -12715,6 +12723,176 @@ namespace DOS.Models
 				if ((this._Result != value))
 				{
 					this._Result = value;
+				}
+			}
+		}
+	}
+	
+	public partial class usp_getCourseReportResult
+	{
+		
+		private string _NRIC;
+		
+		private string _Name;
+		
+		private string _Gender;
+		
+		private string _Church;
+		
+		private string _Congregation;
+		
+		private string _Contact;
+		
+		private string _Email;
+		
+		private System.Nullable<System.DateTime> _Schedule;
+		
+		private int _Attendance;
+		
+		public usp_getCourseReportResult()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_NRIC", DbType="VarChar(20)")]
+		public string NRIC
+		{
+			get
+			{
+				return this._NRIC;
+			}
+			set
+			{
+				if ((this._NRIC != value))
+				{
+					this._NRIC = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Name", DbType="VarChar(50)")]
+		public string Name
+		{
+			get
+			{
+				return this._Name;
+			}
+			set
+			{
+				if ((this._Name != value))
+				{
+					this._Name = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Gender", DbType="VarChar(1)")]
+		public string Gender
+		{
+			get
+			{
+				return this._Gender;
+			}
+			set
+			{
+				if ((this._Gender != value))
+				{
+					this._Gender = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Church", DbType="VarChar(100) NOT NULL", CanBeNull=false)]
+		public string Church
+		{
+			get
+			{
+				return this._Church;
+			}
+			set
+			{
+				if ((this._Church != value))
+				{
+					this._Church = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Congregation", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
+		public string Congregation
+		{
+			get
+			{
+				return this._Congregation;
+			}
+			set
+			{
+				if ((this._Congregation != value))
+				{
+					this._Congregation = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Contact", DbType="VarChar(15)")]
+		public string Contact
+		{
+			get
+			{
+				return this._Contact;
+			}
+			set
+			{
+				if ((this._Contact != value))
+				{
+					this._Contact = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Email", DbType="VarChar(100)")]
+		public string Email
+		{
+			get
+			{
+				return this._Email;
+			}
+			set
+			{
+				if ((this._Email != value))
+				{
+					this._Email = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Schedule", DbType="Date")]
+		public System.Nullable<System.DateTime> Schedule
+		{
+			get
+			{
+				return this._Schedule;
+			}
+			set
+			{
+				if ((this._Schedule != value))
+				{
+					this._Schedule = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Attendance", DbType="Int NOT NULL")]
+		public int Attendance
+		{
+			get
+			{
+				return this._Attendance;
+			}
+			set
+			{
+				if ((this._Attendance != value))
+				{
+					this._Attendance = value;
 				}
 			}
 		}

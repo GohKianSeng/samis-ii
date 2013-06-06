@@ -55,6 +55,7 @@ Course Related
             <% }
               else{%>
                 <li><a href="#tab3">Participants</a></li>
+                <li><a href="#tab4">Attendance Report</a></li>
                 <li><a href="#tab2">Modify a Course</a></li>                
             <%} %>
         </ul>
@@ -78,6 +79,16 @@ Course Related
                     <tr>
                         <td>
 		                    <iframe id="Iframe2" frameborder="0" src="/parish.mvc/ListOfCourseParticipants<%=(string)ViewData["modify"]%>" style="width: 100%; height: 450px;">
+                            <p>Your browser does not support iframes.</p></iframe>
+                        </td>                        
+                    </tr>
+                </table> 
+            </div>
+            <div id="tab4" class="tab_content">
+                <table class="dottedview" cellspacing="0">
+                    <tr>
+                        <td>
+		                    <iframe id="Iframe3" frameborder="0" src="/parish.mvc/attendanceReport<%=(string)ViewData["modify"]%>" style="width: 100%; height: 450px;">
                             <p>Your browser does not support iframes.</p></iframe>
                         </td>                        
                     </tr>

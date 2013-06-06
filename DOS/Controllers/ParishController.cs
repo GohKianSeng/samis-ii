@@ -187,6 +187,16 @@ namespace DOS.Controllers
 
         [ErrorHandler]
         [Authorize]
+        public ActionResult attendanceReport(string courseid)
+        {
+            int? totalday = 0;
+            ViewData["report"] = sql_conn.usp_getCourseReport(int.Parse(courseid), ref totalday).ToList();
+            ViewData["totalday"] = totalday;
+            return View("AttendanceReport");
+        }
+
+        [ErrorHandler]
+        [Authorize]
         public ActionResult updateAcourse()
         {
             string courseid = Request.Form["courseid"];

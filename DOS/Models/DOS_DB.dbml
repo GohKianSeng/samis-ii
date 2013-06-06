@@ -1505,4 +1505,19 @@
       <Column Name="Result" Type="System.String" DbType="VarChar(7) NOT NULL" CanBeNull="false" />
     </ElementType>
   </Function>
+  <Function Name="dbo.usp_getCourseReport" Method="usp_getCourseReport">
+    <Parameter Name="courseID" Type="System.Int32" DbType="Int" />
+    <Parameter Name="TotalDay" Parameter="totalDay" Type="System.Int32" DbType="Int" Direction="InOut" />
+    <ElementType Name="usp_getCourseReportResult">
+      <Column Name="NRIC" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="Name" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Gender" Type="System.String" DbType="VarChar(1)" CanBeNull="true" />
+      <Column Name="Church" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="Congregation" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Contact" Type="System.String" DbType="VarChar(15)" CanBeNull="true" />
+      <Column Name="Email" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="Schedule" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="Attendance" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
 </Database>
