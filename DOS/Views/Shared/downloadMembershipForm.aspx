@@ -402,7 +402,7 @@
     }
 
     function getPostalCodeRetrival(){
-        return "<%=(string)Session["PostalCodeRetrival"] %>"
+        return "<%=((string)Session["PostalCodeRetrival"]).ToUpper() %>"
     }
 
     function getPostalCodeRetrivalURL(){
@@ -423,6 +423,10 @@
 
     function getSubmitURL(){
         return "<%= submitURL() %>";
+    }
+
+    function getBasicSearchRetrivalURL(){
+        return "<%= Session["BasicSearchRetrivalURL"]%>";
     }
 </script>
 

@@ -285,7 +285,7 @@
     }
 
     function getPostalCodeRetrival(){
-        return "<%=(string)Session["PostalCodeRetrival"] %>"
+        return "<%=((string)Session["PostalCodeRetrival"]).ToUpper() %>";
     }
     
     function getNationalityID(){
@@ -331,6 +331,9 @@
         return "<%=((string)Session["SystemMode"]).ToUpper() %>";        
     }
 
+    function getBasicSearchRetrivalURL(){
+        return "<%= Session["BasicSearchRetrivalURL"]%>";
+    }
 </script>
 <div id="loadingdiv" style=" display:none">
     <table style=" height:90%"  width="100%">

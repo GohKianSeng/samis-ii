@@ -236,7 +236,7 @@
     }
 
     function getPostalCodeRetrival(){
-        return "<%=(string)Session["PostalCodeRetrival"] %>"
+        return "<%=((string)Session["PostalCodeRetrival"]).ToUpper() %>"
     }
     function getPostalCodeRetrivalURL(){
         return "<%= (string)Session["PostalCodeRetrivalURL"]%>";
@@ -258,6 +258,9 @@
         return "<%= church.ClientID %>";
     }   
 
+    function getBasicSearchRetrivalURL(){
+        return "<%= Session["BasicSearchRetrivalURL"]%>";
+    }
 </script>
 
 <form AUTOCOMPLETE="off" id="registration_form" action="/membership.mvc/submitUpdateVisitorForm" enctype="multipart/form-data" runat="server">

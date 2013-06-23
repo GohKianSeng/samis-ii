@@ -244,7 +244,7 @@
     }
 
     function getPostalCodeRetrival(){
-        return "<%=(string)Session["PostalCodeRetrival"] %>"
+        return "<%=((string)Session["PostalCodeRetrival"]).ToUpper() %>"
     }
 
     function getPostalCodeRetrivalURL(){
@@ -273,6 +273,10 @@
 
     function getFullCheck(){
         return "<%= ((string)Session["GreenFormFullCheck"]).ToUpper() %>";        
+    }
+    
+    function getBasicSearchRetrivalURL(){
+        return "<%= Session["BasicSearchRetrivalURL"]%>";
     }
 </script>
 

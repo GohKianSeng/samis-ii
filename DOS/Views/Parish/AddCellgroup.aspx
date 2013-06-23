@@ -108,7 +108,7 @@
     }
 
     function getPostalCodeRetrival(){
-        return "<%=(string)Session["PostalCodeRetrival"] %>"
+        return "<%=((string)Session["PostalCodeRetrival"]).ToUpper() %>";
     }
 
     function getPostalCodeRetrivalURL(){
@@ -121,6 +121,10 @@
         <%}else{ %>
             return "<%=((string)Session["SystemMode"]).ToUpper() %>";
         <%} %>
+    }
+
+    function getBasicSearchRetrivalURL(){
+        return "<%= Session["BasicSearchRetrivalURL"]%>";
     }
 </script>
 

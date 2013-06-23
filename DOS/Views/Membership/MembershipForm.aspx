@@ -502,6 +502,10 @@
     function changeHiddenText(obj, hidden){
         $("#"+hidden).val(obj.options[obj.selectedIndex].text);
     }
+
+    function getBasicSearchRetrivalURL(){
+        return "<%= Session["BasicSearchRetrivalURL"]%>";
+    }
 </script>
 <div id="loadingdiv" style=" display:none">
     <table style=" height:90%"  width="100%">

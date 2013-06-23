@@ -376,12 +376,21 @@ function loadAddressFromPostalCode(postalcode) {
         return;
     if (getPostalCodeRetrival() == "CLIENT") {
         var url = getPostalCodeRetrivalURL();
-        url = url + postalcode;
-        $.getJSON(url + "&callback=?", function (parsedJSON) {
-            $("#candidate_blk_house").val(parsedJSON.GeocodeInfo[0].BLOCK);
-            $("#candidate_street_address").val(parsedJSON.GeocodeInfo[0].ROAD);
-            $("#hidden_candidate_blk_house").val(parsedJSON.GeocodeInfo[0].BLOCK);
-            $("#hidden_candidate_street_address").val(parsedJSON.GeocodeInfo[0].ROAD);
+        var basicURL = getBasicSearchRetrivalURL();
+        basicURL = basicURL + postalcode;
+        $.getJSON(basicURL + "&callback=?", function (parsedJSON) {
+            if (parsedJSON.SearchResults[0].ErrorMessage == "No result(s) found.") {
+                alert("Invalid Postal Code");
+            }
+            else {
+                url = url + postalcode + "&location=" + parsedJSON.SearchResults[1].X.toString() + "," + parsedJSON.SearchResults[1].Y.toString();
+                $.getJSON(url + "&callback=?", function (parsedJSON) {
+                    $("#candidate_blk_house").val(parsedJSON.GeocodeInfo[0].BLOCK);
+                    $("#candidate_street_address").val(parsedJSON.GeocodeInfo[0].ROAD);
+                    $("#hidden_candidate_blk_house").val(parsedJSON.GeocodeInfo[0].BLOCK);
+                    $("#hidden_candidate_street_address").val(parsedJSON.GeocodeInfo[0].ROAD);
+                });
+            }
         });
     }
     else {

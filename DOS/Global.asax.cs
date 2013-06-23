@@ -72,8 +72,12 @@ namespace DOS
                 {
                     Session[res.ElementAt(x).ConfigName] = res.ElementAt(x).value.Trim().Replace("<KSTOKEN>", (string)Session["OneMapToken"]);
                 }
+                else if (res.ElementAt(x).ConfigName == "BasicSearchRetrivalURL")
+                {
+                    Session[res.ElementAt(x).ConfigName] = res.ElementAt(x).value.Trim().Replace("<KSTOKEN>", (string)Session["OneMapToken"]);
+                }
                 else
-                Session[res.ElementAt(x).ConfigName] = res.ElementAt(x).value.Trim();
+                    Session[res.ElementAt(x).ConfigName] = res.ElementAt(x).value.Trim();
             }
             //not using onemap.sg api, using googlemap instead
             if (((string)Session["OneMapToken"]).ToString() == "null")

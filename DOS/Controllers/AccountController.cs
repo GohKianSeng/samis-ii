@@ -85,6 +85,10 @@ namespace DOS.Controllers
                         {
                             Session[res.ElementAt(x).ConfigName] = res.ElementAt(x).value.Trim().Replace("<KSTOKEN>", (string)Session["OneMapToken"]);
                         }
+                        else if (res.ElementAt(x).ConfigName == "BasicSearchRetrivalURL")
+                        {
+                            Session[res.ElementAt(x).ConfigName] = res.ElementAt(x).value.Trim().Replace("<KSTOKEN>", (string)Session["OneMapToken"]);
+                        }
                         else
                             Session[res.ElementAt(x).ConfigName] = res.ElementAt(x).value.Trim();
                     }
