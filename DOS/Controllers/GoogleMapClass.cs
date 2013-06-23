@@ -16,6 +16,10 @@ public class results
     public address_component[] address_components { get; set; }
 }
 
+//{"SearchResults":[{"PageCount":"1"},{"SEARCHVAL":"410651","CATEGORY":"Building","X":"36240.2675","Y":"34932.6351"}]}
+//{ "GeocodeInfo":[{  "BUILDINGNAME": "EUNOS DAMAI VILLE",  "BLOCK": "651",  "ROAD": "JALAN TENAGA",  "POSTALCODE": "410651",  "XCOORD": "36240.26745964",  "YCOORD": "34932.63508184"}]}
+
+
 public class geometry
 {
     public string location_type { get; set; }
@@ -37,6 +41,18 @@ public class address_component
 
 public class OneMapResponse{
     public GeocodeInfo[] GeocodeInfo { get; set; }
+}
+
+public class OneMapBasicSearchResponse{
+    public SearchResults[] SearchResults { get; set; }
+}
+
+public class SearchResults
+{
+    public string ErrorMessage { get; set; }
+    public string CATEGORY { get; set; }
+    public string X { get; set; }
+    public string Y { get; set; }
 }
 
 public class GeocodeInfo

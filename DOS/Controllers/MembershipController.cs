@@ -293,18 +293,23 @@ namespace DOS.Controllers
             {
                 JavaScriptSerializer ser = new JavaScriptSerializer();
                 OneMapResponse onemap;
+                OneMapBasicSearchResponse oneMapBasic;
                 //onemap api
                 WebClient clientaa = new WebClient();
                 results AddressResult = new results();
-                string jsonstringOneMap = clientaa.DownloadString((string)Session["PostalCodeRetrivalURL"] + postalCode);
-                onemap = ser.Deserialize<OneMapResponse>(jsonstringOneMap);
-
-                if (onemap != null)
+                string jsonstringOneMapBasicSearch = clientaa.DownloadString((string)Session["BasicSearchRetrivalURL"] + postalCode);
+                oneMapBasic = ser.Deserialize<OneMapBasicSearchResponse>(jsonstringOneMapBasicSearch);
+                if (oneMapBasic.SearchResults[0].ErrorMessage != "No result(s) found.")
                 {
-                    AddressResult.BLOCK = onemap.GeocodeInfo.ElementAt(0).BLOCK;
-                    AddressResult.ROAD = onemap.GeocodeInfo.ElementAt(0).ROAD;
+                    string jsonstringOneMap = clientaa.DownloadString((string)Session["PostalCodeRetrivalURL"] + postalCode + "&location=" + oneMapBasic.SearchResults[1].X + "," + oneMapBasic.SearchResults[1].Y);
+                    onemap = ser.Deserialize<OneMapResponse>(jsonstringOneMap);
+                    if (onemap != null)
+                    {
+                        AddressResult.BLOCK = onemap.GeocodeInfo.ElementAt(0).BLOCK;
+                        AddressResult.ROAD = onemap.GeocodeInfo.ElementAt(0).ROAD;
+                    }
                 }
-
+                
                 ViewData["result"] = ser.Serialize(AddressResult);
                 return View("simplehtml");
             }
