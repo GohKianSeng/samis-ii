@@ -1338,6 +1338,49 @@ namespace DOS.Models
 			totalDay = ((System.Nullable<int>)(result.GetParameterValue(1)));
 			return ((ISingleResult<usp_getCourseReportResult>)(result.ReturnValue));
 		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.usp_addNewHWSMember")]
+		public int usp_addNewHWSMember([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Xml")] System.Xml.Linq.XElement newXML, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Result", DbType="VarChar(10)")] ref string result)
+		{
+			IExecuteResult result1 = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), newXML, result);
+			result = ((string)(result1.GetParameterValue(1)));
+			return ((int)(result1.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.usp_getAllHWSMember")]
+		public ISingleResult<usp_getAllHWSMemberResult> usp_getAllHWSMember()
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())));
+			return ((ISingleResult<usp_getAllHWSMemberResult>)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.usp_removeHWSMember")]
+		public int usp_removeHWSMember([global::System.Data.Linq.Mapping.ParameterAttribute(Name="ID", DbType="Int")] System.Nullable<int> iD)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), iD);
+			return ((int)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.usp_getHWSMemberInformation")]
+		public ISingleResult<usp_getHWSMemberInformationResult> usp_getHWSMemberInformation([global::System.Data.Linq.Mapping.ParameterAttribute(Name="ID", DbType="Int")] System.Nullable<int> iD)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), iD);
+			return ((ISingleResult<usp_getHWSMemberInformationResult>)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.usp_updateHWSMember")]
+		public ISingleResult<usp_updateHWSMemberResult> usp_updateHWSMember([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Xml")] System.Xml.Linq.XElement updateXML)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), updateXML);
+			return ((ISingleResult<usp_updateHWSMemberResult>)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.usp_UpdateHWSAttendance")]
+		public int usp_UpdateHWSAttendance([global::System.Data.Linq.Mapping.ParameterAttribute(Name="ID", DbType="Int")] System.Nullable<int> iD)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), iD);
+			return ((int)(result.ReturnValue));
+		}
 	}
 	
 	public partial class usp_addNewCellgroupResult
@@ -12893,6 +12936,588 @@ namespace DOS.Models
 				if ((this._Attendance != value))
 				{
 					this._Attendance = value;
+				}
+			}
+		}
+	}
+	
+	public partial class usp_getAllHWSMemberResult
+	{
+		
+		private int _ID;
+		
+		private string _EnglishSurname;
+		
+		private string _EnglishGivenName;
+		
+		private string _ChineseSurname;
+		
+		private string _ChineseGivenName;
+		
+		private System.Nullable<System.DateTime> _Birthday;
+		
+		private string _Contact;
+		
+		private string _AddressHouseBlock;
+		
+		private string _AddressStreet;
+		
+		private string _AddressUnit;
+		
+		private int _AddressPostalCode;
+		
+		private string _Photo;
+		
+		private string _NextOfKinName;
+		
+		private string _NextOfKinContact;
+		
+		private string _Remarks;
+		
+		public usp_getAllHWSMemberResult()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID", DbType="Int NOT NULL")]
+		public int ID
+		{
+			get
+			{
+				return this._ID;
+			}
+			set
+			{
+				if ((this._ID != value))
+				{
+					this._ID = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_EnglishSurname", DbType="VarChar(10) NOT NULL", CanBeNull=false)]
+		public string EnglishSurname
+		{
+			get
+			{
+				return this._EnglishSurname;
+			}
+			set
+			{
+				if ((this._EnglishSurname != value))
+				{
+					this._EnglishSurname = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_EnglishGivenName", DbType="VarChar(30) NOT NULL", CanBeNull=false)]
+		public string EnglishGivenName
+		{
+			get
+			{
+				return this._EnglishGivenName;
+			}
+			set
+			{
+				if ((this._EnglishGivenName != value))
+				{
+					this._EnglishGivenName = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ChineseSurname", DbType="NVarChar(2) NOT NULL", CanBeNull=false)]
+		public string ChineseSurname
+		{
+			get
+			{
+				return this._ChineseSurname;
+			}
+			set
+			{
+				if ((this._ChineseSurname != value))
+				{
+					this._ChineseSurname = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ChineseGivenName", DbType="NVarChar(3) NOT NULL", CanBeNull=false)]
+		public string ChineseGivenName
+		{
+			get
+			{
+				return this._ChineseGivenName;
+			}
+			set
+			{
+				if ((this._ChineseGivenName != value))
+				{
+					this._ChineseGivenName = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Birthday", DbType="Date")]
+		public System.Nullable<System.DateTime> Birthday
+		{
+			get
+			{
+				return this._Birthday;
+			}
+			set
+			{
+				if ((this._Birthday != value))
+				{
+					this._Birthday = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Contact", DbType="VarChar(10) NOT NULL", CanBeNull=false)]
+		public string Contact
+		{
+			get
+			{
+				return this._Contact;
+			}
+			set
+			{
+				if ((this._Contact != value))
+				{
+					this._Contact = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_AddressHouseBlock", DbType="VarChar(70) NOT NULL", CanBeNull=false)]
+		public string AddressHouseBlock
+		{
+			get
+			{
+				return this._AddressHouseBlock;
+			}
+			set
+			{
+				if ((this._AddressHouseBlock != value))
+				{
+					this._AddressHouseBlock = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_AddressStreet", DbType="VarChar(100) NOT NULL", CanBeNull=false)]
+		public string AddressStreet
+		{
+			get
+			{
+				return this._AddressStreet;
+			}
+			set
+			{
+				if ((this._AddressStreet != value))
+				{
+					this._AddressStreet = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_AddressUnit", DbType="VarChar(10) NOT NULL", CanBeNull=false)]
+		public string AddressUnit
+		{
+			get
+			{
+				return this._AddressUnit;
+			}
+			set
+			{
+				if ((this._AddressUnit != value))
+				{
+					this._AddressUnit = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_AddressPostalCode", DbType="Int NOT NULL")]
+		public int AddressPostalCode
+		{
+			get
+			{
+				return this._AddressPostalCode;
+			}
+			set
+			{
+				if ((this._AddressPostalCode != value))
+				{
+					this._AddressPostalCode = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Photo", DbType="VarChar(1000) NOT NULL", CanBeNull=false)]
+		public string Photo
+		{
+			get
+			{
+				return this._Photo;
+			}
+			set
+			{
+				if ((this._Photo != value))
+				{
+					this._Photo = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_NextOfKinName", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
+		public string NextOfKinName
+		{
+			get
+			{
+				return this._NextOfKinName;
+			}
+			set
+			{
+				if ((this._NextOfKinName != value))
+				{
+					this._NextOfKinName = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_NextOfKinContact", DbType="VarChar(10) NOT NULL", CanBeNull=false)]
+		public string NextOfKinContact
+		{
+			get
+			{
+				return this._NextOfKinContact;
+			}
+			set
+			{
+				if ((this._NextOfKinContact != value))
+				{
+					this._NextOfKinContact = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Remarks", DbType="VarChar(8000) NOT NULL", CanBeNull=false)]
+		public string Remarks
+		{
+			get
+			{
+				return this._Remarks;
+			}
+			set
+			{
+				if ((this._Remarks != value))
+				{
+					this._Remarks = value;
+				}
+			}
+		}
+	}
+	
+	public partial class usp_getHWSMemberInformationResult
+	{
+		
+		private int _ID;
+		
+		private string _EnglishSurname;
+		
+		private string _EnglishGivenName;
+		
+		private string _ChineseSurname;
+		
+		private string _ChineseGivenName;
+		
+		private string _DOB;
+		
+		private string _Contact;
+		
+		private string _AddressHouseBlock;
+		
+		private string _AddressStreet;
+		
+		private string _AddressUnit;
+		
+		private int _AddressPostalCode;
+		
+		private string _Photo;
+		
+		private string _NextOfKinName;
+		
+		private string _NextOfKinContact;
+		
+		private string _Remarks;
+		
+		public usp_getHWSMemberInformationResult()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID", DbType="Int NOT NULL")]
+		public int ID
+		{
+			get
+			{
+				return this._ID;
+			}
+			set
+			{
+				if ((this._ID != value))
+				{
+					this._ID = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_EnglishSurname", DbType="VarChar(10) NOT NULL", CanBeNull=false)]
+		public string EnglishSurname
+		{
+			get
+			{
+				return this._EnglishSurname;
+			}
+			set
+			{
+				if ((this._EnglishSurname != value))
+				{
+					this._EnglishSurname = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_EnglishGivenName", DbType="VarChar(30) NOT NULL", CanBeNull=false)]
+		public string EnglishGivenName
+		{
+			get
+			{
+				return this._EnglishGivenName;
+			}
+			set
+			{
+				if ((this._EnglishGivenName != value))
+				{
+					this._EnglishGivenName = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ChineseSurname", DbType="NVarChar(2) NOT NULL", CanBeNull=false)]
+		public string ChineseSurname
+		{
+			get
+			{
+				return this._ChineseSurname;
+			}
+			set
+			{
+				if ((this._ChineseSurname != value))
+				{
+					this._ChineseSurname = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ChineseGivenName", DbType="NVarChar(3) NOT NULL", CanBeNull=false)]
+		public string ChineseGivenName
+		{
+			get
+			{
+				return this._ChineseGivenName;
+			}
+			set
+			{
+				if ((this._ChineseGivenName != value))
+				{
+					this._ChineseGivenName = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DOB", DbType="VarChar(10)")]
+		public string DOB
+		{
+			get
+			{
+				return this._DOB;
+			}
+			set
+			{
+				if ((this._DOB != value))
+				{
+					this._DOB = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Contact", DbType="VarChar(10) NOT NULL", CanBeNull=false)]
+		public string Contact
+		{
+			get
+			{
+				return this._Contact;
+			}
+			set
+			{
+				if ((this._Contact != value))
+				{
+					this._Contact = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_AddressHouseBlock", DbType="VarChar(70) NOT NULL", CanBeNull=false)]
+		public string AddressHouseBlock
+		{
+			get
+			{
+				return this._AddressHouseBlock;
+			}
+			set
+			{
+				if ((this._AddressHouseBlock != value))
+				{
+					this._AddressHouseBlock = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_AddressStreet", DbType="VarChar(100) NOT NULL", CanBeNull=false)]
+		public string AddressStreet
+		{
+			get
+			{
+				return this._AddressStreet;
+			}
+			set
+			{
+				if ((this._AddressStreet != value))
+				{
+					this._AddressStreet = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_AddressUnit", DbType="VarChar(10) NOT NULL", CanBeNull=false)]
+		public string AddressUnit
+		{
+			get
+			{
+				return this._AddressUnit;
+			}
+			set
+			{
+				if ((this._AddressUnit != value))
+				{
+					this._AddressUnit = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_AddressPostalCode", DbType="Int NOT NULL")]
+		public int AddressPostalCode
+		{
+			get
+			{
+				return this._AddressPostalCode;
+			}
+			set
+			{
+				if ((this._AddressPostalCode != value))
+				{
+					this._AddressPostalCode = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Photo", DbType="VarChar(1000) NOT NULL", CanBeNull=false)]
+		public string Photo
+		{
+			get
+			{
+				return this._Photo;
+			}
+			set
+			{
+				if ((this._Photo != value))
+				{
+					this._Photo = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_NextOfKinName", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
+		public string NextOfKinName
+		{
+			get
+			{
+				return this._NextOfKinName;
+			}
+			set
+			{
+				if ((this._NextOfKinName != value))
+				{
+					this._NextOfKinName = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_NextOfKinContact", DbType="VarChar(10) NOT NULL", CanBeNull=false)]
+		public string NextOfKinContact
+		{
+			get
+			{
+				return this._NextOfKinContact;
+			}
+			set
+			{
+				if ((this._NextOfKinContact != value))
+				{
+					this._NextOfKinContact = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Remarks", DbType="VarChar(8000) NOT NULL", CanBeNull=false)]
+		public string Remarks
+		{
+			get
+			{
+				return this._Remarks;
+			}
+			set
+			{
+				if ((this._Remarks != value))
+				{
+					this._Remarks = value;
+				}
+			}
+		}
+	}
+	
+	public partial class usp_updateHWSMemberResult
+	{
+		
+		private string _Result;
+		
+		public usp_updateHWSMemberResult()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Result", DbType="VarChar(7) NOT NULL", CanBeNull=false)]
+		public string Result
+		{
+			get
+			{
+				return this._Result;
+			}
+			set
+			{
+				if ((this._Result != value))
+				{
+					this._Result = value;
 				}
 			}
 		}

@@ -215,6 +215,7 @@
     <Content Include="Content\scripts\courseregistration.min.js" />
     <Content Include="Content\scripts\DOS_membership.min.js" />
     <Content Include="Content\scripts\fileuploader.js" />
+    <Content Include="Content\scripts\HokkienMemberForm.min.js" />
     <Content Include="Content\scripts\jquery-1.7.1.min.js" />
     <Content Include="Content\scripts\jquery.multiselectListBox.js" />
     <Content Include="Content\scripts\jquery.watermark.min.js" />
@@ -273,7 +274,9 @@
     <Content Include="Views\CityKids\UpdateCityKidsMembershipForm_forStaff.aspx" />
     <Content Include="Views\Error\DisplayError.aspx" />
     <Content Include="Views\Home\About.aspx" />
+    <Content Include="Views\Hws\manualAttendance.aspx" />
     <Content Include="Views\Hws\AddNewMember.aspx" />
+    <Content Include="Views\Hws\ListOfMembers.aspx" />
     <Content Include="Views\Membership\CourseAttendance.aspx" />
     <Content Include="Views\Membership\courseregistration.aspx" />
     <Content Include="Views\Membership\ElectoralRoll.aspx" />
@@ -461,6 +464,9 @@ echo "Minify: UserAdmin.min.js -&gt;  UserAdmin.min.js"
 
 echo "Minify: common_function.debug.js -&gt;  common_function.min.js"
 "$(ProjectDir)Tools\jsmin" &lt; "$(ProjectDir)Content\scripts\common_function.debug.js" &gt; "$(ProjectDir)Content\scripts\common_function.min.js"
+
+echo "Minify: HokkienMemberForm.debug.js -&gt;  HokkienMemberForm.min.js"
+"$(ProjectDir)Tools\jsmin" &lt; "$(ProjectDir)Content\scripts\HokkienMemberForm.debug.js" &gt; "$(ProjectDir)Content\scripts\HokkienMemberForm.min.js"
 </PostBuildEvent>
   </PropertyGroup>
 </Project>

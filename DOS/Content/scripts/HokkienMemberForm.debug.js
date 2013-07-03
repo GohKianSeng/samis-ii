@@ -16,7 +16,13 @@
     $("table").tablesorter({ dateFormat: "uk" });
     $(".tablesorter tr:even").addClass("alt");
 
-
+    $('#DOB').datepick({ yearRange: getDateRangeString(), maxDate: +0, dateFormat: 'dd/mm/yyyy', pickerClass: 'datepick-jumps',
+        renderer: $.extend({}, $.datepick.defaultRenderer,
+        { picker: $.datepick.defaultRenderer.picker.
+            replace(/\{link:prev\}/, '{link:prevJump}{link:prev}').
+            replace(/\{link:next\}/, '{link:nextJump}{link:next}')
+        })
+    });
 
     $(function () {
         $("#HistoryContent h3.expand").toggler();
@@ -38,15 +44,24 @@
             }
         }
     });
-    var geocode = new SDGeocode();
-    var keyword = "410651";
-    var searchOption = { "q": keyword, "d": 1, "limit": 1 };
-    var gc = SDGeocode.SG;
-    geocode.requestData(gc, searchOption); 
+
+    if (getMesssage().length > 0) {
+        alert(getMesssage());
+    }
+
+    if ($("#candidate_photo").val().length > 0) {
+        var nameguid = $("#candidate_photo").val().split('_');
+        reloadICPhoto(nameguid[1], nameguid[0]);
+        
+    }
+
+    if (changeType() == "Modify") {
+        $("#registration_form").get(0).setAttribute('action', '/hws.mvc/updateMember');
+    }
 });
 
-function mycallBack(myvalue) {
-    alert(myvalue);
+function reloadICPhoto(filename, guid) {
+    $('#icphoto').attr('src', '/uploadfile.mvc/downloadPhoto?guid=' + guid + '&filename=' + escape(filename) + '&random=' + Math.random());
 }
 
 function setActiveTab(tabname) {
@@ -57,4 +72,22 @@ function setActiveTab(tabname) {
         $(".tab_content").eq(0).show(); //show the first tab
     }
     window.focus();
+}
+
+function checkForm() {
+    var errormsg = "";
+    if ($("#EnglishGivenName").val().length <= 0 && $("#ChineseGivenName").val().length <= 0) {
+        errormsg += "Enter at least English Given Name or Chinese Given Name."
+    }
+
+    return errormsg;
+}
+
+function checkHWSMemberFormNew() {
+    var errormsg = checkForm();
+    if (errormsg.length < 0) {
+        alert(errormsg);
+        return;
+    }
+    $("#registration_form").submit();
 }

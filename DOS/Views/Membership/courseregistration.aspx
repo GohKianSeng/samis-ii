@@ -551,6 +551,9 @@
                       if(((string)Session["SystemMode"]).ToUpper() == "FULL"){
                         hideRememberMe = "display:none";   
                       }
+                      else{
+                          hideRememberMe = "display:none";
+                      }
                     %>
 					<li class="buttons">
                         <div style="<%= hideRememberMe%>">

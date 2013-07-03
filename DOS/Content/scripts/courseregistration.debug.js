@@ -1,5 +1,8 @@
 ﻿var selectedlanguges = "";
 $(document).ready(function () {
+    if (/MSIE (\d+\.\d+);/.test(navigator.userAgent)) { //test for MSIE x.x;
+        alert("Attention!! You might encounter error when using Internet Explorer. Please use Firefox or Chrome instead.\nSorry for the inconvenience caused.");
+    }
 
     $("#" + getFormID()).attr("action", unescape(getSubmitURL()));
 
@@ -45,7 +48,7 @@ $(document).ready(function () {
         $("#candidate_email").val($.cookie('candidate_email'));
         $('#RememberMe').attr('checked', 'checked');
         $("#church_others").val($.cookie('candidate_churchOthers'));
-        $("#" + getCongregationID()).val($.cookie('candidate_congregation'));        
+        $("#" + getCongregationID()).val($.cookie('candidate_congregation'));
     }
     changeChurch();
 });
@@ -132,7 +135,10 @@ function checkForm(){
             errormsg += "- Name in English is mandatory\n";
 
         if (jQuery.trim($('#candidate_nric').val()).length == 0)
-            errormsg += "- NRIC is mandatory\n";        
+            errormsg += "- NRIC is mandatory\n";
+        else if (validateNRIC(jQuery.trim($("#candidate_nric").val().toUpperCase())) == false) {
+                errormsg += "- NRIC is not valid. example, S1234567G\n";            
+        }
 
         if (isValidEmailAddress(jQuery.trim($("#candidate_email").val())) == false && jQuery.trim($("#candidate_email").val()).length != 0) {
             errormsg += "- Email address is invalid\n";
@@ -165,9 +171,9 @@ function checkForm(){
     if (errormsg.length > 0) {
 	    alert(errormsg);
 	    return;
-	}
-    
-   if ($("#RememberMe").is(':checked') && getSystemMode() != "FULL") {
+	}	
+
+   //if ($("#RememberMe").is(':checked') && getSystemMode() != "FULL") {
         $.cookie('candidate_nric', $("#candidate_nric").val(), { expires: 365 });
         $.cookie(getSalutationID(), $("#" + getSalutationID()).val(), { expires: 365 });
         $.cookie('candidate_english_name', $("#candidate_english_name").val(), { expires: 365 });
@@ -187,27 +193,27 @@ function checkForm(){
         $.cookie('candidate_churchOthers', $("#church_others").val(), { expires: 365 });
         $.cookie('candidate_congregation', $("#" + getCongregationID()).val(), { expires: 365 });
         
-    }
-    else {
-        $.cookie('candidate_nric', null, { expires: 365 });
-        $.cookie(getSalutationID(), null, { expires: 365 });
-        $.cookie('candidate_english_name', null, { expires: 365 });
-        $.cookie('candidate_dob', null, { expires: 365 });
-        $.cookie('candidate_gender', null, { expires: 365 });
-        $.cookie(getNationalityID(), null, { expires: 365 });
-        $.cookie(getEducationID(), null, { expires: 365 });
-        $.cookie(getCandidateOccupationID(), null, { expires: 365 });
-        $.cookie(getChurchByID(), null, { expires: 365 });
-        $.cookie('candidate_postal_code', null, { expires: 365 });
-        $.cookie('candidate_blk_house', null, { expires: 365 });
-        $.cookie('candidate_unit', null, { expires: 365 });
-        $.cookie('candidate_street_address', null, { expires: 365 });
-        $.cookie('candidate_contact', null, { expires: 365 });
-        $.cookie('candidate_email', null, { expires: 365 });
-        $.cookie('RememberMeCE', null, { expires: 365 });
-        $.cookie('candidate_churchOthers', null, { expires: 365 });
-        $.cookie('candidate_congregation', null, { expires: 365 });
-    }
+//    }
+//    else {
+//        $.cookie('candidate_nric', null, { expires: 365 });
+//        $.cookie(getSalutationID(), null, { expires: 365 });
+//        $.cookie('candidate_english_name', null, { expires: 365 });
+//        $.cookie('candidate_dob', null, { expires: 365 });
+//        $.cookie('candidate_gender', null, { expires: 365 });
+//        $.cookie(getNationalityID(), null, { expires: 365 });
+//        $.cookie(getEducationID(), null, { expires: 365 });
+//        $.cookie(getCandidateOccupationID(), null, { expires: 365 });
+//        $.cookie(getChurchByID(), null, { expires: 365 });
+//        $.cookie('candidate_postal_code', null, { expires: 365 });
+//        $.cookie('candidate_blk_house', null, { expires: 365 });
+//        $.cookie('candidate_unit', null, { expires: 365 });
+//        $.cookie('candidate_street_address', null, { expires: 365 });
+//        $.cookie('candidate_contact', null, { expires: 365 });
+//        $.cookie('candidate_email', null, { expires: 365 });
+//        $.cookie('RememberMeCE', null, { expires: 365 });
+//        $.cookie('candidate_churchOthers', null, { expires: 365 });
+//        $.cookie('candidate_congregation', null, { expires: 365 });
+//    }
 
     var random = Math.random() * 11;
     domwindow = dhtmlmodal.open("Agreement", 'ajax', "/membership.mvc/displayCourseAgreementFrame?random=" + random.toString() + "&id=" + $("#" + getCourseID() + " > option:selected").val(), "Agreement", 'width=800px,height=300px,center=1,resize=1,scrolling=1');

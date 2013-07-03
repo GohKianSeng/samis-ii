@@ -1,6 +1,10 @@
 ﻿var selectedlanguges = "";
 var uploader;
 $(document).ready(function () {
+    if (/MSIE (\d+\.\d+);/.test(navigator.userAgent)) { //test for MSIE x.x;
+        alert("Attention!! You might encounter error when using Internet Explorer. Please use Firefox or Chrome instead.\nSorry for the inconvenience caused.");
+    }
+
     setTextAreaLengthLimit("candidate_transfer_reason");
     $("#" + getFormID()).attr("action", getSubmitURL());
 
