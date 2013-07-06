@@ -443,6 +443,8 @@ namespace DOS.Controllers
             string candidate_course_name = Request.Form["candidate_course_name"];
             string candidate_Congregation = Request.Form["aspnet_variable$MainContent$Congregation"];
 
+            sql_conn.usp_insertlogging('I', "System", "submitcourseregistration", "candidate_course: " + candidate_course + " additional: " + decodedAdditionalInformation, 1, "", "", XElement.Parse("<empty />"));
+
             XElement additionalInfo = XElement.Parse(decodedAdditionalInformation);
 
             ViewData["candidate_course_name"] = candidate_course_name;

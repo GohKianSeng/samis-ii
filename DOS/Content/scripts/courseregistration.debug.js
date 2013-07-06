@@ -28,7 +28,7 @@ $(document).ready(function () {
         }
     });
 
-    if (getCookie('RememberMeCE') == "On" && getSystemMode() != "FULL") {
+    if (getSystemMode() != "FULL") {
         $("#candidate_nric").val($.cookie('candidate_nric'));
         $("#" + getSalutationID()).val($.cookie(getSalutationID()));
         $("#candidate_english_name").val($.cookie('candidate_english_name'));
@@ -173,7 +173,7 @@ function checkForm(){
 	    return;
 	}	
 
-   //if ($("#RememberMe").is(':checked') && getSystemMode() != "FULL") {
+   if (getSystemMode() != "FULL") {
         $.cookie('candidate_nric', $("#candidate_nric").val(), { expires: 365 });
         $.cookie(getSalutationID(), $("#" + getSalutationID()).val(), { expires: 365 });
         $.cookie('candidate_english_name', $("#candidate_english_name").val(), { expires: 365 });
@@ -193,7 +193,7 @@ function checkForm(){
         $.cookie('candidate_churchOthers', $("#church_others").val(), { expires: 365 });
         $.cookie('candidate_congregation', $("#" + getCongregationID()).val(), { expires: 365 });
         
-//    }
+    }
 //    else {
 //        $.cookie('candidate_nric', null, { expires: 365 });
 //        $.cookie(getSalutationID(), null, { expires: 365 });
