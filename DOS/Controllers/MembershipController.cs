@@ -443,7 +443,16 @@ namespace DOS.Controllers
             string candidate_course_name = Request.Form["candidate_course_name"];
             string candidate_Congregation = Request.Form["aspnet_variable$MainContent$Congregation"];
 
-            sql_conn.usp_insertlogging('I', "System", "submitcourseregistration", "candidate_course: " + candidate_course + " additional: " + decodedAdditionalInformation, 1, "", "", XElement.Parse("<empty />"));
+            XElement temp = new XElement("Info");
+            temp.Add(new XElement("Header", Request.Headers.ToString()));
+            temp.Add(new XElement("Form", Request.Form.ToString()));
+            temp.Add(new XElement("decodedAdditionalInformation", decodedAdditionalInformation));
+            temp.Add(new XElement("UserAgent", Request.UserAgent));
+            temp.Add(new XElement("UserHostAddress", Request.UserHostAddress));
+            temp.Add(new XElement("UserHostName", Request.UserHostName));
+            temp.Add(new XElement("Params", Request.Params.ToString()));
+
+            sql_conn.usp_insertlogging('I', "System", "submitcourseregistration", "Request Information", 1, "", "", temp);
 
             XElement additionalInfo = XElement.Parse(decodedAdditionalInformation);
 
