@@ -398,36 +398,26 @@
                         <td colspan="4" style=" color: Gray; font-size:smaller; font-style:italic"><label id="courseDisplayDate"></label></td>
                     </tr>
                     <tr>
-                        <td width="180">
+                        <td width="200">
                             <li style="width:110px" id="li3" >
                             <label class="description" for="element_6">招呼<br>
                                         Salutation</label>
 		                            <div>
-                                    <asp:DropDownList style=" width:100px" class="element select medium" OnLoad="loadSalutation" name="candidate_salutation" ID="candidate_salutation" runat="server">
+                                    <asp:DropDownList style=" width:150px" class="element select medium" OnLoad="loadSalutation" name="candidate_salutation" ID="candidate_salutation" runat="server">
                                     </asp:DropDownList>		                
 		                            </div> 
 		                            </li>
                         </td>
-                        <td>
+                        <td style="width:200px">
                             <li id="li_1">
 		                        <label class="description" for="element_1">
                                     英文姓名<br>
                                     Name in English <span style="color:red;">*</span></label>
-		                        <div>
-			                        <input style=" width:150px" id="candidate_english_name" name="candidate_english_name" class="element text medium" type="text" <%=getTextfieldLength("tb_visitors","EnglishName")%> value="<%= (string)ViewData["candidate_english_name"] %>" size="20"/> 
-		                        </div> 
+		                        <input style=" width:150px" id="candidate_english_name" name="candidate_english_name" class="element text medium" type="text" <%=getTextfieldLength("tb_visitors","EnglishName")%> value="<%= (string)ViewData["candidate_english_name"] %>"/> 
+		                        
 		                    </li>	
                         </td>
-                        <td style="width:150px">
-                            <li id="li_356">
-		                        <label class="description" for="element_3">出生日期<br>
-                                Date of Birth</label>
-                                    <div>
-                                            <input readonly="readonly" style=" width:100px" id="candidate_dob" name="candidate_dob" class="element text medium" type="text" maxlength="10" value="<%= (string)ViewData["candidate_dob"] %>" size="20"/> 
-		                            </div>
-                                </li>
-                        </td>
-                        <td>
+                       <td>
                                 <li style="width:100px" id="li_6" >
 		                            <label class="description" for="element_6">性别<br>
                                     Gender</label>
@@ -440,40 +430,7 @@
 		                            </div> 
 		                            </li>
                         </td>			            
-                    </tr>
-                    <tr>
-                        <td>
-                               <li id="li2">
-		                        <label class="description" for="element_7">国籍<br>
-                                Nationality</label>
-		                        <div>
-		                            <asp:DropDownList style=" width:150px" class="element select medium" OnLoad="loadCountry" name="candidate_nationality" ID="candidate_nationality" runat="server">
-                                    </asp:DropDownList>                                    
-		                        </div> 
-		                        </li>
-                        </td>
-                        <td style=" width:180px">
-                            <li id="li_16" >
-		                        <label class="description" for="element_16">教育程度<br />
-                                    Education</label>
-		                        <div>
-                                <asp:DropDownList style=" width:150px" class="element select medium" OnLoad="loadEducation" name="candidate_education" ID="candidate_education" runat="server">
-                                </asp:DropDownList>
-		                        </div> 
-		                        </li>
-                        </td>
-                        <td>
-                            <li style="width:90px" id="li_9" >
-		                            <label class="description" for="element_9">职业<br>
-                            Occupation</label>
-		                            <div>
-                                        <asp:DropDownList  style="width:200px" class="element select medium" OnLoad="loadOccpation" name="candidate_occupation" ID="candidate_occupation" runat="server">
-                                        </asp:DropDownList>
-                                                                                
-			                    </div> 
-		                    </li>
-                        </td>                       
-                    </tr>
+                    </tr>                   
                     <tr>
                         <td colspan="2">
                             <li style="width:90px" id="li11" >
@@ -487,7 +444,7 @@
 			                    </div> 
 		                    </li>
                         </td>
-                        <td colspan="2">
+                        <td>
                             <li style="width:90px; display:none" id="congregationDiv">
                                 <label class="description" for="element_9">堂会<br>
                                 Congregation<span style="color:red;">*</span></label>
@@ -499,49 +456,25 @@
                         </td>
                     </tr>
                     <tr>
-                        <td colspan="2">
-                            <li style="width:210px" id="li_5" >
-		                        <label class="description" for="element_5">地址<br>
-                                Address</label>
-		                        <div style=" width:100px" >
-			                        <input style=" width:100px" id="candidate_postal_code" name="candidate_postal_code" class="element text medium" maxlength="7" onkeyup="PostalCodeKeyup(event);" value="<%= (string)ViewData["candidate_postal_code"] %>" type="text" size="20" >
-			                        <label class="makesmall" for="element_5_5">Postal Code</label>
-		                        </div>
-                                <div class="left">
-			                        <input style=" width:100px"  id="candidate_blk_house" name="candidate_blk_house" class="element text medium" <%=getTextfieldLength("tb_visitors","AddressHouseBlk")%> value="<%= (string)ViewData["candidate_blk_house"] %>" <%=getAutoPostalCode() %> type="text" size="20" >
-		                            <label class="makesmall" for="element_5_6">BLK / House</label>
-                                    <input type="hidden" id="hidden_candidate_blk_house" name="hidden_candidate_blk_house" value="<%= (string)ViewData["candidate_blk_house"] %>" <%=getAutoPostalCodeHiddenField()%> />
-		                        </div>
-		                        <div class="right">
-                                    <input style=" width:100px" id="candidate_unit" name="candidate_unit" class="element text medium" <%=getTextfieldLength("tb_visitors","AddressUnit")%> value="<%= (string)ViewData["candidate_unit"] %>" type="text" size="20">
-			                        <label class="makesmall" for="element_5_5">Unit #</label>
-	                            </div>
-                                <div>
-			                        <input style=" width:350px" id="candidate_street_address" name="candidate_street_address" class="element text medium" <%=getTextfieldLength("tb_visitors","AddressStreet")%> value="<%= (string)ViewData["candidate_street_address"] %>" <%=getAutoPostalCode() %> type="text" size="20" >
-			                        <label class="makesmall" for="element_5_1">Street Address</label>
-                                    <input type="hidden" id="hidden_candidate_street_address" name="hidden_candidate_street_address" value="<%= (string)ViewData["candidate_street_address"] %>" <%=getAutoPostalCodeHiddenField()%> />
-		                        </div> 
-		                        </li>
-                        </td>
                         <td>
-                            <li id="li4" style="width:90px">
-		                        <li style="width:150px" id="li5" >
+                            
 		                        <label class="description" for="element_4">电话号码<br>
                                 Contact No# <span style="color:red;">*</span></label>
 		                        <div>
-			                        <input style=" width:200px" id="candidate_contact" name="candidate_contact" class="element text medium" type="text" <%=getTextfieldLength("tb_visitors","Contact")%> value="<%= (string)ViewData["candidate_contact"] %>" size="20"/> 	
+			                        <input style=" width:150px" id="candidate_contact" name="candidate_contact" class="element text medium" type="text" <%=getTextfieldLength("tb_visitors","Contact")%> value="<%= (string)ViewData["candidate_contact"] %>" size="20"/> 	
 		                        </div> 
-				            </li>
+				            
+                        </td>    
+                        <td>
                             
-                            <li id="li9" style="width:90px">
-		                        <li style="width:150px" id="li10" >
+		                        
 		                        <label class="description" for="element_4">电子邮件地址<br>
                                 Email <span style="color:red;">*</span></label>
 		                        <div>
-			                        <input style=" width:200px" id="candidate_email" name="candidate_email" class="element text medium" type="text" <%=getTextfieldLength("tb_visitors","Email")%> value="<%= (string)ViewData["candidate_email"] %>" size="20"/> 	
+			                        <input style=" width:150px" id="candidate_email" name="candidate_email" class="element text medium" type="text" <%=getTextfieldLength("tb_visitors","Email")%> value="<%= (string)ViewData["candidate_email"] %>" size="20"/> 	
 		                        </div> 
-				            </li>
-                        </td>                                                
+				            
+                        </td>                                            
                     </tr>
 		        </table>
                 </div>
@@ -563,13 +496,46 @@
 			            <input id="saveForm" class="button_text" type="button" onclick="checkForm();" value="Submit" />
                     </li>
 			</ul>
+
+            <asp:DropDownList  style="width:200px;display:none" class="element select medium" OnLoad="loadOccpation" name="candidate_occupation" ID="candidate_occupation" runat="server">
+                                        </asp:DropDownList>
+            <asp:DropDownList style=" width:150px;display:none" class="element select medium" OnLoad="loadCountry" name="candidate_nationality" ID="candidate_nationality" runat="server">
+                                    </asp:DropDownList>
+            <asp:DropDownList style=" width:150px; display:none" class="element select medium" OnLoad="loadEducation" name="candidate_education" ID="candidate_education" runat="server">
+                                </asp:DropDownList>
+            <input readonly="readonly" style=" width:100px; display:none" id="candidate_dob" name="candidate_dob" class="element text medium" type="text" maxlength="10" value="<%= (string)ViewData["candidate_dob"] %>" size="20"/> 
+
+            <li style="width:210px; display:none" id="li_5" >
+		                        <label class="description" for="element_5">地址<br>
+                                Address</label>
+		                        <div style=" width:100px" >
+			                        <input style=" width:100px" id="candidate_postal_code" name="candidate_postal_code" class="element text medium" maxlength="7" onkeyup="PostalCodeKeyup(event);" value="<%= (string)ViewData["candidate_postal_code"] %>" type="text" size="20" >
+			                        <label class="makesmall" for="element_5_5">Postal Code</label>
+		                        </div>
+                                <div class="left">
+			                        <input style=" width:100px"  id="candidate_blk_house" name="candidate_blk_house" class="element text medium" <%=getTextfieldLength("tb_visitors","AddressHouseBlk")%> value="<%= (string)ViewData["candidate_blk_house"] %>" <%=getAutoPostalCode() %> type="text" size="20" >
+		                            <label class="makesmall" for="element_5_6">BLK / House</label>
+                                    <input type="hidden" id="hidden_candidate_blk_house" name="hidden_candidate_blk_house" value="<%= (string)ViewData["candidate_blk_house"] %>" <%=getAutoPostalCodeHiddenField()%> />
+		                        </div>
+		                        <div class="right">
+                                    <input style=" width:100px" id="candidate_unit" name="candidate_unit" class="element text medium" <%=getTextfieldLength("tb_visitors","AddressUnit")%> value="<%= (string)ViewData["candidate_unit"] %>" type="text" size="20">
+			                        <label class="makesmall" for="element_5_5">Unit #</label>
+	                            </div>
+                                <div>
+			                        <input style=" width:350px" id="candidate_street_address" name="candidate_street_address" class="element text medium" <%=getTextfieldLength("tb_visitors","AddressStreet")%> value="<%= (string)ViewData["candidate_street_address"] %>" <%=getAutoPostalCode() %> type="text" size="20" >
+			                        <label class="makesmall" for="element_5_1">Street Address</label>
+                                    <input type="hidden" id="hidden_candidate_street_address" name="hidden_candidate_street_address" value="<%= (string)ViewData["candidate_street_address"] %>" <%=getAutoPostalCodeHiddenField()%> />
+		                        </div> 
+		                    </li>
+
 		</form>
         <div style="width=100%" id="footer">
 			St Andrew's Cathedral
 		</div>	
 	</div>
 	<img style=" width:800px" id="bottom" src="/Content/images/bottom.png" alt="">
-	</div>
 
+    
+	</div>    
     <%=ViewData["displayCourseInfo"]%>
 </asp:Content>
