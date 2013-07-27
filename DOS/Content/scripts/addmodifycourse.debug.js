@@ -61,7 +61,11 @@ function checkForm() {
     else if (isNaN(jQuery.trim($("#fee").val()))) {
         errormsg += "- Fee is invalid.";
     }
-
-
+    if (jQuery.trim($("#MinCompleteAttendance").val()).length == 0) {
+        errormsg += "- Minimum Attendance for Completion must be at least be 1";
+    }
+    else if (isNaN(jQuery.trim($("#MinCompleteAttendance").val())) || jQuery.trim($("#MinCompleteAttendance").val()).indexOf(".") >= 0 || parseInt(jQuery.trim($("#MinCompleteAttendance").val())) <= 0) {
+        errormsg += "- Minimum Attendance for Completion must be at least be a whole number. No decimal allowed.";
+    }
     return errormsg;
 }

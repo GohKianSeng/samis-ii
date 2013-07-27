@@ -1,9 +1,6 @@
 ﻿var selectedlanguges = "";
 $(document).ready(function () {
-    if (/MSIE (\d+\.\d+);/.test(navigator.userAgent)) { //test for MSIE x.x;
-        alert("Attention!! You might encounter error when using Internet Explorer. Please use Firefox or Chrome instead.\nSorry for the inconvenience caused.");
-    }
-
+    
     $("#" + getFormID()).attr("action", unescape(getSubmitURL()));
 
     $('#candidate_dob').datepick({ yearRange: getDateRangeString(), maxDate: +0, dateFormat: 'dd/mm/yyyy', pickerClass: 'datepick-jumps',
@@ -222,7 +219,10 @@ function checkForm(){
             $("#candidate_course_name").val($("#" + getCourseID() + " > option:selected").text());
             document.getElementById("maindiv").style.display = "none";
             document.getElementById("loadingdiv").style.display = "block";
-            $("#EncodedAdditionalInformation").val(window.frames[random.toString()].document.getElementById('agreementxml').value);
+            for (var x = 0; x < window.frames.length; x++) {
+                if(window.frames[0].name == random.toString())
+                    $("#EncodedAdditionalInformation").val(window.frames[x].document.getElementById('agreementxml').value);
+            }
             $("#" + getFormID()).submit();
         }
         return true;

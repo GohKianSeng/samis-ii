@@ -10,6 +10,23 @@
     IEnumerable<usp_getMembersReportingResult> res = (IEnumerable<usp_getMembersReportingResult>)ViewData["reportinglist"];
   %>
 
+<script language="C#" runat="server">
+    
+    string partialBlankIC(string nric)
+    {
+        Regex rgx = new Regex("[A-Za-z0-9._%+-]");
+        if (nric.Length == 9)
+        {
+            return "S" + rgx.Replace(nric.Substring(0, 4), "x") + nric.Substring(6);
+        }
+        else
+        {
+            return rgx.Replace(nric, "x");                      
+        }
+        
+    }
+</script>
+
 <script type="text/javascript" src="/Content/scripts/jquery-1.6.4.min.js"></script>
     <!-- Fix header and sorter table scripts   -->
     <link rel="stylesheet" type="text/css" href="/Content/css/TablesView.css" />
@@ -77,7 +94,7 @@
                         %>
                             <tr>
                                 
-				                <td><a href="#" onclick="parent.loadMember('<%= res.ElementAt(x).NRIC %>');"><%= res.ElementAt(x).NRIC%></a></td>
+				                <td><a href="#" onclick="parent.loadMember('<%= res.ElementAt(x).NRIC %>');"><%= partialBlankIC(res.ElementAt(x).NRIC)%></a></td>
 				                <td><%= res.ElementAt(x).EnglishName%></td>
 				                <td><%= res.ElementAt(x).DOB.ToString("dd/MM/yyyy")%></td>
 				                <td><%= res.ElementAt(x).Gender%></td>

@@ -11,6 +11,23 @@
     int totalday = (int)ViewData["totalday"];
   %>
 
+<script language="C#" runat="server">
+    
+    string partialBlankIC(string nric)
+    {
+        Regex rgx = new Regex("[A-Za-z0-9._%+-]");
+        if (nric.Length == 9)
+        {
+            return "S" + rgx.Replace(nric.Substring(0, 4), "x") + nric.Substring(6);
+        }
+        else
+        {
+            return rgx.Replace(nric, "x");                      
+        }
+        
+    }
+</script>
+
 <script type="text/javascript" src="/Content/scripts/jquery-1.6.4.min.js"></script>
     <!-- Fix header and sorter table scripts   -->
     <link rel="stylesheet" type="text/css" href="/Content/css/TablesView.css" />
@@ -71,15 +88,27 @@
                 <th width=3% nowrap="nowrap">Congregation</th>
                 <th width=3% nowrap="nowrap">Contact</th>
                 <th width=3% nowrap="nowrap">Email</th>
+                
                 <% 
+                    int minAttendance = int.Parse((ViewData["minAttendance"]).ToString());
+                    int attendedAtLeastOnce = int.Parse((ViewData["attendedAtLeastOnce"]).ToString());
+                    int allCompletedCourse = int.Parse((ViewData["allCompletedCourse"]).ToString());
+                    int SACCompletedCourse = int.Parse((ViewData["SACCompletedCourse"]).ToString());
+                    int NonSACCompletedCourse = int.Parse((ViewData["NonSACCompletedCourse"]).ToString());
+                    int anglicanCompleted = int.Parse((ViewData["anglicanCompleted"]).ToString());
+                    int nonAnglicanCompleted = int.Parse((ViewData["nonAnglicanCompleted"]).ToString());
+                    
+                    
                     if (res.Count() > 0)
                     {
                         for (int x = 0; x < totalday; x++)
                         {
                         %><th width=5% nowrap="nowrap"><%=((DateTime)res.ElementAt(x).Schedule).ToString("dd/MM/yyyy")%>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th><%
-                        }
+                        }                        
                     }
                 %>
+                <th width=3% nowrap="nowrap">Attendance %&nbsp;&nbsp;&nbsp;&nbsp;</th>
+                </tr>
 		</thead>
 		<tbody>
 			    <% 
@@ -92,6 +121,7 @@
 				            <td></td>
 				            <td></td>
 				            <td></td>
+                            <td></td>
                             <td></td>
                             <td></td>
                             <% 
@@ -108,12 +138,14 @@
                         }
                         else
                         {
+                            
                             int total = (res.Count() / totalday)+1;
+                            int individualAttended = 0;
                             for (int x = 0; x < total-1; x++)
-                            {
+                            {   individualAttended = 0;
                                 int index = x * totalday;
                         %>      <tr>  
-                                <td nowrap="nowrap"><%= res.ElementAt(index).NRIC%></td>
+                                <td nowrap="nowrap"><%= partialBlankIC(res.ElementAt(index).NRIC)%></td>
                                 <td nowrap="nowrap"><%= res.ElementAt(index).Name%></td>
                                 <td nowrap="nowrap"><%= res.ElementAt(index).Gender%></td>
                                 <td nowrap="nowrap"><%= res.ElementAt(index).Church%></td>
@@ -124,12 +156,14 @@
                         <%
                                 for (int z = 0; z < totalday; z++)
                                 {
+                                    
                                     %>
                                         <td><%
                                                 if(res.ElementAt(index + z).Attendance == 1){
                                                     %><img src="/Content/images/cancel.png" alt="0"/><%    
                                                 }
                                                 else{
+                                                    individualAttended++;
                                                     %><img src="/Content/images/tick-icon.png" alt="1"/><%    
                                                 }
                                              %>
@@ -137,14 +171,72 @@
                                         </td>
                                     <%
                                 }
+                                string color = "";
+                                float individualPercent = ((float)individualAttended / (float)totalday * (float)100);
+                                if (individualPercent <= 0 || individualAttended == null)
+                                    individualPercent = 0.0f;
+                                if ((int)individualPercent == 100)
+                                    color = "green";
+                                else if (individualAttended >= minAttendance)
+                                    color = "yellow";
+                                else
+                                    color = "red";
+                                    
+                                    
+                                %><td style=" background-color:<%=color%>"><%= (int)individualPercent%>%</td><%
                                 %></tr><%
                             
                             }
+                            %><tr><td colspan="6"></td><td style=" background-color: #CCCCCC">Average Daily Attendance</td><%
+                            XElement xml = (XElement)ViewData["xml"];
+                            for (int g = 0; g < xml.Elements("Attendance").Count(); g++)
+                            {
+                                string dailytotal = xml.Elements("Attendance").ElementAt(g).Element("DailyTotal").Value;
+                                if (dailytotal == "1")
+                                    dailytotal = "0";
+                                 %><td style=" background-color: #CCCCCC"><%=dailytotal%></td><%
+                                
+                            }
+                            %><td style=" background-color: #CCCCCC"><%=allCompletedCourse%></td><%
                         }
             %>
 		</tbody>
 		</table>
-        
+    <br /><br />
+    <table class="tablesorter" id="Table1" style=" width:30%; padding:0; margin-left:0%; margin-right:0%" align="right">
+			<thead>
+			<tr class="header">
+                <td class="nosorting" colspan="2" width=3% nowrap="nowrap">Total Registration</td>                
+            </tr>
+            </thead>
+                <tr>
+                    <td>Attended > 0%</td>
+                    <td align="center" style=" width:30%"><%=attendedAtLeastOnce%></td>
+                </tr>
+                <tr>
+                    <td>Completed</td>
+                    <td align="center"><%=allCompletedCourse%></td>
+                </tr>
+                <tr>
+                    <td>Completed - SAC</td>
+                    <td align="center"><%=SACCompletedCourse%></td>
+                </tr>
+                <tr>
+                    <td>Completed - Non SAC</td>
+                    <td align="center"><%=NonSACCompletedCourse%></td>
+                </tr>
+                <tr>
+                    <td>Completed - Anglican</td>
+                    <td align="center"><%=anglicanCompleted%></td>
+                </tr>
+                <tr>
+                    <td>Completed - Non Anglican</td>
+                    <td align="center"><%=nonAnglicanCompleted%></td>
+                </tr>
+            <tbody>
+            
+            </tbody>
+     </table>        
 </html>
 
 

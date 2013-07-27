@@ -15,7 +15,24 @@
     <link rel="stylesheet" type="text/css" href="/Content/css/TablesView.css" />
     <script type="text/javascript" src="/Content/scripts/jquery.tablesorter.min.js"></script> 
     <!-- Fix header and sorter table scripts   -->
-  
+
+<script language="C#" runat="server">
+    
+    string partialBlankIC(string nric)
+    {
+        Regex rgx = new Regex("[A-Za-z0-9._%+-]");
+        if (nric.Length == 9)
+        {
+            return "S" + rgx.Replace(nric.Substring(0, 4), "x") + nric.Substring(6);
+        }
+        else
+        {
+            return rgx.Replace(nric, "x");                      
+        }
+        
+    }
+</script>
+
 <script type="text/javascript">
     
     $(document).ready(function () {
@@ -98,7 +115,7 @@
                         %>
                             <tr>
                                 <td><img onclick="deleteVisitor('<%=res.ElementAt(x).NRIC%>', '<%= res.ElementAt(x).Name%>', this);" border="0" src="/Content/images/remove.png" width="20" height="20" style="cursor:pointer" title="Remove"  alt="Remove"/></td>
-				                <td><a href="#" onclick="loadVisitor('<%= res.ElementAt(x).NRIC %>');"><%= res.ElementAt(x).NRIC%></a></td>
+				                <td><a href="#" onclick="loadVisitor('<%= res.ElementAt(x).NRIC %>');"><%= partialBlankIC(res.ElementAt(x).NRIC)%></a></td>
 				                <td><%= res.ElementAt(x).Name%></td>
 				                <td><%= res.ElementAt(x).DOB%></td>
 				                <td><%= res.ElementAt(x).Gender%></td>

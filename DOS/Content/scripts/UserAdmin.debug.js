@@ -566,7 +566,12 @@ function addNewRow() {
     var random = Math.random() * 11;
     domwindow = dhtmlmodal.open("ViewPDF", 'ajax', "/settings.mvc/displayNewRole?random=" + random.toString(), 'Create a new role', 'width=300px,height=200px,center=1,resize=1,scrolling=1');
     domwindow.onclose = function () { //Define custom code to run when window is closed
-        $("#" + getModuleFunctionRoles()).append("<option value=\"new" + random.toString() + "\">" + window.frames['iframe' + random.toString()].document.getElementById('rolename').value + "</option>");
+        for (var x = 0; x < window.frames.length; x++) {
+            if (window.frames[0].name == "iframe" + random.toString()) {
+                $("#" + getModuleFunctionRoles()).append("<option value=\"new" + random.toString() + "\">" + window.frames[x].document.getElementById('rolename').value + "</option>");
+            }
+
+        }        
         $("#" + getModuleFunctionRoles()).val("new" + random.toString());
         changeModuleFunctionRole($("#" + getModuleFunctionRoles()));
         var index = RoleArrayIndex($("#" + getModuleFunctionRoles()).val());
@@ -582,7 +587,12 @@ function renameExistingRole() {
         $("#" + getModuleFunctionRoles() + " option:selected").text(window.frames['iframe' + random.toString()].document.getElementById('rolename').value);
         var index = RoleArrayIndex($("#" + getModuleFunctionRoles()).val());
         rolearr = RoleArray[index];
-        rolearr[1] = window.frames['iframe' + random.toString()].document.getElementById('rolename').value;
+        for (var x = 0; x < window.frames.length; x++) {
+            if (window.frames[0].name == "iframe"+random.toString()) {
+                rolearr[1] = window.frames[x].document.getElementById('rolename').value;
+            }
+        }
+        
         RoleArray[index] = rolearr;
         RoleIsModified[index] = true;
         return true;

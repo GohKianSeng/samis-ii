@@ -44,7 +44,7 @@
         <%}%>
     });
 
-    function updateAttendance(id){
+    function updateAttendance(id, event){
         $.post("/hws.mvc/UpdateAttendance",
                 { ID: id },
                 function (data) {
@@ -53,6 +53,9 @@
                     }
                 }
             );
+
+
+        event.preventDefault();
     }
 
 </script>
@@ -67,11 +70,11 @@
     int remainder = res.Count() % 5;
     for(int x=0; x < totalRow; x++){%>
     <tr>
-        <td align="center"><br /><a style="text-decoration: none" href="#" onclick="updateAttendance('<%=res.ElementAt(x+0).ID%>')"><label id="<%=res.ElementAt(x+0).ID%>" style=" font-size:medium; font-weight:bold; color:red"><%=getEnglishName(res.ElementAt(x+0))%></label></a><br />&nbsp;</td>
-        <td align="center"><br /><a style="text-decoration: none" href="#" onclick="updateAttendance('<%=res.ElementAt(x+1).ID%>')"><label id="<%=res.ElementAt(x+1).ID%>" style=" font-size:medium; font-weight:bold; color:red"><%=getEnglishName(res.ElementAt(x+1))%></label></a><br />&nbsp;</td>
-        <td align="center"><br /><a style="text-decoration: none" href="#" onclick="updateAttendance('<%=res.ElementAt(x+2).ID%>')"><label id="<%=res.ElementAt(x+2).ID%>" style=" font-size:medium; font-weight:bold; color:red"><%=getEnglishName(res.ElementAt(x+2))%></label></a><br />&nbsp;</td>
-        <td align="center"><br /><a style="text-decoration: none" href="#" onclick="updateAttendance('<%=res.ElementAt(x+3).ID%>')"><label id="<%=res.ElementAt(x+3).ID%>" style=" font-size:medium; font-weight:bold; color:red"><%=getEnglishName(res.ElementAt(x+3))%></label></a><br />&nbsp;</td>
-        <td align="center"><br /><a style="text-decoration: none" href="#" onclick="updateAttendance('<%=res.ElementAt(x+4).ID%>')"><label id="<%=res.ElementAt(x+4).ID%>" style=" font-size:medium; font-weight:bold; color:red"><%=getEnglishName(res.ElementAt(x+4))%></label></a><br />&nbsp;</td>        
+        <td align="center"><br /><a style="text-decoration: none" href="#" onclick="updateAttendance('<%=res.ElementAt((x*5)+0).ID%>', event)"><label id="<%=res.ElementAt((x*5)+0).ID%>" style=" font-size:medium; font-weight:bold; color:red"><%=getEnglishName(res.ElementAt((x * 5) + 0))%></label></a><br />&nbsp;</td>
+        <td align="center"><br /><a style="text-decoration: none" href="#" onclick="updateAttendance('<%=res.ElementAt((x*5)+1).ID%>', event)"><label id="<%=res.ElementAt((x*5)+1).ID%>" style=" font-size:medium; font-weight:bold; color:red"><%=getEnglishName(res.ElementAt((x * 5) + 1))%></label></a><br />&nbsp;</td>
+        <td align="center"><br /><a style="text-decoration: none" href="#" onclick="updateAttendance('<%=res.ElementAt((x*5)+2).ID%>', event)"><label id="<%=res.ElementAt((x*5)+2).ID%>" style=" font-size:medium; font-weight:bold; color:red"><%=getEnglishName(res.ElementAt((x * 5) + 2))%></label></a><br />&nbsp;</td>
+        <td align="center"><br /><a style="text-decoration: none" href="#" onclick="updateAttendance('<%=res.ElementAt((x*5)+3).ID%>', event)"><label id="<%=res.ElementAt((x*5)+3).ID%>" style=" font-size:medium; font-weight:bold; color:red"><%=getEnglishName(res.ElementAt((x * 5) + 3))%></label></a><br />&nbsp;</td>
+        <td align="center"><br /><a style="text-decoration: none" href="#" onclick="updateAttendance('<%=res.ElementAt((x*5)+4).ID%>', event)"><label id="<%=res.ElementAt((x*5)+4).ID%>" style=" font-size:medium; font-weight:bold; color:red"><%=getEnglishName(res.ElementAt((x * 5) + 4))%></label></a><br />&nbsp;</td>        
     </tr>
 <%}
     if (remainder > 0)
@@ -79,7 +82,7 @@
         %><tr><%
         for (int x = 0; x < remainder; x++)
         {%>    
-        <td align="center"><br /><a style="text-decoration: none" href="#" onclick="updateAttendance('<%=res.ElementAt((totalRow * 5) + x).ID%>')"><label id="<%=res.ElementAt((totalRow * 5) + x).ID%>" style=" font-size:medium; font-weight:bold; color:red"><%=getEnglishName(res.ElementAt((totalRow * 5) + x))%></label></a><br />&nbsp;</td>             
+        <td align="center"><br /><a style="text-decoration: none" href="#" onclick="updateAttendance('<%=res.ElementAt((totalRow * 5) + x).ID%>', event)"><label id="<%=res.ElementAt((totalRow * 5) + x).ID%>" style=" font-size:medium; font-weight:bold; color:red"><%=getEnglishName(res.ElementAt((totalRow * 5) + x))%></label></a><br />&nbsp;</td>             
 <%      }
         %><tr><%
   }%>

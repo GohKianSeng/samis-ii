@@ -1,10 +1,7 @@
 ﻿var selectedlanguges = "";
 var uploader;
 $(document).ready(function () {
-    if (/MSIE (\d+\.\d+);/.test(navigator.userAgent)) { //test for MSIE x.x;
-        alert("Attention!! You might encounter error when using Internet Explorer. Please use Firefox or Chrome instead.\nSorry for the inconvenience caused.");
-    }
-
+    
     setTextAreaLengthLimit("candidate_transfer_reason");
     $("#" + getFormID()).attr("action", getSubmitURL());
 
@@ -362,8 +359,13 @@ function basicCheck() {
     if (jQuery.trim($('#candidate_english_name').val()).length == 0)
         errormsg += "- Name in English is mandatory\n";
 
-    if (jQuery.trim($('#candidate_nric').val()).length == 0)
+    if (jQuery.trim($('#candidate_nric').val()).length == 0){
         errormsg += "- NRIC is mandatory\n";
+    }
+    else if (validateNRIC(jQuery.trim($("#candidate_nric").val().toUpperCase())) == false) {
+        errormsg += "- NRIC is invalid, Example S1234567A\n";        
+    }
+
 
     if ($("#" + getCongregationID() + "> option:selected").val() == '') {
         errormsg += "- Congregation is mandatory\n";
@@ -476,13 +478,7 @@ function checkForm(){
 	if (errormsg.length > 0) {
 	    alert(errormsg);
 	    return;
-	}
-
-	if (validateNRIC(jQuery.trim($("#candidate_nric").val().toUpperCase())) == false) {
-	    if (!confirm("NRIC, " + $("#candidate_nric").val() + ", entered seem to be invalid. Are you sure it is correct?")) {
-	        return;
-	    }  
-	}
+	}	
 
 	if (!isOffline()) {
 	    domwindow = dhtmlmodal.open("Agreement", 'ajax', "/membership.mvc/displayAgreement", "Agreement", 'width=800px,height=600px,center=1,resize=1,scrolling=1');

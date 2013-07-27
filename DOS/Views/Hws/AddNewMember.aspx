@@ -135,7 +135,7 @@
             <% 
                 if ((string)ViewData["ChangeType"] == "Modify"){
             %>
-            <li><a href="#tab2">Personal Infomation</a></li>
+            <!--li><a href="#tab2">Personal Infomation</a></li-->
             <li><a href="#tab3">History</a></li>
             <%
                 }

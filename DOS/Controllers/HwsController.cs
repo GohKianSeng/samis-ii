@@ -13,6 +13,16 @@ namespace DOS.Controllers
         //
         // GET: /Hws/
 
+        public ActionResult attendanceReport()
+        {
+            string date = Request.Form["aspnet_variable$MainContent$serviceDate"];
+            if (date == null || date.Length <= 0)
+                date = "11/11/1900";
+            ViewData["date"] = sql_conn.usp_getAllHWSAttendanceDate().ToList();
+            ViewData["listofmembers"] = sql_conn.usp_getHWSMemberAttendance(DateTime.ParseExact(date, "dd/MM/yyyy", null)).ToList();
+            return View();
+        }
+
         public ActionResult AddNewMember(string message)
         {
             ViewData["message"] = message;
@@ -31,6 +41,21 @@ namespace DOS.Controllers
         {
             ViewData["listofmembers"] = sql_conn.usp_getAllHWSMember().ToList();
             return View();
+        }
+
+        public ActionResult scanAttendance()
+        {
+            return View("scanAttendance");
+        }
+
+        public ActionResult updateMemberAttendance(string ID, string date)
+        {
+            if(ID == null || ID.Length <=0)
+                return View("scanAttendance");
+
+            usp_UpdateHWSAttendanceResult res = sql_conn.usp_UpdateHWSAttendance(int.Parse(ID)).ElementAt(0);
+            ViewData["errormsg"] = "Welcome, " + res.EnglishSurname + " " + res.EnglishGivenName + " / " + res.ChineseSurname + res.ChineseGivenName;
+            return View("scanAttendance");
         }
 
         public ActionResult listmember()

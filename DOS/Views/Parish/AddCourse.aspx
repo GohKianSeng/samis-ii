@@ -67,6 +67,16 @@
             AdditionalInfo.Items.Add(item);
         }
     }
+
+    string getMinAttendance()
+    {
+        if (((string)ViewData["type"]) == "update")
+        {
+            usp_getCourseInfoResult res = (usp_getCourseInfoResult)ViewData["courseinformation"];
+            return res.MinCompleteAttendance.ToString();
+        }
+        return "1";
+    }
     
     string getCourseName()
     {
@@ -266,6 +276,12 @@
                             $('#timeend').timepicker();
                         });
                     </script>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="3">
+                    Minimum Attendance for Completion<br />
+                    <input id="MinCompleteAttendance" name="MinCompleteAttendance" class="element text medium" type="text" value="<%= getMinAttendance()%>"/> 
                 </td>
             </tr>
             <tr>

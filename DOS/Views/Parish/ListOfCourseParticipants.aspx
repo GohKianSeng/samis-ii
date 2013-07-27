@@ -10,6 +10,23 @@
     IEnumerable<usp_getListofCourseParticipantsResult> res = (IEnumerable<usp_getListofCourseParticipantsResult>)ViewData["listofparticipants"];
   %>
 
+<script language="C#" runat="server">
+    
+    string partialBlankIC(string nric)
+    {
+        Regex rgx = new Regex("[A-Za-z0-9._%+-]");
+        if (nric.Length == 9)
+        {
+            return "S" + rgx.Replace(nric.Substring(0, 4), "x") + nric.Substring(6);
+        }
+        else
+        {
+            return rgx.Replace(nric, "x");                      
+        }
+        
+    }
+</script>
+
 <script type="text/javascript" src="/Content/scripts/jquery-1.6.4.min.js"></script>
     <!-- Fix header and sorter table scripts   -->
     <link rel="stylesheet" type="text/css" href="/Content/css/TablesView.css" />
@@ -94,7 +111,7 @@
                         %>
                             <tr>
                                 <td><img onclick="deleteParticipant('<%=res.ElementAt(x).courseID%>', '<%= res.ElementAt(x).NRIC%>', '<%= res.ElementAt(x).EnglishName%>');" border="0" src="/Content/images/remove.png" width="20" height="20" style="cursor:pointer" title="Remove"  alt="Remove"/></td>
-                                <td><a href="#" onclick="loadCourseParticipant('<%= res.ElementAt(x).courseID %>', '<%= res.ElementAt(x).NRIC %>');"><%= res.ElementAt(x).NRIC%></a></td>
+                                <td><a href="#" onclick="loadCourseParticipant('<%= res.ElementAt(x).courseID %>', '<%= res.ElementAt(x).NRIC %>');"><%= partialBlankIC(res.ElementAt(x).NRIC)%></a></td>
 				                <td><%= res.ElementAt(x).EnglishName%></td>
                                 <td><%= res.ElementAt(x).feePaid%></td>
                                 <td><%= res.ElementAt(x).materialReceived%></td>

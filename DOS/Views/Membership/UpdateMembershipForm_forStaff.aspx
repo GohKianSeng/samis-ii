@@ -668,7 +668,7 @@
                             <label class="description" for="element_4">
                             NRIC <span style="color:red;">*</span></label>
 		                        <div>
-			                        <input style=" width:150px" id="candidate_nric" readonly="readonly" name="candidate_nric" class="element text medium" type="text" <%=getTextfieldLength("tb_members","NRIC")%> value="<%= (string)ViewData["candidate_nric"] %>" size="20"/> 
+			                        <input style=" width:150px" id="candidate_nric" name="candidate_nric" class="element text medium" type="text" <%=getTextfieldLength("tb_members","NRIC")%> value="<%= (string)ViewData["candidate_nric"] %>" size="20"/> 
 		                        </div>                      
                         </td>
                     </tr>

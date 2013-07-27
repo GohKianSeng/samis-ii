@@ -274,6 +274,8 @@
     <Content Include="Views\CityKids\UpdateCityKidsMembershipForm_forStaff.aspx" />
     <Content Include="Views\Error\DisplayError.aspx" />
     <Content Include="Views\Home\About.aspx" />
+    <Content Include="Views\Hws\attendanceReport.aspx" />
+    <Content Include="Views\Hws\scanAttendance.aspx" />
     <Content Include="Views\Hws\manualAttendance.aspx" />
     <Content Include="Views\Hws\AddNewMember.aspx" />
     <Content Include="Views\Hws\ListOfMembers.aspx" />

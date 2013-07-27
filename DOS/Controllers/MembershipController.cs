@@ -213,7 +213,7 @@ namespace DOS.Controllers
             ViewData["courseid"] = courseid;
             ViewData["date"] = date;
 
-            ViewData["listofcourse"] = sql_conn.usp_getListofCourse().ToList();
+            ViewData["listofcourse"] = sql_conn.usp_getListofCourse(false).ToList();
             return View("CourseAttendance");
         }
 
@@ -221,7 +221,7 @@ namespace DOS.Controllers
         [Authorize]
         public ActionResult courseattendance()
         {
-            ViewData["listofcourse"] = sql_conn.usp_getListofCourse().ToList();
+            ViewData["listofcourse"] = sql_conn.usp_getListofCourse(false).ToList();
             return View("CourseAttendance");
         }
 
@@ -325,7 +325,10 @@ namespace DOS.Controllers
         public ActionResult courseregistration(string Message, string candidate_course)
         {
             initializedParameter();
-            ViewData["listofcourse"] = sql_conn.usp_getListofCourse().ToList();
+            if (((string)Session["SystemMode"]).ToUpper() != "FULL")
+                ViewData["listofcourse"] = sql_conn.usp_getListofCourse(true).ToList();
+            else
+                ViewData["listofcourse"] = sql_conn.usp_getListofCourse(false).ToList();
             ViewData["Message"] = Message;
             ViewData["candidate_course"] = candidate_course;
             ViewData["existingmember"] = "null";
@@ -338,7 +341,7 @@ namespace DOS.Controllers
         {
             initializedParameter();
             ViewData["ad"] = "_ad";
-            ViewData["listofcourse"] = sql_conn.usp_getListofCourse().ToList();
+            ViewData["listofcourse"] = sql_conn.usp_getListofCourse(true).ToList();
             ViewData["Message"] = Message;
             ViewData["candidate_course"] = candidate_course;
             return View("courseregistration");
@@ -349,7 +352,7 @@ namespace DOS.Controllers
         public ActionResult submitcourseregistration_ad()
         {
             initializedParameter();
-            ViewData["listofcourse"] = sql_conn.usp_getListofCourse().ToList();
+            ViewData["listofcourse"] = sql_conn.usp_getListofCourse(true).ToList();
 
             string existingmember = Request.Form["existingmember"];
             if (existingmember == null)
@@ -364,13 +367,25 @@ namespace DOS.Controllers
             string candidate_nationality = Request.Form["aspnet_variable$MainContent$candidate_nationality"];
             string candidate_occupation = Request.Form["aspnet_variable$MainContent$candidate_occupation"];
             string candidate_postal_code = Request.Form["candidate_postal_code"];
-            string candidate_blk_house = Request.Form["candidate_blk_house"];
-            string candidate_street_address = Request.Form["candidate_street_address"];
+            string decodedAdditionalInformation = HttpUtility.UrlDecode(Request.Form["EncodedAdditionalInformation"]);
+            string candidate_blk_house;
+            if (Request.Form["candidate_blk_house"] != null)
+                candidate_blk_house = Request.Form["candidate_blk_house"];
+            else
+                candidate_blk_house = Request.Form["hidden_candidate_blk_house"];
+
+            string candidate_street_address;
+            if (Request.Form["candidate_street_address"] != null)
+                candidate_street_address = Request.Form["candidate_street_address"];
+            else
+                candidate_street_address = Request.Form["hidden_candidate_street_address"];
             string candidate_unit = Request.Form["candidate_unit"];
             string candidate_contact = Request.Form["candidate_contact"];
             string candidate_email = Request.Form["candidate_email"];
             string candidate_church = Request.Form["aspnet_variable$MainContent$church"];
             string candidate_church_others = Request.Form["church_others"];
+            string candidate_course_name = Request.Form["candidate_course_name"];
+            string candidate_Congregation = Request.Form["aspnet_variable$MainContent$Congregation"];
 
             string result = "ERROR";
             usp_addNewCourseMemberParticipantAndAttendanceResult mem;
@@ -385,9 +400,9 @@ namespace DOS.Controllers
                 convertok = DateTime.TryParseExact(candidate_dob, "dd/MM/yyyy", null, System.Globalization.DateTimeStyles.None, out dt);
 
                 if (convertok)
-                    vis = sql_conn.usp_addNewCourseVisitorParticipantAndAttendance(candidate_nric, candidate_course, candidate_salutation, candidate_english_name, dt, candidate_gender, candidate_education, candidate_nationality, candidate_occupation, candidate_postal_code, candidate_blk_house, candidate_street_address, candidate_unit, candidate_contact, candidate_email, int.Parse(candidate_church), candidate_church_others, User.Identity.Name).ElementAt(0);
+                    vis = sql_conn.usp_addNewCourseVisitorParticipantAndAttendance(candidate_nric, candidate_course, candidate_salutation.Split('~')[0], candidate_english_name, dt, candidate_gender, candidate_education, candidate_nationality, candidate_occupation, candidate_postal_code, candidate_blk_house, candidate_street_address, candidate_unit, candidate_contact, candidate_email, int.Parse(candidate_church.Split('~')[0]), candidate_church_others, User.Identity.Name).ElementAt(0);
                 else
-                    vis = sql_conn.usp_addNewCourseVisitorParticipantAndAttendance(candidate_nric, candidate_course, candidate_salutation, candidate_english_name, null, candidate_gender, candidate_education, candidate_nationality, candidate_occupation, candidate_postal_code, candidate_blk_house, candidate_street_address, candidate_unit, candidate_contact, candidate_email, int.Parse(candidate_church), candidate_church_others, User.Identity.Name).ElementAt(0);
+                    vis = sql_conn.usp_addNewCourseVisitorParticipantAndAttendance(candidate_nric, candidate_course, candidate_salutation.Split('~')[0], candidate_english_name, null, candidate_gender, candidate_education, candidate_nationality, candidate_occupation, candidate_postal_code, candidate_blk_house, candidate_street_address, candidate_unit, candidate_contact, candidate_email, int.Parse(candidate_church.Split('~')[0]), candidate_church_others, User.Identity.Name).ElementAt(0);
 
                 result = vis.Result;
             }
@@ -407,8 +422,12 @@ namespace DOS.Controllers
         [ErrorHandler]
         public ActionResult submitcourseregistration()
         {
+            MailMessage mail = null;
             initializedParameter();
-            ViewData["listofcourse"] = sql_conn.usp_getListofCourse().ToList();
+            if (((string)Session["SystemMode"]).ToUpper() != "FULL")
+                ViewData["listofcourse"] = sql_conn.usp_getListofCourse(true).ToList();
+            else
+                ViewData["listofcourse"] = sql_conn.usp_getListofCourse(false).ToList();
 
             string existingmember = Request.Form["existingmember"];
             if (existingmember == null)
@@ -451,8 +470,6 @@ namespace DOS.Controllers
             temp.Add(new XElement("UserHostAddress", Request.UserHostAddress));
             temp.Add(new XElement("UserHostName", Request.UserHostName));
             temp.Add(new XElement("Params", Request.Params.ToString()));
-
-            sql_conn.usp_insertlogging('I', "System", "submitcourseregistration", "Request Information", 1, "", "", temp);
 
             XElement additionalInfo = XElement.Parse(decodedAdditionalInformation);
 
@@ -519,7 +536,7 @@ namespace DOS.Controllers
                 }
                 mailbody = mailbody.Replace("[Age]", age);
 
-                MailMessage mail = new MailMessage();
+                mail = new MailMessage();
                 mail.IsBodyHtml = true;
                 string to = (string)Session["CERegistrationRecipients"];
 
@@ -534,11 +551,10 @@ namespace DOS.Controllers
                         mail.To.Add("<" + emailTo[x].Trim() + ">");
                 }
 
-                mail.Subject = "Course Registration";        // put subject here	        
+                mail.Subject = "Course Registration - " + candidate_course_name;        // put subject here	        
                 mail.IsBodyHtml = true;
                 mail.Body = mailbody;
-                sendEmail(mail);
-                result = "OK";
+                                
                 sal = candidate_salutation;
                 name = candidate_english_name;
                 course = candidate_course_name;
@@ -563,6 +579,8 @@ namespace DOS.Controllers
 
             if (result == "OK")
             {
+                if (((string)Session["SystemMode"]).ToUpper() != "FULL" && mail != null)
+                    sendEmail(mail);
                 return RedirectToAction("courseregistration", "Membership", new { Message = sal + " " + name + ", registration for [" + course + "], successfully.", candidate_course = candidate_course });
             }
             else if (result == "EXISTS")
@@ -599,7 +617,7 @@ namespace DOS.Controllers
 
             for (int x = 0; x < count; x++ )
             {
-                string from = Session["temp_uploadfilesavedlocation"].ToString() + "temp_" + res.ElementAt(x).ICPhoto;
+                string from = Session["icphotolocation"].ToString() + "temp_" + res.ElementAt(x).ICPhoto;
                 string to = Session["icphotolocation"].ToString() + res.ElementAt(x).ICPhoto;
                 if (System.IO.File.Exists(from))
                     System.IO.File.Move(from, to);
@@ -1420,7 +1438,12 @@ namespace DOS.Controllers
             ViewData["familytypelist"] = sql_conn.usp_getAllFamilyType().ToList();
 
             ViewData["ministrylist"] = sql_conn.usp_getListofMinistry().ToList();
-            ViewData["courseslist"] = sql_conn.usp_getListofCourse().ToList();
+
+            if (((string)Session["SystemMode"]).ToUpper() != "FULL")
+                ViewData["listofcourse"] = sql_conn.usp_getListofCourse(true).ToList();
+            else
+                ViewData["listofcourse"] = sql_conn.usp_getListofCourse(false).ToList();
+
             ViewData["cellgrouplist"] = sql_conn.usp_getListofCellgroup().ToList();
             ViewData["religionlist"] = sql_conn.usp_getAllReligion().ToList();
             ViewData["familylist"] = "";

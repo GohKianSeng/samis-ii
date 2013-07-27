@@ -398,13 +398,6 @@ namespace DOS.Models
 			return ((ISingleResult<usp_getListofCellgroupResult>)(result.ReturnValue));
 		}
 		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.usp_getListofCourse")]
-		public ISingleResult<usp_getListofCourseResult> usp_getListofCourse()
-		{
-			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())));
-			return ((ISingleResult<usp_getListofCourseResult>)(result.ReturnValue));
-		}
-		
 		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.usp_getListofCourseParticipants")]
 		public ISingleResult<usp_getListofCourseParticipantsResult> usp_getListofCourseParticipants([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> courseID)
 		{
@@ -1211,32 +1204,11 @@ namespace DOS.Models
 			return ((ISingleResult<usp_SyncVisitorAndMembersResult>)(result.ReturnValue));
 		}
 		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.usp_getCourseInfo")]
-		public ISingleResult<usp_getCourseInfoResult> usp_getCourseInfo([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> courseid)
-		{
-			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), courseid);
-			return ((ISingleResult<usp_getCourseInfoResult>)(result.ReturnValue));
-		}
-		
 		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.usp_getAllCourseAdditionalInfo")]
 		public ISingleResult<usp_getAllCourseAdditionalInfoResult> usp_getAllCourseAdditionalInfo()
 		{
 			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())));
 			return ((ISingleResult<usp_getAllCourseAdditionalInfoResult>)(result.ReturnValue));
-		}
-		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.usp_UpdateCourse")]
-		public ISingleResult<usp_UpdateCourseResult> usp_UpdateCourse([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> courseid, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(100)")] string coursename, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(2000)")] string startdate, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(5)")] string starttime, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(5)")] string endtime, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(10)")] string incharge, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> location, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="AdditionalInformation", DbType="Int")] System.Nullable<int> additionalInformation, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="LastRegistrationDate", DbType="DateTime")] System.Nullable<System.DateTime> lastRegistrationDate)
-		{
-			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), courseid, coursename, startdate, starttime, endtime, incharge, location, additionalInformation, lastRegistrationDate);
-			return ((ISingleResult<usp_UpdateCourseResult>)(result.ReturnValue));
-		}
-		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.usp_addNewCourse")]
-		public ISingleResult<usp_addNewCourseResult> usp_addNewCourse([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(100)")] string coursename, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(2000)")] string startdate, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(5)")] string starttime, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(5)")] string endtime, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(10)")] string incharge, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> location, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Decimal(5,2)")] System.Nullable<decimal> fee, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="AdditionalQuestion", DbType="Int")] System.Nullable<int> additionalQuestion, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="LastRegistration", DbType="DateTime")] System.Nullable<System.DateTime> lastRegistration)
-		{
-			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), coursename, startdate, starttime, endtime, incharge, location, fee, additionalQuestion, lastRegistration);
-			return ((ISingleResult<usp_addNewCourseResult>)(result.ReturnValue));
 		}
 		
 		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.usp_getCourseAdditionalInformation")]
@@ -1331,14 +1303,6 @@ namespace DOS.Models
 			return ((ISingleResult<usp_SyncAllSettings_AdditionalInformationResult>)(result.ReturnValue));
 		}
 		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.usp_getCourseReport")]
-		public ISingleResult<usp_getCourseReportResult> usp_getCourseReport([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> courseID, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="TotalDay", DbType="Int")] ref System.Nullable<int> totalDay)
-		{
-			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), courseID, totalDay);
-			totalDay = ((System.Nullable<int>)(result.GetParameterValue(1)));
-			return ((ISingleResult<usp_getCourseReportResult>)(result.ReturnValue));
-		}
-		
 		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.usp_addNewHWSMember")]
 		public int usp_addNewHWSMember([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Xml")] System.Xml.Linq.XElement newXML, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Result", DbType="VarChar(10)")] ref string result)
 		{
@@ -1368,6 +1332,13 @@ namespace DOS.Models
 			return ((ISingleResult<usp_getHWSMemberInformationResult>)(result.ReturnValue));
 		}
 		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.usp_getListofCourse")]
+		public ISingleResult<usp_getListofCourseResult> usp_getListofCourse([global::System.Data.Linq.Mapping.ParameterAttribute(Name="public", DbType="Bit")] System.Nullable<bool> @public)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), @public);
+			return ((ISingleResult<usp_getListofCourseResult>)(result.ReturnValue));
+		}
+		
 		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.usp_updateHWSMember")]
 		public ISingleResult<usp_updateHWSMemberResult> usp_updateHWSMember([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Xml")] System.Xml.Linq.XElement updateXML)
 		{
@@ -1376,10 +1347,61 @@ namespace DOS.Models
 		}
 		
 		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.usp_UpdateHWSAttendance")]
-		public int usp_UpdateHWSAttendance([global::System.Data.Linq.Mapping.ParameterAttribute(Name="ID", DbType="Int")] System.Nullable<int> iD)
+		public ISingleResult<usp_UpdateHWSAttendanceResult> usp_UpdateHWSAttendance([global::System.Data.Linq.Mapping.ParameterAttribute(Name="ID", DbType="Int")] System.Nullable<int> iD)
 		{
 			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), iD);
-			return ((int)(result.ReturnValue));
+			return ((ISingleResult<usp_UpdateHWSAttendanceResult>)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.usp_addNewCourse")]
+		public ISingleResult<usp_addNewCourseResult> usp_addNewCourse([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(100)")] string coursename, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(2000)")] string startdate, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(5)")] string starttime, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(5)")] string endtime, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(10)")] string incharge, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> location, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Decimal(5,2)")] System.Nullable<decimal> fee, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="AdditionalQuestion", DbType="Int")] System.Nullable<int> additionalQuestion, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="LastRegistration", DbType="DateTime")] System.Nullable<System.DateTime> lastRegistration, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="MinCompleteAttendance", DbType="Int")] System.Nullable<int> minCompleteAttendance)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), coursename, startdate, starttime, endtime, incharge, location, fee, additionalQuestion, lastRegistration, minCompleteAttendance);
+			return ((ISingleResult<usp_addNewCourseResult>)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.usp_getCourseInfo")]
+		public ISingleResult<usp_getCourseInfoResult> usp_getCourseInfo([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> courseid)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), courseid);
+			return ((ISingleResult<usp_getCourseInfoResult>)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.usp_UpdateCourse")]
+		public ISingleResult<usp_UpdateCourseResult> usp_UpdateCourse([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> courseid, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(100)")] string coursename, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(2000)")] string startdate, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(5)")] string starttime, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(5)")] string endtime, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(10)")] string incharge, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> location, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="AdditionalInformation", DbType="Int")] System.Nullable<int> additionalInformation, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="LastRegistrationDate", DbType="DateTime")] System.Nullable<System.DateTime> lastRegistrationDate, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="MinCompleteAttendance", DbType="Int")] System.Nullable<int> minCompleteAttendance)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), courseid, coursename, startdate, starttime, endtime, incharge, location, additionalInformation, lastRegistrationDate, minCompleteAttendance);
+			return ((ISingleResult<usp_UpdateCourseResult>)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.usp_getCourseReport")]
+		public ISingleResult<usp_getCourseReportResult> usp_getCourseReport([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> courseID, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="TotalDay", DbType="Int")] ref System.Nullable<int> totalDay, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="MinAttendance", DbType="Int")] ref System.Nullable<int> minAttendance, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="XML", DbType="Xml")] ref System.Xml.Linq.XElement xML, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="AttendedAtLeastOnce", DbType="Int")] ref System.Nullable<int> attendedAtLeastOnce, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="AllCompletedCourse", DbType="Int")] ref System.Nullable<int> allCompletedCourse, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="SACCompletedCourse", DbType="Int")] ref System.Nullable<int> sACCompletedCourse, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="NonSACCompletedCourse", DbType="Int")] ref System.Nullable<int> nonSACCompletedCourse, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="AnglicanCompletedCourse", DbType="Int")] ref System.Nullable<int> anglicanCompletedCourse, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="NonAnglicanCompletedCourse", DbType="Int")] ref System.Nullable<int> nonAnglicanCompletedCourse)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), courseID, totalDay, minAttendance, xML, attendedAtLeastOnce, allCompletedCourse, sACCompletedCourse, nonSACCompletedCourse, anglicanCompletedCourse, nonAnglicanCompletedCourse);
+			totalDay = ((System.Nullable<int>)(result.GetParameterValue(1)));
+			minAttendance = ((System.Nullable<int>)(result.GetParameterValue(2)));
+			xML = ((System.Xml.Linq.XElement)(result.GetParameterValue(3)));
+			attendedAtLeastOnce = ((System.Nullable<int>)(result.GetParameterValue(4)));
+			allCompletedCourse = ((System.Nullable<int>)(result.GetParameterValue(5)));
+			sACCompletedCourse = ((System.Nullable<int>)(result.GetParameterValue(6)));
+			nonSACCompletedCourse = ((System.Nullable<int>)(result.GetParameterValue(7)));
+			anglicanCompletedCourse = ((System.Nullable<int>)(result.GetParameterValue(8)));
+			nonAnglicanCompletedCourse = ((System.Nullable<int>)(result.GetParameterValue(9)));
+			return ((ISingleResult<usp_getCourseReportResult>)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.usp_getHWSMemberAttendance")]
+		public ISingleResult<usp_getHWSMemberAttendanceResult> usp_getHWSMemberAttendance([global::System.Data.Linq.Mapping.ParameterAttribute(Name="Date", DbType="Date")] System.Nullable<System.DateTime> date)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), date);
+			return ((ISingleResult<usp_getHWSMemberAttendanceResult>)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.usp_getAllHWSAttendanceDate")]
+		public ISingleResult<usp_getAllHWSAttendanceDateResult> usp_getAllHWSAttendanceDate()
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())));
+			return ((ISingleResult<usp_getAllHWSAttendanceDateResult>)(result.ReturnValue));
 		}
 	}
 	
@@ -3222,158 +3244,6 @@ namespace DOS.Models
 				if ((this._CellgroupName != value))
 				{
 					this._CellgroupName = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Name", DbType="VarChar(100)")]
-		public string Name
-		{
-			get
-			{
-				return this._Name;
-			}
-			set
-			{
-				if ((this._Name != value))
-				{
-					this._Name = value;
-				}
-			}
-		}
-	}
-	
-	public partial class usp_getListofCourseResult
-	{
-		
-		private int _courseID;
-		
-		private string _CourseName;
-		
-		private string _CourseStartDate;
-		
-		private System.Nullable<System.DateTime> _CourseEndDate;
-		
-		private System.TimeSpan _CourseStartTime;
-		
-		private System.TimeSpan _CourseEndTime;
-		
-		private string _courseLocation;
-		
-		private string _Name;
-		
-		public usp_getListofCourseResult()
-		{
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_courseID", DbType="Int NOT NULL")]
-		public int courseID
-		{
-			get
-			{
-				return this._courseID;
-			}
-			set
-			{
-				if ((this._courseID != value))
-				{
-					this._courseID = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CourseName", DbType="VarChar(100) NOT NULL", CanBeNull=false)]
-		public string CourseName
-		{
-			get
-			{
-				return this._CourseName;
-			}
-			set
-			{
-				if ((this._CourseName != value))
-				{
-					this._CourseName = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CourseStartDate", DbType="VarChar(8000)")]
-		public string CourseStartDate
-		{
-			get
-			{
-				return this._CourseStartDate;
-			}
-			set
-			{
-				if ((this._CourseStartDate != value))
-				{
-					this._CourseStartDate = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CourseEndDate", DbType="Date")]
-		public System.Nullable<System.DateTime> CourseEndDate
-		{
-			get
-			{
-				return this._CourseEndDate;
-			}
-			set
-			{
-				if ((this._CourseEndDate != value))
-				{
-					this._CourseEndDate = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CourseStartTime", DbType="Time NOT NULL")]
-		public System.TimeSpan CourseStartTime
-		{
-			get
-			{
-				return this._CourseStartTime;
-			}
-			set
-			{
-				if ((this._CourseStartTime != value))
-				{
-					this._CourseStartTime = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CourseEndTime", DbType="Time NOT NULL")]
-		public System.TimeSpan CourseEndTime
-		{
-			get
-			{
-				return this._CourseEndTime;
-			}
-			set
-			{
-				if ((this._CourseEndTime != value))
-				{
-					this._CourseEndTime = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_courseLocation", DbType="VarChar(100)")]
-		public string courseLocation
-		{
-			get
-			{
-				return this._courseLocation;
-			}
-			set
-			{
-				if ((this._courseLocation != value))
-				{
-					this._courseLocation = value;
 				}
 			}
 		}
@@ -11993,230 +11863,6 @@ namespace DOS.Models
 		}
 	}
 	
-	public partial class usp_getCourseInfoResult
-	{
-		
-		private System.Nullable<System.DateTime> _LastRegistrationDate;
-		
-		private int _AdditionalQuestion;
-		
-		private decimal _Fee;
-		
-		private string _CourseDay;
-		
-		private int _courseID;
-		
-		private string _CourseName;
-		
-		private string _CourseStartDate;
-		
-		private System.TimeSpan _CourseStartTime;
-		
-		private System.TimeSpan _CourseEndTime;
-		
-		private string _courseLocation;
-		
-		private string _Name;
-		
-		private string _CourseInCharge;
-		
-		public usp_getCourseInfoResult()
-		{
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_LastRegistrationDate", DbType="Date")]
-		public System.Nullable<System.DateTime> LastRegistrationDate
-		{
-			get
-			{
-				return this._LastRegistrationDate;
-			}
-			set
-			{
-				if ((this._LastRegistrationDate != value))
-				{
-					this._LastRegistrationDate = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_AdditionalQuestion", DbType="Int NOT NULL")]
-		public int AdditionalQuestion
-		{
-			get
-			{
-				return this._AdditionalQuestion;
-			}
-			set
-			{
-				if ((this._AdditionalQuestion != value))
-				{
-					this._AdditionalQuestion = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Fee", DbType="Decimal(5,2) NOT NULL")]
-		public decimal Fee
-		{
-			get
-			{
-				return this._Fee;
-			}
-			set
-			{
-				if ((this._Fee != value))
-				{
-					this._Fee = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CourseDay", DbType="VarChar(50)")]
-		public string CourseDay
-		{
-			get
-			{
-				return this._CourseDay;
-			}
-			set
-			{
-				if ((this._CourseDay != value))
-				{
-					this._CourseDay = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_courseID", DbType="Int NOT NULL")]
-		public int courseID
-		{
-			get
-			{
-				return this._courseID;
-			}
-			set
-			{
-				if ((this._courseID != value))
-				{
-					this._courseID = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CourseName", DbType="VarChar(100) NOT NULL", CanBeNull=false)]
-		public string CourseName
-		{
-			get
-			{
-				return this._CourseName;
-			}
-			set
-			{
-				if ((this._CourseName != value))
-				{
-					this._CourseName = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CourseStartDate", DbType="VarChar(8000) NOT NULL", CanBeNull=false)]
-		public string CourseStartDate
-		{
-			get
-			{
-				return this._CourseStartDate;
-			}
-			set
-			{
-				if ((this._CourseStartDate != value))
-				{
-					this._CourseStartDate = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CourseStartTime", DbType="Time NOT NULL")]
-		public System.TimeSpan CourseStartTime
-		{
-			get
-			{
-				return this._CourseStartTime;
-			}
-			set
-			{
-				if ((this._CourseStartTime != value))
-				{
-					this._CourseStartTime = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CourseEndTime", DbType="Time NOT NULL")]
-		public System.TimeSpan CourseEndTime
-		{
-			get
-			{
-				return this._CourseEndTime;
-			}
-			set
-			{
-				if ((this._CourseEndTime != value))
-				{
-					this._CourseEndTime = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_courseLocation", DbType="VarChar(100)")]
-		public string courseLocation
-		{
-			get
-			{
-				return this._courseLocation;
-			}
-			set
-			{
-				if ((this._courseLocation != value))
-				{
-					this._courseLocation = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Name", DbType="VarChar(100)")]
-		public string Name
-		{
-			get
-			{
-				return this._Name;
-			}
-			set
-			{
-				if ((this._Name != value))
-				{
-					this._Name = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CourseInCharge", DbType="VarChar(10) NOT NULL", CanBeNull=false)]
-		public string CourseInCharge
-		{
-			get
-			{
-				return this._CourseInCharge;
-			}
-			set
-			{
-				if ((this._CourseInCharge != value))
-				{
-					this._CourseInCharge = value;
-				}
-			}
-		}
-	}
-	
 	public partial class usp_getAllCourseAdditionalInfoResult
 	{
 		
@@ -12274,58 +11920,6 @@ namespace DOS.Models
 				if ((this._AgreementHTML != value))
 				{
 					this._AgreementHTML = value;
-				}
-			}
-		}
-	}
-	
-	public partial class usp_UpdateCourseResult
-	{
-		
-		private int _Result;
-		
-		public usp_UpdateCourseResult()
-		{
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Result", DbType="Int NOT NULL")]
-		public int Result
-		{
-			get
-			{
-				return this._Result;
-			}
-			set
-			{
-				if ((this._Result != value))
-				{
-					this._Result = value;
-				}
-			}
-		}
-	}
-	
-	public partial class usp_addNewCourseResult
-	{
-		
-		private int _Result;
-		
-		public usp_addNewCourseResult()
-		{
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Result", DbType="Int NOT NULL")]
-		public int Result
-		{
-			get
-			{
-				return this._Result;
-			}
-			set
-			{
-				if ((this._Result != value))
-				{
-					this._Result = value;
 				}
 			}
 		}
@@ -12766,176 +12360,6 @@ namespace DOS.Models
 				if ((this._Result != value))
 				{
 					this._Result = value;
-				}
-			}
-		}
-	}
-	
-	public partial class usp_getCourseReportResult
-	{
-		
-		private string _NRIC;
-		
-		private string _Name;
-		
-		private string _Gender;
-		
-		private string _Church;
-		
-		private string _Congregation;
-		
-		private string _Contact;
-		
-		private string _Email;
-		
-		private System.Nullable<System.DateTime> _Schedule;
-		
-		private int _Attendance;
-		
-		public usp_getCourseReportResult()
-		{
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_NRIC", DbType="VarChar(20)")]
-		public string NRIC
-		{
-			get
-			{
-				return this._NRIC;
-			}
-			set
-			{
-				if ((this._NRIC != value))
-				{
-					this._NRIC = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Name", DbType="VarChar(50)")]
-		public string Name
-		{
-			get
-			{
-				return this._Name;
-			}
-			set
-			{
-				if ((this._Name != value))
-				{
-					this._Name = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Gender", DbType="VarChar(1)")]
-		public string Gender
-		{
-			get
-			{
-				return this._Gender;
-			}
-			set
-			{
-				if ((this._Gender != value))
-				{
-					this._Gender = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Church", DbType="VarChar(100) NOT NULL", CanBeNull=false)]
-		public string Church
-		{
-			get
-			{
-				return this._Church;
-			}
-			set
-			{
-				if ((this._Church != value))
-				{
-					this._Church = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Congregation", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
-		public string Congregation
-		{
-			get
-			{
-				return this._Congregation;
-			}
-			set
-			{
-				if ((this._Congregation != value))
-				{
-					this._Congregation = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Contact", DbType="VarChar(15)")]
-		public string Contact
-		{
-			get
-			{
-				return this._Contact;
-			}
-			set
-			{
-				if ((this._Contact != value))
-				{
-					this._Contact = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Email", DbType="VarChar(100)")]
-		public string Email
-		{
-			get
-			{
-				return this._Email;
-			}
-			set
-			{
-				if ((this._Email != value))
-				{
-					this._Email = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Schedule", DbType="Date")]
-		public System.Nullable<System.DateTime> Schedule
-		{
-			get
-			{
-				return this._Schedule;
-			}
-			set
-			{
-				if ((this._Schedule != value))
-				{
-					this._Schedule = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Attendance", DbType="Int NOT NULL")]
-		public int Attendance
-		{
-			get
-			{
-				return this._Attendance;
-			}
-			set
-			{
-				if ((this._Attendance != value))
-				{
-					this._Attendance = value;
 				}
 			}
 		}
@@ -13497,6 +12921,158 @@ namespace DOS.Models
 		}
 	}
 	
+	public partial class usp_getListofCourseResult
+	{
+		
+		private int _courseID;
+		
+		private string _CourseName;
+		
+		private string _CourseStartDate;
+		
+		private System.Nullable<System.DateTime> _CourseEndDate;
+		
+		private System.TimeSpan _CourseStartTime;
+		
+		private System.TimeSpan _CourseEndTime;
+		
+		private string _courseLocation;
+		
+		private string _Name;
+		
+		public usp_getListofCourseResult()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_courseID", DbType="Int NOT NULL")]
+		public int courseID
+		{
+			get
+			{
+				return this._courseID;
+			}
+			set
+			{
+				if ((this._courseID != value))
+				{
+					this._courseID = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CourseName", DbType="VarChar(100) NOT NULL", CanBeNull=false)]
+		public string CourseName
+		{
+			get
+			{
+				return this._CourseName;
+			}
+			set
+			{
+				if ((this._CourseName != value))
+				{
+					this._CourseName = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CourseStartDate", DbType="VarChar(8000)")]
+		public string CourseStartDate
+		{
+			get
+			{
+				return this._CourseStartDate;
+			}
+			set
+			{
+				if ((this._CourseStartDate != value))
+				{
+					this._CourseStartDate = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CourseEndDate", DbType="Date")]
+		public System.Nullable<System.DateTime> CourseEndDate
+		{
+			get
+			{
+				return this._CourseEndDate;
+			}
+			set
+			{
+				if ((this._CourseEndDate != value))
+				{
+					this._CourseEndDate = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CourseStartTime", DbType="Time NOT NULL")]
+		public System.TimeSpan CourseStartTime
+		{
+			get
+			{
+				return this._CourseStartTime;
+			}
+			set
+			{
+				if ((this._CourseStartTime != value))
+				{
+					this._CourseStartTime = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CourseEndTime", DbType="Time NOT NULL")]
+		public System.TimeSpan CourseEndTime
+		{
+			get
+			{
+				return this._CourseEndTime;
+			}
+			set
+			{
+				if ((this._CourseEndTime != value))
+				{
+					this._CourseEndTime = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_courseLocation", DbType="VarChar(100)")]
+		public string courseLocation
+		{
+			get
+			{
+				return this._courseLocation;
+			}
+			set
+			{
+				if ((this._courseLocation != value))
+				{
+					this._courseLocation = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Name", DbType="VarChar(100)")]
+		public string Name
+		{
+			get
+			{
+				return this._Name;
+			}
+			set
+			{
+				if ((this._Name != value))
+				{
+					this._Name = value;
+				}
+			}
+		}
+	}
+	
 	public partial class usp_updateHWSMemberResult
 	{
 		
@@ -13518,6 +13094,854 @@ namespace DOS.Models
 				if ((this._Result != value))
 				{
 					this._Result = value;
+				}
+			}
+		}
+	}
+	
+	public partial class usp_UpdateHWSAttendanceResult
+	{
+		
+		private string _EnglishSurname;
+		
+		private string _EnglishGivenName;
+		
+		private string _ChineseSurname;
+		
+		private string _ChineseGivenName;
+		
+		public usp_UpdateHWSAttendanceResult()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_EnglishSurname", DbType="VarChar(10) NOT NULL", CanBeNull=false)]
+		public string EnglishSurname
+		{
+			get
+			{
+				return this._EnglishSurname;
+			}
+			set
+			{
+				if ((this._EnglishSurname != value))
+				{
+					this._EnglishSurname = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_EnglishGivenName", DbType="VarChar(30) NOT NULL", CanBeNull=false)]
+		public string EnglishGivenName
+		{
+			get
+			{
+				return this._EnglishGivenName;
+			}
+			set
+			{
+				if ((this._EnglishGivenName != value))
+				{
+					this._EnglishGivenName = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ChineseSurname", DbType="NVarChar(2) NOT NULL", CanBeNull=false)]
+		public string ChineseSurname
+		{
+			get
+			{
+				return this._ChineseSurname;
+			}
+			set
+			{
+				if ((this._ChineseSurname != value))
+				{
+					this._ChineseSurname = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ChineseGivenName", DbType="NVarChar(3) NOT NULL", CanBeNull=false)]
+		public string ChineseGivenName
+		{
+			get
+			{
+				return this._ChineseGivenName;
+			}
+			set
+			{
+				if ((this._ChineseGivenName != value))
+				{
+					this._ChineseGivenName = value;
+				}
+			}
+		}
+	}
+	
+	public partial class usp_addNewCourseResult
+	{
+		
+		private int _Result;
+		
+		public usp_addNewCourseResult()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Result", DbType="Int NOT NULL")]
+		public int Result
+		{
+			get
+			{
+				return this._Result;
+			}
+			set
+			{
+				if ((this._Result != value))
+				{
+					this._Result = value;
+				}
+			}
+		}
+	}
+	
+	public partial class usp_getCourseInfoResult
+	{
+		
+		private int _MinCompleteAttendance;
+		
+		private System.DateTime _LastRegistrationDate;
+		
+		private int _AdditionalQuestion;
+		
+		private decimal _Fee;
+		
+		private string _CourseDay;
+		
+		private int _courseID;
+		
+		private string _CourseName;
+		
+		private string _CourseStartDate;
+		
+		private System.TimeSpan _CourseStartTime;
+		
+		private System.TimeSpan _CourseEndTime;
+		
+		private string _courseLocation;
+		
+		private string _Name;
+		
+		private string _CourseInCharge;
+		
+		public usp_getCourseInfoResult()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MinCompleteAttendance", DbType="Int NOT NULL")]
+		public int MinCompleteAttendance
+		{
+			get
+			{
+				return this._MinCompleteAttendance;
+			}
+			set
+			{
+				if ((this._MinCompleteAttendance != value))
+				{
+					this._MinCompleteAttendance = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_LastRegistrationDate", DbType="Date NOT NULL")]
+		public System.DateTime LastRegistrationDate
+		{
+			get
+			{
+				return this._LastRegistrationDate;
+			}
+			set
+			{
+				if ((this._LastRegistrationDate != value))
+				{
+					this._LastRegistrationDate = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_AdditionalQuestion", DbType="Int NOT NULL")]
+		public int AdditionalQuestion
+		{
+			get
+			{
+				return this._AdditionalQuestion;
+			}
+			set
+			{
+				if ((this._AdditionalQuestion != value))
+				{
+					this._AdditionalQuestion = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Fee", DbType="Decimal(5,2) NOT NULL")]
+		public decimal Fee
+		{
+			get
+			{
+				return this._Fee;
+			}
+			set
+			{
+				if ((this._Fee != value))
+				{
+					this._Fee = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CourseDay", DbType="VarChar(50)")]
+		public string CourseDay
+		{
+			get
+			{
+				return this._CourseDay;
+			}
+			set
+			{
+				if ((this._CourseDay != value))
+				{
+					this._CourseDay = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_courseID", DbType="Int NOT NULL")]
+		public int courseID
+		{
+			get
+			{
+				return this._courseID;
+			}
+			set
+			{
+				if ((this._courseID != value))
+				{
+					this._courseID = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CourseName", DbType="VarChar(100) NOT NULL", CanBeNull=false)]
+		public string CourseName
+		{
+			get
+			{
+				return this._CourseName;
+			}
+			set
+			{
+				if ((this._CourseName != value))
+				{
+					this._CourseName = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CourseStartDate", DbType="VarChar(8000) NOT NULL", CanBeNull=false)]
+		public string CourseStartDate
+		{
+			get
+			{
+				return this._CourseStartDate;
+			}
+			set
+			{
+				if ((this._CourseStartDate != value))
+				{
+					this._CourseStartDate = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CourseStartTime", DbType="Time NOT NULL")]
+		public System.TimeSpan CourseStartTime
+		{
+			get
+			{
+				return this._CourseStartTime;
+			}
+			set
+			{
+				if ((this._CourseStartTime != value))
+				{
+					this._CourseStartTime = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CourseEndTime", DbType="Time NOT NULL")]
+		public System.TimeSpan CourseEndTime
+		{
+			get
+			{
+				return this._CourseEndTime;
+			}
+			set
+			{
+				if ((this._CourseEndTime != value))
+				{
+					this._CourseEndTime = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_courseLocation", DbType="VarChar(100)")]
+		public string courseLocation
+		{
+			get
+			{
+				return this._courseLocation;
+			}
+			set
+			{
+				if ((this._courseLocation != value))
+				{
+					this._courseLocation = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Name", DbType="VarChar(100)")]
+		public string Name
+		{
+			get
+			{
+				return this._Name;
+			}
+			set
+			{
+				if ((this._Name != value))
+				{
+					this._Name = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CourseInCharge", DbType="VarChar(10) NOT NULL", CanBeNull=false)]
+		public string CourseInCharge
+		{
+			get
+			{
+				return this._CourseInCharge;
+			}
+			set
+			{
+				if ((this._CourseInCharge != value))
+				{
+					this._CourseInCharge = value;
+				}
+			}
+		}
+	}
+	
+	public partial class usp_UpdateCourseResult
+	{
+		
+		private int _Result;
+		
+		public usp_UpdateCourseResult()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Result", DbType="Int NOT NULL")]
+		public int Result
+		{
+			get
+			{
+				return this._Result;
+			}
+			set
+			{
+				if ((this._Result != value))
+				{
+					this._Result = value;
+				}
+			}
+		}
+	}
+	
+	public partial class usp_getCourseReportResult
+	{
+		
+		private string _NRIC;
+		
+		private string _Name;
+		
+		private string _Gender;
+		
+		private string _Church;
+		
+		private string _Congregation;
+		
+		private string _Contact;
+		
+		private string _Email;
+		
+		private System.Nullable<System.DateTime> _Schedule;
+		
+		private int _Attendance;
+		
+		public usp_getCourseReportResult()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_NRIC", DbType="VarChar(20)")]
+		public string NRIC
+		{
+			get
+			{
+				return this._NRIC;
+			}
+			set
+			{
+				if ((this._NRIC != value))
+				{
+					this._NRIC = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Name", DbType="VarChar(50)")]
+		public string Name
+		{
+			get
+			{
+				return this._Name;
+			}
+			set
+			{
+				if ((this._Name != value))
+				{
+					this._Name = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Gender", DbType="VarChar(1)")]
+		public string Gender
+		{
+			get
+			{
+				return this._Gender;
+			}
+			set
+			{
+				if ((this._Gender != value))
+				{
+					this._Gender = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Church", DbType="VarChar(100) NOT NULL", CanBeNull=false)]
+		public string Church
+		{
+			get
+			{
+				return this._Church;
+			}
+			set
+			{
+				if ((this._Church != value))
+				{
+					this._Church = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Congregation", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
+		public string Congregation
+		{
+			get
+			{
+				return this._Congregation;
+			}
+			set
+			{
+				if ((this._Congregation != value))
+				{
+					this._Congregation = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Contact", DbType="VarChar(15)")]
+		public string Contact
+		{
+			get
+			{
+				return this._Contact;
+			}
+			set
+			{
+				if ((this._Contact != value))
+				{
+					this._Contact = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Email", DbType="VarChar(100)")]
+		public string Email
+		{
+			get
+			{
+				return this._Email;
+			}
+			set
+			{
+				if ((this._Email != value))
+				{
+					this._Email = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Schedule", DbType="Date")]
+		public System.Nullable<System.DateTime> Schedule
+		{
+			get
+			{
+				return this._Schedule;
+			}
+			set
+			{
+				if ((this._Schedule != value))
+				{
+					this._Schedule = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Attendance", DbType="Int NOT NULL")]
+		public int Attendance
+		{
+			get
+			{
+				return this._Attendance;
+			}
+			set
+			{
+				if ((this._Attendance != value))
+				{
+					this._Attendance = value;
+				}
+			}
+		}
+	}
+	
+	public partial class usp_getHWSMemberAttendanceResult
+	{
+		
+		private int _ID;
+		
+		private string _EnglishSurname;
+		
+		private string _EnglishGivenName;
+		
+		private string _ChineseSurname;
+		
+		private string _ChineseGivenName;
+		
+		private System.Nullable<System.DateTime> _Birthday;
+		
+		private string _Contact;
+		
+		private string _AddressHouseBlock;
+		
+		private string _AddressStreet;
+		
+		private string _AddressUnit;
+		
+		private int _AddressPostalCode;
+		
+		private string _Photo;
+		
+		private string _NextOfKinName;
+		
+		private string _NextOfKinContact;
+		
+		private string _Remarks;
+		
+		public usp_getHWSMemberAttendanceResult()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID", DbType="Int NOT NULL")]
+		public int ID
+		{
+			get
+			{
+				return this._ID;
+			}
+			set
+			{
+				if ((this._ID != value))
+				{
+					this._ID = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_EnglishSurname", DbType="VarChar(10) NOT NULL", CanBeNull=false)]
+		public string EnglishSurname
+		{
+			get
+			{
+				return this._EnglishSurname;
+			}
+			set
+			{
+				if ((this._EnglishSurname != value))
+				{
+					this._EnglishSurname = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_EnglishGivenName", DbType="VarChar(30) NOT NULL", CanBeNull=false)]
+		public string EnglishGivenName
+		{
+			get
+			{
+				return this._EnglishGivenName;
+			}
+			set
+			{
+				if ((this._EnglishGivenName != value))
+				{
+					this._EnglishGivenName = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ChineseSurname", DbType="NVarChar(2) NOT NULL", CanBeNull=false)]
+		public string ChineseSurname
+		{
+			get
+			{
+				return this._ChineseSurname;
+			}
+			set
+			{
+				if ((this._ChineseSurname != value))
+				{
+					this._ChineseSurname = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ChineseGivenName", DbType="NVarChar(3) NOT NULL", CanBeNull=false)]
+		public string ChineseGivenName
+		{
+			get
+			{
+				return this._ChineseGivenName;
+			}
+			set
+			{
+				if ((this._ChineseGivenName != value))
+				{
+					this._ChineseGivenName = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Birthday", DbType="Date")]
+		public System.Nullable<System.DateTime> Birthday
+		{
+			get
+			{
+				return this._Birthday;
+			}
+			set
+			{
+				if ((this._Birthday != value))
+				{
+					this._Birthday = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Contact", DbType="VarChar(10) NOT NULL", CanBeNull=false)]
+		public string Contact
+		{
+			get
+			{
+				return this._Contact;
+			}
+			set
+			{
+				if ((this._Contact != value))
+				{
+					this._Contact = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_AddressHouseBlock", DbType="VarChar(70) NOT NULL", CanBeNull=false)]
+		public string AddressHouseBlock
+		{
+			get
+			{
+				return this._AddressHouseBlock;
+			}
+			set
+			{
+				if ((this._AddressHouseBlock != value))
+				{
+					this._AddressHouseBlock = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_AddressStreet", DbType="VarChar(100) NOT NULL", CanBeNull=false)]
+		public string AddressStreet
+		{
+			get
+			{
+				return this._AddressStreet;
+			}
+			set
+			{
+				if ((this._AddressStreet != value))
+				{
+					this._AddressStreet = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_AddressUnit", DbType="VarChar(10) NOT NULL", CanBeNull=false)]
+		public string AddressUnit
+		{
+			get
+			{
+				return this._AddressUnit;
+			}
+			set
+			{
+				if ((this._AddressUnit != value))
+				{
+					this._AddressUnit = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_AddressPostalCode", DbType="Int NOT NULL")]
+		public int AddressPostalCode
+		{
+			get
+			{
+				return this._AddressPostalCode;
+			}
+			set
+			{
+				if ((this._AddressPostalCode != value))
+				{
+					this._AddressPostalCode = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Photo", DbType="VarChar(1000) NOT NULL", CanBeNull=false)]
+		public string Photo
+		{
+			get
+			{
+				return this._Photo;
+			}
+			set
+			{
+				if ((this._Photo != value))
+				{
+					this._Photo = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_NextOfKinName", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
+		public string NextOfKinName
+		{
+			get
+			{
+				return this._NextOfKinName;
+			}
+			set
+			{
+				if ((this._NextOfKinName != value))
+				{
+					this._NextOfKinName = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_NextOfKinContact", DbType="VarChar(10) NOT NULL", CanBeNull=false)]
+		public string NextOfKinContact
+		{
+			get
+			{
+				return this._NextOfKinContact;
+			}
+			set
+			{
+				if ((this._NextOfKinContact != value))
+				{
+					this._NextOfKinContact = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Remarks", DbType="VarChar(8000) NOT NULL", CanBeNull=false)]
+		public string Remarks
+		{
+			get
+			{
+				return this._Remarks;
+			}
+			set
+			{
+				if ((this._Remarks != value))
+				{
+					this._Remarks = value;
+				}
+			}
+		}
+	}
+	
+	public partial class usp_getAllHWSAttendanceDateResult
+	{
+		
+		private System.DateTime _WorshipDate;
+		
+		public usp_getAllHWSAttendanceDateResult()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_WorshipDate", DbType="Date NOT NULL")]
+		public System.DateTime WorshipDate
+		{
+			get
+			{
+				return this._WorshipDate;
+			}
+			set
+			{
+				if ((this._WorshipDate != value))
+				{
+					this._WorshipDate = value;
 				}
 			}
 		}

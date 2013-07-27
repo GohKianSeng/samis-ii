@@ -31,6 +31,7 @@ namespace DOS.Controllers
                 Session["SMTPAccount"].ToString(),
                 Session["SMTPAddress"].ToString(),
                 Session["SMTPAccountPassword"].ToString(),
+                Session["icphotolocation"].ToString()
             });
             return View("simplehtml");
         }
@@ -41,8 +42,8 @@ namespace DOS.Controllers
 
             XElement xmlDoc = sql_conn.usp_GetAllSettingsInXML().ElementAt(0).XML;
             IEnumerable<usp_getAllSettingResult> res = sql_conn.usp_getAllSetting().ToList();
-            serverSideProcessMsg = "10";
-            int count = 10;
+            serverSideProcessMsg = "8";
+            int count = 8;
             
             string url = "https://" + res.ElementAt(0).ExternalDBIP;
             for (int b = 0; b < xmlDoc.Elements().Count(); b++)
@@ -69,19 +70,21 @@ namespace DOS.Controllers
             IEnumerable<usp_SyncVisitorAndMembersResult> syncRes = sql_conn.usp_SyncVisitorAndMembers(XElement.Parse(recResult)).ToList();
             if (syncRes.Count() > 0)
             {
-                int countincrement = 50 / syncRes.Count();
+                double countincrement = 50.0 / ((float)syncRes.Count());
+                double downloadCount = 0.0;
                 for (int y = 0; y < syncRes.Count(); y++)
                 {
                     if (syncRes.ElementAt(y).Type == "New" && (bool)syncRes.ElementAt(y).Successful)
                     {
-                        downloadAndDeleteRemoteStorageFile(syncRes.ElementAt(y).PhotoFile, url);
+                        downloadAndDeleteRemoteStorageFile(syncRes.ElementAt(y).PhotoFile, url, obj[4]);
                         new WebClient().DownloadString(url + "/settings.mvc/SyncDeleteMember?NRIC=" + syncRes.ElementAt(y).NRIC);
                     }
                     else if (syncRes.ElementAt(y).Type == "Update" && (bool)syncRes.ElementAt(y).Successful)
                     {
-                        new WebClient().DownloadString(url + "/settings.mvc/SyncDeleteVisitor?NRIC=" + syncRes.ElementAt(y).NRIC);
+                        new WebClient().DownloadString(url + "/settings.mvc/SyncDeleteVisitor?NRIC=" + syncRes.ElementAt(y).NRIC);                        
                     }
-                    count = count + countincrement;
+                    downloadCount += countincrement;
+                    count = count + (int)downloadCount;
                     serverSideProcessMsg = count.ToString();
                     if (!(bool)syncRes.ElementAt(y).Successful)
                     {
@@ -121,13 +124,13 @@ namespace DOS.Controllers
         }
         
 
-        private void downloadAndDeleteRemoteStorageFile(string filename, string host)
+        private void downloadAndDeleteRemoteStorageFile(string filename, string host, string savelocation)
         {
-            if (filename.Length <= 0)
+            if (filename == null || filename.Length <= 0)
                 return;
 
             WebClient client = new WebClient();
-            client.DownloadFile(host + "/UploadFile.mvc/downloadPhoto?guid=&filename=" + filename, "C:\\tempfile\\icphoto\\" + filename);
+            client.DownloadFile(host + "/UploadFile.mvc/downloadPhoto?guid=&filename=" + filename, savelocation + "temp_" +filename);
             client.DownloadString(host + "/UploadFile.mvc/deleteRemoteStoragePhoto?filename=" + filename);
             
         }

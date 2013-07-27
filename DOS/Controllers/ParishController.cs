@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using DOS.Controllers;
 using DOS.Models;
+using System.Xml.Linq;
 
 namespace DOS.Controllers
 {
@@ -100,7 +101,7 @@ namespace DOS.Controllers
         [Authorize]
         public ActionResult ListOfCourse()
         {
-            ViewData["listofcourse"] = sql_conn.usp_getListofCourse().ToList();
+            ViewData["listofcourse"] = sql_conn.usp_getListofCourse(false).ToList();
             return View();
         }
 
@@ -118,7 +119,7 @@ namespace DOS.Controllers
             {
                 ViewData["errormsg"] = "Unable to delete course, " + name + ".";
             }
-            ViewData["listofcourse"] = sql_conn.usp_getListofCourse().ToList();
+            ViewData["listofcourse"] = sql_conn.usp_getListofCourse(false).ToList();
             return View("ListOfCourse");
         }
 
@@ -145,6 +146,7 @@ namespace DOS.Controllers
             string startdate = Request.Form["startdate"];
             string timestart = Request.Form["timestart"];
             string timeend = Request.Form["timeend"];
+            int MinCompleteAttendance = int.Parse(Request.Form["MinCompleteAttendance"]);
             string courseArea = Request.Form["aspnet_variable$MainContent$courseArea"];
             string additionalAgreement = Request.Form["aspnet_variable$MainContent$AdditionalInfo"];
             string lastRegistrationDate = Request.Form["lastRegistrationDate"];
@@ -152,9 +154,9 @@ namespace DOS.Controllers
             decimal fee = 0;
             int res;
             if(decimal.TryParse(Request.Form["fee"], out fee))
-                res = sql_conn.usp_addNewCourse(coursename, startdate, timestart, timeend, incharge, int.Parse(courseArea), fee, int.Parse(additionalAgreement), DateTime.ParseExact(lastRegistrationDate, "dd/MM/yyyy", null)).ElementAt(0).Result;
+                res = sql_conn.usp_addNewCourse(coursename, startdate, timestart, timeend, incharge, int.Parse(courseArea), fee, int.Parse(additionalAgreement), DateTime.ParseExact(lastRegistrationDate, "dd/MM/yyyy", null), MinCompleteAttendance).ElementAt(0).Result;
             else
-                res = sql_conn.usp_addNewCourse(coursename, startdate, timestart, timeend, incharge, int.Parse(courseArea), (decimal)0, int.Parse(additionalAgreement), DateTime.ParseExact(lastRegistrationDate, "dd/MM/yyyy", null)).ElementAt(0).Result;
+                res = sql_conn.usp_addNewCourse(coursename, startdate, timestart, timeend, incharge, int.Parse(courseArea), (decimal)0, int.Parse(additionalAgreement), DateTime.ParseExact(lastRegistrationDate, "dd/MM/yyyy", null), MinCompleteAttendance).ElementAt(0).Result;
             if (res == 1)
             {
                 ViewData["errormsg"] = "Course added.";
@@ -189,9 +191,21 @@ namespace DOS.Controllers
         [Authorize]
         public ActionResult attendanceReport(string courseid)
         {
-            int? totalday = 0;
-            ViewData["report"] = sql_conn.usp_getCourseReport(int.Parse(courseid), ref totalday).ToList();
+            int? totalday = 0, minAttendance = 0;
+            XElement xml = null;
+            int? attendedAtLeastOnce = 0, allCompletedCourse = 0, SACCompletedCourse = 0, NonSACCompletedCourse = 0;
+            int? anglicanCompleted = 0, nonAnglicanCompleted = 0;
+            ViewData["report"] = sql_conn.usp_getCourseReport(int.Parse(courseid), ref totalday, ref minAttendance, ref xml, ref attendedAtLeastOnce, ref allCompletedCourse, ref SACCompletedCourse, ref NonSACCompletedCourse, ref anglicanCompleted, ref nonAnglicanCompleted).ToList();
             ViewData["totalday"] = totalday;
+            ViewData["xml"] = xml;
+            ViewData["attendedAtLeastOnce"] = attendedAtLeastOnce;
+            ViewData["allCompletedCourse"] = allCompletedCourse;
+            ViewData["SACCompletedCourse"] = SACCompletedCourse;
+            ViewData["NonSACCompletedCourse"] = NonSACCompletedCourse;
+            ViewData["anglicanCompleted"] = anglicanCompleted;
+            ViewData["nonAnglicanCompleted"] = nonAnglicanCompleted;
+            ViewData["minAttendance"] = minAttendance;
+            
             return View("AttendanceReport");
         }
 
@@ -199,6 +213,7 @@ namespace DOS.Controllers
         [Authorize]
         public ActionResult updateAcourse()
         {
+            int MinCompleteAttendance = int.Parse(Request.Form["MinCompleteAttendance"]);
             string courseid = Request.Form["courseid"];
             string coursename = Request.Form["coursename"];
             string startdate = Request.Form["startdate"];
@@ -210,7 +225,7 @@ namespace DOS.Controllers
             string lastRegistrationDate = Request.Form["lastRegistrationDate"];
             string incharge = Request.Form["incharge"];
 
-            int res = sql_conn.usp_UpdateCourse(int.Parse(courseid), coursename, startdate, timestart, timeend, incharge, int.Parse(courseArea), int.Parse(additionalAgreement), DateTime.ParseExact(lastRegistrationDate, "dd/MM/yyyy", null)).ElementAt(0).Result;
+            int res = sql_conn.usp_UpdateCourse(int.Parse(courseid), coursename, startdate, timestart, timeend, incharge, int.Parse(courseArea), int.Parse(additionalAgreement), DateTime.ParseExact(lastRegistrationDate, "dd/MM/yyyy", null), MinCompleteAttendance).ElementAt(0).Result;
 
             ViewData["courseinformation"] = sql_conn.usp_getCourseInfo(int.Parse(courseid)).ElementAt(0);
             ViewData["type"] = "update";
