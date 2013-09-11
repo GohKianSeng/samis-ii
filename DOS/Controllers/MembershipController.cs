@@ -433,8 +433,8 @@ namespace DOS.Controllers
         [ErrorHandler]
         public ActionResult submitcourseregistration()
         {
-            try
-            {
+            //try
+            //{
                 MailMessage mail = null;
                 initializedParameter();
                 if (((string)Session["SystemMode"]).ToUpper() != "FULL")
@@ -627,18 +627,18 @@ namespace DOS.Controllers
                 }
 
                 return View();
-            }
-            catch (Exception e)
-            {
-                initializedParameter();
-                if (((string)Session["SystemMode"]).ToUpper() != "FULL")
-                    ViewData["listofcourse"] = sql_conn.usp_getListofCourse(true).ToList();
-                else
-                    ViewData["listofcourse"] = sql_conn.usp_getListofCourse(false).ToList();
-                ViewData["Message"] = "<label style=\"color:red;\">Unable to register user. Please try again.</label>";          
-                ViewData["existingmember"] = "null";
-                return View("courseregistration");
-            }
+            //}
+            //catch (Exception e)
+            //{
+            //    initializedParameter();
+            //    if (((string)Session["SystemMode"]).ToUpper() != "FULL")
+            //        ViewData["listofcourse"] = sql_conn.usp_getListofCourse(true).ToList();
+            //    else
+            //        ViewData["listofcourse"] = sql_conn.usp_getListofCourse(false).ToList();
+            //    ViewData["Message"] = "<label style=\"color:red;\">Unable to register user. Please try again.</label>";          
+            //    ViewData["existingmember"] = "null";
+            //    return View("courseregistration");
+            //}
         }
 
         [ErrorHandler]
