@@ -504,7 +504,7 @@ namespace DOS.Controllers
                 ViewData["candidate_church"] = candidate_church;
                 ViewData["candidate_church_others"] = candidate_church_others;
 
-                XElement additionalInfo = XElement.Parse(decodedAdditionalInformation + "sdf");
+                XElement additionalInfo = XElement.Parse(decodedAdditionalInformation);
 
                 string result = "ERROR";
                 string sal = "";
