@@ -131,6 +131,7 @@
     <Content Include="Content\css\TopMenu.css" />
     <Content Include="Content\images\apple-touch-icon.png" />
     <Content Include="Content\images\edit-icon.png" />
+    <Content Include="Content\images\facebookshare.png" />
     <Content Include="Content\images\help-icon.png" />
     <Content Include="Content\images\h_bg2.png" />
     <Content Include="Content\images\loading.gif" />

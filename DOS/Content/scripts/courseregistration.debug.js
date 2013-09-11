@@ -1,6 +1,6 @@
 ﻿var selectedlanguges = "";
 $(document).ready(function () {
-    
+
     $("#" + getFormID()).attr("action", unescape(getSubmitURL()));
 
     $('#candidate_dob').datepick({ yearRange: getDateRangeString(), maxDate: +0, dateFormat: 'dd/mm/yyyy', pickerClass: 'datepick-jumps',
@@ -47,6 +47,18 @@ $(document).ready(function () {
         $("#church_others").val($.cookie('candidate_churchOthers'));
         $("#" + getCongregationID()).val($.cookie('candidate_congregation'));
     }
+
+    if (getIfAD() == "_ad") {
+        $('#WalkInDate').datepick({ yearRange: 'c-100:c+0', maxDate: +0, dateFormat: 'dd/mm/yyyy', pickerClass: 'datepick-jumps',
+            renderer: $.extend({}, $.datepick.defaultRenderer,
+            { picker: $.datepick.defaultRenderer.picker.
+            replace(/\{link:prev\}/, '{link:prevJump}{link:prev}').
+            replace(/\{link:next\}/, '{link:nextJump}{link:next}')
+            })
+        });
+    }
+    $("#nric").focus();
+
     changeChurch();
 });
 
@@ -220,8 +232,13 @@ function checkForm(){
             document.getElementById("maindiv").style.display = "none";
             document.getElementById("loadingdiv").style.display = "block";
             for (var x = 0; x < window.frames.length; x++) {
-                if(window.frames[0].name == random.toString())
-                    $("#EncodedAdditionalInformation").val(window.frames[x].document.getElementById('agreementxml').value);
+                try {
+                    if (window.frames[x].name == random.toString()) {
+                        $("#EncodedAdditionalInformation").val(window.frames[x].document.getElementById('agreementxml').value);
+                        break;
+                    }
+                }
+                catch (err) { }
             }
             $("#" + getFormID()).submit();
         }

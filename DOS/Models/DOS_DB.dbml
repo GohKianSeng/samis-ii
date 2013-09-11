@@ -1359,36 +1359,6 @@
       <Column Name="AgreementType" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
     </ElementType>
   </Function>
-  <Function Name="dbo.usp_addNewCourseVisitorParticipantAndAttendance" Method="usp_addNewCourseVisitorParticipantAndAttendance">
-    <Parameter Name="nric" Type="System.String" DbType="VarChar(10)" />
-    <Parameter Name="course" Type="System.String" DbType="VarChar(10)" />
-    <Parameter Name="salutation" Type="System.String" DbType="VarChar(10)" />
-    <Parameter Name="english_name" Type="System.String" DbType="VarChar(50)" />
-    <Parameter Name="dob" Type="System.DateTime" DbType="Date" />
-    <Parameter Name="gender" Type="System.String" DbType="VarChar(1)" />
-    <Parameter Name="education" Type="System.String" DbType="VarChar(10)" />
-    <Parameter Name="nationality" Type="System.String" DbType="VarChar(10)" />
-    <Parameter Name="occupation" Type="System.String" DbType="VarChar(10)" />
-    <Parameter Name="postal_code" Type="System.String" DbType="VarChar(6)" />
-    <Parameter Name="blk_house" Type="System.String" DbType="VarChar(10)" />
-    <Parameter Name="street_address" Type="System.String" DbType="VarChar(1000)" />
-    <Parameter Name="unit" Type="System.String" DbType="VarChar(10)" />
-    <Parameter Name="contact" Type="System.String" DbType="VarChar(15)" />
-    <Parameter Name="email" Type="System.String" DbType="VarChar(100)" />
-    <Parameter Name="church" Type="System.Int32" DbType="Int" />
-    <Parameter Name="church_others" Type="System.String" DbType="VarChar(100)" />
-    <Parameter Name="UserID" Parameter="userID" Type="System.String" DbType="VarChar(50)" />
-    <ElementType Name="usp_addNewCourseVisitorParticipantAndAttendanceResult">
-      <Column Name="Result" Type="System.String" DbType="VarChar(185)" CanBeNull="true" />
-    </ElementType>
-  </Function>
-  <Function Name="dbo.usp_addNewCourseMemberParticipantAndAttendance" Method="usp_addNewCourseMemberParticipantAndAttendance">
-    <Parameter Name="NRIC" Parameter="nRIC" Type="System.String" DbType="VarChar(100)" />
-    <Parameter Name="courseid" Type="System.Int32" DbType="Int" />
-    <ElementType Name="usp_addNewCourseMemberParticipantAndAttendanceResult">
-      <Column Name="Result" Type="System.String" DbType="VarChar(185)" CanBeNull="true" />
-    </ElementType>
-  </Function>
   <Function Name="dbo.usp_getCourseParticipantInformation" Method="usp_getCourseParticipantInformation">
     <Parameter Name="courseid" Type="System.Int32" DbType="Int" />
     <Parameter Name="nric" Type="System.String" DbType="VarChar(20)" />
@@ -1619,5 +1589,42 @@
     <ElementType Name="usp_getAllHWSAttendanceDateResult">
       <Column Name="WorshipDate" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
     </ElementType>
+  </Function>
+  <Function Name="dbo.usp_addNewCourseMemberParticipantAndAttendance" Method="usp_addNewCourseMemberParticipantAndAttendance">
+    <Parameter Name="NRIC" Parameter="nRIC" Type="System.String" DbType="VarChar(100)" />
+    <Parameter Name="courseid" Type="System.Int32" DbType="Int" />
+    <Parameter Name="today" Type="System.DateTime" DbType="DateTime" />
+    <ElementType Name="usp_addNewCourseMemberParticipantAndAttendanceResult">
+      <Column Name="Result" Type="System.String" DbType="VarChar(185)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.usp_addNewCourseVisitorParticipantAndAttendance" Method="usp_addNewCourseVisitorParticipantAndAttendance">
+    <Parameter Name="nric" Type="System.String" DbType="VarChar(10)" />
+    <Parameter Name="course" Type="System.String" DbType="VarChar(10)" />
+    <Parameter Name="salutation" Type="System.String" DbType="VarChar(10)" />
+    <Parameter Name="english_name" Type="System.String" DbType="VarChar(50)" />
+    <Parameter Name="dob" Type="System.DateTime" DbType="Date" />
+    <Parameter Name="gender" Type="System.String" DbType="VarChar(1)" />
+    <Parameter Name="education" Type="System.String" DbType="VarChar(10)" />
+    <Parameter Name="nationality" Type="System.String" DbType="VarChar(10)" />
+    <Parameter Name="occupation" Type="System.String" DbType="VarChar(10)" />
+    <Parameter Name="postal_code" Type="System.String" DbType="VarChar(6)" />
+    <Parameter Name="blk_house" Type="System.String" DbType="VarChar(10)" />
+    <Parameter Name="street_address" Type="System.String" DbType="VarChar(1000)" />
+    <Parameter Name="unit" Type="System.String" DbType="VarChar(10)" />
+    <Parameter Name="contact" Type="System.String" DbType="VarChar(15)" />
+    <Parameter Name="email" Type="System.String" DbType="VarChar(100)" />
+    <Parameter Name="church" Type="System.Int32" DbType="Int" />
+    <Parameter Name="church_others" Type="System.String" DbType="VarChar(100)" />
+    <Parameter Name="UserID" Parameter="userID" Type="System.String" DbType="VarChar(50)" />
+    <Parameter Name="today" Type="System.DateTime" DbType="DateTime" />
+    <ElementType Name="usp_addNewCourseVisitorParticipantAndAttendanceResult">
+      <Column Name="Result" Type="System.String" DbType="VarChar(185)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.usp_getCourseURL" Method="usp_getCourseURL">
+    <Parameter Name="CourseID" Parameter="courseID" Type="System.Int32" DbType="Int" />
+    <Parameter Name="CourseURL" Parameter="courseURL" Type="System.String" DbType="VarChar(2000)" Direction="InOut" />
+    <Return Type="System.Int32" />
   </Function>
 </Database>

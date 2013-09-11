@@ -334,7 +334,51 @@
     function getBasicSearchRetrivalURL(){
         return "<%= Session["BasicSearchRetrivalURL"]%>";
     }
+
+    function getIfAD(){
+        return "<%=(string)ViewData["ad"]%>";
+    }
+
 </script>
+<script>
+
+    window.fbAsyncInit = function () {
+        // init the FB JS SDK
+        FB.init({
+            appId: '<%=Session["FacebookAppID"]%>',                        // App ID from the app dashboard
+            status: true,                                 // Check Facebook Login status
+            xfbml: true                                  // Look for social plugins on the page
+        });
+
+        // Additional initialization code such as adding Event Listeners goes here
+    };
+
+    // Load the SDK asynchronously
+    (function (d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) { return; }
+        js = d.createElement(s); js.id = id;
+        js.src = "//connect.facebook.net/en_US/all.js";
+        fjs.parentNode.insertBefore(js, fjs);
+    } (document, 'script', 'facebook-jssdk'));
+
+    function streamPublish() {
+        FB.ui(
+        {
+            method: 'feed',
+            link: '<%=ViewData["CourseURL"] %>',
+            picture: 'http://www.freeimagehosting.net/newuploads/82wc9.png'
+
+        },
+        function (response) {
+            if (response && response.post_id) {
+                alert('Thank you for sharing.');
+            }
+        }
+ );
+    }
+</script>
+
 <div id="loadingdiv" style=" display:none">
     <table style=" height:90%"  width="100%">
             <tr>
@@ -355,7 +399,11 @@
 		</div>						
 			<ul >
 			    <h4>Personal Information</h4>
-                <h5 style="color:red;"><%=(string)ViewData["Message"] %></h5>
+                <h3><%=(string)ViewData["Message"] %><br />
+                    <%if((string)ViewData["ShowFB"] == "TRUE"){ %>
+                        <img border="0" onclick="streamPublish();" src="/Content/images/facebookshare.png" width="150">
+                    <%} %>
+                </h3>                
 				<table width="800" border="0">
                     <tr>
                         <td style="width:180px">
@@ -366,6 +414,19 @@
                                     <input style=" width:20px" <%=ischeck() %> id="existingmember" name="existingmember" class="element text medium" type="checkbox" />		                
 		                        </div> 
 		                        </li>
+                            <%}%>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="width:180px">
+                            <%if((string)ViewData["ad"] == "_ad"){ %>
+                            <li id="li2" >
+		                        <label class="description" for="element_9"><br />
+                                Walk in Date <span style="color:red;">*</span></label>
+		                        <div>
+                                    <input style=" width:150px" id="WalkInDate" name="WalkInDate" class="element text medium" type="text" value="<%= (string)ViewData["WalkInDate"] %>" size="20"/> 
+			                    </div> 
+		                    </li>
                             <%}%>
                         </td>
                         <td style="width:230px">

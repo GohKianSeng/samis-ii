@@ -9,24 +9,24 @@
     <file relUrl="Content/images/uploadify.swf" publishTime="11/09/2012 20:15:48" />
     <file relUrl="Content/images/h_bg2.png" publishTime="04/21/2013 22:43:08" />
     <file relUrl="Content/images/samis2logo.gif" publishTime="11/09/2012 20:15:48" />
-    <file relUrl="Views/Reporting/ElectoralList.aspx" publishTime="11/09/2012 20:15:48" />
+    <file relUrl="Views/Hws/AddNewMember.aspx" publishTime="07/17/2013 23:03:49" />
     <file relUrl="Content/scripts/jquery.watermark.min.js" publishTime="11/09/2012 20:15:48" />
     <file relUrl="Views/Shared/Agreement.aspx" publishTime="11/09/2012 20:15:48" />
-    <file relUrl="Views/Reporting/MinistryInvolvementList.aspx" publishTime="11/09/2012 20:15:48" />
+    <file relUrl="Views/Reporting/MinistryInvolvementList.aspx" publishTime="07/27/2013 14:26:17" />
     <file relUrl="Content/images/switch.png" publishTime="12/01/2012 21:09:04" />
     <file relUrl="Content/images/custom_t.png" publishTime="11/09/2012 20:15:48" />
     <file relUrl="Content/scripts/jquery-1.7.1.min.js" publishTime="12/01/2012 21:10:10" />
     <file relUrl="Content/images/datepicker_l.png" publishTime="11/09/2012 20:15:48" />
     <file relUrl="Views/Parish/Ministry.aspx" publishTime="11/09/2012 20:15:48" />
+    <file relUrl="Content/images/custom_br.png" publishTime="11/09/2012 20:15:48" />
+    <file relUrl="Default.html" publishTime="11/09/2012 20:15:48" />
     <file relUrl="Views/Account/ChangePassword.aspx" publishTime="11/09/2012 20:15:48" />
-    <file relUrl="Views/Settings/viewSessionVariable.aspx" publishTime="04/13/2013 19:19:22" />
     <file relUrl="Views/Reporting/CellgroupInvolvement.aspx" publishTime="11/09/2012 20:15:48" />
-    <file relUrl="Views/Settings/DisplayCreateNewRole.aspx" publishTime="12/01/2012 21:26:32" />
     <file relUrl="Content/images/datepicker_b.png" publishTime="11/09/2012 20:15:48" />
-    <file relUrl="Content/scripts/courseregistration.min.js" publishTime="07/20/2013 04:37:15" />
+    <file relUrl="Content/scripts/courseregistration.min.js" publishTime="09/11/2013 22:54:24" />
+    <file relUrl="Content/images/facebookshare.png" publishTime="08/16/2013 12:57:27" />
     <file relUrl="Views/Web.config" publishTime="11/09/2012 20:15:48" />
-    <file relUrl="bin/DOS.dll" publishTime="07/17/2013 23:04:26" />
-    <file relUrl="Content/images/edit-icon.png" publishTime="07/24/2012 15:07:08" />
+    <file relUrl="bin/DOS.dll" publishTime="09/11/2013 22:33:55" />
     <file relUrl="Content/scripts/changepassword.debug.js" publishTime="11/09/2012 20:15:48" />
     <file relUrl="Views/Parish/ListOfMinistry.aspx" publishTime="11/09/2012 20:15:48" />
     <file relUrl="Views/Account/ChangePasswordSuccess.aspx" publishTime="11/09/2012 20:15:48" />
@@ -34,17 +34,18 @@
     <file relUrl="Content/images/shadow.gif" publishTime="11/09/2012 20:15:48" />
     <file relUrl="Content/scripts/modal.min.js" publishTime="11/09/2012 20:15:48" />
     <file relUrl="Content/images/printelectoralroll.png" publishTime="11/09/2012 20:15:48" />
-    <file relUrl="Content/images/custom_l.png" publishTime="11/09/2012 20:15:48" />
     <file relUrl="Content/scripts/jquery.uploadify.v2.1.4.min.js" publishTime="11/09/2012 20:15:48" />
-    <file relUrl="Views/Shared/CourseAgreement.aspx" publishTime="05/15/2013 22:59:38" />
+    <file relUrl="bin/Microsoft.JScript.dll" publishTime="03/18/2010 19:31:26" />
     <file relUrl="Content/scripts/jquery.multiselect.min.js" publishTime="11/09/2012 20:15:48" />
-    <file relUrl="Content/scripts/navigateAway.min.js" publishTime="07/20/2013 04:37:15" />
+    <file relUrl="Content/scripts/parish_course.min.js" publishTime="09/11/2013 22:54:24" />
+    <file relUrl="Views/Reporting/ManualSearchList.aspx" publishTime="07/27/2013 14:24:57" />
+    <file relUrl="Content/scripts/navigateAway.min.js" publishTime="09/11/2013 22:54:24" />
     <file relUrl="Content/images/datepicker_tr.png" publishTime="11/09/2012 20:15:48" />
     <file relUrl="Views/Membership/UpdateVisitorSearchForm.aspx" publishTime="11/09/2012 20:15:48" />
     <file relUrl="Content/images/C3-icon.jpg" publishTime="11/09/2012 20:15:48" />
+    <file relUrl="Content/images/ui-icons_222222_256x240.png" publishTime="11/09/2012 20:15:48" />
     <file relUrl="Views/Reporting/ManualSearch.aspx" publishTime="11/09/2012 20:15:48" />
     <file relUrl="Content/css/fileuploader.css" publishTime="11/09/2012 20:15:48" />
-    <file relUrl="Content/scripts/parish_staff.min.js" publishTime="07/20/2013 04:37:15" />
     <file relUrl="Content/css/datepicker.css" publishTime="11/09/2012 20:15:48" />
     <file relUrl="Views/Shared/downloadMembershipForm.aspx" publishTime="06/24/2013 00:08:25" />
     <file relUrl="Content/scripts/parish_staff.debug.js" publishTime="11/09/2012 20:15:48" />
@@ -54,19 +55,16 @@
     <file relUrl="Content/scripts/dhtmlwindow.min.js" publishTime="11/09/2012 20:15:48" />
     <file relUrl="Content/images/ictemp.jpg" publishTime="05/01/2013 03:33:24" />
     <file relUrl="Content/scripts/staffUpdateCityKids.debug.js" publishTime="11/09/2012 20:15:48" />
-    <file relUrl="Content/scripts/HokkienMemberForm.debug.js" publishTime="06/28/2013 12:23:09" />
     <file relUrl="Views/Parish/Cellgroup.aspx" publishTime="11/09/2012 20:15:48" />
-    <file relUrl="Content/scripts/HokkienMemberForm.min.js" publishTime="07/20/2013 04:37:15" />
+    <file relUrl="Content/scripts/HokkienMemberForm.min.js" publishTime="09/11/2013 22:54:24" />
     <file relUrl="Content/css/dhtmlwindow.css" publishTime="11/09/2012 20:15:48" />
     <file relUrl="Content/scripts/common_function.debug.js" publishTime="06/23/2013 23:48:15" />
-    <file relUrl="Content/scripts/DOS_membership.min.js" publishTime="07/20/2013 04:37:15" />
-    <file relUrl="Views/Membership/CourseAttendance.aspx" publishTime="11/09/2012 20:15:48" />
+    <file relUrl="Content/scripts/DOS_membership.min.js" publishTime="09/11/2013 22:54:24" />
+    <file relUrl="Views/Membership/CourseAttendance.aspx" publishTime="08/16/2013 11:21:22" />
     <file relUrl="Views/Shared/simplexml.aspx" publishTime="04/21/2013 21:46:40" />
     <file relUrl="Content/images/help-icon.png" publishTime="12/01/2012 21:06:20" />
     <file relUrl="Content/scripts/citykids_membership.debug.js" publishTime="11/09/2012 20:15:48" />
-    <file relUrl="Views/CityKids/UpdateCityKidsMembershipForm_forStaff.aspx" publishTime="06/24/2013 00:08:31" />
-    <file relUrl="Content/images/bar.PNG" publishTime="11/09/2012 20:15:48" />
-    <file relUrl="Views/Parish/AddCourse.aspx" publishTime="05/16/2013 00:59:22" />
+    <file relUrl="Views/Parish/AddCourse.aspx" publishTime="07/27/2013 16:36:31" />
     <file relUrl="Views/Shared/LogOnUserControl.ascx" publishTime="11/09/2012 20:15:48" />
     <file relUrl="Views/CityKids/UpdateCityKidsSchedule.aspx" publishTime="11/09/2012 20:15:48" />
     <file relUrl="Content/images/ui-bg_glass_100_fdf5ce_1x400.png" publishTime="11/09/2012 20:15:48" />
@@ -78,60 +76,57 @@
     <file relUrl="Views/Shared/ListOfStaff.aspx" publishTime="11/09/2012 20:15:48" />
     <file relUrl="Content/images/datepicker_br.png" publishTime="11/09/2012 20:15:48" />
     <file relUrl="Content/scripts/fileuploader.js" publishTime="11/09/2012 20:15:48" />
-    <file relUrl="Content/scripts/parish_ministry.min.js" publishTime="07/20/2013 04:37:15" />
-    <file relUrl="Content/images/tick-icon.png" publishTime="11/09/2012 20:15:48" />
+    <file relUrl="Content/scripts/parish_ministry.min.js" publishTime="09/11/2013 22:54:24" />
     <file relUrl="Content/images/samis2icon.ico" publishTime="11/09/2012 20:15:48" />
     <file relUrl="Content/scripts/parish_course.debug.js" publishTime="11/09/2012 20:15:48" />
     <file relUrl="Global.asax" publishTime="11/09/2012 20:15:48" />
     <file relUrl="Content/images/asc.gif" publishTime="11/09/2012 20:15:48" />
     <file relUrl="Views/Settings/UserAdmin.aspx" publishTime="12/01/2012 19:29:32" />
     <file relUrl="Views/Parish/Staff.aspx" publishTime="11/09/2012 20:15:48" />
-    <file relUrl="Views/Reporting/CellgroupInvolvementList.aspx" publishTime="11/09/2012 20:15:48" />
+    <file relUrl="Views/Reporting/CellgroupInvolvementList.aspx" publishTime="07/27/2013 14:29:51" />
     <file relUrl="Views/Reporting/Electoral.aspx" publishTime="11/09/2012 20:15:48" />
-    <file relUrl="Content/scripts/changepassword.min.js" publishTime="07/20/2013 04:37:15" />
+    <file relUrl="Content/scripts/changepassword.min.js" publishTime="09/11/2013 22:54:24" />
     <file relUrl="Content/images/sactitle.PNG" publishTime="11/09/2012 20:15:48" />
-    <file relUrl="Content/scripts/addmodifycellgroup.min.js" publishTime="07/20/2013 04:37:15" />
-    <file relUrl="Web.config" publishTime="07/20/2013 04:37:15" />
+    <file relUrl="Content/scripts/addmodifycellgroup.min.js" publishTime="09/11/2013 22:54:24" />
+    <file relUrl="Web.config" publishTime="09/11/2013 22:54:24" />
     <file relUrl="Views/Account/LogOn.aspx" publishTime="11/09/2012 20:15:48" />
-    <file relUrl="Content/scripts/logon.min.js" publishTime="07/20/2013 04:37:15" />
-    <file relUrl="Views/Membership/MembershipTransferForm.aspx" publishTime="11/09/2012 20:15:48" />
-    <file relUrl="Views/Membership/ListOfVisitors.aspx" publishTime="11/09/2012 20:15:48" />
-    <file relUrl="Content/scripts/UserAdmin.debug.js" publishTime="12/01/2012 22:44:50" />
-    <file relUrl="Content/css/jquery-ui.css" publishTime="11/09/2012 20:15:48" />
-    <file relUrl="Content/images/custom_br.png" publishTime="11/09/2012 20:15:48" />
-    <file relUrl="bin/DOS.pdb" publishTime="07/17/2013 23:04:26" />
-    <file relUrl="Views/Membership/UpdateMembershipForm_forStaff.aspx" publishTime="06/24/2013 00:07:57" />
+    <file relUrl="Content/images/custom_l.png" publishTime="11/09/2012 20:15:48" />
+    <file relUrl="Views/Membership/ListOfVisitors.aspx" publishTime="07/27/2013 14:23:37" />
+    <file relUrl="Content/scripts/UserAdmin.debug.js" publishTime="07/27/2013 15:51:12" />
+    <file relUrl="Content/images/tick-icon.png" publishTime="11/09/2012 20:15:48" />
+    <file relUrl="Content/scripts/logon.min.js" publishTime="09/11/2013 22:54:24" />
+    <file relUrl="bin/DOS.pdb" publishTime="09/11/2013 22:33:55" />
+    <file relUrl="Views/Membership/UpdateMembershipForm_forStaff.aspx" publishTime="07/27/2013 15:15:52" />
     <file relUrl="Content/scripts/jquery.ui.core.min.js" publishTime="11/09/2012 20:15:48" />
     <file relUrl="Content/css/progressbar.css" publishTime="04/21/2013 22:39:12" />
-    <file relUrl="Content/images/marker2.png" publishTime="04/21/2013 22:43:08" />
     <file relUrl="Content/images/desc.gif" publishTime="11/09/2012 20:15:48" />
     <file relUrl="Content/scripts/jquery.cookie.js" publishTime="11/09/2012 20:15:48" />
     <file relUrl="Content/images/ui-bg_glass_65_ffffff_1x400.png" publishTime="11/09/2012 20:15:48" />
     <file relUrl="Views/Membership/UpdateMembershipSearchForm.aspx" publishTime="11/09/2012 20:15:48" />
-    <file relUrl="Views/Reporting/AgeList.aspx" publishTime="11/09/2012 20:15:48" />
+    <file relUrl="Views/Reporting/AgeList.aspx" publishTime="07/27/2013 14:30:19" />
     <file relUrl="Views/Membership/UpdateVisitorForm_forStaff.aspx" publishTime="06/24/2013 00:08:45" />
     <file relUrl="Content/images/ui-bg_gloss-wave_35_f6a828_500x100.png" publishTime="11/09/2012 20:15:48" />
+    <file relUrl="Content/images/ui-bg_flat_10_000000_40x100.png" publishTime="11/09/2012 20:15:48" />
     <file relUrl="Views/Membership/ElectoralRoll.aspx" publishTime="11/09/2012 20:15:48" />
     <file relUrl="Views/Hws/scanAttendance.aspx" publishTime="07/17/2013 22:51:26" />
-    <file relUrl="Views/Membership/OfflineMembership.aspx" publishTime="11/09/2012 20:15:48" />
     <file relUrl="Content/images/apple-touch-icon.png" publishTime="11/09/2012 20:15:48" />
     <file relUrl="Content/images/add.png" publishTime="11/09/2012 20:15:48" />
-    <file relUrl="Views/Membership/NewMemberApproval.aspx" publishTime="11/09/2012 20:15:48" />
+    <file relUrl="Views/Membership/NewMemberApproval.aspx" publishTime="09/11/2013 22:47:41" />
     <file relUrl="Views/Parish/AddCellgroup.aspx" publishTime="06/24/2013 00:05:13" />
     <file relUrl="Content/images/custom_b.png" publishTime="11/09/2012 20:15:48" />
+    <file relUrl="Content/images/ui-bg_diagonals-thick_20_666666_40x40.png" publishTime="11/09/2012 20:15:48" />
     <file relUrl="Content/images/ui-icons_ffd27a_256x240.png" publishTime="11/09/2012 20:15:48" />
-    <file relUrl="Content/scripts/parish_course.min.js" publishTime="07/20/2013 04:37:15" />
-    <file relUrl="Content/scripts/staffUpdateVisitor.min.js" publishTime="07/20/2013 04:37:15" />
-    <file relUrl="Views/Membership/ListOfMembers.aspx" publishTime="11/09/2012 20:15:48" />
-    <file relUrl="Content/scripts/UserAdmin.min.js" publishTime="07/20/2013 04:37:15" />
+    <file relUrl="Content/images/edit-icon.png" publishTime="07/24/2012 15:07:08" />
+    <file relUrl="Content/scripts/staffUpdateVisitor.min.js" publishTime="09/11/2013 22:54:24" />
+    <file relUrl="Views/Membership/ListOfMembers.aspx" publishTime="07/27/2013 14:20:34" />
+    <file relUrl="Content/scripts/UserAdmin.min.js" publishTime="09/11/2013 22:54:24" />
     <file relUrl="Content/css/ITSCHistory.css" publishTime="11/09/2012 20:15:48" />
     <file relUrl="Default.aspx" publishTime="11/09/2012 20:15:48" />
-    <file relUrl="Views/Hws/AddNewMember.aspx" publishTime="07/17/2013 23:03:49" />
-    <file relUrl="Content/scripts/addmodifyministry.min.js" publishTime="07/20/2013 04:37:15" />
+    <file relUrl="Content/scripts/addmodifyministry.min.js" publishTime="09/11/2013 22:54:24" />
     <file relUrl="Content/scripts/cityKidSchedule.debug.js" publishTime="11/09/2012 20:15:48" />
     <file relUrl="Content/images/remove.png" publishTime="11/09/2012 20:15:48" />
+    <file relUrl="Views/Hws/attendanceReport.aspx" publishTime="07/27/2013 20:07:26" />
     <file relUrl="Views/Settings/accessControl.aspx" publishTime="12/01/2012 22:59:30" />
-    <file relUrl="bin/System.Data.Linq.dll" publishTime="03/18/2010 19:31:26" />
     <file relUrl="Content/images/T-icon.png" publishTime="11/09/2012 20:15:48" />
     <file relUrl="Content/images/top.png" publishTime="11/09/2012 20:15:48" />
     <file relUrl="Content/images/custom_r.png" publishTime="11/09/2012 20:15:48" />
@@ -142,98 +137,105 @@
     <file relUrl="Views/Reporting/Age.aspx" publishTime="11/09/2012 20:15:48" />
     <file relUrl="Content/scripts/jquery.multiselect.filter.min.js" publishTime="11/09/2012 20:15:48" />
     <file relUrl="Views/Parish/ListOfCellgroup.aspx" publishTime="11/09/2012 20:15:48" />
-    <file relUrl="Content/images/ui-bg_glass_100_f6f6f6_1x400.png" publishTime="11/09/2012 20:15:48" />
+    <file relUrl="Content/images/marker2.png" publishTime="04/21/2013 22:43:08" />
     <file relUrl="Content/images/ui-bg_highlight-soft_75_ffe45c_1x100.png" publishTime="11/09/2012 20:15:48" />
     <file relUrl="Content/images/menubg_0_blue.jpg" publishTime="11/09/2012 20:15:48" />
+    <file relUrl="Views/Parish/ListOfCourseParticipants.aspx" publishTime="07/27/2013 14:31:29" />
     <file relUrl="Content/scripts/addmodifyministry.debug.js" publishTime="11/09/2012 20:15:48" />
+    <file relUrl="Content/images/bottom.png" publishTime="11/09/2012 20:15:48" />
     <file relUrl="Views/CityKids/ListOfCityKids.aspx" publishTime="11/09/2012 20:15:48" />
-    <file relUrl="Content/scripts/logon.debug.js" publishTime="11/09/2012 20:15:48" />
-    <file relUrl="Content/images/ui-bg_diagonals-thick_20_666666_40x40.png" publishTime="11/09/2012 20:15:48" />
+    <file relUrl="Content/css/jquery-ui.css" publishTime="11/09/2012 20:15:48" />
+    <file relUrl="Views/Settings/DisplayCreateNewRole.aspx" publishTime="12/01/2012 21:26:32" />
     <file relUrl="Content/scripts/sha1.min.js" publishTime="11/09/2012 20:15:48" />
     <file relUrl="Content/css/jquery.ui.timepicker.css" publishTime="11/09/2012 20:15:48" />
     <file relUrl="Views/Settings/webconfig.aspx" publishTime="11/09/2012 20:15:48" />
-    <file relUrl="Content/scripts/adduser.min.js" publishTime="07/20/2013 04:37:15" />
-    <file relUrl="Views/Shared/Error.aspx" publishTime="11/09/2012 20:15:48" />
+    <file relUrl="Content/scripts/adduser.min.js" publishTime="09/11/2013 22:54:24" />
     <file relUrl="Content/images/custom_tl.png" publishTime="11/09/2012 20:15:48" />
     <file relUrl="Content/scripts/jquery-1.6.4.min.js" publishTime="11/09/2012 20:15:48" />
     <file relUrl="Content/css/jquery.multiselect.css" publishTime="11/09/2012 20:15:48" />
     <file relUrl="Views/Hws/ListOfMembers.aspx" publishTime="06/28/2013 11:29:18" />
+    <file relUrl="Content/images/ui-bg_glass_100_f6f6f6_1x400.png" publishTime="11/09/2012 20:15:48" />
     <file relUrl="Views/Reporting/MinistryInvolvement.aspx" publishTime="11/09/2012 20:15:48" />
     <file relUrl="Content/css/multiselectListBox.css" publishTime="12/01/2012 20:35:28" />
-    <file relUrl="Content/scripts/staffUpdateMembership.min.js" publishTime="07/20/2013 04:37:15" />
-    <file relUrl="Views/Reporting/Occupation.aspx" publishTime="11/09/2012 20:15:48" />
+    <file relUrl="Content/scripts/staffUpdateMembership.min.js" publishTime="09/11/2013 22:54:24" />
+    <file relUrl="Content/scripts/HokkienMemberForm.debug.js" publishTime="06/28/2013 12:23:09" />
     <file relUrl="Views/Shared/displayModalClose.aspx" publishTime="12/01/2012 21:26:06" />
     <file relUrl="Content/images/datepicker_t.png" publishTime="11/09/2012 20:15:48" />
     <file relUrl="Views/CityKids/UpdateCityKidsSearchForm.aspx" publishTime="11/09/2012 20:15:48" />
-    <file relUrl="Content/scripts/jquery.tablesorter.min.js" publishTime="11/09/2012 20:15:48" />
-    <file relUrl="Content/scripts/addmodifycourse.min.js" publishTime="07/20/2013 04:37:15" />
-    <file relUrl="Content/images/samis2logo.png" publishTime="11/09/2012 20:15:48" />
+    <file relUrl="Views/CityKids/UpdateCityKidsMembershipForm_forStaff.aspx" publishTime="06/24/2013 00:08:31" />
+    <file relUrl="Content/scripts/addmodifycourse.min.js" publishTime="09/11/2013 22:54:24" />
+    <file relUrl="Content/scripts/logon.debug.js" publishTime="11/09/2012 20:15:48" />
     <file relUrl="Content/scripts/samis2settings.debug.js" publishTime="05/16/2013 23:27:12" />
     <file relUrl="Content/scripts/navigateAway.debug.js" publishTime="03/10/2013 22:08:14" />
-    <file relUrl="Views/Reporting/OccupationList.aspx" publishTime="11/09/2012 20:15:48" />
+    <file relUrl="Content/images/bar.PNG" publishTime="11/09/2012 20:15:48" />
+    <file relUrl="Content/scripts/jquery.tablesorter.min.js" publishTime="11/09/2012 20:15:48" />
     <file relUrl="Content/scripts/addmodifycellgroup.debug.js" publishTime="11/09/2012 20:15:48" />
     <file relUrl="bin/CloudinaryDotNet.dll" publishTime="04/30/2013 22:13:06" />
-    <file relUrl="Content/images/ui-icons_222222_256x240.png" publishTime="11/09/2012 20:15:48" />
+    <file relUrl="Content/images/field.png" publishTime="11/09/2012 20:15:48" />
+    <file relUrl="Views/Settings/viewSessionVariable.aspx" publishTime="04/13/2013 19:19:22" />
     <file relUrl="Content/scripts/jquery.multiselectListBox.js" publishTime="12/01/2012 20:35:10" />
-    <file relUrl="Default.html" publishTime="11/09/2012 20:15:48" />
-    <file relUrl="Content/scripts/citykids_membership.min.js" publishTime="07/20/2013 04:37:15" />
+    <file relUrl="Content/scripts/parish_staff.min.js" publishTime="09/11/2013 22:54:24" />
+    <file relUrl="Content/scripts/citykids_membership.min.js" publishTime="09/11/2013 22:54:24" />
     <file relUrl="Content/images/menubg_1_blue.jpg" publishTime="11/09/2012 20:15:48" />
-    <file relUrl="Views/Parish/AttendanceReport.aspx" publishTime="06/07/2013 00:20:16" />
+    <file relUrl="Content/scripts/progressbar_min.js" publishTime="04/21/2013 22:37:40" />
     <file relUrl="Content/scripts/parish_ministry.debug.js" publishTime="11/09/2012 20:15:48" />
     <file relUrl="Content/images/datepicker_bl.png" publishTime="11/09/2012 20:15:48" />
-    <file relUrl="Content/images/ui-bg_diagonals-thick_18_b81900_40x40.png" publishTime="11/09/2012 20:15:48" />
-    <file relUrl="Views/Reporting/BaptismConfirmList.aspx" publishTime="11/09/2012 20:15:48" />
+    <file relUrl="Views/Reporting/BaptismConfirmList.aspx" publishTime="07/27/2013 14:26:49" />
     <file relUrl="Content/css/bk_datepicker.css" publishTime="11/09/2012 20:15:48" />
-    <file relUrl="Content/scripts/cityKidSchedule.min.js" publishTime="07/20/2013 04:37:15" />
-    <file relUrl="Views/Parish/ListOfCourseParticipants.aspx" publishTime="11/09/2012 20:15:48" />
+    <file relUrl="Content/scripts/cityKidSchedule.min.js" publishTime="09/11/2013 22:54:24" />
+    <file relUrl="bin/System.Data.Linq.dll" publishTime="03/18/2010 19:31:26" />
+    <file relUrl="Views/Reporting/ElectoralList.aspx" publishTime="07/27/2013 14:29:07" />
     <file relUrl="Views/Parish/Course.aspx" publishTime="06/06/2013 23:30:02" />
     <file relUrl="Content/scripts/mnuHover.min.js" publishTime="11/09/2012 20:15:48" />
     <file relUrl="Content/css/login_view.css" publishTime="11/09/2012 20:15:48" />
-    <file relUrl="Content/scripts/courseregistration.debug.js" publishTime="07/06/2013 21:38:48" />
+    <file relUrl="Content/scripts/courseregistration.debug.js" publishTime="08/16/2013 13:32:08" />
     <file relUrl="Content/scripts/staffUpdateVisitor.debug.js" publishTime="11/09/2012 20:15:48" />
     <file relUrl="Content/images/v_fg12.png" publishTime="04/21/2013 22:43:08" />
     <file relUrl="Content/scripts/staffUpdateMembership.debug.js" publishTime="11/09/2012 20:15:48" />
     <file relUrl="Content/images/loading.gif" publishTime="11/09/2012 20:15:48" />
     <file relUrl="Content/images/empty_profile_pix.gif" publishTime="11/09/2012 20:15:48" />
-    <file relUrl="Content/scripts/addmodifycourse.debug.js" publishTime="05/16/2013 00:58:56" />
+    <file relUrl="Content/scripts/addmodifycourse.debug.js" publishTime="07/27/2013 16:28:55" />
+    <file relUrl="Content/scripts/jquery.ui.timepicker.js" publishTime="11/09/2012 20:15:48" />
     <file relUrl="Content/scripts/expand.min.js" publishTime="11/09/2012 20:15:48" />
-    <file relUrl="Content/scripts/samis2settings.min.js" publishTime="07/20/2013 04:37:15" />
-    <file relUrl="Views/Reporting/ManualSearchList.aspx" publishTime="11/09/2012 20:15:48" />
+    <file relUrl="Content/scripts/samis2settings.min.js" publishTime="09/11/2013 22:54:24" />
+    <file relUrl="Views/Shared/Error.aspx" publishTime="11/09/2012 20:15:48" />
     <file relUrl="Content/images/bg.gif" publishTime="11/09/2012 20:15:48" />
     <file relUrl="Content/images/ui-icons_228ef1_256x240.png" publishTime="11/09/2012 20:15:48" />
+    <file relUrl="Content/images/samis2logo.png" publishTime="11/09/2012 20:15:48" />
     <file relUrl="Views/Parish/CourseParticipant.aspx" publishTime="05/16/2013 22:39:40" />
-    <file relUrl="Content/images/field.png" publishTime="11/09/2012 20:15:48" />
-    <file relUrl="Views/Membership/courseregistration.aspx" publishTime="07/17/2013 21:59:51" />
+    <file relUrl="Views/Membership/MembershipTransferForm.aspx" publishTime="11/09/2012 20:15:48" />
+    <file relUrl="Views/Membership/courseregistration.aspx" publishTime="08/16/2013 13:54:06" />
     <file relUrl="Content/css/TablesView.css" publishTime="11/09/2012 20:15:48" />
     <file relUrl="Content/images/custom_bl.png" publishTime="11/09/2012 20:15:48" />
     <file relUrl="Views/Settings/Samis2Settings.aspx" publishTime="05/16/2013 23:00:42" />
-    <file relUrl="Content/scripts/common_function.min.js" publishTime="07/20/2013 04:37:15" />
+    <file relUrl="Content/scripts/common_function.min.js" publishTime="09/11/2013 22:54:24" />
     <file relUrl="Content/images/custom_tr.png" publishTime="11/09/2012 20:15:48" />
-    <file relUrl="Content/scripts/staffUpdateCityKids.min.js" publishTime="07/20/2013 04:37:15" />
+    <file relUrl="Content/scripts/staffUpdateCityKids.min.js" publishTime="09/11/2013 22:54:24" />
     <file relUrl="Views/Membership/NewMemberResubmit.aspx" publishTime="11/09/2012 20:15:48" />
     <file relUrl="Content/scripts/datepicker.js" publishTime="11/09/2012 20:15:48" />
+    <file relUrl="Content/scripts/DOS_membership.debug.js" publishTime="07/27/2013 16:00:09" />
     <file relUrl="Content/css/searchsuggest.css" publishTime="11/09/2012 20:15:48" />
-    <file relUrl="Content/scripts/DOS_membership.debug.js" publishTime="07/04/2013 00:20:52" />
+    <file relUrl="Views/Reporting/Occupation.aspx" publishTime="11/09/2012 20:15:48" />
     <file relUrl="Content/css/TopMenu.css" publishTime="11/09/2012 20:15:48" />
     <file relUrl="Views/Reporting/BaptismConfirm.aspx" publishTime="11/09/2012 20:15:48" />
     <file relUrl="Content/images/ui-icons_ffffff_256x240.png" publishTime="11/09/2012 20:15:48" />
     <file relUrl="Content/images/datepicker_r.png" publishTime="11/09/2012 20:15:48" />
     <file relUrl="Content/images/datepicker_tl.png" publishTime="11/09/2012 20:15:48" />
     <file relUrl="Content/images/menubg_1a_blue.jpg" publishTime="11/09/2012 20:15:48" />
-    <file relUrl="Content/scripts/jquery.ui.timepicker.js" publishTime="11/09/2012 20:15:48" />
-    <file relUrl="Content/images/ui-bg_flat_10_000000_40x100.png" publishTime="11/09/2012 20:15:48" />
+    <file relUrl="Content/images/ui-bg_diagonals-thick_18_b81900_40x40.png" publishTime="11/09/2012 20:15:48" />
+    <file relUrl="Views/Membership/OfflineMembership.aspx" publishTime="11/09/2012 20:15:48" />
     <file relUrl="Content/images/ui-bg_highlight-soft_100_eeeeee_1x100.png" publishTime="11/09/2012 20:15:48" />
-    <file relUrl="Views/Reporting/MarriageList.aspx" publishTime="11/09/2012 20:15:48" />
+    <file relUrl="Views/Reporting/MarriageList.aspx" publishTime="07/27/2013 14:27:39" />
     <file relUrl="Views/Hws/manualAttendance.aspx" publishTime="07/17/2013 22:43:14" />
-    <file relUrl="Content/images/bottom.png" publishTime="11/09/2012 20:15:48" />
+    <file relUrl="Views/Shared/CourseAgreement.aspx" publishTime="05/15/2013 22:59:38" />
     <file relUrl="Views/Shared/simplehtml.aspx" publishTime="11/09/2012 20:15:48" />
     <file relUrl="Views/Parish/AddMinistry.aspx" publishTime="11/09/2012 20:15:48" />
     <file relUrl="Content/scripts/adduser.debug.js" publishTime="11/09/2012 20:15:48" />
     <file relUrl="Views/Shared/Site.Master" publishTime="11/09/2012 20:15:48" />
-    <file relUrl="Content/scripts/progressbar_min.js" publishTime="04/21/2013 22:37:40" />
+    <file relUrl="Views/Parish/AttendanceReport.aspx" publishTime="08/16/2013 12:04:02" />
     <file relUrl="Views/CityKids/CityKidsMembershipForm.aspx" publishTime="06/24/2013 00:09:29" />
     <file relUrl="Views/Home/About.aspx" publishTime="04/28/2013 22:27:08" />
-    <file relUrl="bin/Microsoft.JScript.dll" publishTime="03/18/2010 19:31:26" />
+    <file relUrl="Views/Reporting/OccupationList.aspx" publishTime="07/27/2013 14:28:29" />
     <file relUrl="Content/css/jquery.multiselect.filter.css" publishTime="11/09/2012 20:15:48" />
   </publishProfile>
 </publishData>

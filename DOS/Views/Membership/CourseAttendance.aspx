@@ -86,7 +86,7 @@
 			<h3>Course Attendance</h3>
 		</div>						
 			<ul >
-                <h2><span style="color:red;"><%= (string)ViewData["errormsg"] %></span></h2><br /><br />			
+                <h5><%= (string)ViewData["errormsg"] %></h5><br /><br />			
 			    <table width="800" border="0">
                     <tr>
                         <td>

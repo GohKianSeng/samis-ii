@@ -61,11 +61,7 @@
         parent.loadMember(nric);
     }
 
-    function reloadCase(NRIC, name) {
-        var submitForm = getNewSubmitForm();
-        createNewFormE
-
-<script type="text/javascript">
+    
     $(document).ready(function () {
         $("table").tablesorter({ dateFormat: "uk" });
         $(".tablesorter tr:even").addClass("alt");

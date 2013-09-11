@@ -189,15 +189,16 @@
                             }
                             %><tr><td colspan="6"></td><td style=" background-color: #CCCCCC">Average Daily Attendance</td><%
                             XElement xml = (XElement)ViewData["xml"];
+                            float dailyaverage = 0.0f;
                             for (int g = 0; g < xml.Elements("Attendance").Count(); g++)
                             {
                                 string dailytotal = xml.Elements("Attendance").ElementAt(g).Element("DailyTotal").Value;
-                                if (dailytotal == "1")
-                                    dailytotal = "0";
+                                dailyaverage += float.Parse(xml.Elements("Attendance").ElementAt(g).Element("DailyTotal").Value);
+                                
                                  %><td style=" background-color: #CCCCCC"><%=dailytotal%></td><%
                                 
                             }
-                            %><td style=" background-color: #CCCCCC"><%=allCompletedCourse%></td><%
+                            %><td style=" background-color: #CCCCCC"><%=(dailyaverage / xml.Elements("Attendance").Count()).ToString("0.##")%></td><%
                         }
             %>
 		</tbody>

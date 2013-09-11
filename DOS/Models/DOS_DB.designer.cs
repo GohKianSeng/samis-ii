@@ -1218,38 +1218,6 @@ namespace DOS.Models
 			return ((ISingleResult<usp_getCourseAdditionalInformationResult>)(result.ReturnValue));
 		}
 		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.usp_addNewCourseVisitorParticipantAndAttendance")]
-		public ISingleResult<usp_addNewCourseVisitorParticipantAndAttendanceResult> usp_addNewCourseVisitorParticipantAndAttendance(
-					[global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(10)")] string nric, 
-					[global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(10)")] string course, 
-					[global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(10)")] string salutation, 
-					[global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(50)")] string english_name, 
-					[global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Date")] System.Nullable<System.DateTime> dob, 
-					[global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(1)")] string gender, 
-					[global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(10)")] string education, 
-					[global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(10)")] string nationality, 
-					[global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(10)")] string occupation, 
-					[global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(6)")] string postal_code, 
-					[global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(10)")] string blk_house, 
-					[global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(1000)")] string street_address, 
-					[global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(10)")] string unit, 
-					[global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(15)")] string contact, 
-					[global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(100)")] string email, 
-					[global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> church, 
-					[global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(100)")] string church_others, 
-					[global::System.Data.Linq.Mapping.ParameterAttribute(Name="UserID", DbType="VarChar(50)")] string userID)
-		{
-			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), nric, course, salutation, english_name, dob, gender, education, nationality, occupation, postal_code, blk_house, street_address, unit, contact, email, church, church_others, userID);
-			return ((ISingleResult<usp_addNewCourseVisitorParticipantAndAttendanceResult>)(result.ReturnValue));
-		}
-		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.usp_addNewCourseMemberParticipantAndAttendance")]
-		public ISingleResult<usp_addNewCourseMemberParticipantAndAttendanceResult> usp_addNewCourseMemberParticipantAndAttendance([global::System.Data.Linq.Mapping.ParameterAttribute(Name="NRIC", DbType="VarChar(100)")] string nRIC, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> courseid)
-		{
-			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), nRIC, courseid);
-			return ((ISingleResult<usp_addNewCourseMemberParticipantAndAttendanceResult>)(result.ReturnValue));
-		}
-		
 		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.usp_getCourseParticipantInformation")]
 		public ISingleResult<usp_getCourseParticipantInformationResult> usp_getCourseParticipantInformation([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> courseid, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(20)")] string nric)
 		{
@@ -1402,6 +1370,47 @@ namespace DOS.Models
 		{
 			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())));
 			return ((ISingleResult<usp_getAllHWSAttendanceDateResult>)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.usp_addNewCourseMemberParticipantAndAttendance")]
+		public ISingleResult<usp_addNewCourseMemberParticipantAndAttendanceResult> usp_addNewCourseMemberParticipantAndAttendance([global::System.Data.Linq.Mapping.ParameterAttribute(Name="NRIC", DbType="VarChar(100)")] string nRIC, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> courseid, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="DateTime")] System.Nullable<System.DateTime> today)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), nRIC, courseid, today);
+			return ((ISingleResult<usp_addNewCourseMemberParticipantAndAttendanceResult>)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.usp_addNewCourseVisitorParticipantAndAttendance")]
+		public ISingleResult<usp_addNewCourseVisitorParticipantAndAttendanceResult> usp_addNewCourseVisitorParticipantAndAttendance(
+					[global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(10)")] string nric, 
+					[global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(10)")] string course, 
+					[global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(10)")] string salutation, 
+					[global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(50)")] string english_name, 
+					[global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Date")] System.Nullable<System.DateTime> dob, 
+					[global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(1)")] string gender, 
+					[global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(10)")] string education, 
+					[global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(10)")] string nationality, 
+					[global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(10)")] string occupation, 
+					[global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(6)")] string postal_code, 
+					[global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(10)")] string blk_house, 
+					[global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(1000)")] string street_address, 
+					[global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(10)")] string unit, 
+					[global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(15)")] string contact, 
+					[global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(100)")] string email, 
+					[global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> church, 
+					[global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(100)")] string church_others, 
+					[global::System.Data.Linq.Mapping.ParameterAttribute(Name="UserID", DbType="VarChar(50)")] string userID, 
+					[global::System.Data.Linq.Mapping.ParameterAttribute(DbType="DateTime")] System.Nullable<System.DateTime> today)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), nric, course, salutation, english_name, dob, gender, education, nationality, occupation, postal_code, blk_house, street_address, unit, contact, email, church, church_others, userID, today);
+			return ((ISingleResult<usp_addNewCourseVisitorParticipantAndAttendanceResult>)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.usp_getCourseURL")]
+		public int usp_getCourseURL([global::System.Data.Linq.Mapping.ParameterAttribute(Name="CourseID", DbType="Int")] System.Nullable<int> courseID, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="CourseURL", DbType="VarChar(2000)")] ref string courseURL)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), courseID, courseURL);
+			courseURL = ((string)(result.GetParameterValue(1)));
+			return ((int)(result.ReturnValue));
 		}
 	}
 	
@@ -11969,58 +11978,6 @@ namespace DOS.Models
 		}
 	}
 	
-	public partial class usp_addNewCourseVisitorParticipantAndAttendanceResult
-	{
-		
-		private string _Result;
-		
-		public usp_addNewCourseVisitorParticipantAndAttendanceResult()
-		{
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Result", DbType="VarChar(185)")]
-		public string Result
-		{
-			get
-			{
-				return this._Result;
-			}
-			set
-			{
-				if ((this._Result != value))
-				{
-					this._Result = value;
-				}
-			}
-		}
-	}
-	
-	public partial class usp_addNewCourseMemberParticipantAndAttendanceResult
-	{
-		
-		private string _Result;
-		
-		public usp_addNewCourseMemberParticipantAndAttendanceResult()
-		{
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Result", DbType="VarChar(185)")]
-		public string Result
-		{
-			get
-			{
-				return this._Result;
-			}
-			set
-			{
-				if ((this._Result != value))
-				{
-					this._Result = value;
-				}
-			}
-		}
-	}
-	
 	public partial class usp_getCourseParticipantInformationResult
 	{
 		
@@ -13942,6 +13899,58 @@ namespace DOS.Models
 				if ((this._WorshipDate != value))
 				{
 					this._WorshipDate = value;
+				}
+			}
+		}
+	}
+	
+	public partial class usp_addNewCourseMemberParticipantAndAttendanceResult
+	{
+		
+		private string _Result;
+		
+		public usp_addNewCourseMemberParticipantAndAttendanceResult()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Result", DbType="VarChar(185)")]
+		public string Result
+		{
+			get
+			{
+				return this._Result;
+			}
+			set
+			{
+				if ((this._Result != value))
+				{
+					this._Result = value;
+				}
+			}
+		}
+	}
+	
+	public partial class usp_addNewCourseVisitorParticipantAndAttendanceResult
+	{
+		
+		private string _Result;
+		
+		public usp_addNewCourseVisitorParticipantAndAttendanceResult()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Result", DbType="VarChar(185)")]
+		public string Result
+		{
+			get
+			{
+				return this._Result;
+			}
+			set
+			{
+				if ((this._Result != value))
+				{
+					this._Result = value;
 				}
 			}
 		}

@@ -341,9 +341,13 @@ namespace DOS.Controllers
         {
             initializedParameter();
             ViewData["ad"] = "_ad";
-            ViewData["listofcourse"] = sql_conn.usp_getListofCourse(true).ToList();
+            if (((string)Session["SystemMode"]).ToUpper() != "FULL")
+                ViewData["listofcourse"] = sql_conn.usp_getListofCourse(true).ToList();
+            else
+                ViewData["listofcourse"] = sql_conn.usp_getListofCourse(false).ToList();
             ViewData["Message"] = Message;
             ViewData["candidate_course"] = candidate_course;
+            ViewData["WalkInDate"] = DateTime.Now.ToString("dd/MM/yyyy");
             return View("courseregistration");
         }
 
@@ -357,6 +361,8 @@ namespace DOS.Controllers
             string existingmember = Request.Form["existingmember"];
             if (existingmember == null)
                 existingmember = "null";
+            DateTime WalkInDate = DateTime.ParseExact(Request.Form["WalkInDate"], "dd/MM/yyyy", null);
+            ViewData["WalkInDate"] = Request.Form["WalkInDate"];
             string candidate_nric = Request.Form["candidate_nric"];
             string candidate_course = Request.Form["aspnet_variable$MainContent$candidate_course"];
             string candidate_salutation = Request.Form["aspnet_variable$MainContent$candidate_salutation"];
@@ -400,17 +406,22 @@ namespace DOS.Controllers
                 convertok = DateTime.TryParseExact(candidate_dob, "dd/MM/yyyy", null, System.Globalization.DateTimeStyles.None, out dt);
 
                 if (convertok)
-                    vis = sql_conn.usp_addNewCourseVisitorParticipantAndAttendance(candidate_nric, candidate_course, candidate_salutation.Split('~')[0], candidate_english_name, dt, candidate_gender, candidate_education, candidate_nationality, candidate_occupation, candidate_postal_code, candidate_blk_house, candidate_street_address, candidate_unit, candidate_contact, candidate_email, int.Parse(candidate_church.Split('~')[0]), candidate_church_others, User.Identity.Name).ElementAt(0);
+                    vis = sql_conn.usp_addNewCourseVisitorParticipantAndAttendance(candidate_nric, candidate_course, candidate_salutation.Split('~')[0], candidate_english_name, dt, candidate_gender, candidate_education, candidate_nationality, candidate_occupation, candidate_postal_code, candidate_blk_house, candidate_street_address, candidate_unit, candidate_contact, candidate_email, int.Parse(candidate_church.Split('~')[0]), candidate_church_others, User.Identity.Name, WalkInDate).ElementAt(0);
                 else
-                    vis = sql_conn.usp_addNewCourseVisitorParticipantAndAttendance(candidate_nric, candidate_course, candidate_salutation.Split('~')[0], candidate_english_name, null, candidate_gender, candidate_education, candidate_nationality, candidate_occupation, candidate_postal_code, candidate_blk_house, candidate_street_address, candidate_unit, candidate_contact, candidate_email, int.Parse(candidate_church.Split('~')[0]), candidate_church_others, User.Identity.Name).ElementAt(0);
+                    vis = sql_conn.usp_addNewCourseVisitorParticipantAndAttendance(candidate_nric, candidate_course, candidate_salutation.Split('~')[0], candidate_english_name, null, candidate_gender, candidate_education, candidate_nationality, candidate_occupation, candidate_postal_code, candidate_blk_house, candidate_street_address, candidate_unit, candidate_contact, candidate_email, int.Parse(candidate_church.Split('~')[0]), candidate_church_others, User.Identity.Name, WalkInDate).ElementAt(0);
 
                 result = vis.Result;
             }
             else
             {
-                mem = sql_conn.usp_addNewCourseMemberParticipantAndAttendance(candidate_nric, int.Parse(candidate_course)).ElementAt(0);
+                mem = sql_conn.usp_addNewCourseMemberParticipantAndAttendance(candidate_nric, int.Parse(candidate_course), WalkInDate).ElementAt(0);
                 result = mem.Result;
             }
+
+            if (((string)Session["SystemMode"]).ToUpper() != "FULL")
+                ViewData["listofcourse"] = sql_conn.usp_getListofCourse(true).ToList();
+            else
+                ViewData["listofcourse"] = sql_conn.usp_getListofCourse(false).ToList();
 
             ViewData["Message"] = result;
             ViewData["candidate_nric"] = "";
@@ -422,189 +433,212 @@ namespace DOS.Controllers
         [ErrorHandler]
         public ActionResult submitcourseregistration()
         {
-            MailMessage mail = null;
-            initializedParameter();
-            if (((string)Session["SystemMode"]).ToUpper() != "FULL")
-                ViewData["listofcourse"] = sql_conn.usp_getListofCourse(true).ToList();
-            else
-                ViewData["listofcourse"] = sql_conn.usp_getListofCourse(false).ToList();
-
-            string existingmember = Request.Form["existingmember"];
-            if (existingmember == null)
-                existingmember = "null";
-            string candidate_nric = Request.Form["candidate_nric"];
-            string candidate_course = Request.Form["aspnet_variable$MainContent$candidate_course"];
-            string candidate_salutation = Request.Form["aspnet_variable$MainContent$candidate_salutation"];
-            string candidate_english_name = Request.Form["candidate_english_name"];
-            string candidate_dob = Request.Form["candidate_dob"];
-            string candidate_gender = Request.Form["candidate_gender"];
-            string candidate_education = Request.Form["aspnet_variable$MainContent$candidate_education"];
-            string candidate_nationality = Request.Form["aspnet_variable$MainContent$candidate_nationality"];
-            string candidate_occupation = Request.Form["aspnet_variable$MainContent$candidate_occupation"];
-            string candidate_postal_code = Request.Form["candidate_postal_code"];
-            string decodedAdditionalInformation = HttpUtility.UrlDecode(Request.Form["EncodedAdditionalInformation"]);
-            string candidate_blk_house;
-            if (Request.Form["candidate_blk_house"] != null)
-                candidate_blk_house = Request.Form["candidate_blk_house"];
-            else
-                candidate_blk_house = Request.Form["hidden_candidate_blk_house"];
-            
-            string candidate_street_address;
-            if(Request.Form["candidate_street_address"] != null)
-                candidate_street_address = Request.Form["candidate_street_address"];
-            else
-                candidate_street_address = Request.Form["hidden_candidate_street_address"];
-            string candidate_unit = Request.Form["candidate_unit"];
-            string candidate_contact = Request.Form["candidate_contact"];
-            string candidate_email = Request.Form["candidate_email"];
-            string candidate_church = Request.Form["aspnet_variable$MainContent$church"];
-            string candidate_church_others = Request.Form["church_others"];
-            string candidate_course_name = Request.Form["candidate_course_name"];
-            string candidate_Congregation = Request.Form["aspnet_variable$MainContent$Congregation"];
-
-            XElement temp = new XElement("Info");
-            temp.Add(new XElement("Header", Request.Headers.ToString()));
-            temp.Add(new XElement("Form", Request.Form.ToString()));
-            temp.Add(new XElement("decodedAdditionalInformation", decodedAdditionalInformation));
-            temp.Add(new XElement("UserAgent", Request.UserAgent));
-            temp.Add(new XElement("UserHostAddress", Request.UserHostAddress));
-            temp.Add(new XElement("UserHostName", Request.UserHostName));
-            temp.Add(new XElement("Params", Request.Params.ToString()));
-
-            XElement additionalInfo = XElement.Parse(decodedAdditionalInformation);
-
-            ViewData["candidate_course_name"] = candidate_course_name;
-            ViewData["existingmember"] = existingmember;
-            ViewData["candidate_nric"] = candidate_nric;
-            ViewData["candidate_course"] = candidate_course;
-            ViewData["candidate_salutation"] = candidate_salutation;
-            ViewData["candidate_english_name"] = candidate_english_name;
-            ViewData["candidate_dob"] = candidate_dob;
-            ViewData["candidate_gender"] = candidate_gender;
-            ViewData["candidate_education"] = candidate_education;
-            ViewData["candidate_nationality"] = candidate_nationality;
-            ViewData["candidate_occupation"] = candidate_occupation;
-            ViewData["candidate_postal_code"] = candidate_postal_code;
-            ViewData["candidate_blk_house"] = candidate_blk_house;
-            ViewData["candidate_street_address"] = candidate_street_address;
-            ViewData["candidate_unit"] = candidate_unit;
-            ViewData["candidate_contact"] = candidate_contact;
-            ViewData["candidate_email"] = candidate_email;
-            ViewData["candidate_church"] = candidate_church;
-            ViewData["candidate_church_others"] = candidate_church_others;
-
-            string result = "ERROR";
-            string sal = "";
-            string name = "";
-            string course = "";
-            usp_addNewCourseMemberParticipantResult mem;
-            
-            if (candidate_church.Length == 0)
-                candidate_church = "0";
-
-            if (((string)Session["SystemMode"]).ToUpper() != "FULL")
+            try
             {
-                string mailbody = (string)Session["CourseRegistration"];
-                mailbody = mailbody.Replace("[candidate_course_name]",candidate_course_name);
-                mailbody = mailbody.Replace("[candidate_nric]",candidate_nric);
-                mailbody = mailbody.Replace("[candidate_salutation]",candidate_salutation);
-                mailbody = mailbody.Replace("[candidate_english_name]",candidate_english_name);
-                mailbody = mailbody.Replace("[candidate_dob]",candidate_dob);
-                mailbody = mailbody.Replace("[candidate_gender]",candidate_gender);
-                mailbody = mailbody.Replace("[candidate_nationality]",candidate_nationality);
-                mailbody = mailbody.Replace("[candidate_education]",candidate_education);
-                mailbody = mailbody.Replace("[candidate_church]",candidate_church);
-                mailbody = mailbody.Replace("[candidate_occupation]",candidate_occupation);
-                mailbody = mailbody.Replace("[candidate_church_others]",candidate_church_others);
-                mailbody = mailbody.Replace("[candidate_postal_code]",candidate_postal_code);
-                mailbody = mailbody.Replace("[candidate_blk_house]",candidate_blk_house);
-                mailbody = mailbody.Replace("[candidate_contact]",candidate_contact);
-                mailbody = mailbody.Replace("[candidate_email]",candidate_email);
-                mailbody = mailbody.Replace("[candidate_unit]",candidate_unit);
-                mailbody = mailbody.Replace("[candidate_street_address]",candidate_street_address);
-                mailbody = mailbody.Replace("[AdditionalInformation]",decodedAdditionalInformation);
-                mailbody = mailbody.Replace("[Congregation]", candidate_Congregation);
-                if(candidate_church.StartsWith((string)Session["OtherChurchParish"]))
-                    mailbody = mailbody.Replace("[combine_church]", candidate_church_others);
+                MailMessage mail = null;
+                initializedParameter();
+                if (((string)Session["SystemMode"]).ToUpper() != "FULL")
+                    ViewData["listofcourse"] = sql_conn.usp_getListofCourse(true).ToList();
                 else
-                    mailbody = mailbody.Replace("[combine_church]", candidate_church);
+                    ViewData["listofcourse"] = sql_conn.usp_getListofCourse(false).ToList();
 
-                string age = "";
-                if (candidate_dob.Length > 0)
+                string existingmember = Request.Form["existingmember"];
+                if (existingmember == null)
+                    existingmember = "null";
+                string candidate_nric = Request.Form["candidate_nric"];
+                string candidate_course = Request.Form["aspnet_variable$MainContent$candidate_course"];
+                string candidate_salutation = Request.Form["aspnet_variable$MainContent$candidate_salutation"];
+                string candidate_english_name = Request.Form["candidate_english_name"];
+                string candidate_dob = Request.Form["candidate_dob"];
+                string candidate_gender = Request.Form["candidate_gender"];
+                string candidate_education = Request.Form["aspnet_variable$MainContent$candidate_education"];
+                string candidate_nationality = Request.Form["aspnet_variable$MainContent$candidate_nationality"];
+                string candidate_occupation = Request.Form["aspnet_variable$MainContent$candidate_occupation"];
+                string candidate_postal_code = Request.Form["candidate_postal_code"];
+                string decodedAdditionalInformation = HttpUtility.UrlDecode(Request.Form["EncodedAdditionalInformation"]);
+                string candidate_blk_house;
+                if (Request.Form["candidate_blk_house"] != null)
+                    candidate_blk_house = Request.Form["candidate_blk_house"];
+                else
+                    candidate_blk_house = Request.Form["hidden_candidate_blk_house"];
+
+                string candidate_street_address;
+                if (Request.Form["candidate_street_address"] != null)
+                    candidate_street_address = Request.Form["candidate_street_address"];
+                else
+                    candidate_street_address = Request.Form["hidden_candidate_street_address"];
+                string candidate_unit = Request.Form["candidate_unit"];
+                string candidate_contact = Request.Form["candidate_contact"];
+                string candidate_email = Request.Form["candidate_email"];
+                string candidate_church = Request.Form["aspnet_variable$MainContent$church"];
+                string candidate_church_others = Request.Form["church_others"];
+                string candidate_course_name = Request.Form["candidate_course_name"];
+                string candidate_Congregation = Request.Form["aspnet_variable$MainContent$Congregation"];
+
+                XElement temp = new XElement("Info");
+                temp.Add(new XElement("Header", Request.Headers.ToString()));
+                temp.Add(new XElement("Form", Request.Form.ToString()));
+                temp.Add(new XElement("decodedAdditionalInformation", decodedAdditionalInformation));
+                temp.Add(new XElement("UserAgent", Request.UserAgent));
+                temp.Add(new XElement("UserHostAddress", Request.UserHostAddress));
+                temp.Add(new XElement("UserHostName", Request.UserHostName));
+                temp.Add(new XElement("Params", Request.Params.ToString()));
+
+                ViewData["candidate_course_name"] = candidate_course_name;
+                ViewData["existingmember"] = existingmember;
+                ViewData["candidate_nric"] = candidate_nric;
+                ViewData["candidate_course"] = candidate_course;
+                ViewData["candidate_salutation"] = candidate_salutation;
+                ViewData["candidate_english_name"] = candidate_english_name;
+                ViewData["candidate_dob"] = candidate_dob;
+                ViewData["candidate_gender"] = candidate_gender;
+                ViewData["candidate_education"] = candidate_education;
+                ViewData["candidate_nationality"] = candidate_nationality;
+                ViewData["candidate_occupation"] = candidate_occupation;
+                ViewData["candidate_postal_code"] = candidate_postal_code;
+                ViewData["candidate_blk_house"] = candidate_blk_house;
+                ViewData["candidate_street_address"] = candidate_street_address;
+                ViewData["candidate_unit"] = candidate_unit;
+                ViewData["candidate_contact"] = candidate_contact;
+                ViewData["candidate_email"] = candidate_email;
+                ViewData["candidate_church"] = candidate_church;
+                ViewData["candidate_church_others"] = candidate_church_others;
+
+                XElement additionalInfo = XElement.Parse(decodedAdditionalInformation + "sdf");
+
+                string result = "ERROR";
+                string sal = "";
+                string name = "";
+                string course = "";
+                usp_addNewCourseMemberParticipantResult mem;
+
+                if (candidate_church.Length == 0)
+                    candidate_church = "0";
+
+                if (((string)Session["SystemMode"]).ToUpper() != "FULL")
                 {
-                    age = (DateTime.Now.Year - DateTime.ParseExact(candidate_dob, "dd/MM/yyyy", null).Year).ToString();
+                    string mailbody = (string)Session["CourseRegistration"];
+                    mailbody = mailbody.Replace("[candidate_course_name]", candidate_course_name);
+                    mailbody = mailbody.Replace("[candidate_nric]", candidate_nric);
+                    mailbody = mailbody.Replace("[candidate_salutation]", candidate_salutation);
+                    mailbody = mailbody.Replace("[candidate_english_name]", candidate_english_name);
+                    mailbody = mailbody.Replace("[candidate_dob]", candidate_dob);
+                    mailbody = mailbody.Replace("[candidate_gender]", candidate_gender);
+                    mailbody = mailbody.Replace("[candidate_nationality]", candidate_nationality);
+                    mailbody = mailbody.Replace("[candidate_education]", candidate_education);
+                    mailbody = mailbody.Replace("[candidate_church]", candidate_church);
+                    mailbody = mailbody.Replace("[candidate_occupation]", candidate_occupation);
+                    mailbody = mailbody.Replace("[candidate_church_others]", candidate_church_others);
+                    mailbody = mailbody.Replace("[candidate_postal_code]", candidate_postal_code);
+                    mailbody = mailbody.Replace("[candidate_blk_house]", candidate_blk_house);
+                    mailbody = mailbody.Replace("[candidate_contact]", candidate_contact);
+                    mailbody = mailbody.Replace("[candidate_email]", candidate_email);
+                    mailbody = mailbody.Replace("[candidate_unit]", candidate_unit);
+                    mailbody = mailbody.Replace("[candidate_street_address]", candidate_street_address);
+                    mailbody = mailbody.Replace("[AdditionalInformation]", decodedAdditionalInformation);
+                    mailbody = mailbody.Replace("[Congregation]", candidate_Congregation);
+                    if (candidate_church.StartsWith((string)Session["OtherChurchParish"]))
+                        mailbody = mailbody.Replace("[combine_church]", candidate_church_others);
+                    else
+                        mailbody = mailbody.Replace("[combine_church]", candidate_church);
+
+                    string age = "";
+                    if (candidate_dob.Length > 0)
+                    {
+                        age = (DateTime.Now.Year - DateTime.ParseExact(candidate_dob, "dd/MM/yyyy", null).Year).ToString();
+                    }
+                    mailbody = mailbody.Replace("[Age]", age);
+
+                    mail = new MailMessage();
+                    mail.IsBodyHtml = true;
+                    string to = (string)Session["CERegistrationRecipients"];
+
+                    mail.From = new MailAddress((string)Session["SMTPAccount"]);
+
+                    if (to.Length == 0)
+                        to = "zniter81@gmail.com";
+                    string[] emailTo = to.Split(';');
+                    for (int x = 0; x < emailTo.Length; x++)
+                    {
+                        if (emailTo[x].Trim().Length != 0)
+                            mail.To.Add("<" + emailTo[x].Trim() + ">");
+                    }
+
+                    mail.Subject = "Course Registration - " + candidate_course_name;        // put subject here	        
+                    mail.IsBodyHtml = true;
+                    mail.Body = mailbody;
+
+                    sal = candidate_salutation;
+                    name = candidate_english_name;
+                    course = candidate_course_name;
                 }
-                mailbody = mailbody.Replace("[Age]", age);
 
-                mail = new MailMessage();
-                mail.IsBodyHtml = true;
-                string to = (string)Session["CERegistrationRecipients"];
-
-                mail.From = new MailAddress((string)Session["SMTPAccount"]);
-
-                if (to.Length == 0)
-                    to = "zniter81@gmail.com";
-                string[] emailTo = to.Split(';');
-                for (int x = 0; x < emailTo.Length; x++)
+                XElement visitorxml = toUpdateXMLVisitor("Unspecified", candidate_nric, candidate_nric, candidate_salutation.Split('~')[0], candidate_english_name, candidate_unit, candidate_blk_house, candidate_nationality.Split('~')[0], candidate_occupation.Split('~')[0], candidate_dob, candidate_gender, candidate_street_address, candidate_postal_code, candidate_email, candidate_education.Split('~')[0], candidate_contact, candidate_church.Split('~')[0], candidate_church_others);
+                if (existingmember == "null")
                 {
-                    if (emailTo[x].Trim().Length != 0)
-                        mail.To.Add("<" + emailTo[x].Trim() + ">");
+                    sql_conn.usp_addNewCourseVisitorParticipant(visitorxml, candidate_course, ref result, ref sal, ref name, ref course, additionalInfo);
+                }
+                else
+                {
+                    mem = sql_conn.usp_addNewCourseMemberParticipant(candidate_nric, int.Parse(candidate_course), additionalInfo).ElementAt(0);
+                    sal = mem.SalutationName;
+                    name = mem.EnglishName;
+                    course = mem.CourseName;
+                    result = mem.Result;
                 }
 
-                mail.Subject = "Course Registration - " + candidate_course_name;        // put subject here	        
-                mail.IsBodyHtml = true;
-                mail.Body = mailbody;
-                                
-                sal = candidate_salutation;
-                name = candidate_english_name;
-                course = candidate_course_name;
-            }
 
-            XElement visitorxml = toUpdateXMLVisitor("Unspecified", candidate_nric, candidate_nric, candidate_salutation.Split('~')[0], candidate_english_name, candidate_unit, candidate_blk_house, candidate_nationality.Split('~')[0], candidate_occupation.Split('~')[0], candidate_dob, candidate_gender, candidate_street_address, candidate_postal_code, candidate_email, candidate_education.Split('~')[0], candidate_contact, candidate_church.Split('~')[0], candidate_church_others);
-            if (existingmember == "null")
-            {
-                sql_conn.usp_addNewCourseVisitorParticipant(visitorxml, candidate_course, ref result, ref sal, ref name, ref course, additionalInfo);                
-            }
-            else
-            {
-                mem = sql_conn.usp_addNewCourseMemberParticipant(candidate_nric, int.Parse(candidate_course), additionalInfo).ElementAt(0);
-                sal = mem.SalutationName;
-                name = mem.EnglishName;
-                course = mem.CourseName;
-                result = mem.Result;
-            }
-            
+                ViewData["candidate_course"] = Request.Form["aspnet_variable$MainContent$candidate_course"];
+                string url = "";
+                sql_conn.usp_getCourseURL(int.Parse(candidate_course), ref url);
 
-            ViewData["candidate_course"] = Request.Form["aspnet_variable$MainContent$candidate_course"];
+                ViewData["CourseURL"] = url;
+                ViewData["ShowFB"] = (Session["ShowShareCourseOnFacebook"]).ToString().ToUpper();
+                if (result == "OK")
+                {
+                    if (((string)Session["SystemMode"]).ToUpper() != "FULL" && mail != null)
+                        sendEmail(mail);
 
-            if (result == "OK")
-            {
-                if (((string)Session["SystemMode"]).ToUpper() != "FULL" && mail != null)
-                    sendEmail(mail);
-                return RedirectToAction("courseregistration", "Membership", new { Message = sal + " " + name + ", registration for [" + course + "], successfully.", candidate_course = candidate_course });
+                    ViewData["Message"] = "<label style=\"color:green;\">" + sal + " " + name + ", registration for [" + course + "], successfully.</label>";
+                    return View("courseregistration");
+                }
+                else if (result == "EXISTS")
+                {
+                    ViewData["Message"] = "<label style=\"color:green;\">" + sal + " " + name + ", is already registered for [" + course + "].</label>";
+                    return View("courseregistration");
+                }
+                else if (result == "NOTEXISTS")
+                {
+                    ViewData["Message"] = "<label style=\"color:red;\">" + candidate_nric + " is not a member nor a revisiting visitor.</label>";
+                    ViewData["ShowFB"] = "FALSE";
+                    return View("courseregistration");
+                }
+                else if (result == "NRICEXISTS")
+                {
+                    ViewData["Message"] = "<label style=\"color:red;\">" + candidate_english_name + " is already registered visitor, Please tick the 'Existing Member?/Revisiting Visitor?'</label>";
+                    ViewData["ShowFB"] = "FALSE";
+                    return View("courseregistration");
+                }
+                else if (result == "ERROR")
+                {
+                    ViewData["ShowFB"] = "FALSE";
+                    ViewData["Message"] = "<label style=\"color:red;\">Unable to register user. Please try again.</label>";
+                    return View("courseregistration");
+                }
+
+                return View();
             }
-            else if (result == "EXISTS")
+            catch (Exception e)
             {
-                ViewData["Message"] = sal + " " + name + ", is already registered for [" + course + "].";
+                initializedParameter();
+                if (((string)Session["SystemMode"]).ToUpper() != "FULL")
+                    ViewData["listofcourse"] = sql_conn.usp_getListofCourse(true).ToList();
+                else
+                    ViewData["listofcourse"] = sql_conn.usp_getListofCourse(false).ToList();
+                ViewData["Message"] = "<label style=\"color:red;\">Unable to register user. Please try again.</label>";          
+                ViewData["existingmember"] = "null";
                 return View("courseregistration");
             }
-            else if (result == "NOTEXISTS" )
-            {
-                ViewData["Message"] = candidate_nric + " is not a member nor a revisiting visitor.";
-                return View("courseregistration");
-            }
-            else if (result == "NRICEXISTS")
-            {
-                ViewData["Message"] = candidate_english_name + " is already registered visitor, Please tick the 'Existing Member?/Revisiting Visitor?'";
-                return View("courseregistration");
-            }
-            else if (result == "ERROR")
-            {
-                ViewData["Message"] = "Unable to register user.";
-                return View("courseregistration");
-            }
-
-            return View();
         }
 
         [ErrorHandler]
@@ -929,233 +963,128 @@ namespace DOS.Controllers
         [AcceptVerbs(HttpVerbs.Post)]
         public ActionResult submitMemberForm()
         {
-            initializedParameter();
-
-            string candidate_congregation = Request.Form["aspnet_variable$MainContent$candidate_congregation"];
-            string candidate_marriage_date = Request.Form["candidate_marriage_date"];
-            string candidate_christian_yes_no = Request.Form["candidate_christian_yes_no"];
-            string candidate_salutation = Request.Form["aspnet_variable$MainContent$candidate_salutation"];
-            string candidate_photo = Request.Form["candidate_photo"];
-            string candidate_english_name = Request.Form["candidate_english_name"].ToUpper();
-	        string candidate_chinses_name = Request.Form["candidate_chinese_name"];
-            string candidate_nric = Request.Form["candidate_nric"].ToUpper();
-	        string candidate_dob = Request.Form["candidate_dob"];
-	        string candidate_gender = Request.Form["candidate_gender"];
-            string candidate_marital_status = Request.Form["aspnet_variable$MainContent$candidate_marital_status"];
-            string candidate_street_address = Request.Form["candidate_street_address"].ToUpper();
-            string candidate_blk_house = Request.Form["candidate_blk_house"].ToUpper();
-	        string candidate_postal_code = Request.Form["candidate_postal_code"];
-            string candidate_unit = Request.Form["candidate_unit"];
-            string candidate_nationality = Request.Form["aspnet_variable$MainContent$candidate_nationality"];
-            string candidate_dialect = Request.Form["aspnet_variable$MainContent$candidate_dialect"];
-	        string candidate_email = Request.Form["candidate_email"];
-            string candidate_education = Request.Form["aspnet_variable$MainContent$candidate_education"];
-	        string candidate_language = Request.Form["candidate_language"];
-            string candidate_occupation = Request.Form["aspnet_variable$MainContent$candidate_occupation"];
-	        string candidate_home_tel = Request.Form["candidate_home_tel"];
-	        string candidate_mobile_tel = Request.Form["candidate_mobile_tel"];
-	        string candidate_baptism_date = Request.Form["candidate_baptism_date"];
-            string baptized_by = Request.Form["aspnet_variable$MainContent$baptized_by"];
-            string baptism_church = Request.Form["aspnet_variable$MainContent$baptism_church"];
-	        string candidate_confirmation_date = Request.Form["candidate_confirmation_date"];
-            string confirmation_by = Request.Form["aspnet_variable$MainContent$confirm_by"];
-            string confirmation_church = Request.Form["aspnet_variable$MainContent$confirmation_church"];
-            string previous_church_membership = Request.Form["aspnet_variable$MainContent$previous_church_membership"];
-            string sponsor1 = Request.Form["candidate_sponsor1"];
-            string sponsor2 = Request.Form["candidate_sponsor2"];
-            string sponsor2contact = Request.Form["candidate_sponsor2contact"];
-            string candidate_transfer_reason = Request.Form["candidate_transfer_reason"];
-
-            string baptized_by_others = Request.Form["baptized_by_others"];
-            string baptism_church_others = Request.Form["baptism_church_others"];
-            string confirm_by_others = Request.Form["confirm_by_others"];
-            string confirmation_church_others = Request.Form["confirmation_church_others"];
-            string previous_church_membership_others = Request.Form["previous_church_membership_others"];
-            string childhtml = "";
-            string familyhtml = "";
-
-            string childlist = "<ChildList></ChildList>";
-	        if(Request.Form["childlist"] != "0" && Request.Form["childlist"].Length > 0){
-		        childlist = "<ChildList>";
-		        string[] childno = Request.Form["childlist"].Split(',');
-		        for(int x=0; x < childno.Count(); x++)
-		        {
-			        childlist += "<Child>";
-                    childlist += "<ChildEnglishName>" + Request.Form["child_english_name_" + childno[x]].ToUpper() + "</ChildEnglishName>";
-			        childlist += "<ChildChineseName>" + Request.Form["child_chinese_name_"+childno[x]] + "</ChildChineseName>";
-			        childlist += "<ChildBaptismDate>" + Request.Form["child_baptism_date_"+childno[x]] + "</ChildBaptismDate>";
-			        childlist += "<ChildBaptismBy>" + Request.Form["child_baptism_by_"+childno[x]] + "</ChildBaptismBy>";
-			        childlist += "<ChildChurch>" + Request.Form["child_church_"+childno[x]] + "</ChildChurch>";
-			        childlist += "</Child>";
-
-                    childhtml += "<tr><td>" + Request.Form["child_english_name_" + childno[x]].ToUpper() + "</td><td>" + Request.Form["child_chinese_name_" + childno[x]].ToUpper() + "</td><td>" + Request.Form["child_baptism_date_" + childno[x]].ToUpper() + "</td><td>" + Request.Form["child_baptism_by_" + childno[x]].ToUpper() + "</td><td>" + Request.Form["child_church_text_" + childno[x]].ToUpper() + "</td></tr>";
-		        }
-		        childlist += "</ChildList>";
-	        }
-
-            string familylist = "<FamilyList></FamilyList>";
-	        if(Request.Form["familylist"] != "0" && Request.Form["familylist"].Length > 0){
-		        familylist = "<FamilyList>";
-		        string[] familyno = Request.Form["familylist"].Split(',');
-		        for(int x=0; x < familyno.Count(); x++)
-		        {
-			        familylist += "<Family>";
-			        familylist += "<FamilyType>" + Request.Form["family_type_"+familyno[x]] + "</FamilyType>";
-			        familylist += "<FamilyEnglishName>" + Request.Form["family_english_name_"+familyno[x]].ToUpper() + "</FamilyEnglishName>";
-			        familylist += "<FamilyChineseName>" + Request.Form["family_chinese_name_"+familyno[x]] + "</FamilyChineseName>";
-			        familylist += "<FamilyOccupation>" + Request.Form["family_occupation_"+familyno[x]] + "</FamilyOccupation>";
-			        familylist += "<FamilyReligion>" + Request.Form["family_religion_"+familyno[x]] + "</FamilyReligion>";
-			        familylist += "</Family>";
-                    familyhtml += "<tr><td>" + Request.Form["family_type_text_" + familyno[x]] + "</td><td>" + Request.Form["family_english_name_" + familyno[x]] + "</td><td>" + Request.Form["family_chinese_name_" + familyno[x]] + "</td><td>" + Request.Form["family_occupation_text_" + familyno[x]] + "</td><td>" + Request.Form["family_religion_text_" + familyno[x]] + "</td></tr>";
-		        }
-		        familylist += "</FamilyList>";
-	        }
-
-            
-            string candidate_join_cellgroup = Request.Form["candidate_join_cellgroup"];
-            if (candidate_join_cellgroup != null)
-                candidate_join_cellgroup = "1";
-            else
-                candidate_join_cellgroup = "0";
-            string candidate_serve_congregation = Request.Form["candidate_serve_congregation"];
-            if (candidate_serve_congregation != null)
-                candidate_serve_congregation = "1";
-            else
-                candidate_serve_congregation = "0";
-            string candidate_tithing = Request.Form["candidate_tithing"];
-            if (candidate_tithing != null)
-                candidate_tithing = "1";
-            else
-                candidate_tithing = "0";
-
-            string candidate_interested_ministry = Request.Form["aspnet_variable$MainContent$candidate_interested_ministry"];
-            if (candidate_interested_ministry != null)
+            try
             {
-                string[] ministry = candidate_interested_ministry.Split(',');
-                candidate_interested_ministry = "<Ministry>";
-                for (int x = 0; x < ministry.Count(); x++)
+                initializedParameter();
+
+                string candidate_congregation = Request.Form["aspnet_variable$MainContent$candidate_congregation"];
+                string candidate_marriage_date = Request.Form["candidate_marriage_date"];
+                string candidate_christian_yes_no = Request.Form["candidate_christian_yes_no"];
+                string candidate_salutation = Request.Form["aspnet_variable$MainContent$candidate_salutation"];
+                string candidate_photo = Request.Form["candidate_photo"];
+                string candidate_english_name = Request.Form["candidate_english_name"].ToUpper();
+                string candidate_chinses_name = Request.Form["candidate_chinese_name"];
+                string candidate_nric = Request.Form["candidate_nric"].ToUpper();
+                string candidate_dob = Request.Form["candidate_dob"];
+                string candidate_gender = Request.Form["candidate_gender"];
+                string candidate_marital_status = Request.Form["aspnet_variable$MainContent$candidate_marital_status"];
+                string candidate_street_address = Request.Form["candidate_street_address"].ToUpper();
+                string candidate_blk_house = Request.Form["candidate_blk_house"].ToUpper();
+                string candidate_postal_code = Request.Form["candidate_postal_code"];
+                string candidate_unit = Request.Form["candidate_unit"];
+                string candidate_nationality = Request.Form["aspnet_variable$MainContent$candidate_nationality"];
+                string candidate_dialect = Request.Form["aspnet_variable$MainContent$candidate_dialect"];
+                string candidate_email = Request.Form["candidate_email"];
+                string candidate_education = Request.Form["aspnet_variable$MainContent$candidate_education"];
+                string candidate_language = Request.Form["candidate_language"];
+                string candidate_occupation = Request.Form["aspnet_variable$MainContent$candidate_occupation"];
+                string candidate_home_tel = Request.Form["candidate_home_tel"];
+                string candidate_mobile_tel = Request.Form["candidate_mobile_tel"];
+                string candidate_baptism_date = Request.Form["candidate_baptism_date"];
+                string baptized_by = Request.Form["aspnet_variable$MainContent$baptized_by"];
+                string baptism_church = Request.Form["aspnet_variable$MainContent$baptism_church"];
+                string candidate_confirmation_date = Request.Form["candidate_confirmation_date"];
+                string confirmation_by = Request.Form["aspnet_variable$MainContent$confirm_by"];
+                string confirmation_church = Request.Form["aspnet_variable$MainContent$confirmation_church"];
+                string previous_church_membership = Request.Form["aspnet_variable$MainContent$previous_church_membership"];
+                string sponsor1 = Request.Form["candidate_sponsor1"];
+                string sponsor2 = Request.Form["candidate_sponsor2"];
+                string sponsor2contact = Request.Form["candidate_sponsor2contact"];
+                string candidate_transfer_reason = Request.Form["candidate_transfer_reason"];
+
+                string baptized_by_others = Request.Form["baptized_by_others"];
+                string baptism_church_others = Request.Form["baptism_church_others"];
+                string confirm_by_others = Request.Form["confirm_by_others"];
+                string confirmation_church_others = Request.Form["confirmation_church_others"];
+                string previous_church_membership_others = Request.Form["previous_church_membership_others"];
+                string childhtml = "";
+                string familyhtml = "";
+
+                string childlist = "<ChildList></ChildList>";
+                if (Request.Form["childlist"] != "0" && Request.Form["childlist"].Length > 0)
                 {
-                    candidate_interested_ministry += "<MinistryID>" + ministry[x] + "</MinistryID>";
-                }
-                candidate_interested_ministry += "</Ministry>";
-            }
-            else
-            {
-                candidate_interested_ministry = "<Ministry />";
-            }
-            XElement xml = toAddXMLNewMember(User.Identity.Name, candidate_salutation, candidate_photo, candidate_english_name, candidate_unit, candidate_blk_house, candidate_nationality, candidate_dialect, candidate_occupation, baptized_by, baptism_church, confirmation_by, confirmation_church, previous_church_membership, candidate_chinses_name, candidate_nric, candidate_dob, candidate_gender, candidate_marital_status, candidate_street_address, candidate_postal_code, candidate_email, candidate_education, candidate_language, candidate_home_tel, candidate_mobile_tel, candidate_baptism_date, candidate_confirmation_date, candidate_marriage_date, candidate_congregation, sponsor1, sponsor2, XElement.Parse(familylist), XElement.Parse(childlist), XElement.Parse(candidate_interested_ministry), candidate_join_cellgroup, candidate_serve_congregation, candidate_tithing, candidate_transfer_reason, baptized_by_others, baptism_church_others, confirm_by_others, confirmation_church_others, previous_church_membership_others, sponsor2contact);
-            if (((string)Session["SystemMode"]).ToUpper() != "FULL")
-            {
-                string mailBody = (string)Session["GreenForm"];
-                mailBody = mailBody.Replace("[Salutation]", Request.Form["SalutationText"]); 
-                mailBody = mailBody.Replace("[English Name]", candidate_english_name);
-                mailBody = mailBody.Replace("[Chinese Name]", candidate_chinses_name);
-                mailBody = mailBody.Replace("[DOB]", candidate_dob);
-                mailBody = mailBody.Replace("[Gender]", Request.Form["GenderText"]); 
-                mailBody = mailBody.Replace("[NRIC]", candidate_nric);
-                mailBody = mailBody.Replace("[Nationality]", Request.Form["NationalityText"]);
-                mailBody = mailBody.Replace("[Dialect]", Request.Form["DialectText"]);
-                mailBody = mailBody.Replace("[Marital Status]", Request.Form["MaritalStatusText"]);
-                mailBody = mailBody.Replace("[Marital Status Date]", candidate_marriage_date);
-                mailBody = mailBody.Replace("[Postal Code]", candidate_postal_code);
-                mailBody = mailBody.Replace("[Email]", candidate_email);
-                mailBody = mailBody.Replace("[Education]", Request.Form["EducationText"]);
-                mailBody = mailBody.Replace("[Blk House]", candidate_blk_house);
-                mailBody = mailBody.Replace("[Language]", Request.Form["LanguageText"]);
-                mailBody = mailBody.Replace("[Occupation]", Request.Form["OccupationText"]);
-                mailBody = mailBody.Replace("[Unit]", candidate_unit);
-                mailBody = mailBody.Replace("[Home Tel]", candidate_home_tel);
-                mailBody = mailBody.Replace("[Mobile Tel]", candidate_mobile_tel);
-                mailBody = mailBody.Replace("[Street Address]", candidate_street_address);
-
-                mailBody = mailBody.Replace("[Congregation]", Request.Form["CongregationText"]);
-                mailBody = mailBody.Replace("[Sponsor 1]", Request.Form["candidate_sponsor1_text"]);
-                mailBody = mailBody.Replace("[Sponsor 2]", sponsor2);
-                mailBody = mailBody.Replace("[Sponsor 2 Contact]", sponsor2contact);
-                mailBody = mailBody.Replace("[Baptism Date]", candidate_baptism_date);
-                mailBody = mailBody.Replace("[Baptism By]", Request.Form["BaptisedByText"]);
-                mailBody = mailBody.Replace("[Baptism By Others]", baptized_by_others);
-                mailBody = mailBody.Replace("[Baptism Church]", Request.Form["BaptisedChurchText"]);
-                mailBody = mailBody.Replace("[Baptism Church Others]", baptism_church_others);
-                mailBody = mailBody.Replace("[Confirmation Date]", candidate_confirmation_date);
-                mailBody = mailBody.Replace("[Confirmation By]", Request.Form["ComfirmationByText"]);
-                mailBody = mailBody.Replace("[Confirmation By Others]", confirm_by_others);
-                mailBody = mailBody.Replace("[Confirmation Church]", Request.Form["ComfirmationChurchText"]);
-                mailBody = mailBody.Replace("[Confirmation Church Others]", confirmation_church_others);
-                mailBody = mailBody.Replace("[Previous Church Membership]", Request.Form["PreviousChurchText"]);
-                mailBody = mailBody.Replace("[Previous Church Membership Others]", previous_church_membership_others);
-                mailBody = mailBody.Replace("[Transfer Reason]", candidate_transfer_reason);
-                mailBody = mailBody.Replace("[Family]", familyhtml);
-                mailBody = mailBody.Replace("[Child]", childhtml);
-                if (candidate_join_cellgroup == "1")
-                    mailBody = mailBody.Replace("[Join Cellgroup]", "Yes");
-                else
-                    mailBody = mailBody.Replace("[Join Cellgroup]", "No");
-                if (candidate_serve_congregation == "1")
-                    mailBody = mailBody.Replace("[Serve Congregation]", "Yes");
-                else
-                    mailBody = mailBody.Replace("[Serve Congregation]", "No");
-                if (candidate_tithing == "1")
-                    mailBody = mailBody.Replace("[Tithing Member]", "Yes");
-                else
-                    mailBody = mailBody.Replace("[Tithing Member]", "No");
-                mailBody = mailBody.Replace("[Join Ministry]", Request.Form["MinistryText"]);
-                mailBody = mailBody.Replace("[xmlcontent]", "<table><tr><td>"+xml.ToString().Replace("<", "&lt;").Replace(">", "&gt;") + "</td></tr></table>");
-
-                
-                MailMessage mail = new MailMessage();
-                mail.IsBodyHtml = true;
-                string to = (string)Session["SamisRegistrationRecipients"];
-
-                mail.From = new MailAddress((string)Session["SMTPAccount"]);
-
-                if (to.Length == 0)
-                    to = "zniter81@gmail.com";
-                string[] emailTo = to.Split(';');
-                for (int x = 0; x < emailTo.Length; x++)
-                {
-                    if (emailTo[x].Trim().Length != 0)
-                        mail.To.Add("<" + emailTo[x].Trim() + ">");
-                }
-
-                mail.Subject = "SAC Green Form Registration";        // put subject here	        
-                mail.IsBodyHtml = true;
-                
-                if (Session["FileIOStream"] == null)
-                    mailBody = mailBody.Replace("[attachment]", "<br /><br />");
-                else if (((byte[])Session["FileIOStream"]).Count() > 0)
-                {
-                    MemoryStream stream = new MemoryStream((byte[])Session["FileIOStream"]);
-                    Attachment attach = new Attachment(stream, (string)Session["FileName"]);
-                    mail.Attachments.Add(attach);
-                    mailBody = mailBody.Replace("[attachment]", "Attachment of person IC Photo<br /><br />");
-                }
-                
-
-                mail.Body = mailBody;
-                sendEmail(mail);                
-            }
-
-            string res = "0";
-            sql_conn.usp_addNewMember(xml, ref res);
-            if (int.Parse(res) == 1)
-            {
-                if (candidate_photo.Length > 0)
-                {
-                    if (Session["RemoteStorage"].ToString().ToUpper() == "ON")
+                    childlist = "<ChildList>";
+                    string[] childno = Request.Form["childlist"].Split(',');
+                    for (int x = 0; x < childno.Count(); x++)
                     {
-                        new RemoteStorage((string)Session["StorageCloudName"], (string)Session["StorageAccessKey"], (string)Session["StorageSecretKey"]).renameRemoteStorageFilename("temp_" + candidate_photo, candidate_photo);
+                        childlist += "<Child>";
+                        childlist += "<ChildEnglishName>" + Request.Form["child_english_name_" + childno[x]].ToUpper() + "</ChildEnglishName>";
+                        childlist += "<ChildChineseName>" + Request.Form["child_chinese_name_" + childno[x]] + "</ChildChineseName>";
+                        childlist += "<ChildBaptismDate>" + Request.Form["child_baptism_date_" + childno[x]] + "</ChildBaptismDate>";
+                        childlist += "<ChildBaptismBy>" + Request.Form["child_baptism_by_" + childno[x]] + "</ChildBaptismBy>";
+                        childlist += "<ChildChurch>" + Request.Form["child_church_" + childno[x]] + "</ChildChurch>";
+                        childlist += "</Child>";
+
+                        childhtml += "<tr><td>" + Request.Form["child_english_name_" + childno[x]].ToUpper() + "</td><td>" + Request.Form["child_chinese_name_" + childno[x]].ToUpper() + "</td><td>" + Request.Form["child_baptism_date_" + childno[x]].ToUpper() + "</td><td>" + Request.Form["child_baptism_by_" + childno[x]].ToUpper() + "</td><td>" + Request.Form["child_church_text_" + childno[x]].ToUpper() + "</td></tr>";
                     }
-                    else{
-                        string from = Session["temp_uploadfilesavedlocation"].ToString() + "temp_" + candidate_photo;
-                        string to = Session["icphotolocation"].ToString() + candidate_photo;                    
-                        System.IO.File.Move(from, to);
-                    }
+                    childlist += "</ChildList>";
                 }
-                return RedirectToAction("NewMember", "Membership", new { message = "Member, " + candidate_english_name + " added." });
-            }
-            else
-            {
+
+                string familylist = "<FamilyList></FamilyList>";
+                if (Request.Form["familylist"] != "0" && Request.Form["familylist"].Length > 0)
+                {
+                    familylist = "<FamilyList>";
+                    string[] familyno = Request.Form["familylist"].Split(',');
+                    for (int x = 0; x < familyno.Count(); x++)
+                    {
+                        familylist += "<Family>";
+                        familylist += "<FamilyType>" + Request.Form["family_type_" + familyno[x]] + "</FamilyType>";
+                        familylist += "<FamilyEnglishName>" + Request.Form["family_english_name_" + familyno[x]].ToUpper() + "</FamilyEnglishName>";
+                        familylist += "<FamilyChineseName>" + Request.Form["family_chinese_name_" + familyno[x]] + "</FamilyChineseName>";
+                        familylist += "<FamilyOccupation>" + Request.Form["family_occupation_" + familyno[x]] + "</FamilyOccupation>";
+                        familylist += "<FamilyReligion>" + Request.Form["family_religion_" + familyno[x]] + "</FamilyReligion>";
+                        familylist += "</Family>";
+                        familyhtml += "<tr><td>" + Request.Form["family_type_text_" + familyno[x]] + "</td><td>" + Request.Form["family_english_name_" + familyno[x]] + "</td><td>" + Request.Form["family_chinese_name_" + familyno[x]] + "</td><td>" + Request.Form["family_occupation_text_" + familyno[x]] + "</td><td>" + Request.Form["family_religion_text_" + familyno[x]] + "</td></tr>";
+                    }
+                    familylist += "</FamilyList>";
+                }
+
+
+                string candidate_join_cellgroup = Request.Form["candidate_join_cellgroup"];
+                if (candidate_join_cellgroup != null)
+                    candidate_join_cellgroup = "1";
+                else
+                    candidate_join_cellgroup = "0";
+                string candidate_serve_congregation = Request.Form["candidate_serve_congregation"];
+                if (candidate_serve_congregation != null)
+                    candidate_serve_congregation = "1";
+                else
+                    candidate_serve_congregation = "0";
+                string candidate_tithing = Request.Form["candidate_tithing"];
+                if (candidate_tithing != null)
+                    candidate_tithing = "1";
+                else
+                    candidate_tithing = "0";
+
+                string candidate_interested_ministry = Request.Form["aspnet_variable$MainContent$candidate_interested_ministry"];
+                if (candidate_interested_ministry != null)
+                {
+                    string[] ministry = candidate_interested_ministry.Split(',');
+                    candidate_interested_ministry = "<Ministry>";
+                    for (int x = 0; x < ministry.Count(); x++)
+                    {
+                        candidate_interested_ministry += "<MinistryID>" + ministry[x] + "</MinistryID>";
+                    }
+                    candidate_interested_ministry += "</Ministry>";
+                }
+                else
+                {
+                    candidate_interested_ministry = "<Ministry />";
+                }
+
+
+
+
                 ViewData["candidate_congregation"] = Request.Form["aspnet_variable$MainContent$candidate_congregation"];
                 ViewData["candidate_marriage_date"] = Request.Form["candidate_marriage_date"];
                 ViewData["candidate_christian_yes_no"] = Request.Form["candidate_christian_yes_no"];
@@ -1205,11 +1134,134 @@ namespace DOS.Controllers
 
                 ViewData["familylist"] = familylist;
                 ViewData["childlist"] = childlist;
-                
-                ViewData["errormsg"] = "Member, " + candidate_english_name + " not added. Record exist.";
+
+
+                XElement xml = toAddXMLNewMember(User.Identity.Name, candidate_salutation, candidate_photo, candidate_english_name, candidate_unit, candidate_blk_house, candidate_nationality, candidate_dialect, candidate_occupation, baptized_by, baptism_church, confirmation_by, confirmation_church, previous_church_membership, candidate_chinses_name, candidate_nric, candidate_dob, candidate_gender, candidate_marital_status, candidate_street_address, candidate_postal_code, candidate_email, candidate_education, candidate_language, candidate_home_tel, candidate_mobile_tel, candidate_baptism_date, candidate_confirmation_date, candidate_marriage_date, candidate_congregation, sponsor1, sponsor2, XElement.Parse(familylist), XElement.Parse(childlist), XElement.Parse(candidate_interested_ministry), candidate_join_cellgroup, candidate_serve_congregation, candidate_tithing, candidate_transfer_reason, baptized_by_others, baptism_church_others, confirm_by_others, confirmation_church_others, previous_church_membership_others, sponsor2contact);
+                if (((string)Session["SystemMode"]).ToUpper() != "FULL")
+                {
+                    string mailBody = (string)Session["GreenForm"];
+                    mailBody = mailBody.Replace("[Salutation]", Request.Form["SalutationText"]);
+                    mailBody = mailBody.Replace("[English Name]", candidate_english_name);
+                    mailBody = mailBody.Replace("[Chinese Name]", candidate_chinses_name);
+                    mailBody = mailBody.Replace("[DOB]", candidate_dob);
+                    mailBody = mailBody.Replace("[Gender]", Request.Form["GenderText"]);
+                    mailBody = mailBody.Replace("[NRIC]", candidate_nric);
+                    mailBody = mailBody.Replace("[Nationality]", Request.Form["NationalityText"]);
+                    mailBody = mailBody.Replace("[Dialect]", Request.Form["DialectText"]);
+                    mailBody = mailBody.Replace("[Marital Status]", Request.Form["MaritalStatusText"]);
+                    mailBody = mailBody.Replace("[Marital Status Date]", candidate_marriage_date);
+                    mailBody = mailBody.Replace("[Postal Code]", candidate_postal_code);
+                    mailBody = mailBody.Replace("[Email]", candidate_email);
+                    mailBody = mailBody.Replace("[Education]", Request.Form["EducationText"]);
+                    mailBody = mailBody.Replace("[Blk House]", candidate_blk_house);
+                    mailBody = mailBody.Replace("[Language]", Request.Form["LanguageText"]);
+                    mailBody = mailBody.Replace("[Occupation]", Request.Form["OccupationText"]);
+                    mailBody = mailBody.Replace("[Unit]", candidate_unit);
+                    mailBody = mailBody.Replace("[Home Tel]", candidate_home_tel);
+                    mailBody = mailBody.Replace("[Mobile Tel]", candidate_mobile_tel);
+                    mailBody = mailBody.Replace("[Street Address]", candidate_street_address);
+
+                    mailBody = mailBody.Replace("[Congregation]", Request.Form["CongregationText"]);
+                    mailBody = mailBody.Replace("[Sponsor 1]", Request.Form["candidate_sponsor1_text"]);
+                    mailBody = mailBody.Replace("[Sponsor 2]", sponsor2);
+                    mailBody = mailBody.Replace("[Sponsor 2 Contact]", sponsor2contact);
+                    mailBody = mailBody.Replace("[Baptism Date]", candidate_baptism_date);
+                    mailBody = mailBody.Replace("[Baptism By]", Request.Form["BaptisedByText"]);
+                    mailBody = mailBody.Replace("[Baptism By Others]", baptized_by_others);
+                    mailBody = mailBody.Replace("[Baptism Church]", Request.Form["BaptisedChurchText"]);
+                    mailBody = mailBody.Replace("[Baptism Church Others]", baptism_church_others);
+                    mailBody = mailBody.Replace("[Confirmation Date]", candidate_confirmation_date);
+                    mailBody = mailBody.Replace("[Confirmation By]", Request.Form["ComfirmationByText"]);
+                    mailBody = mailBody.Replace("[Confirmation By Others]", confirm_by_others);
+                    mailBody = mailBody.Replace("[Confirmation Church]", Request.Form["ComfirmationChurchText"]);
+                    mailBody = mailBody.Replace("[Confirmation Church Others]", confirmation_church_others);
+                    mailBody = mailBody.Replace("[Previous Church Membership]", Request.Form["PreviousChurchText"]);
+                    mailBody = mailBody.Replace("[Previous Church Membership Others]", previous_church_membership_others);
+                    mailBody = mailBody.Replace("[Transfer Reason]", candidate_transfer_reason);
+                    mailBody = mailBody.Replace("[Family]", familyhtml);
+                    mailBody = mailBody.Replace("[Child]", childhtml);
+                    if (candidate_join_cellgroup == "1")
+                        mailBody = mailBody.Replace("[Join Cellgroup]", "Yes");
+                    else
+                        mailBody = mailBody.Replace("[Join Cellgroup]", "No");
+                    if (candidate_serve_congregation == "1")
+                        mailBody = mailBody.Replace("[Serve Congregation]", "Yes");
+                    else
+                        mailBody = mailBody.Replace("[Serve Congregation]", "No");
+                    if (candidate_tithing == "1")
+                        mailBody = mailBody.Replace("[Tithing Member]", "Yes");
+                    else
+                        mailBody = mailBody.Replace("[Tithing Member]", "No");
+                    mailBody = mailBody.Replace("[Join Ministry]", Request.Form["MinistryText"]);
+                    mailBody = mailBody.Replace("[xmlcontent]", "<table><tr><td>" + xml.ToString().Replace("<", "&lt;").Replace(">", "&gt;") + "</td></tr></table>");
+
+
+                    MailMessage mail = new MailMessage();
+                    mail.IsBodyHtml = true;
+                    string to = (string)Session["SamisRegistrationRecipients"];
+
+                    mail.From = new MailAddress((string)Session["SMTPAccount"]);
+
+                    if (to.Length == 0)
+                        to = "zniter81@gmail.com";
+                    string[] emailTo = to.Split(';');
+                    for (int x = 0; x < emailTo.Length; x++)
+                    {
+                        if (emailTo[x].Trim().Length != 0)
+                            mail.To.Add("<" + emailTo[x].Trim() + ">");
+                    }
+
+                    mail.Subject = "SAC Green Form Registration";        // put subject here	        
+                    mail.IsBodyHtml = true;
+
+                    if (Session["FileIOStream"] == null)
+                        mailBody = mailBody.Replace("[attachment]", "<br /><br />");
+                    else if (((byte[])Session["FileIOStream"]).Count() > 0)
+                    {
+                        MemoryStream stream = new MemoryStream((byte[])Session["FileIOStream"]);
+                        Attachment attach = new Attachment(stream, (string)Session["FileName"]);
+                        mail.Attachments.Add(attach);
+                        mailBody = mailBody.Replace("[attachment]", "Attachment of person IC Photo<br /><br />");
+                    }
+
+
+                    mail.Body = mailBody;
+                    sendEmail(mail);
+                }
+
+                string res = "0";
+                sql_conn.usp_addNewMember(xml, ref res);
+                if (int.Parse(res) == 1)
+                {
+                    if (candidate_photo.Length > 0)
+                    {
+                        if (Session["RemoteStorage"].ToString().ToUpper() == "ON")
+                        {
+                            new RemoteStorage((string)Session["StorageCloudName"], (string)Session["StorageAccessKey"], (string)Session["StorageSecretKey"]).renameRemoteStorageFilename("temp_" + candidate_photo, candidate_photo);
+                        }
+                        else
+                        {
+                            string from = Session["temp_uploadfilesavedlocation"].ToString() + "temp_" + candidate_photo;
+                            string to = Session["icphotolocation"].ToString() + candidate_photo;
+                            System.IO.File.Move(from, to);
+                        }
+                    }
+                    return RedirectToAction("NewMember", "Membership", new { message = "Member, " + candidate_english_name + " added." });
+                }
+                else
+                {
+                    ViewData["errormsg"] = "Member, " + candidate_english_name + " not added. Record exist.";
+                    ViewData["Type"] = "ADD";
+                    return View("MembershipForm");
+                }
             }
-            ViewData["Type"] = "ADD";
-            return View("MembershipForm");
+            catch (Exception e)
+            {
+                ViewData["errormsg"] = "Member, " + Request.Form["candidate_english_name"] + " not added. Please Try again.";
+                ViewData["Type"] = "ADD";
+                return View("MembershipForm");
+            }
+            
         }
 
         [ErrorHandler]

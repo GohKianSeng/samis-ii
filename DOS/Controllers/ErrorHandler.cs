@@ -31,6 +31,11 @@ public class ErrorHandler : HandleErrorAttribute
         error.Add(new XElement("Message", httpContext.Exception.Message));
         error.Add(new XElement("InnerException", httpContext.Exception.InnerException));
         error.Add(new XElement("StackTrace", httpContext.Exception.StackTrace.ToString()));
+
+        error.Add(new XElement("UserAgent", httpContext.HttpContext.Request.UserAgent));
+        error.Add(new XElement("UserHostAddress", httpContext.HttpContext.Request.UserHostAddress));
+        error.Add(new XElement("UserHostName", httpContext.HttpContext.Request.UserHostName));
+        error.Add(new XElement("Params", httpContext.HttpContext.Request.Params.ToString()));  
         
         XElement para = new XElement("Parameters");
         for (int x = 0; x < httpContext.HttpContext.Request.Form.Count; x++)
