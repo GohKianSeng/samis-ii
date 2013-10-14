@@ -46,6 +46,10 @@ $(document).ready(function () {
         $('#RememberMe').attr('checked', 'checked');
         $("#church_others").val($.cookie('candidate_churchOthers'));
         $("#" + getCongregationID()).val($.cookie('candidate_congregation'));
+        if ($.cookie('mailingList') == 'true') {
+            $('#mailingList').prop('checked', true);
+        }
+
     }
 
     if (getIfAD() == "_ad") {
@@ -126,7 +130,8 @@ function changeChurch() {
     }
 }
 
-function checkForm(){
+function checkForm() {
+
     var errormsg = "";
 
     if ($("#existingmember").is(':checked')) {
@@ -201,6 +206,7 @@ function checkForm(){
         $.cookie('RememberMeCE', "On", { expires: 365 });
         $.cookie('candidate_churchOthers', $("#church_others").val(), { expires: 365 });
         $.cookie('candidate_congregation', $("#" + getCongregationID()).val(), { expires: 365 });
+        $.cookie('mailingList', $("#mailingList").is(":checked"), { expires: 365 });
         
     }
 //    else {

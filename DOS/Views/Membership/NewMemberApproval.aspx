@@ -110,15 +110,16 @@
 			            <tr class="header">
                             <td class="nosorting" width=1% nowrap><input id="check_uncheck_all" onclick="for_check_uncheck_all();" type="checkbox"/></td>
 				            <td class="nosorting" width="1%" nowrap="nowrap"></td>
+                            <th width=6% nowrap="nowrap">Name</th>
                             <th width=2% nowrap="nowrap">NRIC</th>
-				            <th width=10% nowrap="nowrap">Name</th>
-				            <th width=3% nowrap="nowrap">Date of Birth</th>
+				            <th width=3% nowrap="nowrap">Age</th>                           
 				            <th width=2% nowrap="nowrap">Gender</th>
-				            <th width=10% nowrap="nowrap">Nationality</th>
-				            <th width=3% nowrap="nowrap">Marital Status</th>
-				            <th width=8% nowrap="nowrap">Email</th>
-				            <th width=3% nowrap="nowrap">Home Tel:</th>
-				            <th width=3% nowrap="nowrap">Mobile No:</th>
+                            <th width=3% nowrap="nowrap">Service</th>
+				            <th width=2% nowrap="nowrap">Mobile No</th>
+                            <th width=3% nowrap="nowrap">Email</th>
+                            <th width=10% nowrap="nowrap">Residential Address</th>
+                            <th width=2% nowrap="nowrap">Occupation</th>
+
 		            </thead>
 		            <tbody>
 			                <% 
@@ -128,15 +129,15 @@
                                     <tr>
                                         <td>&nbsp;</td>
                                         <td>&nbsp;</td>
+				                        <td>&nbsp;</td>				                       
+				                        <td>&nbsp;</td>
+                                        <td>&nbsp;</td>
 				                        <td>&nbsp;</td>
 				                        <td>&nbsp;</td>
 				                        <td>&nbsp;</td>
 				                        <td>&nbsp;</td>
 				                        <td>&nbsp;</td>
-				                        <td>&nbsp;</td>
-				                        <td>&nbsp;</td>
-				                        <td>&nbsp;</td>
-				                        <td>&nbsp;</td>
+                                        <td>&nbsp;</td>				                        
 			                        </tr>      
                                 <%
                             }
@@ -148,16 +149,17 @@
                                         <tr>
                                             <td><input id="approveCheckBox<%=x.ToString() %>" value="<%= res.ElementAt(x).NRIC%>" onclick="checkBoxIndividualApprove(this)" type="checkbox"/></td>
 				                            <td><img onclick="deleteMember('<%=res.ElementAt(x).NRIC%>', '<%= res.ElementAt(x).Name%>', this);" border="0" src="/Content/images/remove.png" width="20" height="20" style="cursor:pointer" title="Remove"  alt="Remove"/></td>
+                                            <td><%= res.ElementAt(x).Name%></td>
                                             <td><a href="#" onclick="loadTempMember('<%= res.ElementAt(x).NRIC %>');"><%= partialBlankIC(res.ElementAt(x).NRIC)%></a></td>
-				                            <td><%= res.ElementAt(x).Name%></td>
-				                            <td><%= res.ElementAt(x).DOB.ToString("dd/MM/yyyy")%></td>
+				                            <td><%= DateTime.Now.Year - res.ElementAt(x).DOB.Year%></td>
 				                            <td><%= res.ElementAt(x).Gender%></td>
-				                            <td><%= res.ElementAt(x).Nationality%></td>
-				                            <td><%= res.ElementAt(x).MaritalStatus%></td>
-				                            <td><%= res.ElementAt(x).Email%></td>
-				                            <td><%= res.ElementAt(x).HomeTel%></td>
+				                            <td><%= res.ElementAt(x).CongregationName%></td>
 				                            <td><%= res.ElementAt(x).MobileTel%></td>
-			                            </tr>      
+                                            <td><%= res.ElementAt(x).Email%></td>	
+                                            <%string unit = res.ElementAt(x).AddressUnit; if (unit.Length > 0 && !unit.StartsWith("#")) unit = "#" + unit;%>
+                                            <td><%= res.ElementAt(x).AddressHouseBlk + " " + res.ElementAt(x).AddressStreet + " " + unit + " S'(" + res.ElementAt(x).AddressPostalCode.ToString() + ")"%></td>
+			                                <td><%= res.ElementAt(x).OccupationName%></td>	
+                                        </tr>      
                                     <%
                                 }
                             }

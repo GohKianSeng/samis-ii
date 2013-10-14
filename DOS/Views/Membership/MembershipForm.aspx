@@ -320,6 +320,10 @@
 
 <script type="text/javascript">
     
+    function getMailingList(){
+        return null;
+    }
+
     function getDateRangeString(){
         return '<%=DateTime.Now.Year - 100%>:<%=DateTime.Now.Year%>';
     }
@@ -506,6 +510,18 @@
     function getBasicSearchRetrivalURL(){
         return "<%= Session["BasicSearchRetrivalURL"]%>";
     }
+
+    function getAttachmentType(){
+        <%  IEnumerable<usp_getAllFileTypeResult> res = (IEnumerable<usp_getAllFileTypeResult>)ViewData["filetypelist"];
+            string option = "";
+            for (int x = 0; x < res.Count(); x++)
+            {
+                option += "<option value='" + res.ElementAt(x).FileTypeID.ToString() + "'>" + res.ElementAt(x).FileType + "</option>";                
+            }
+            
+        %>
+        return "<%= option%>";
+    }
 </script>
 <div id="loadingdiv" style=" display:none">
     <table style=" height:90%"  width="100%">
@@ -522,6 +538,7 @@
 	
 		<form AUTOCOMPLETE="off" runat="server" id="registration_form" class="appnitro"  method="post" action="<%=submitURL()%>" enctype="multipart/form-data">
 		<input type="hidden" id="childlist" name="childlist" value="0">
+        <input type="hidden" id="attachmentlist" name="attachmentlist" value="0">
 		<input type="hidden" id="familylist" name="familylist" value="0">
 		<input type="hidden" id="OriginalNRIC" name="OriginalNRIC" value="<%=(string)ViewData["candidate_nric"] %>">
         <input type="hidden" id="candidate_Filename" name="candidate_Filename" value="">
@@ -1072,6 +1089,26 @@
         </tr>
         </table>
 
+        <div style="display:none">
+        <li class="section_break">
+
+			<h3>&nbsp;</h3>
+			<p></p>
+		</li>
+        <h4>Attachments</h4>
+        <table style="width:100%" id="attachmenttable">
+            <tr>
+                <td style="width:200px" nowrap="nowrap"><label class="description" for="element_211">Attachment Type </label>
+                </td>
+                <td colspan="1" style="width:400px" nowrap="nowrap"><label class="description" for="element_21a">File</label>
+                </td>
+                <td style="width:1px"><img onclick="addNewAttachment('','');" border="0" src="/Content/images/add.png" width="20" height="20" title="Add Child" style="cursor:pointer" title="Add"  alt="Add"/>
+				</td>
+            <tr>
+            
+        </table>
+        </div>
+        
             
         	
 					<li class="buttons">
@@ -1091,5 +1128,5 @@
 		</div>	
 	</div>
 	<img style=" width:800px" id="bottom" src="/Content/images/bottom.png" alt="">
-	</div>
+	</div>    
 </asp:Content>

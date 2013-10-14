@@ -12,6 +12,62 @@ namespace DOS.Controllers
     [HandleError]
     public class ParishController : MasterPageController
     {
+        [ErrorHandler]
+        [Authorize]
+        public ActionResult CourseIndivudialAttendanceReport()
+        {
+            ViewData["Years"] = sql_conn.usp_getAllCourseYears().ToList();
+            return View();
+        }
+        [ErrorHandler]
+        public ActionResult CourseIndivudialAttendanceReportResult(string FromYear, string numberOfCourse)
+        {
+            ViewData["res"] = sql_conn.usp_getCourseIndividualAttendanceReport(FromYear, int.Parse(numberOfCourse)).ToList();
+            return View();
+        }
+
+        [ErrorHandler]
+        public ActionResult LoadPeriodicAttendanceReportResult(string FromYear, string ToYear, string FromMonth, string ToMonth){
+
+            IEnumerable<usp_getPeriodicAttendanceReportResult> res = sql_conn.usp_getPeriodicAttendanceReport(FromYear, ToYear, FromMonth, ToMonth).ToList();
+            string CourseName = "";
+            string CourseAttendance = "";
+            for (int x = 0; x < res.Count(); x++)
+            {
+                CourseName += "'" + res.ElementAt(x).CourseName + "',";
+                CourseAttendance += "[" + res.ElementAt(x).AttendanceAttended + "," + res.ElementAt(x).AttendanceCompleted + "],";
+            }
+
+            ViewData["res"] = res;
+            if (CourseName.Length > 0)
+                ViewData["CourseName"] = CourseName.Substring(0, CourseName.Length - 1);
+            if (CourseAttendance.Length > 0)
+                ViewData["CourseAttendance"] = CourseAttendance.Substring(0, CourseAttendance.Length - 1); ;
+            return View();
+        }
+
+        [ErrorHandler]
+        [Authorize]
+        public ActionResult courseRegistrationStat()
+        {
+            ViewData["Years"] = sql_conn.usp_getAllCourseYears().ToList();
+            return View();
+        }
+
+        [ErrorHandler]
+        public ActionResult CourseRegistrationStatResult(string FromYear, string FromMonth)
+        {
+            ViewData["res"] = sql_conn.usp_getCourseRegistrationStat(FromYear, FromMonth).ToList();
+            return View();
+        }
+        
+        [ErrorHandler]
+        [Authorize]
+        public ActionResult periodicAttendanceReport()
+        {
+            ViewData["Years"] = sql_conn.usp_getAllCourseYears().ToList();
+            return View();
+        }
 
         [ErrorHandler]
         [Authorize]

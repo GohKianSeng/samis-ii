@@ -27,6 +27,10 @@
         })
     });
     changeChurch();
+
+    if (getMailingList() == "TRUE") {
+        $('#mailingList').prop('checked', true);
+    }
 });
 
 function setActiveTab(tabname) {

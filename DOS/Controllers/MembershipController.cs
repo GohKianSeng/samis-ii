@@ -10,8 +10,6 @@ using System.Net;
 using System.Net.Mail;
 using System.IO;
 using System.Web.Script.Serialization;
-using CloudinaryDotNet;
-using CloudinaryDotNet.Actions;
 
 namespace DOS.Controllers
 {
@@ -117,8 +115,12 @@ namespace DOS.Controllers
             string candidate_contact = Request.Form["candidate_contact"];
             string candidate_church = Request.Form["aspnet_variable$MainContent$church"];
             string candidate_church_others = Request.Form["church_others"];
+            string mailingList = "";
 
-            XElement xml = toUpdateXMLVisitor(User.Identity.Name, OriginalNRIC, candidate_nric, candidate_salutation, candidate_english_name, candidate_unit, candidate_blk_house, candidate_nationality, candidate_occupation, candidate_dob, candidate_gender, candidate_street_address, candidate_postal_code, candidate_email, candidate_education, candidate_contact, candidate_church, candidate_church_others);
+            if (Request.Form["mailingList"] != null)
+                mailingList = Request.Form["mailingList"].ToUpper();
+
+            XElement xml = toUpdateXMLVisitor(mailingList, User.Identity.Name, OriginalNRIC, candidate_nric, candidate_salutation, candidate_english_name, candidate_unit, candidate_blk_house, candidate_nationality, candidate_occupation, candidate_dob, candidate_gender, candidate_street_address, candidate_postal_code, candidate_email, candidate_education, candidate_contact, candidate_church, candidate_church_others);
             string res = "NotFound";
             sql_conn.usp_updateVistor(xml, ref res);
 
@@ -140,7 +142,7 @@ namespace DOS.Controllers
 
         [ErrorHandler]
         [Authorize]
-        private XElement toUpdateXMLVisitor(string userID, string OriginalNRIC, string nric, string salutation, string english_name, string unit, string blk_house, string nationality, string occupation, string dob, string gender, string street_address, string postal_code, string email, string education,  string contact, string church, string churchOthers)
+        private XElement toUpdateXMLVisitor(string mailingList, string userID, string OriginalNRIC, string nric, string salutation, string english_name, string unit, string blk_house, string nationality, string occupation, string dob, string gender, string street_address, string postal_code, string email, string education,  string contact, string church, string churchOthers)
         {
             bool convertok = false;
             DateTime dt;
@@ -168,6 +170,7 @@ namespace DOS.Controllers
                 church = "0";
             update.Add(new XElement("Church", church));
             update.Add(new XElement("ChurchOthers", churchOthers));
+            update.Add(new XElement("mailingList", mailingList));
             return update;
         }
 
@@ -195,7 +198,7 @@ namespace DOS.Controllers
             ViewData["history"] = res.History;
             ViewData["church"] = res.Church;
             ViewData["church_others"] = res.ChurchOthers;
-
+            ViewData["mailingList"] = res.mailingList.ToString().ToUpper();
             return View("UpdateVisitorForm_forStaff");           
         }
 
@@ -397,7 +400,11 @@ namespace DOS.Controllers
             usp_addNewCourseMemberParticipantAndAttendanceResult mem;
             usp_addNewCourseVisitorParticipantAndAttendanceResult vis;
             if (candidate_church.Length == 0)
-                candidate_church = "0";  
+                candidate_church = "0";
+
+            string mailingList = "";
+            if (Request.Form["mailingList"] != null)
+                mailingList = Request.Form["mailingList"].ToUpper();
 
             if (existingmember == "null")
             {
@@ -406,9 +413,9 @@ namespace DOS.Controllers
                 convertok = DateTime.TryParseExact(candidate_dob, "dd/MM/yyyy", null, System.Globalization.DateTimeStyles.None, out dt);
 
                 if (convertok)
-                    vis = sql_conn.usp_addNewCourseVisitorParticipantAndAttendance(candidate_nric, candidate_course, candidate_salutation.Split('~')[0], candidate_english_name, dt, candidate_gender, candidate_education, candidate_nationality, candidate_occupation, candidate_postal_code, candidate_blk_house, candidate_street_address, candidate_unit, candidate_contact, candidate_email, int.Parse(candidate_church.Split('~')[0]), candidate_church_others, User.Identity.Name, WalkInDate).ElementAt(0);
+                    vis = sql_conn.usp_addNewCourseVisitorParticipantAndAttendance(mailingList, candidate_nric, candidate_course, candidate_salutation.Split('~')[0], candidate_english_name, dt, candidate_gender, candidate_education, candidate_nationality, candidate_occupation, candidate_postal_code, candidate_blk_house, candidate_street_address, candidate_unit, candidate_contact, candidate_email, int.Parse(candidate_church.Split('~')[0]), candidate_church_others, User.Identity.Name, WalkInDate).ElementAt(0);
                 else
-                    vis = sql_conn.usp_addNewCourseVisitorParticipantAndAttendance(candidate_nric, candidate_course, candidate_salutation.Split('~')[0], candidate_english_name, null, candidate_gender, candidate_education, candidate_nationality, candidate_occupation, candidate_postal_code, candidate_blk_house, candidate_street_address, candidate_unit, candidate_contact, candidate_email, int.Parse(candidate_church.Split('~')[0]), candidate_church_others, User.Identity.Name, WalkInDate).ElementAt(0);
+                    vis = sql_conn.usp_addNewCourseVisitorParticipantAndAttendance(mailingList, candidate_nric, candidate_course, candidate_salutation.Split('~')[0], candidate_english_name, null, candidate_gender, candidate_education, candidate_nationality, candidate_occupation, candidate_postal_code, candidate_blk_house, candidate_street_address, candidate_unit, candidate_contact, candidate_email, int.Parse(candidate_church.Split('~')[0]), candidate_church_others, User.Identity.Name, WalkInDate).ElementAt(0);
 
                 result = vis.Result;
             }
@@ -474,6 +481,10 @@ namespace DOS.Controllers
                 string candidate_church_others = Request.Form["church_others"];
                 string candidate_course_name = Request.Form["candidate_course_name"];
                 string candidate_Congregation = Request.Form["aspnet_variable$MainContent$Congregation"];
+
+                string mailingList = "";
+                if (Request.Form["mailingList"] != null)
+                    mailingList = Request.Form["mailingList"].ToUpper();
 
                 XElement temp = new XElement("Info");
                 temp.Add(new XElement("Header", Request.Headers.ToString()));
@@ -573,7 +584,7 @@ namespace DOS.Controllers
                     course = candidate_course_name;
                 }
 
-                XElement visitorxml = toUpdateXMLVisitor("Unspecified", candidate_nric, candidate_nric, candidate_salutation.Split('~')[0], candidate_english_name, candidate_unit, candidate_blk_house, candidate_nationality.Split('~')[0], candidate_occupation.Split('~')[0], candidate_dob, candidate_gender, candidate_street_address, candidate_postal_code, candidate_email, candidate_education.Split('~')[0], candidate_contact, candidate_church.Split('~')[0], candidate_church_others);
+                XElement visitorxml = toUpdateXMLVisitor(mailingList, "Unspecified", candidate_nric, candidate_nric, candidate_salutation.Split('~')[0], candidate_english_name, candidate_unit, candidate_blk_house, candidate_nationality.Split('~')[0], candidate_occupation.Split('~')[0], candidate_dob, candidate_gender, candidate_street_address, candidate_postal_code, candidate_email, candidate_education.Split('~')[0], candidate_contact, candidate_church.Split('~')[0], candidate_church_others);
                 if (existingmember == "null")
                 {
                     sql_conn.usp_addNewCourseVisitorParticipant(visitorxml, candidate_course, ref result, ref sal, ref name, ref course, additionalInfo);
@@ -1237,7 +1248,7 @@ namespace DOS.Controllers
                     {
                         if (Session["RemoteStorage"].ToString().ToUpper() == "ON")
                         {
-                            new RemoteStorage((string)Session["StorageCloudName"], (string)Session["StorageAccessKey"], (string)Session["StorageSecretKey"]).renameRemoteStorageFilename("temp_" + candidate_photo, candidate_photo);
+                            new RemoteStorage((string)Session["DropBoxApiKey"], (string)Session["DropBoxAppSecret"], (string)Session["DropBoxUserToken"], (string)Session["DropBoxUserSecret"]).renameRemoteStorageFilename("temp_" + candidate_photo, candidate_photo);
                         }
                         else
                         {
@@ -1657,7 +1668,13 @@ namespace DOS.Controllers
                 }
                 familylist += "</FamilyList>";
             }
-            XElement xml = toUpdateXML(Filename, GUID, FileType, fileremarks, User.Identity.Name, original_nric, candidate_salutation, candidate_photo, candidate_english_name, candidate_unit, candidate_blk_house, candidate_nationality, candidate_dialect, candidate_occupation, baptized_by, baptism_church, confirmation_by, confirmation_church, previous_church_membership, candidate_chinses_name, candidate_nric, candidate_dob, candidate_gender, candidate_marital_status, candidate_street_address, candidate_postal_code, candidate_email, candidate_education, candidate_language, candidate_home_tel, candidate_mobile_tel, candidate_baptism_date, candidate_confirmation_date, candidate_marriage_date, candidate_congregation, candidate_electoralroll, candidate_cellgroup, sponsor1, sponsor2, candidate_ministry, DeceasedDate, MemberDate, familylist, childlist, candidate_transfer_reason, candidate_cariu, candidate_remarks, baptized_by_others, baptism_church_others, confirm_by_others, confirmation_church_others, previous_church_membership_others, transferTo, transferToDate, sponsor2contact);
+
+
+            string mailingList = "";
+            if(Request.Form["mailingList"] != null)
+                mailingList = Request.Form["mailingList"].ToUpper();
+
+            XElement xml = toUpdateXML(mailingList, Filename, GUID, FileType, fileremarks, User.Identity.Name, original_nric, candidate_salutation, candidate_photo, candidate_english_name, candidate_unit, candidate_blk_house, candidate_nationality, candidate_dialect, candidate_occupation, baptized_by, baptism_church, confirmation_by, confirmation_church, previous_church_membership, candidate_chinses_name, candidate_nric, candidate_dob, candidate_gender, candidate_marital_status, candidate_street_address, candidate_postal_code, candidate_email, candidate_education, candidate_language, candidate_home_tel, candidate_mobile_tel, candidate_baptism_date, candidate_confirmation_date, candidate_marriage_date, candidate_congregation, candidate_electoralroll, candidate_cellgroup, sponsor1, sponsor2, candidate_ministry, DeceasedDate, MemberDate, familylist, childlist, candidate_transfer_reason, candidate_cariu, candidate_remarks, baptized_by_others, baptism_church_others, confirm_by_others, confirmation_church_others, previous_church_membership_others, transferTo, transferToDate, sponsor2contact);
       
             if (type == "Actual")
                 return sql_conn.usp_updateMember(xml).ElementAt(0).Result;
@@ -1666,7 +1683,7 @@ namespace DOS.Controllers
             return "ERROR";
         }
 
-        private XElement toUpdateXML(string filename, string guid, string filetype, string fileremarks, string userID, string originalNric, string salutation, string photo, string english_name, string unit, string blk_house, string nationality, string dialect, string occupation, string baptized_by, string baptize_church, string confirmation_by, string confirmation_church, string previous_church_membership, string chinese_name, string nric, string dob, string gender, string marital_status, string street_address, string postal_code, string email, string education, string language, string home_tel, string mobile_tel, string baptism_date, string confirmation_date, string marriage_date, string congregation, string electoralroll, string cellgroup, string sponsor1, string sponsor2, string ministry, string deceasedDate, string memberDate, string family, string child, string transferReason, string cariu, string remarks, string baptized_by_others, string baptism_church_others, string confirm_by_others, string confirmation_church_others, string previous_church_membership_others, string transferTo, string transferToDate, string sponsor2contact)
+        private XElement toUpdateXML(string mailingList, string filename, string guid, string filetype, string fileremarks, string userID, string originalNric, string salutation, string photo, string english_name, string unit, string blk_house, string nationality, string dialect, string occupation, string baptized_by, string baptize_church, string confirmation_by, string confirmation_church, string previous_church_membership, string chinese_name, string nric, string dob, string gender, string marital_status, string street_address, string postal_code, string email, string education, string language, string home_tel, string mobile_tel, string baptism_date, string confirmation_date, string marriage_date, string congregation, string electoralroll, string cellgroup, string sponsor1, string sponsor2, string ministry, string deceasedDate, string memberDate, string family, string child, string transferReason, string cariu, string remarks, string baptized_by_others, string baptism_church_others, string confirm_by_others, string confirmation_church_others, string previous_church_membership_others, string transferTo, string transferToDate, string sponsor2contact)
         {
             XElement update = XElement.Parse("<Update />");
             update.Add(new XElement("EnteredBy", userID));
@@ -1728,6 +1745,8 @@ namespace DOS.Controllers
             update.Add(new XElement("GUID", guid));
             update.Add(new XElement("Filetype", filetype));
             update.Add(new XElement("FileRemarks", fileremarks));
+
+            update.Add(new XElement("mailingList", mailingList));
 
             return update;
         }
@@ -1867,6 +1886,8 @@ namespace DOS.Controllers
                 ViewData["candidate_transfertodate"] = ((DateTime)res.TransferToDate).ToString("dd/MM/yyyy");
             else
                 ViewData["candidate_transfertodate"] = "";
+
+            ViewData["candidate_mailingList"] = res.ReceiveMailingList.ToString().ToUpper();
         }        
     }
 

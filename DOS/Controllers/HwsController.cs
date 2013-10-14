@@ -120,7 +120,7 @@ namespace DOS.Controllers
             {
                 if (Session["RemoteStorage"].ToString().ToUpper() == "ON")
                 {
-                    new RemoteStorage((string)Session["StorageCloudName"], (string)Session["StorageAccessKey"], (string)Session["StorageSecretKey"]).renameRemoteStorageFilename("temp_" + Request.Form["candidate_photo"], Request.Form["candidate_photo"]);
+                    new RemoteStorage((string)Session["DropBoxApiKey"], (string)Session["DropBoxAppSecret"], (string)Session["DropBoxUserToken"], (string)Session["DropBoxUserSecret"]).renameRemoteStorageFilename("temp_" + Request.Form["candidate_photo"], Request.Form["candidate_photo"]);
                 }
                 else
                 {

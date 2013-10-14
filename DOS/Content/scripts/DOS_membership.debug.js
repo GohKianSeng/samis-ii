@@ -94,6 +94,10 @@ $(document).ready(function () {
         }
     });
 
+    if (getMailingList() == "TRUE") {
+        $('#mailingList').prop('checked', true);
+    }
+
     setSelectedDropDownlist(getSalutationID(), getSalutationValue());
     setSelectedDropDownlist("candidate_gender", getGenderValue());
     setSelectedDropDownlist(getDialectID(), getDialectValue());
@@ -269,9 +273,32 @@ function removeSelectedChild(obj) {
 
 var totalChild = 0;
 var totalFamily = 0;
+var totalAttachment = 0;
 var childarray = new Array();
 var familyarray = new Array();
+var attachmentarray = new Array();
 
+function addNewAttachment(attachmentType, filename) {
+    totalAttachment++;
+    attachmentarray.push(totalAttachment.toString());
+    $('#attachmentlist').val(attachmentarray.toString());
+    var table = document.getElementById("attachmenttable");
+    var row = table.insertRow(document.getElementById("attachmenttable").rows.length);
+    var attachmentno = totalAttachment;
+
+    var attachmenttype = '<div><select style="width:100%" name="attachmenttype_' + attachmentno.toString() + '"" id="attachmenttype_' + attachmentno.toString() + '" >' + getAttachmentType() + '</select></div>';
+    var attachmentfile = '<div><input type="file" style="width:100%" name="attachmentfile_' + attachmentno.toString() + '" id="attachmentfile_' + attachmentno.toString() + '"/></div>';
+
+    fillCell(row, 0, attachmenttype);
+    fillCell(row, 1, attachmentfile);
+
+    if (!isOffline())
+        fillCell(row, 2, '<img onclick="removeSelectedChild(this);" border="0" src="/Content/images/remove.png" width="20" height="20" title="Remove Child" style="cursor:pointer" title="Remove"  alt="Remove"/>');
+    else
+        fillCell(row, 2, '<input type="button" onclick="removeSelectedChild(this);" value="-"/>');
+
+    setSelectedDropDownlist('attachmenttype_' + attachmentno.toString(), attachmentType);
+}
 
 function addNewChild(ChildEnglishName, ChildChineseName, ChildBaptismDate, ChildBaptismBy, ChildChurch) {
     totalChild++;

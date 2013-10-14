@@ -414,7 +414,10 @@
 </script>
 
 <script type="text/javascript">
-    
+    function getMailingList(){
+        return "<%=ViewData["candidate_mailingList"]%>";
+    }
+
     function getDateRangeString(){
         return '<%=DateTime.Now.Year - 100%>:<%=DateTime.Now.Year%>';
     }
@@ -831,6 +834,16 @@
                             <div>
 			                        <input style=" width:80%" id="candidate_cariu" name="candidate_cariu" class="element text medium" type="text" <%=getTextfieldLength("tb_members","CarIU")%> value="<%= (string)ViewData["candidate_cariu"] %>" size="20"/> 
 		                        </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td colspan="3">
+                            <label class="description" for="element_19">
+                                    <div>
+			                            <input type="checkbox" id="mailingList" name="mailingList"/> I would like to join Christian Education mailing list for future CE Courses.
+		                            </div> 
+                                </label>
                         </td>
                     </tr>
                     <tr>

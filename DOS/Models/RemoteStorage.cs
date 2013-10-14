@@ -2,36 +2,29 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-using CloudinaryDotNet;
-using CloudinaryDotNet.Actions;
 using System.IO;
 using System.Net;
+using DropNet;
+using DropNet.Models;
 
 namespace DOS.Models
 {
     
     public class RemoteStorage
     {
-        private Account account;
-        private Cloudinary cloudinary;
-        
-        public RemoteStorage(string CloudName, string accessKey, string secretKey)
+        private DropNetClient _client;
+
+        public RemoteStorage(string apiKey, string appSecret, string userToken, string userSecret)
         {
-            account= new Account(CloudName, accessKey, secretKey);
-            cloudinary = new Cloudinary(account);
+            _client = new DropNetClient(apiKey, appSecret, userToken, userSecret);
         }
 
         public bool saveToRemoteStorage(string filename, byte[] data)
         {
-            MemoryStream memoryStream = new MemoryStream(data);
-            ImageUploadParams uploadParams = new ImageUploadParams()
-            {
-                File = new FileDescription("streamed", memoryStream),
-                PublicId = filename
-            };
+            MetaData res = _client.UploadFile("", filename, data);
 
-            ImageUploadResult uploadResult = cloudinary.Upload(uploadParams);
-            if(uploadResult.SecureUri != null){
+            if (res.Bytes > 0)
+            {
                 return true;
             }
             return false;
@@ -39,40 +32,37 @@ namespace DOS.Models
 
         public byte[] loadDataFromRemoteStorage(string filename, string guid)
         {
-            WebClient client = new WebClient();
+            string finalFilename = "";
+            if (guid.Length > 0)
+                finalFilename = guid + "_" + filename;
+            else
+                finalFilename = filename;
+            byte[] data = {};
 
-            ListResourcesResult res = cloudinary.ListResourcesByPrefix("upload", "temp_" + guid + "_" + filename, null);
-            if (res.Resources.Count() == 0){
-                res = cloudinary.ListResourcesByPrefix("upload", guid + "_" + filename, null);
 
-                if (res.Resources.Count() == 0)
-                    res = cloudinary.ListResourcesByPrefix("upload", filename, null);
+            try
+            {
+                data = _client.GetFile("temp_" + finalFilename);
+
             }
+            catch (Exception e)
+            {
+                if (data.Length == 0)
+                    data = _client.GetFile(finalFilename);
 
-            return client.DownloadData(res.Resources[0].SecureUri);
+            }
+            return data;
         }
 
         public void deleteDataFromRemoteStorage(string filename)
         {
-            cloudinary.DeleteResources(filename);
+            _client.Delete(filename);            
         }
 
         public void renameRemoteStorageFilename(string from, string to)
         {
-
-            WebClient client = new WebClient();
-            
-            ListResourcesResult result = cloudinary.ListResourcesByPrefix("upload", from, null);
-            MemoryStream memoryStream = new MemoryStream(client.DownloadData(result.Resources[0].SecureUri));
-
-            ImageUploadParams uploadParams = new ImageUploadParams()
-            {
-                File = new FileDescription("streamed", memoryStream),
-                PublicId = to
-            };
-
-            ImageUploadResult uploadResult = cloudinary.Upload(uploadParams);
-            cloudinary.DeleteResources(from);
+            _client.Copy(from, to);
+            _client.Delete(from);
         }
     }
 }

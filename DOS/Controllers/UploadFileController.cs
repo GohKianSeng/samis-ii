@@ -11,8 +11,6 @@ using DOS.Models;
 using System.Security.Cryptography;
 using System.Text;
 using System.IO;
-using CloudinaryDotNet.Actions;
-using CloudinaryDotNet;
 using System.Net;
 
 namespace DOS.Controllers
@@ -53,7 +51,7 @@ namespace DOS.Controllers
             if (Session["RemoteStorage"].ToString().ToUpper() == "ON")
             {
                 MemoryStream memoryStream = new MemoryStream((byte[])Session["FileIOStream"]);
-                if (new RemoteStorage((string)Session["StorageCloudName"], (string)Session["StorageAccessKey"], (string)Session["StorageSecretKey"]).saveToRemoteStorage("temp_" + guid + "_" + filename, (byte[])Session["FileIOStream"]))
+                if (new RemoteStorage((string)Session["DropBoxApiKey"], (string)Session["DropBoxAppSecret"], (string)Session["DropBoxUserToken"], (string)Session["DropBoxUserSecret"]).saveToRemoteStorage("temp_" + guid + "_" + filename, (byte[])Session["FileIOStream"]))
                     return true;
                 else
                     return false;
@@ -198,17 +196,23 @@ namespace DOS.Controllers
                 
                 if (Session["RemoteStorage"].ToString().ToUpper() == "ON")
                 {
-                    return File(new RemoteStorage((string)Session["StorageCloudName"], (string)Session["StorageAccessKey"], (string)Session["StorageSecretKey"]).loadDataFromRemoteStorage(filename, guid), MimeType(filename), filename);
+                    return File(new RemoteStorage((string)Session["DropBoxApiKey"], (string)Session["DropBoxAppSecret"], (string)Session["DropBoxUserToken"], (string)Session["DropBoxUserSecret"]).loadDataFromRemoteStorage(filename, guid), MimeType(filename), filename);
                 }
                 else
                 {
                     filename = HttpUtility.UrlDecode(filename);
                     string path1 = Session["icphotolocation"].ToString() + guid + "_" + filename;
+                    string path3 = Session["icphotolocation"].ToString() + "temp_" + guid + "_" + filename;
                     string path2 = Session["temp_uploadfilesavedlocation"].ToString() + "temp_" + guid + "_" + filename;
+                    string path4 = Session["temp_uploadfilesavedlocation"].ToString() + guid + "_" + filename;
                     if (System.IO.File.Exists(path1))
                         return File(ReadFile(path1), MimeType(filename), filename);
                     else if (System.IO.File.Exists(path2))
                         return File(ReadFile(path2), MimeType(filename), filename);
+                    else if (System.IO.File.Exists(path3))
+                        return File(ReadFile(path3), MimeType(filename), filename);
+                    else if (System.IO.File.Exists(path4))
+                        return File(ReadFile(path4), MimeType(filename), filename);
                     else
                     {
                         return null;
@@ -250,7 +254,7 @@ namespace DOS.Controllers
         {
             try
             {
-                new RemoteStorage((string)Session["StorageCloudName"], (string)Session["StorageAccessKey"], (string)Session["StorageSecretKey"]).deleteDataFromRemoteStorage(filename);
+                new RemoteStorage((string)Session["DropBoxApiKey"], (string)Session["DropBoxAppSecret"], (string)Session["DropBoxUserToken"], (string)Session["DropBoxUserSecret"]).deleteDataFromRemoteStorage(filename);
                 ViewData["result"] = "OK";
                 return View("simplehtml");
             }

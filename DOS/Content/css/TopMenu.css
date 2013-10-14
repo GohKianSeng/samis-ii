@@ -34,20 +34,20 @@ body {
 #nav li:hover ul.sub li
 {display:block; height:20px; position:relative; float:left; width:140px; font-weight:normal;}
 #nav li:hover ul.sub li a
-{display:block; font-size:11px; height:18px; width:148px; line-height:18px; text-indent:5px; color:#000; text-decoration:none;border:1px solid #7AA9DD;}
+{display:block; background:#7AA9DD; font-size:11px; height:18px; width:148px; line-height:18px; text-indent:5px; color:#000; text-decoration:none;border:1px solid #7AA9DD;}
 #nav li ul.sub li a.fly
-{background:#bbd37e url(../images/arrow.gif) 140px 6px no-repeat;}
+{background:#7AA9DD url(../images/arrow.gif) 140px 6px no-repeat;}
 #nav li:hover ul.sub li a:hover 
 {background:#151B54; color:#fff; border-color:#fff;}
 #nav li:hover ul.sub li a.fly:hover
-{background:#6a812c url(../images/arrow_over.gif) 140px 6px no-repeat; color:#fff;}
+{background:#151B54 url(../images/arrow_over.gif) 140px 6px no-repeat; color:#fff;}
 
 
 #nav li:hover li:hover ul,
 #nav li:hover li:hover li:hover ul,
 #nav li:hover li:hover li:hover li:hover ul,
 #nav li:hover li:hover li:hover li:hover li:hover ul
-{left:90px; top:-4px; background: #bbd37e; padding:3px; border:1px solid #5c731e; white-space:nowrap; width:150px; z-index:400; height:auto;}
+{left:150px; top:-4px; background: #7AA9DD; padding:3px; border:1px solid #151B54; white-space:nowrap; width:150px; z-index:400; height:auto;}
 
 #nav ul, 
 #nav li:hover ul ul,
@@ -60,9 +60,9 @@ body {
 #nav li:hover li:hover li:hover a.fly,
 #nav li:hover li:hover li:hover li:hover a.fly,
 #nav li:hover li:hover li:hover li:hover li:hover a.fly
-{background:#6a812c url(../images/arrow_over.gif) 140px 6px no-repeat; color:#fff; border-color:#fff;} 
+{background:#151B54 url(../images/arrow_over.gif) 140px 6px no-repeat; color:#fff; border-color:#fff;} 
 
 #nav li:hover li:hover li a.fly,
 #nav li:hover li:hover li:hover li a.fly,
 #nav li:hover li:hover li:hover li:hover li a.fly
-{background:#bbd37e url(../images/arrow.gif) 140px 6px no-repeat; color:#000; border-color:#bbd37e;}
+{background:#151B54 url(../images/arrow.gif) 140px 6px no-repeat; color:#000; border-color:#151B54;}

@@ -34,16 +34,20 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="CloudinaryDotNet, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="DropNet, Version=1.8.2.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>ExternalLibrary\CloudinaryDotNet.dll</HintPath>
+      <HintPath>ExternalLibrary\DropNet.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Microsoft.JScript">
       <Private>True</Private>
     </Reference>
-    <Reference Include="Newtonsoft.Json">
-      <HintPath>ExternalLibrary\Newtonsoft.Json.dll</HintPath>
+    <Reference Include="Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.5.0.6\lib\net40\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="RestSharp, Version=104.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>ExternalLibrary\RestSharp.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -125,11 +129,13 @@
     <Content Include="Content\css\modal.css" />
     <Content Include="Content\css\multiselectListBox.css" />
     <Content Include="Content\css\progressbar.css" />
+    <Content Include="Content\css\RGraph\demos.css" />
     <Content Include="Content\css\searchsuggest.css" />
     <Content Include="Content\css\TablesView.css" />
     <Content Include="Content\css\TabsView.css" />
     <Content Include="Content\css\TopMenu.css" />
     <Content Include="Content\images\apple-touch-icon.png" />
+    <Content Include="Content\images\arrow.gif" />
     <Content Include="Content\images\edit-icon.png" />
     <Content Include="Content\images\facebookshare.png" />
     <Content Include="Content\images\help-icon.png" />
@@ -227,6 +233,50 @@
     <Content Include="Content\scripts\parish_ministry.min.js" />
     <Content Include="Content\scripts\parish_staff.min.js" />
     <Content Include="Content\scripts\progressbar_min.js" />
+    <Content Include="Content\scripts\RGraph\excanvas.js" />
+    <Content Include="Content\scripts\RGraph\financial-data.js" />
+    <Content Include="Content\scripts\RGraph\jquery.min.js" />
+    <Content Include="Content\scripts\RGraph\RGraph.bar.js" />
+    <Content Include="Content\scripts\RGraph\RGraph.bipolar.js" />
+    <Content Include="Content\scripts\RGraph\RGraph.common.annotate.js" />
+    <Content Include="Content\scripts\RGraph\RGraph.common.context.js" />
+    <Content Include="Content\scripts\RGraph\RGraph.common.core.js" />
+    <Content Include="Content\scripts\RGraph\RGraph.common.csv.js" />
+    <Content Include="Content\scripts\RGraph\RGraph.common.dynamic.js" />
+    <Content Include="Content\scripts\RGraph\RGraph.common.effects.js" />
+    <Content Include="Content\scripts\RGraph\RGraph.common.key.js" />
+    <Content Include="Content\scripts\RGraph\RGraph.common.resizing.js" />
+    <Content Include="Content\scripts\RGraph\RGraph.common.tooltips.js" />
+    <Content Include="Content\scripts\RGraph\RGraph.common.zoom.js" />
+    <Content Include="Content\scripts\RGraph\RGraph.cornergauge.js" />
+    <Content Include="Content\scripts\RGraph\RGraph.drawing.circle.js" />
+    <Content Include="Content\scripts\RGraph\RGraph.drawing.image.js" />
+    <Content Include="Content\scripts\RGraph\RGraph.drawing.marker1.js" />
+    <Content Include="Content\scripts\RGraph\RGraph.drawing.marker2.js" />
+    <Content Include="Content\scripts\RGraph\RGraph.drawing.poly.js" />
+    <Content Include="Content\scripts\RGraph\RGraph.drawing.rect.js" />
+    <Content Include="Content\scripts\RGraph\RGraph.drawing.text.js" />
+    <Content Include="Content\scripts\RGraph\RGraph.drawing.xaxis.js" />
+    <Content Include="Content\scripts\RGraph\RGraph.drawing.yaxis.js" />
+    <Content Include="Content\scripts\RGraph\RGraph.fuel.js" />
+    <Content Include="Content\scripts\RGraph\RGraph.funnel.js" />
+    <Content Include="Content\scripts\RGraph\RGraph.gantt.js" />
+    <Content Include="Content\scripts\RGraph\RGraph.gauge.js" />
+    <Content Include="Content\scripts\RGraph\RGraph.hbar.js" />
+    <Content Include="Content\scripts\RGraph\RGraph.hprogress.js" />
+    <Content Include="Content\scripts\RGraph\RGraph.led.js" />
+    <Content Include="Content\scripts\RGraph\RGraph.line.js" />
+    <Content Include="Content\scripts\RGraph\RGraph.meter.js" />
+    <Content Include="Content\scripts\RGraph\RGraph.modaldialog.js" />
+    <Content Include="Content\scripts\RGraph\RGraph.odo.js" />
+    <Content Include="Content\scripts\RGraph\RGraph.pie.js" />
+    <Content Include="Content\scripts\RGraph\RGraph.radar.js" />
+    <Content Include="Content\scripts\RGraph\RGraph.rose.js" />
+    <Content Include="Content\scripts\RGraph\RGraph.rscatter.js" />
+    <Content Include="Content\scripts\RGraph\RGraph.scatter.js" />
+    <Content Include="Content\scripts\RGraph\RGraph.thermometer.js" />
+    <Content Include="Content\scripts\RGraph\RGraph.vprogress.js" />
+    <Content Include="Content\scripts\RGraph\RGraph.waterfall.js" />
     <Content Include="Content\scripts\samis2settings.min.js" />
     <Content Include="Content\scripts\staffUpdateCityKids.debug.js" />
     <Content Include="Content\scripts\courseregistration.debug.js" />
@@ -298,8 +348,14 @@
     <Content Include="Views\Parish\AddCellgroup.aspx" />
     <Content Include="Views\Parish\AddCourse.aspx" />
     <Content Include="Views\Parish\AddMinistry.aspx" />
-    <Content Include="Views\Parish\Cellgroup.aspx" />
     <Content Include="Views\Parish\AttendanceReport.aspx" />
+    <Content Include="Views\Parish\Cellgroup.aspx" />
+    <Content Include="Views\Parish\CourseIndivudialAttendanceReport.aspx" />
+    <Content Include="Views\Parish\CourseIndivudialAttendanceReportResult.aspx" />
+    <Content Include="Views\Parish\LoadPeriodicAttendanceReportResult.aspx" />
+    <Content Include="Views\Parish\CourseRegistrationStat.aspx" />
+    <Content Include="Views\Parish\CourseRegistrationStatResult.aspx" />
+    <Content Include="Views\Parish\periodicAttendanceReport.aspx" />
     <Content Include="Views\Parish\Course.aspx" />
     <Content Include="Views\Parish\CourseParticipant.aspx" />
     <Content Include="Views\Parish\ListOfCellgroup.aspx" />
@@ -370,6 +426,7 @@
     <None Include="Models\DOS_DB.dbml.layout">
       <DependentUpon>DOS_DB.dbml</DependentUpon>
     </None>
+    <Content Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{3259AA49-8AA1-44D3-9025-A0B520596A8C}" />
@@ -472,4 +529,9 @@ echo "Minify: HokkienMemberForm.debug.js -&gt;  HokkienMemberForm.min.js"
 "$(ProjectDir)Tools\jsmin" &lt; "$(ProjectDir)Content\scripts\HokkienMemberForm.debug.js" &gt; "$(ProjectDir)Content\scripts\HokkienMemberForm.min.js"
 </PostBuildEvent>
   </PropertyGroup>
+  <Import Project="..\packages\Microsoft.Bcl.Build.1.0.10\tools\Microsoft.Bcl.Build.targets" Condition="Exists('..\packages\Microsoft.Bcl.Build.1.0.10\tools\Microsoft.Bcl.Build.targets')" />
+  <Target Name="EnsureBclBuildImported" BeforeTargets="BeforeBuild" Condition="'$(BclBuildImported)' == ''">
+    <Error Condition="!Exists('..\packages\Microsoft.Bcl.Build.1.0.10\tools\Microsoft.Bcl.Build.targets')" Text="This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=317567." HelpKeyword="BCLBUILD2001" />
+    <Error Condition="Exists('..\packages\Microsoft.Bcl.Build.1.0.10\tools\Microsoft.Bcl.Build.targets')" Text="The build restored NuGet packages. Build the project again to include these packages in the build. For more information, see http://go.microsoft.com/fwlink/?LinkID=317568." HelpKeyword="BCLBUILD2002" />
+  </Target>
 </Project>

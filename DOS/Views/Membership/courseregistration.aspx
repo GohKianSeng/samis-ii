@@ -535,7 +535,19 @@
 			                        <input style=" width:150px" id="candidate_email" name="candidate_email" class="element text medium" type="text" <%=getTextfieldLength("tb_visitors","Email")%> value="<%= (string)ViewData["candidate_email"] %>" size="20"/> 	
 		                        </div> 
 				            
-                        </td>                                            
+                        </td>
+                        </tr>
+                        <tr>
+                            <td colspan="3">
+                                    <br />
+                                    <label class="description" for="element_4">
+                                    <div>
+			                            <input type="checkbox" id="mailingList" name="mailingList"/> I would like to join Christian Education mailing list for future CE Courses.
+		                            </div> 
+                                    </label>
+				            
+                            </td>
+                                                                    
                     </tr>
 		        </table>
                 </div>

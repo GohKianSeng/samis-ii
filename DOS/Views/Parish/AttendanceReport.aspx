@@ -209,7 +209,11 @@
 			<tr class="header">
                 <td class="nosorting" colspan="2" width=3% nowrap="nowrap">Total Registration</td>                
             </tr>
-            </thead>
+            </thead>                
+                <tr>
+                    <td>Total Registered</td>
+                    <td align="center" style=" width:30%"><%= res.Count()/totalday%></td>
+                </tr>
                 <tr>
                     <td>Attended > 0%</td>
                     <td align="center" style=" width:30%"><%=attendedAtLeastOnce%></td>

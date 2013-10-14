@@ -261,6 +261,10 @@
     function getBasicSearchRetrivalURL(){
         return "<%= Session["BasicSearchRetrivalURL"]%>";
     }
+
+    function getMailingList(){
+        return "<%=ViewData["mailingList"]%>";
+    }
 </script>
 
 <form AUTOCOMPLETE="off" id="registration_form" action="/membership.mvc/submitUpdateVisitorForm" enctype="multipart/form-data" runat="server">
@@ -393,13 +397,19 @@
 		                        
 		                        
                         </td>
-                        <td>
+                        <td colspan="2">
                             
 		                        <label class="description" for="element_19">
                                 Email <span style="color:red;">*</span></label>
 		                        <div>
 			                        <input style=" width:80%" id="candidate_email" name="candidate_email" class="element text medium" type="text" <%=getTextfieldLength("tb_visitors","Email")%> value="<%= (string)ViewData["Email"] %>" size="20"/> 
 		                        </div> 
+                                
+                                <label class="description" for="element_19">
+                                    <div>
+			                            <input type="checkbox" id="mailingList" name="mailingList"/> I would like to join Christian Education mailing list for future CE Courses.
+		                            </div> 
+                                </label>
 		                        
                         </td>                        			            
                     </tr>
