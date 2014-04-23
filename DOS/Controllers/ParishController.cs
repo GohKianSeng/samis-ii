@@ -20,9 +20,9 @@ namespace DOS.Controllers
             return View();
         }
         [ErrorHandler]
-        public ActionResult CourseIndivudialAttendanceReportResult(string FromYear, string numberOfCourse)
+        public ActionResult CourseIndivudialAttendanceReportResult(string FromYear, string numberOfCourse, string NRIC, string Church)
         {
-            ViewData["res"] = sql_conn.usp_getCourseIndividualAttendanceReport(FromYear, int.Parse(numberOfCourse)).ToList();
+            ViewData["res"] = sql_conn.usp_getCourseIndividualAttendanceReport(FromYear, int.Parse(numberOfCourse), Church, NRIC).ToList();
             return View();
         }
 
@@ -95,6 +95,11 @@ namespace DOS.Controllers
             string feepaid = Request.Form["feepaid"];
             string materialcollected = Request.Form["materialcollected"];
 
+            if (courseid == null)
+            {
+                return View("ErrorReload");
+            }
+
             int res = sql_conn.usp_UpdateCourseParticipantInformation(int.Parse(courseid), nric, feepaid, materialcollected).ElementAt(0).Result;
             if (res == 1)
             {
@@ -155,9 +160,16 @@ namespace DOS.Controllers
 
         [ErrorHandler]
         [Authorize]
-        public ActionResult ListOfCourse()
+        public ActionResult ListOfCourse(string Year)
         {
-            ViewData["listofcourse"] = sql_conn.usp_getListofCourse(false).ToList();
+            if (Year == null)
+            {
+                Year = DateTime.Now.Year.ToString();
+            }
+            ViewData["Years"] = sql_conn.usp_getAllCourseYears().ToList();
+
+            ViewData["Year"] = Year;
+            ViewData["listofcourse"] = sql_conn.usp_getListofCourse(false, int.Parse(Year)).ToList();
             return View();
         }
 
@@ -175,7 +187,7 @@ namespace DOS.Controllers
             {
                 ViewData["errormsg"] = "Unable to delete course, " + name + ".";
             }
-            ViewData["listofcourse"] = sql_conn.usp_getListofCourse(false).ToList();
+            ViewData["listofcourse"] = sql_conn.usp_getListofCourse(false, -1).ToList();
             return View("ListOfCourse");
         }
 
@@ -207,12 +219,15 @@ namespace DOS.Controllers
             string additionalAgreement = Request.Form["aspnet_variable$MainContent$AdditionalInfo"];
             string lastRegistrationDate = Request.Form["lastRegistrationDate"];
             string incharge = Request.Form["incharge"];
+            string speaker = Request.Form["Speaker"];
+            bool SendReminder = (Request.Form["SendReminder"] == "1") ? true : false;
+
             decimal fee = 0;
             int res;
             if(decimal.TryParse(Request.Form["fee"], out fee))
-                res = sql_conn.usp_addNewCourse(coursename, startdate, timestart, timeend, incharge, int.Parse(courseArea), fee, int.Parse(additionalAgreement), DateTime.ParseExact(lastRegistrationDate, "dd/MM/yyyy", null), MinCompleteAttendance).ElementAt(0).Result;
+                res = sql_conn.usp_addNewCourse(speaker, SendReminder, coursename, startdate, timestart, timeend, incharge, int.Parse(courseArea), fee, int.Parse(additionalAgreement), DateTime.ParseExact(lastRegistrationDate, "dd/MM/yyyy", null), MinCompleteAttendance).ElementAt(0).Result;
             else
-                res = sql_conn.usp_addNewCourse(coursename, startdate, timestart, timeend, incharge, int.Parse(courseArea), (decimal)0, int.Parse(additionalAgreement), DateTime.ParseExact(lastRegistrationDate, "dd/MM/yyyy", null), MinCompleteAttendance).ElementAt(0).Result;
+                res = sql_conn.usp_addNewCourse(speaker, SendReminder, coursename, startdate, timestart, timeend, incharge, int.Parse(courseArea), (decimal)0, int.Parse(additionalAgreement), DateTime.ParseExact(lastRegistrationDate, "dd/MM/yyyy", null), MinCompleteAttendance).ElementAt(0).Result;
             if (res == 1)
             {
                 ViewData["errormsg"] = "Course added.";
@@ -280,8 +295,10 @@ namespace DOS.Controllers
             string additionalAgreement = Request.Form["aspnet_variable$MainContent$AdditionalInfo"];
             string lastRegistrationDate = Request.Form["lastRegistrationDate"];
             string incharge = Request.Form["incharge"];
+            string speaker = Request.Form["Speaker"];
+            bool SendReminder = (Request.Form["SendReminder"] == "1") ? true : false;
 
-            int res = sql_conn.usp_UpdateCourse(int.Parse(courseid), coursename, startdate, timestart, timeend, incharge, int.Parse(courseArea), int.Parse(additionalAgreement), DateTime.ParseExact(lastRegistrationDate, "dd/MM/yyyy", null), MinCompleteAttendance).ElementAt(0).Result;
+            int res = sql_conn.usp_UpdateCourse(speaker, SendReminder, int.Parse(courseid), coursename, startdate, timestart, timeend, incharge, int.Parse(courseArea), int.Parse(additionalAgreement), DateTime.ParseExact(lastRegistrationDate, "dd/MM/yyyy", null), MinCompleteAttendance).ElementAt(0).Result;
 
             ViewData["courseinformation"] = sql_conn.usp_getCourseInfo(int.Parse(courseid)).ElementAt(0);
             ViewData["type"] = "update";

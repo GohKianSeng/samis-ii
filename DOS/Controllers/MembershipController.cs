@@ -216,7 +216,7 @@ namespace DOS.Controllers
             ViewData["courseid"] = courseid;
             ViewData["date"] = date;
 
-            ViewData["listofcourse"] = sql_conn.usp_getListofCourse(false).ToList();
+            ViewData["listofcourse"] = sql_conn.usp_getListofCourse(false, -1).ToList();
             return View("CourseAttendance");
         }
 
@@ -224,8 +224,20 @@ namespace DOS.Controllers
         [Authorize]
         public ActionResult courseattendance()
         {
-            ViewData["listofcourse"] = sql_conn.usp_getListofCourse(false).ToList();
+            ViewData["listofcourse"] = sql_conn.usp_getListofCourse(true,-1).ToList();
             return View("CourseAttendance");
+        }
+
+        [ErrorHandler]
+        [Authorize]
+        public ActionResult courseattendance_bd(string Year)
+        {
+            ViewData["Years"] = sql_conn.usp_getAllCourseYears().ToList();            
+            if (Year == null)
+                Year = DateTime.Now.Year.ToString();
+            ViewData["listofcourse"] = sql_conn.usp_getListofCourse(false, int.Parse(Year)).ToList();
+            ViewData["selectedYear"] = int.Parse(Year);
+            return View("CourseAttendance_bd");
         }
 
         [ErrorHandler]
@@ -329,9 +341,11 @@ namespace DOS.Controllers
         {
             initializedParameter();
             if (((string)Session["SystemMode"]).ToUpper() != "FULL")
-                ViewData["listofcourse"] = sql_conn.usp_getListofCourse(true).ToList();
+                ViewData["listofcourse"] = sql_conn.usp_getListofCourse(true, -1).ToList();
             else
-                ViewData["listofcourse"] = sql_conn.usp_getListofCourse(false).ToList();
+                ViewData["listofcourse"] = sql_conn.usp_getListofCourse(false, DateTime.Now.Year).ToList();
+            ViewData["Year"] = "1";
+            ViewData["Years"] = sql_conn.usp_getAllCourseYears().ToList();
             ViewData["Message"] = Message;
             ViewData["candidate_course"] = candidate_course;
             ViewData["existingmember"] = "null";
@@ -340,14 +354,18 @@ namespace DOS.Controllers
 
         [ErrorHandler]
         [Authorize]
-        public ActionResult courseregistration_ad(string Message, string candidate_course)
+        public ActionResult courseregistration_ad(string Message, string candidate_course, string Year)
         {
             initializedParameter();
             ViewData["ad"] = "_ad";
-            if (((string)Session["SystemMode"]).ToUpper() != "FULL")
-                ViewData["listofcourse"] = sql_conn.usp_getListofCourse(true).ToList();
-            else
-                ViewData["listofcourse"] = sql_conn.usp_getListofCourse(false).ToList();
+            if (Year == null)
+            {
+                Year = DateTime.Now.Year.ToString();
+            }
+            ViewData["Year"] = Year;
+            ViewData["Years"] = sql_conn.usp_getAllCourseYears().ToList();
+
+            ViewData["listofcourse"] = sql_conn.usp_getListofCourse(false, int.Parse(Year)).ToList();
             ViewData["Message"] = Message;
             ViewData["candidate_course"] = candidate_course;
             ViewData["WalkInDate"] = DateTime.Now.ToString("dd/MM/yyyy");
@@ -359,7 +377,7 @@ namespace DOS.Controllers
         public ActionResult submitcourseregistration_ad()
         {
             initializedParameter();
-            ViewData["listofcourse"] = sql_conn.usp_getListofCourse(true).ToList();
+            ViewData["listofcourse"] = sql_conn.usp_getListofCourse(true, -1).ToList();
 
             string existingmember = Request.Form["existingmember"];
             if (existingmember == null)
@@ -426,14 +444,16 @@ namespace DOS.Controllers
             }
 
             if (((string)Session["SystemMode"]).ToUpper() != "FULL")
-                ViewData["listofcourse"] = sql_conn.usp_getListofCourse(true).ToList();
+                ViewData["listofcourse"] = sql_conn.usp_getListofCourse(true, -1).ToList();
             else
-                ViewData["listofcourse"] = sql_conn.usp_getListofCourse(false).ToList();
+                ViewData["listofcourse"] = sql_conn.usp_getListofCourse(false, -1).ToList();
 
             ViewData["Message"] = result;
             ViewData["candidate_nric"] = "";
             ViewData["ad"] = "_ad";
             ViewData["candidate_course"] = Request.Form["aspnet_variable$MainContent$candidate_course"];
+            ViewData["Years"] = sql_conn.usp_getAllCourseYears().ToList();
+            ViewData["Year"] = "1";
             return View("courseregistration");
         }
 
@@ -445,9 +465,9 @@ namespace DOS.Controllers
                 MailMessage mail = null;
                 initializedParameter();
                 if (((string)Session["SystemMode"]).ToUpper() != "FULL")
-                    ViewData["listofcourse"] = sql_conn.usp_getListofCourse(true).ToList();
+                    ViewData["listofcourse"] = sql_conn.usp_getListofCourse(true, -1).ToList();
                 else
-                    ViewData["listofcourse"] = sql_conn.usp_getListofCourse(false).ToList();
+                    ViewData["listofcourse"] = sql_conn.usp_getListofCourse(false, -1).ToList();
 
                 string existingmember = Request.Form["existingmember"];
                 if (existingmember == null)
@@ -562,7 +582,7 @@ namespace DOS.Controllers
 
                     mail = new MailMessage();
                     mail.IsBodyHtml = true;
-                    string to = (string)Session["CERegistrationRecipients"];
+                    string to = (string)Session["CERegistrationRecipients"] + ";" + candidate_email;
 
                     mail.From = new MailAddress((string)Session["SMTPAccount"]);
 
@@ -643,9 +663,9 @@ namespace DOS.Controllers
             {
                 initializedParameter();
                 if (((string)Session["SystemMode"]).ToUpper() != "FULL")
-                    ViewData["listofcourse"] = sql_conn.usp_getListofCourse(true).ToList();
+                    ViewData["listofcourse"] = sql_conn.usp_getListofCourse(true, -1).ToList();
                 else
-                    ViewData["listofcourse"] = sql_conn.usp_getListofCourse(false).ToList();
+                    ViewData["listofcourse"] = sql_conn.usp_getListofCourse(false, -1).ToList();
                 ViewData["Message"] = "<label style=\"color:red;\">Unable to register user. Please try again.</label>";          
                 ViewData["existingmember"] = "null";
                 return View("courseregistration");
@@ -1503,9 +1523,9 @@ namespace DOS.Controllers
             ViewData["ministrylist"] = sql_conn.usp_getListofMinistry().ToList();
 
             if (((string)Session["SystemMode"]).ToUpper() != "FULL")
-                ViewData["listofcourse"] = sql_conn.usp_getListofCourse(true).ToList();
+                ViewData["listofcourse"] = sql_conn.usp_getListofCourse(true, -1).ToList();
             else
-                ViewData["listofcourse"] = sql_conn.usp_getListofCourse(false).ToList();
+                ViewData["listofcourse"] = sql_conn.usp_getListofCourse(false, -1).ToList();
 
             ViewData["cellgrouplist"] = sql_conn.usp_getListofCellgroup().ToList();
             ViewData["religionlist"] = sql_conn.usp_getAllReligion().ToList();

@@ -66,6 +66,14 @@ $(document).ready(function () {
     changeChurch();
 });
 
+function reloadCourse(obj) {
+    var submitForm = getNewSubmitForm();
+    createNewFormElement(submitForm, "Year", $(obj).val());
+    submitForm.action = "/membership.mvc/courseregistration_ad";
+    submitForm.Method = "POST";
+    submitForm.submit();
+}
+
 function onChangeCourse(obj) {
     $("#courseDisplayDate").html("Course schedule: <br />" + $("#courseInfo_" + $(obj).val()).html());
 }

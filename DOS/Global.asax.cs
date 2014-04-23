@@ -116,8 +116,8 @@ namespace DOS
 
         protected void Application_Start()
         {
-            AreaRegistration.RegisterAllAreas();
 
+            AreaRegistration.RegisterAllAreas();
             RegisterRoutes(RouteTable.Routes);
         }
 

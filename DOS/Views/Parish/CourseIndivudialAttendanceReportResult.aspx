@@ -20,20 +20,26 @@
 </head>
 <body>
     <div>
+        <%
+            IEnumerable<usp_getCourseIndividualAttendanceReportResult> res = (IEnumerable<usp_getCourseIndividualAttendanceReportResult>)ViewData["res"];
+        %>
+        <span style=" text-align:right">Total Count: <%=res.Count() %></span>
+
         <table class="tablesorter" style="width:100%;padding:0; margin-left:0%; margin-right:0%">
             <thead>
 			<tr class="header">
                 <th style="width:5%">NRIC</th>
                 <th style="width:16%">Name</th>
                 <th  style="width:7%"># Attended</th>
-                <th  style="width:35%">Course Attended</th>
+                <th  style="width:25%">Course Attended</th>
                 <th  style="width:7%"># Completed</th>
-                <th  style="width:35%">Course Attended</th>
+                <th  style="width:25%">Course Completed</th>
+                <th  style="width:20%">Church</th>
             </tr>
             </thead>
             <tbody>
         <%
-            IEnumerable<usp_getCourseIndividualAttendanceReportResult> res = (IEnumerable<usp_getCourseIndividualAttendanceReportResult>)ViewData["res"];
+            
             for (int x = 0; x < res.Count(); x++)
             {
                 %><tr><%
@@ -57,7 +63,9 @@
                 %><td><%=res.ElementAt(x).AttendedNumberOfCourse%></td><%
                 %><td><%=res.ElementAt(x).AttendedCourseName.Replace("||","<br />")%></td><%
                 %><td><%=res.ElementAt(x).CompletedNumberOfCourse%></td><%
-                %><td><%=res.ElementAt(x).CompletedCourseName.Replace("||","<br />")%></td></tr><%
+                %><td><%=res.ElementAt(x).CompletedCourseName.Replace("||","<br />")%></td><%
+                string churchName = res.ElementAt(x).Parish;
+                %><td><%=churchName%></td></tr><%
             }    
             
         %>

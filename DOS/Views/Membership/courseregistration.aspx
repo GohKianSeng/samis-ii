@@ -31,7 +31,21 @@
 <!-- modal windows scripts   -->
     
 <script language="C#" runat="server">
+    void loadYear(Object Sender, EventArgs e)
+    {
+        ListItem item = new ListItem("", "-1");
+        List<usp_getAllCourseYearsResult> res1 = (List<usp_getAllCourseYearsResult>)ViewData["Years"];
 
+
+        for (int x = 0; x < res1.Count; x++)
+        {
+            item = new ListItem(res1.ElementAt(x).Year.ToString(), res1.ElementAt(x).Year.ToString());
+            if (res1.ElementAt(x).Year == int.Parse((string)ViewData["Year"]))
+                item.Selected = true;
+            Year.Items.Add(item);
+        }
+    } 
+    
     void loadCongregation(Object Sender, EventArgs e)
     {
         List<usp_getAllCongregationResult> res = (List<usp_getAllCongregationResult>)ViewData["congregationlist"];
@@ -416,6 +430,18 @@
 		                        </li>
                             <%}%>
                         </td>
+                            <%if((string)ViewData["ad"] == "_ad"){ %>
+                            <td>
+                            <li id="li4" >
+		                        <label class="description" for="element_9"><br />
+                                Year <span style="color:red;">*</span></label>
+		                        <div>
+                                    <asp:DropDownList style=" width:150px" onchange="reloadCourse(this);" OnLoad="loadYear" name="Year" ID="Year" runat="server">
+                                    </asp:DropDownList>
+			                    </div> 
+		                    </li>
+                            </td>
+                            <%}%>
                     </tr>
                     <tr>
                         <td style="width:180px">

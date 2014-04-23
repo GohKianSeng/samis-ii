@@ -162,7 +162,7 @@ namespace DOS.Controllers
             ViewData["congregationlist"] = sql_conn.usp_getAllCongregation().ToList();
 
             ViewData["ministrylist"] = sql_conn.usp_getListofMinistry().ToList();
-            ViewData["courseslist"] = sql_conn.usp_getListofCourse(false).ToList();
+            ViewData["courseslist"] = sql_conn.usp_getListofCourse(false, -1).ToList();
             ViewData["cellgrouplist"] = sql_conn.usp_getListofCellgroup().ToList();
         }
     }

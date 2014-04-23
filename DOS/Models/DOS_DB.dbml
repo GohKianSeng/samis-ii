@@ -1326,19 +1326,6 @@
       <Column Name="Remarks" Type="System.String" DbType="VarChar(8000) NOT NULL" CanBeNull="false" />
     </ElementType>
   </Function>
-  <Function Name="dbo.usp_getListofCourse" Method="usp_getListofCourse">
-    <Parameter Name="public" Type="System.Boolean" DbType="Bit" />
-    <ElementType Name="usp_getListofCourseResult">
-      <Column Name="courseID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="CourseName" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
-      <Column Name="CourseStartDate" Type="System.String" DbType="VarChar(8000)" CanBeNull="true" />
-      <Column Name="CourseEndDate" Type="System.DateTime" DbType="Date" CanBeNull="true" />
-      <Column Name="CourseStartTime" Type="System.TimeSpan" DbType="Time NOT NULL" CanBeNull="false" />
-      <Column Name="CourseEndTime" Type="System.TimeSpan" DbType="Time NOT NULL" CanBeNull="false" />
-      <Column Name="courseLocation" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
-      <Column Name="Name" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
-    </ElementType>
-  </Function>
   <Function Name="dbo.usp_updateHWSMember" Method="usp_updateHWSMember">
     <Parameter Name="updateXML" Type="System.Xml.Linq.XElement" DbType="Xml" />
     <ElementType Name="usp_updateHWSMemberResult">
@@ -1352,77 +1339,6 @@
       <Column Name="EnglishGivenName" Type="System.String" DbType="VarChar(30) NOT NULL" CanBeNull="false" />
       <Column Name="ChineseSurname" Type="System.String" DbType="NVarChar(2) NOT NULL" CanBeNull="false" />
       <Column Name="ChineseGivenName" Type="System.String" DbType="NVarChar(3) NOT NULL" CanBeNull="false" />
-    </ElementType>
-  </Function>
-  <Function Name="dbo.usp_addNewCourse" Method="usp_addNewCourse">
-    <Parameter Name="coursename" Type="System.String" DbType="VarChar(100)" />
-    <Parameter Name="startdate" Type="System.String" DbType="VarChar(2000)" />
-    <Parameter Name="starttime" Type="System.String" DbType="VarChar(5)" />
-    <Parameter Name="endtime" Type="System.String" DbType="VarChar(5)" />
-    <Parameter Name="incharge" Type="System.String" DbType="VarChar(10)" />
-    <Parameter Name="location" Type="System.Int32" DbType="Int" />
-    <Parameter Name="fee" Type="System.Decimal" DbType="Decimal(5,2)" />
-    <Parameter Name="AdditionalQuestion" Parameter="additionalQuestion" Type="System.Int32" DbType="Int" />
-    <Parameter Name="LastRegistration" Parameter="lastRegistration" Type="System.DateTime" DbType="DateTime" />
-    <Parameter Name="MinCompleteAttendance" Parameter="minCompleteAttendance" Type="System.Int32" DbType="Int" />
-    <ElementType Name="usp_addNewCourseResult">
-      <Column Name="Result" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-    </ElementType>
-  </Function>
-  <Function Name="dbo.usp_getCourseInfo" Method="usp_getCourseInfo">
-    <Parameter Name="courseid" Type="System.Int32" DbType="Int" />
-    <ElementType Name="usp_getCourseInfoResult">
-      <Column Name="MinCompleteAttendance" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="LastRegistrationDate" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
-      <Column Name="AdditionalQuestion" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="Fee" Type="System.Decimal" DbType="Decimal(5,2) NOT NULL" CanBeNull="false" />
-      <Column Name="CourseDay" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
-      <Column Name="courseID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="CourseName" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
-      <Column Name="CourseStartDate" Type="System.String" DbType="VarChar(8000) NOT NULL" CanBeNull="false" />
-      <Column Name="CourseStartTime" Type="System.TimeSpan" DbType="Time NOT NULL" CanBeNull="false" />
-      <Column Name="CourseEndTime" Type="System.TimeSpan" DbType="Time NOT NULL" CanBeNull="false" />
-      <Column Name="courseLocation" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
-      <Column Name="Name" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
-      <Column Name="CourseInCharge" Type="System.String" DbType="VarChar(10) NOT NULL" CanBeNull="false" />
-    </ElementType>
-  </Function>
-  <Function Name="dbo.usp_UpdateCourse" Method="usp_UpdateCourse">
-    <Parameter Name="courseid" Type="System.Int32" DbType="Int" />
-    <Parameter Name="coursename" Type="System.String" DbType="VarChar(100)" />
-    <Parameter Name="startdate" Type="System.String" DbType="VarChar(2000)" />
-    <Parameter Name="starttime" Type="System.String" DbType="VarChar(5)" />
-    <Parameter Name="endtime" Type="System.String" DbType="VarChar(5)" />
-    <Parameter Name="incharge" Type="System.String" DbType="VarChar(10)" />
-    <Parameter Name="location" Type="System.Int32" DbType="Int" />
-    <Parameter Name="AdditionalInformation" Parameter="additionalInformation" Type="System.Int32" DbType="Int" />
-    <Parameter Name="LastRegistrationDate" Parameter="lastRegistrationDate" Type="System.DateTime" DbType="DateTime" />
-    <Parameter Name="MinCompleteAttendance" Parameter="minCompleteAttendance" Type="System.Int32" DbType="Int" />
-    <ElementType Name="usp_UpdateCourseResult">
-      <Column Name="Result" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-    </ElementType>
-  </Function>
-  <Function Name="dbo.usp_getCourseReport" Method="usp_getCourseReport">
-    <Parameter Name="courseID" Type="System.Int32" DbType="Int" />
-    <Parameter Name="TotalDay" Parameter="totalDay" Type="System.Int32" DbType="Int" Direction="InOut" />
-    <Parameter Name="MinAttendance" Parameter="minAttendance" Type="System.Int32" DbType="Int" Direction="InOut" />
-    <Parameter Name="XML" Parameter="xML" Type="System.Xml.Linq.XElement" DbType="Xml" Direction="InOut" />
-    <Parameter Name="AttendedAtLeastOnce" Parameter="attendedAtLeastOnce" Type="System.Int32" DbType="Int" Direction="InOut" />
-    <Parameter Name="AllCompletedCourse" Parameter="allCompletedCourse" Type="System.Int32" DbType="Int" Direction="InOut" />
-    <Parameter Name="SACCompletedCourse" Parameter="sACCompletedCourse" Type="System.Int32" DbType="Int" Direction="InOut" />
-    <Parameter Name="NonSACCompletedCourse" Parameter="nonSACCompletedCourse" Type="System.Int32" DbType="Int" Direction="InOut" />
-    <Parameter Name="AnglicanCompletedCourse" Parameter="anglicanCompletedCourse" Type="System.Int32" DbType="Int" Direction="InOut" />
-    <Parameter Name="NonAnglicanCompletedCourse" Parameter="nonAnglicanCompletedCourse" Type="System.Int32" DbType="Int" Direction="InOut" />
-    <ElementType Name="usp_getCourseReportResult">
-      <Column Name="NRIC" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
-      <Column Name="Name" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
-      <Column Name="Gender" Type="System.String" DbType="VarChar(1)" CanBeNull="true" />
-      <Column Name="Church" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
-      <Column Name="Congregation" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
-      <Column Name="Contact" Type="System.String" DbType="VarChar(15)" CanBeNull="true" />
-      <Column Name="Email" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
-      <Column Name="Schedule" Type="System.DateTime" DbType="Date" CanBeNull="true" />
-      <Column Name="Attendance" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
     </ElementType>
   </Function>
   <Function Name="dbo.usp_getHWSMemberAttendance" Method="usp_getHWSMemberAttendance">
@@ -1505,21 +1421,6 @@
     <ElementType Name="usp_getCourseRegistrationStatResult">
       <Column Name="CourseName" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
       <Column Name="Registered" Type="System.Int32" DbType="Int" CanBeNull="true" />
-    </ElementType>
-  </Function>
-  <Function Name="dbo.usp_getCourseIndividualAttendanceReport" Method="usp_getCourseIndividualAttendanceReport">
-    <Parameter Name="FromYear" Parameter="fromYear" Type="System.String" DbType="VarChar(4)" />
-    <Parameter Name="NumberOfCourse" Parameter="numberOfCourse" Type="System.Int32" DbType="Int" />
-    <ElementType Name="usp_getCourseIndividualAttendanceReportResult">
-      <Column Name="Member" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
-      <Column Name="TempMember" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
-      <Column Name="Visitor" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
-      <Column Name="Name" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
-      <Column Name="NRIC" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
-      <Column Name="CompletedNumberOfCourse" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="CompletedCourseName" Type="System.String" DbType="VarChar(MAX) NOT NULL" CanBeNull="false" />
-      <Column Name="AttendedNumberOfCourse" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="AttendedCourseName" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
     </ElementType>
   </Function>
   <Function Name="dbo.usp_getVisitorInformation" Method="usp_getVisitorInformation">
@@ -1674,6 +1575,119 @@
     <Parameter Name="today" Type="System.DateTime" DbType="DateTime" />
     <ElementType Name="usp_addNewCourseVisitorParticipantAndAttendanceResult">
       <Column Name="Result" Type="System.String" DbType="VarChar(292)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.usp_getListofCourse" Method="usp_getListofCourse">
+    <Parameter Name="public" Type="System.Boolean" DbType="Bit" />
+    <Parameter Name="Year" Parameter="year" Type="System.Int32" DbType="Int" />
+    <ElementType Name="usp_getListofCourseResult">
+      <Column Name="courseID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="CourseName" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="CourseStartDate" Type="System.String" DbType="VarChar(8000)" CanBeNull="true" />
+      <Column Name="CourseEndDate" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="CourseStartTime" Type="System.TimeSpan" DbType="Time NOT NULL" CanBeNull="false" />
+      <Column Name="CourseEndTime" Type="System.TimeSpan" DbType="Time NOT NULL" CanBeNull="false" />
+      <Column Name="courseLocation" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="Name" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.usp_getCourseReport" Method="usp_getCourseReport">
+    <Parameter Name="courseID" Type="System.Int32" DbType="Int" />
+    <Parameter Name="TotalDay" Parameter="totalDay" Type="System.Int32" DbType="Int" Direction="InOut" />
+    <Parameter Name="MinAttendance" Parameter="minAttendance" Type="System.Int32" DbType="Int" Direction="InOut" />
+    <Parameter Name="XML" Parameter="xML" Type="System.Xml.Linq.XElement" DbType="Xml" Direction="InOut" />
+    <Parameter Name="AttendedAtLeastOnce" Parameter="attendedAtLeastOnce" Type="System.Int32" DbType="Int" Direction="InOut" />
+    <Parameter Name="AllCompletedCourse" Parameter="allCompletedCourse" Type="System.Int32" DbType="Int" Direction="InOut" />
+    <Parameter Name="SACCompletedCourse" Parameter="sACCompletedCourse" Type="System.Int32" DbType="Int" Direction="InOut" />
+    <Parameter Name="NonSACCompletedCourse" Parameter="nonSACCompletedCourse" Type="System.Int32" DbType="Int" Direction="InOut" />
+    <Parameter Name="AnglicanCompletedCourse" Parameter="anglicanCompletedCourse" Type="System.Int32" DbType="Int" Direction="InOut" />
+    <Parameter Name="NonAnglicanCompletedCourse" Parameter="nonAnglicanCompletedCourse" Type="System.Int32" DbType="Int" Direction="InOut" />
+    <ElementType Name="usp_getCourseReportResult">
+      <Column Name="NRIC" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="Name" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Gender" Type="System.String" DbType="VarChar(1)" CanBeNull="true" />
+      <Column Name="Church" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="ChurchOthersName" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="Congregation" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Contact" Type="System.String" DbType="VarChar(15)" CanBeNull="true" />
+      <Column Name="Email" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="Schedule" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="Attendance" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.usp_getCourseInfo" Method="usp_getCourseInfo">
+    <Parameter Name="courseid" Type="System.Int32" DbType="Int" />
+    <ElementType Name="usp_getCourseInfoResult">
+      <Column Name="MinCompleteAttendance" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="LastRegistrationDate" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
+      <Column Name="AdditionalQuestion" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Fee" Type="System.Decimal" DbType="Decimal(5,2) NOT NULL" CanBeNull="false" />
+      <Column Name="CourseDay" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="courseID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="CourseName" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="CourseStartDate" Type="System.String" DbType="VarChar(8000) NOT NULL" CanBeNull="false" />
+      <Column Name="CourseStartTime" Type="System.TimeSpan" DbType="Time NOT NULL" CanBeNull="false" />
+      <Column Name="CourseEndTime" Type="System.TimeSpan" DbType="Time NOT NULL" CanBeNull="false" />
+      <Column Name="courseLocation" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="Name" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="CourseInCharge" Type="System.String" DbType="VarChar(10) NOT NULL" CanBeNull="false" />
+      <Column Name="Speaker" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="SendReminder" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="ReminderSent" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.usp_UpdateCourse" Method="usp_UpdateCourse">
+    <Parameter Name="Speaker" Parameter="speaker" Type="System.String" DbType="VarChar(100)" />
+    <Parameter Name="SendReminder" Parameter="sendReminder" Type="System.Boolean" DbType="Bit" />
+    <Parameter Name="courseid" Type="System.Int32" DbType="Int" />
+    <Parameter Name="coursename" Type="System.String" DbType="VarChar(100)" />
+    <Parameter Name="startdate" Type="System.String" DbType="VarChar(2000)" />
+    <Parameter Name="starttime" Type="System.String" DbType="VarChar(5)" />
+    <Parameter Name="endtime" Type="System.String" DbType="VarChar(5)" />
+    <Parameter Name="incharge" Type="System.String" DbType="VarChar(10)" />
+    <Parameter Name="location" Type="System.Int32" DbType="Int" />
+    <Parameter Name="AdditionalInformation" Parameter="additionalInformation" Type="System.Int32" DbType="Int" />
+    <Parameter Name="LastRegistrationDate" Parameter="lastRegistrationDate" Type="System.DateTime" DbType="DateTime" />
+    <Parameter Name="MinCompleteAttendance" Parameter="minCompleteAttendance" Type="System.Int32" DbType="Int" />
+    <ElementType Name="usp_UpdateCourseResult">
+      <Column Name="Result" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.usp_addNewCourse" Method="usp_addNewCourse">
+    <Parameter Name="Speaker" Parameter="speaker" Type="System.String" DbType="VarChar(100)" />
+    <Parameter Name="SendReminder" Parameter="sendReminder" Type="System.Boolean" DbType="Bit" />
+    <Parameter Name="coursename" Type="System.String" DbType="VarChar(100)" />
+    <Parameter Name="startdate" Type="System.String" DbType="VarChar(2000)" />
+    <Parameter Name="starttime" Type="System.String" DbType="VarChar(5)" />
+    <Parameter Name="endtime" Type="System.String" DbType="VarChar(5)" />
+    <Parameter Name="incharge" Type="System.String" DbType="VarChar(10)" />
+    <Parameter Name="location" Type="System.Int32" DbType="Int" />
+    <Parameter Name="fee" Type="System.Decimal" DbType="Decimal(5,2)" />
+    <Parameter Name="AdditionalQuestion" Parameter="additionalQuestion" Type="System.Int32" DbType="Int" />
+    <Parameter Name="LastRegistration" Parameter="lastRegistration" Type="System.DateTime" DbType="DateTime" />
+    <Parameter Name="MinCompleteAttendance" Parameter="minCompleteAttendance" Type="System.Int32" DbType="Int" />
+    <ElementType Name="usp_addNewCourseResult">
+      <Column Name="Result" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.usp_getCourseIndividualAttendanceReport" Method="usp_getCourseIndividualAttendanceReport">
+    <Parameter Name="FromYear" Parameter="fromYear" Type="System.String" DbType="VarChar(4)" />
+    <Parameter Name="NumberOfCourse" Parameter="numberOfCourse" Type="System.Int32" DbType="Int" />
+    <Parameter Name="Church" Parameter="church" Type="System.String" DbType="VarChar(1)" />
+    <Parameter Name="NRIC" Parameter="nRIC" Type="System.String" DbType="VarChar(20)" />
+    <ElementType Name="usp_getCourseIndividualAttendanceReportResult">
+      <Column Name="Member" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="TempMember" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="Visitor" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="NRIC" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="CompletedNumberOfCourse" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="CompletedCourseName" Type="System.String" DbType="VarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="AttendedNumberOfCourse" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="AttendedCourseName" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="ChurchName" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="OtherChurchName" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="Parish" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
     </ElementType>
   </Function>
 </Database>

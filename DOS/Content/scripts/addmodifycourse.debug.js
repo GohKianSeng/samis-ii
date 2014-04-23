@@ -25,7 +25,7 @@ $(document).ready(function () {
             $("#" + getFormID()).submit();
     });
 
-
+    $("#SendReminder").val(getSendReminder());
 });
 
 function checkForm() {

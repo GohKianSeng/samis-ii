@@ -77,6 +77,36 @@
         }
         return "1";
     }
+
+    string getSpeaker()
+    {
+        if (((string)ViewData["type"]) == "update")
+        {
+            usp_getCourseInfoResult res = (usp_getCourseInfoResult)ViewData["courseinformation"];
+            return res.Speaker;
+        }
+        return "";
+    }
+
+    string getSendReminder()
+    {
+        if (((string)ViewData["type"]) == "update")
+        {
+            usp_getCourseInfoResult res = (usp_getCourseInfoResult)ViewData["courseinformation"];
+            return (res.SendReminder) ? "1" : "0";
+        }
+        return "";
+    }
+
+    string getReminderSent()
+    {
+        if (((string)ViewData["type"]) == "update")
+        {
+            usp_getCourseInfoResult res = (usp_getCourseInfoResult)ViewData["courseinformation"];
+            return (res.ReminderSent) ? "<span style=\"color:green\">Reminder Email Sent!</span>" : "";
+        }
+        return "";
+    }
     
     string getCourseName()
     {
@@ -204,6 +234,10 @@
         return "<%=form.ClientID %>";
     }
 
+    function getSendReminder(){
+        return "<%=getSendReminder() %>";
+    }
+
     function getSubmitURL() {
         return "<%= Microsoft.JScript.GlobalObject.escape(getSubmitURL())%>"
     }
@@ -265,7 +299,7 @@
                 <td>
                     In Charge<br />
                     <input type="hidden" id="incharge" name="incharge" value="<%= getInchargeNRIC()%>" />
-                    <input AUTOCOMPLETE = "off" style=" width:200px" id="inchargeinput" type="text" onkeyup="searchSuggest(1000, 'inchargeinput', 'search_suggest_incharge', 'incharge');" <%=getTextfieldLength("tb_members","EnglishName")%> value="<%= getInchargeName()%>"/> 
+                    <input AUTOCOMPLETE = "off" style=" width:250px" id="inchargeinput" type="text" onkeyup="searchSuggest(1000, 'inchargeinput', 'search_suggest_incharge', 'incharge');" <%=getTextfieldLength("tb_members","EnglishName")%> value="<%= getInchargeName()%>"/> 
                     <div id="search_suggest_incharge" style="border:1px solid black; position:absolute; z-index:99999; display:none; height:200px; overflow:auto; width:370px"></div>
                 </td>
                 <td>
@@ -279,9 +313,19 @@
                 </td>
             </tr>
             <tr>
-                <td colspan="3">
+                <td>
                     Minimum Attendance for Completion<br />
                     <input id="MinCompleteAttendance" name="MinCompleteAttendance" class="element text medium" type="text" value="<%= getMinAttendance()%>"/> 
+                </td>
+                <td>
+                    Speaker<br />
+                    <input id="Speaker" name="Speaker"  style=" width:250px" class="element text medium" type="text" value="<%= getSpeaker()%>"/>
+                </td>
+                <td>
+                    Send Reminder to participant<br />
+                    <select id="SendReminder" name="SendReminder"><option value="1">Yes</option><option value="0">No</option></select>
+                    <br />
+                    <%=getReminderSent()%>
                 </td>
             </tr>
             <tr>

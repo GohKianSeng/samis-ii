@@ -1,0 +1,6 @@
+C:\Users\ks\Desktop\New folder\samis-ii\DOSService\bin\Debug\DOSService.exe
+C:\Users\ks\Desktop\New folder\samis-ii\DOSService\bin\Debug\DOSService.pdb
+C:\Users\ks\Desktop\New folder\samis-ii\DOSService\obj\x86\Debug\ResolveAssemblyReference.cache
+C:\Users\ks\Desktop\New folder\samis-ii\DOSService\obj\x86\Debug\DOSService.exe
+C:\Users\ks\Desktop\New folder\samis-ii\DOSService\obj\x86\Debug\DOSService.pdb
+C:\Users\ks\Desktop\New folder\samis-ii\DOSService\bin\Debug\DOSService.exe.config

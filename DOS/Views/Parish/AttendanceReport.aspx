@@ -148,7 +148,16 @@
                                 <td nowrap="nowrap"><%= partialBlankIC(res.ElementAt(index).NRIC)%></td>
                                 <td nowrap="nowrap"><%= res.ElementAt(index).Name%></td>
                                 <td nowrap="nowrap"><%= res.ElementAt(index).Gender%></td>
-                                <td nowrap="nowrap"><%= res.ElementAt(index).Church%></td>
+
+                                <%
+                                string churchName = res.ElementAt(index).Church;
+                                if (churchName.ToUpper() == "OTHERS")
+                                {
+                                    churchName = res.ElementAt(index).ChurchOthersName;
+                                }      
+                                    
+                                %>
+                                <td nowrap="nowrap"><%= churchName%></td>
                                 <td nowrap="nowrap"><%= res.ElementAt(index).Congregation%></td>
                                 <td nowrap="nowrap"><%= res.ElementAt(index).Contact%></td>
                                 <td nowrap="nowrap"><%= res.ElementAt(index).Email%></td>

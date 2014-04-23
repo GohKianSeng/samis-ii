@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="DOS" Class="DBConnectionDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="AppSettings" ConnectionString="Data Source=localhost;Initial Catalog=DOS;Persist Security Info=True;User ID=root" SettingsObjectName="DOSService.Properties.Settings" SettingsPropertyName="DOSConnectionString" Provider="System.Data.SqlClient" />
+  <Function Name="dbo.usp_getAppConfig" Method="usp_getAppConfig">
+    <ElementType Name="usp_getAppConfigResult">
+      <Column Name="ConfigName" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="value" Type="System.String" DbType="VarChar(1000) NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.usp_getAllEmail" Method="usp_getAllEmail">
+    <ElementType Name="usp_getAllEmailResult">
+      <Column Name="EmailType" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="EmailContent" Type="System.String" DbType="VarChar(MAX) NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.usp_insertlogging" Method="usp_insertlogging">
+    <Parameter Name="Type" Parameter="type" Type="System.Char" DbType="Char(1)" />
+    <Parameter Name="ActionBy" Parameter="actionBy" Type="System.String" DbType="VarChar(50)" />
+    <Parameter Name="ProgramReference" Parameter="programReference" Type="System.String" DbType="VarChar(100)" />
+    <Parameter Name="Description" Parameter="description" Type="System.String" DbType="VarChar(2000)" />
+    <Parameter Name="DebugLevel" Parameter="debugLevel" Type="System.Int32" DbType="Int" />
+    <Parameter Name="ReferenceType" Parameter="referenceType" Type="System.String" DbType="VarChar(100)" />
+    <Parameter Name="Reference" Parameter="reference" Type="System.String" DbType="VarChar(100)" />
+    <Parameter Name="Updates" Parameter="updates" Type="System.Xml.Linq.XElement" DbType="Xml" />
+    <ElementType Name="usp_insertloggingResult">
+      <Column Name="Result" Type="System.Decimal" DbType="Decimal(38,0)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.usp_getAllCourseReminderRecipients" Method="usp_getAllCourseReminderRecipients">
+    <ElementType Name="usp_getAllCourseReminderRecipientsResult">
+      <Column Name="Email" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="Name" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="CourseName" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="AreaName" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="CourseStartTime" Type="System.TimeSpan" DbType="Time NOT NULL" CanBeNull="false" />
+      <Column Name="CourseEndTime" Type="System.TimeSpan" DbType="Time NOT NULL" CanBeNull="false" />
+      <Column Name="CourseStartDate" Type="System.String" DbType="VarChar(8000) NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+</Database>

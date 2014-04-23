@@ -78,11 +78,25 @@
 
         successor.Sort(delegate(usp_getAppModFuncAccessRightsResult thisItem, usp_getAppModFuncAccessRightsResult otherItem)
         {
-            return thisItem.Sequence.ToString().CompareTo(otherItem.Sequence.ToString());
+            if (thisItem.Sequence < otherItem.Sequence)
+                return -1;
+            else if (thisItem.Sequence > otherItem.Sequence)
+                return 1;
+            else if (thisItem.Sequence == otherItem.Sequence)
+                return 0;
+
+            return 0;
         });
         successor.Sort(delegate(usp_getAppModFuncAccessRightsResult thisItem, usp_getAppModFuncAccessRightsResult otherItem)
         {
-            return thisItem.Sequence.ToString().CompareTo(otherItem.Sequence.ToString());
+            if (thisItem.Sequence < otherItem.Sequence)
+                return -1;
+            else if (thisItem.Sequence > otherItem.Sequence)
+                return 1;
+            else if (thisItem.Sequence == otherItem.Sequence)
+                return 0;
+
+            return 0;
         });
         return successor;
     }

@@ -135,3 +135,14 @@ C:\Users\ks\Desktop\net40-full\test1\DOS\obj\Debug\DOS.dll
 C:\Users\ks\Desktop\net40-full\test1\DOS\obj\Debug\DOS.pdb
 C:\Users\ks\Desktop\net40-full\test1\DOS\bin\DropNet.dll
 C:\Users\ks\Desktop\net40-full\test1\DOS\bin\RestSharp.dll
+C:\Users\ks\Desktop\New folder\samis-ii\DOS\bin\DOS.dll
+C:\Users\ks\Desktop\New folder\samis-ii\DOS\bin\DOS.pdb
+C:\Users\ks\Desktop\New folder\samis-ii\DOS\bin\DropNet.dll
+C:\Users\ks\Desktop\New folder\samis-ii\DOS\bin\Microsoft.JScript.dll
+C:\Users\ks\Desktop\New folder\samis-ii\DOS\bin\Newtonsoft.Json.dll
+C:\Users\ks\Desktop\New folder\samis-ii\DOS\bin\RestSharp.dll
+C:\Users\ks\Desktop\New folder\samis-ii\DOS\bin\System.Data.Linq.dll
+C:\Users\ks\Desktop\New folder\samis-ii\DOS\bin\Newtonsoft.Json.xml
+C:\Users\ks\Desktop\New folder\samis-ii\DOS\obj\Debug\ResolveAssemblyReference.cache
+C:\Users\ks\Desktop\New folder\samis-ii\DOS\obj\Debug\DOS.dll
+C:\Users\ks\Desktop\New folder\samis-ii\DOS\obj\Debug\DOS.pdb

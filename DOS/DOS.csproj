@@ -330,6 +330,7 @@
     <Content Include="Views\Hws\manualAttendance.aspx" />
     <Content Include="Views\Hws\AddNewMember.aspx" />
     <Content Include="Views\Hws\ListOfMembers.aspx" />
+    <Content Include="Views\Membership\CourseAttendance_bd.aspx" />
     <Content Include="Views\Membership\CourseAttendance.aspx" />
     <Content Include="Views\Membership\courseregistration.aspx" />
     <Content Include="Views\Membership\ElectoralRoll.aspx" />
@@ -387,6 +388,7 @@
     <Content Include="Views\Settings\webconfig.aspx" />
     <Content Include="Views\Settings\Samis2Settings.aspx" />
     <Content Include="Views\Shared\Agreement.aspx" />
+    <Content Include="Views\Shared\ErrorReload.aspx" />
     <Content Include="Views\Shared\CourseAgreement.aspx" />
     <Content Include="Views\Shared\simplexml.aspx" />
     <Content Include="Views\Shared\displayModalClose.aspx" />

@@ -2,6 +2,7 @@
 <%@ Import Namespace="DOS.Models" %>
 <%@ Import Namespace="System.IO" %>
 <html>
+<form id="Form1" runat="server">  
 <%if (HttpContext.Current.IsDebuggingEnabled){%>
     <script type="text/javascript" src="/Content/scripts/common_function.debug.js"></script>    
 <%}else{%>
@@ -27,8 +28,9 @@
         parent.loadcase(nric);
     }
 
-    function reloadCourse() {
+    function reloadCourse(obj) {
         var submitForm = getNewSubmitForm();
+        createNewFormElement(submitForm, "Year", $(obj).val());
         submitForm.action = "/parish.mvc/ListOfCourse";
         submitForm.Method = "POST";
         submitForm.submit();
@@ -51,8 +53,24 @@
     }
 
 </script>
-
+<script language="C#" runat="server">
     
+    void loadYear(Object Sender, EventArgs e)
+    {
+        ListItem item = new ListItem("", "-1");
+        List<usp_getAllCourseYearsResult> res1 = (List<usp_getAllCourseYearsResult>)ViewData["Years"];
+        
+        
+        for (int x = 0; x<res1.Count; x++)
+        {
+            item = new ListItem(res1.ElementAt(x).Year.ToString(), res1.ElementAt(x).Year.ToString());
+            if (res1.ElementAt(x).Year == int.Parse((string)ViewData["Year"]))
+                item.Selected = true;
+            Year.Items.Add(item);
+        }
+    }    
+</script>
+  
     <p style="color:red;"><%= (string)ViewData["errormsg"]%></p>
     <table width="100%">
         <tr>
@@ -61,7 +79,9 @@
                 
             </td>
             <td width=50%; align="right">
-                <input id="showrepbut" type=button value="Reload" onclick="reloadCourse();" align="right">
+                
+                Year: <asp:DropDownList style=" width:150px" onchange="reloadCourse(this);" OnLoad="loadYear" name="Year" ID="Year" runat="server">
+                </asp:DropDownList>
             </td>
         </tr>
     </table>
@@ -112,7 +132,7 @@
             %>
 		</tbody>
 		</table>
-        
+</form>        
 </html>
 
 

@@ -35,7 +35,7 @@ Course Related
         var FromYear = document.getElementById('<%=FromYear.ClientID%>').value;
         var numberOfCourse = document.getElementById('numberOfCourse').value;
 
-        document.getElementById('Iframe').src = "/parish.mvc/CourseIndivudialAttendanceReportResult?FromYear=" + FromYear + "&numberOfCourse=" + numberOfCourse;
+        document.getElementById('Iframe').src = "/parish.mvc/CourseIndivudialAttendanceReportResult?FromYear=" + FromYear + "&numberOfCourse=" + numberOfCourse + "&NRIC=" + document.getElementById('NRIC').value + "&Church=" + document.getElementById('Church').value;
     }
 </script>
 
@@ -52,16 +52,19 @@ Course Related
 		                    <table width="100%">
                                 <tr>
                                     <td style=" padding: 0 0 0 0;width:20%"></td>
-                                    <td style=" padding: 0 0 0 0;width:80%"><b>Select Period</b></td>                                   
+                                    <td style=" padding: 0 0 0 0;width:20%"><b>Select Period</b></td>  
+                                    <td style=" padding: 0 0 0 0;width:5%"></td>                                 
                                 </tr>
                                 <tr>
                                     <td style=" padding: 0 0 0 0;">Year</td>
                                     <td style=" padding: 0 0 0 0;"><asp:DropDownList style=" width:60px" OnLoad="LoadYear" name="FromYear" ID="FromYear" runat="server">
                                         </asp:DropDownList>
-                                    </td>                                    
+                                    </td>
+                                    <td style=" padding: 0 0 0 0;">Church</td>
+                                    <td style=" padding: 0 0 0 0;"><select id="Church"><option value=""></option><option value="C">Current Parish</option><option value="A">Other Anglican</option><option value="B">All Anglican</option><option value="O">Others</option></select></td>                                    
                                 </tr>
                                 <tr>
-                                    <td style=" padding: 0 0 0 0;">Number of Courses attended</td>
+                                    <td style=" padding: 0 0 0 0;">Number of Courses completed</td>
                                     <td style=" padding: 0 0 0 0;">
                                         <select id="numberOfCourse">
                                             <option value="1"> at least 1</option>
@@ -85,9 +88,9 @@ Course Related
                                             <option value="19"> more than 19</option>
                                             <option value="20"> more than 20</option>
                                         </select>
-                                        
-
                                     </td>
+                                    <td style=" padding: 0 0 0 0;">NRIC</td>
+                                    <td style=" padding: 0 0 0 0;"><input id="NRIC" type="text"/></td>
                                 </tr>                                        
                                 <tr>
                                     <td></td>
