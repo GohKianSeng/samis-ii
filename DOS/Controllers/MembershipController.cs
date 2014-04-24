@@ -508,6 +508,7 @@ namespace DOS.Controllers
                 string candidate_church = Request.Form["aspnet_variable$MainContent$church"];
                 string candidate_church_others = Request.Form["church_others"];
                 string candidate_course_name = Request.Form["candidate_course_name"];
+                string CongregationName = Request.Form["CongregationName"];
                 string candidate_Congregation = Request.Form["aspnet_variable$MainContent$Congregation"];
                 if (candidate_Congregation.Length == 0)
                     candidate_Congregation = null;
@@ -577,7 +578,7 @@ namespace DOS.Controllers
                     mailbody = mailbody.Replace("[candidate_unit]", candidate_unit);
                     mailbody = mailbody.Replace("[candidate_street_address]", candidate_street_address);
                     mailbody = mailbody.Replace("[AdditionalInformation]", decodedAdditionalInformation);
-                    mailbody = mailbody.Replace("[Congregation]", candidate_Congregation);
+                    mailbody = mailbody.Replace("[Congregation]", CongregationName);
                     if (candidate_church.StartsWith((string)Session["OtherChurchParish"]))
                         mailbody = mailbody.Replace("[combine_church]", candidate_church_others);
                     else

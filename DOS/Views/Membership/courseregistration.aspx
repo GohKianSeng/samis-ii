@@ -538,8 +538,9 @@
                                 <label class="description" for="element_9">堂会<br>
                                 Congregation<span style="color:red;">*</span></label>
 		                        <div>
-                                    <asp:DropDownList  style="width:300px" onchange="changeChurch();" OnLoad="loadCongregation" class="element select medium" name="church" ID="Congregation" runat="server">
-                                    </asp:DropDownList>                                
+                                    <asp:DropDownList  style="width:300px" onchange="changeCongregation();" OnLoad="loadCongregation" class="element select medium" name="church" ID="Congregation" runat="server">
+                                    </asp:DropDownList>
+                                    <input type="hidden" id="CongregationName" name="CongregationName" value="" />                                
                                 </div>
                             </li>
                         </td>

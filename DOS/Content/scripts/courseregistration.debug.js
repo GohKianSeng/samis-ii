@@ -64,7 +64,12 @@ $(document).ready(function () {
     $("#nric").focus();
 
     changeChurch();
+    changeCongregation()
 });
+
+function changeCongregation() {
+    $("#CongregationName").val($("#" + getCongregationID() + " option:selected").text());
+}
 
 function reloadCourse(obj) {
     var submitForm = getNewSubmitForm();
