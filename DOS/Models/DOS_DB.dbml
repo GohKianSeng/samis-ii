@@ -1423,30 +1423,6 @@
       <Column Name="Registered" Type="System.Int32" DbType="Int" CanBeNull="true" />
     </ElementType>
   </Function>
-  <Function Name="dbo.usp_getVisitorInformation" Method="usp_getVisitorInformation">
-    <Parameter Name="NRIC" Parameter="nRIC" Type="System.String" DbType="VarChar(20)" />
-    <ElementType Name="usp_getVisitorInformationResult">
-      <Column Name="mailingList" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
-      <Column Name="EnglishName" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
-      <Column Name="Salutation" Type="System.String" DbType="VarChar(5)" CanBeNull="true" />
-      <Column Name="DOB" Type="System.String" DbType="VarChar(10) NOT NULL" CanBeNull="false" />
-      <Column Name="Gender" Type="System.String" DbType="VarChar(1) NOT NULL" CanBeNull="false" />
-      <Column Name="NRIC" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
-      <Column Name="Nationality" Type="System.String" DbType="VarChar(5)" CanBeNull="true" />
-      <Column Name="AddressStreet" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
-      <Column Name="AddressHouseBlk" Type="System.String" DbType="VarChar(10) NOT NULL" CanBeNull="false" />
-      <Column Name="AddressPostalCode" Type="System.String" DbType="VarChar(6) NOT NULL" CanBeNull="false" />
-      <Column Name="AddressUnit" Type="System.String" DbType="VarChar(10) NOT NULL" CanBeNull="false" />
-      <Column Name="Email" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
-      <Column Name="Education" Type="System.String" DbType="VarChar(5)" CanBeNull="true" />
-      <Column Name="Occupation" Type="System.String" DbType="VarChar(5)" CanBeNull="true" />
-      <Column Name="Contact" Type="System.String" DbType="VarChar(15) NOT NULL" CanBeNull="false" />
-      <Column Name="Church" Type="System.String" DbType="VarChar(3)" CanBeNull="true" />
-      <Column Name="ChurchOthers" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
-      <Column Name="CourseAttended" Type="System.Xml.Linq.XElement" DbType="Xml" CanBeNull="true" />
-      <Column Name="History" Type="System.Xml.Linq.XElement" DbType="Xml" CanBeNull="true" />
-    </ElementType>
-  </Function>
   <Function Name="dbo.usp_getMemberInformation" Method="usp_getMemberInformation">
     <Parameter Name="NRIC" Parameter="nRIC" Type="System.String" DbType="VarChar(20)" />
     <Parameter Name="Type" Parameter="type" Type="System.String" DbType="VarChar(10)" />
@@ -1550,31 +1526,6 @@
       <Column Name="PreviousChurchOthers" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
       <Column Name="GUID" Type="System.String" DbType="VarChar(37)" CanBeNull="true" />
       <Column Name="Filename" Type="System.String" DbType="VarChar(999)" CanBeNull="true" />
-    </ElementType>
-  </Function>
-  <Function Name="dbo.usp_addNewCourseVisitorParticipantAndAttendance" Method="usp_addNewCourseVisitorParticipantAndAttendance">
-    <Parameter Name="mailingList" Type="System.String" DbType="VarChar(3)" />
-    <Parameter Name="nric" Type="System.String" DbType="VarChar(10)" />
-    <Parameter Name="course" Type="System.String" DbType="VarChar(10)" />
-    <Parameter Name="salutation" Type="System.String" DbType="VarChar(10)" />
-    <Parameter Name="english_name" Type="System.String" DbType="VarChar(50)" />
-    <Parameter Name="dob" Type="System.DateTime" DbType="Date" />
-    <Parameter Name="gender" Type="System.String" DbType="VarChar(1)" />
-    <Parameter Name="education" Type="System.String" DbType="VarChar(10)" />
-    <Parameter Name="nationality" Type="System.String" DbType="VarChar(10)" />
-    <Parameter Name="occupation" Type="System.String" DbType="VarChar(10)" />
-    <Parameter Name="postal_code" Type="System.String" DbType="VarChar(6)" />
-    <Parameter Name="blk_house" Type="System.String" DbType="VarChar(10)" />
-    <Parameter Name="street_address" Type="System.String" DbType="VarChar(1000)" />
-    <Parameter Name="unit" Type="System.String" DbType="VarChar(10)" />
-    <Parameter Name="contact" Type="System.String" DbType="VarChar(15)" />
-    <Parameter Name="email" Type="System.String" DbType="VarChar(100)" />
-    <Parameter Name="church" Type="System.Int32" DbType="Int" />
-    <Parameter Name="church_others" Type="System.String" DbType="VarChar(100)" />
-    <Parameter Name="UserID" Parameter="userID" Type="System.String" DbType="VarChar(50)" />
-    <Parameter Name="today" Type="System.DateTime" DbType="DateTime" />
-    <ElementType Name="usp_addNewCourseVisitorParticipantAndAttendanceResult">
-      <Column Name="Result" Type="System.String" DbType="VarChar(292)" CanBeNull="true" />
     </ElementType>
   </Function>
   <Function Name="dbo.usp_getListofCourse" Method="usp_getListofCourse">
@@ -1688,6 +1639,57 @@
       <Column Name="ChurchName" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
       <Column Name="OtherChurchName" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
       <Column Name="Parish" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.usp_addNewCourseVisitorParticipantAndAttendance" Method="usp_addNewCourseVisitorParticipantAndAttendance">
+    <Parameter Name="Congregation" Parameter="congregation" Type="System.String" DbType="VarChar(3)" />
+    <Parameter Name="mailingList" Type="System.String" DbType="VarChar(3)" />
+    <Parameter Name="nric" Type="System.String" DbType="VarChar(10)" />
+    <Parameter Name="course" Type="System.String" DbType="VarChar(10)" />
+    <Parameter Name="salutation" Type="System.String" DbType="VarChar(10)" />
+    <Parameter Name="english_name" Type="System.String" DbType="VarChar(50)" />
+    <Parameter Name="dob" Type="System.DateTime" DbType="Date" />
+    <Parameter Name="gender" Type="System.String" DbType="VarChar(1)" />
+    <Parameter Name="education" Type="System.String" DbType="VarChar(10)" />
+    <Parameter Name="nationality" Type="System.String" DbType="VarChar(10)" />
+    <Parameter Name="occupation" Type="System.String" DbType="VarChar(10)" />
+    <Parameter Name="postal_code" Type="System.String" DbType="VarChar(6)" />
+    <Parameter Name="blk_house" Type="System.String" DbType="VarChar(10)" />
+    <Parameter Name="street_address" Type="System.String" DbType="VarChar(1000)" />
+    <Parameter Name="unit" Type="System.String" DbType="VarChar(10)" />
+    <Parameter Name="contact" Type="System.String" DbType="VarChar(15)" />
+    <Parameter Name="email" Type="System.String" DbType="VarChar(100)" />
+    <Parameter Name="church" Type="System.Int32" DbType="Int" />
+    <Parameter Name="church_others" Type="System.String" DbType="VarChar(100)" />
+    <Parameter Name="UserID" Parameter="userID" Type="System.String" DbType="VarChar(50)" />
+    <Parameter Name="today" Type="System.DateTime" DbType="DateTime" />
+    <ElementType Name="usp_addNewCourseVisitorParticipantAndAttendanceResult">
+      <Column Name="Result" Type="System.String" DbType="VarChar(292)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.usp_getVisitorInformation" Method="usp_getVisitorInformation">
+    <Parameter Name="NRIC" Parameter="nRIC" Type="System.String" DbType="VarChar(20)" />
+    <ElementType Name="usp_getVisitorInformationResult">
+      <Column Name="Congregation" Type="System.String" DbType="VarChar(2) NOT NULL" CanBeNull="false" />
+      <Column Name="mailingList" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="EnglishName" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Salutation" Type="System.String" DbType="VarChar(5)" CanBeNull="true" />
+      <Column Name="DOB" Type="System.String" DbType="VarChar(10) NOT NULL" CanBeNull="false" />
+      <Column Name="Gender" Type="System.String" DbType="VarChar(1) NOT NULL" CanBeNull="false" />
+      <Column Name="NRIC" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="Nationality" Type="System.String" DbType="VarChar(5)" CanBeNull="true" />
+      <Column Name="AddressStreet" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="AddressHouseBlk" Type="System.String" DbType="VarChar(10) NOT NULL" CanBeNull="false" />
+      <Column Name="AddressPostalCode" Type="System.String" DbType="VarChar(6) NOT NULL" CanBeNull="false" />
+      <Column Name="AddressUnit" Type="System.String" DbType="VarChar(10) NOT NULL" CanBeNull="false" />
+      <Column Name="Email" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="Education" Type="System.String" DbType="VarChar(5)" CanBeNull="true" />
+      <Column Name="Occupation" Type="System.String" DbType="VarChar(5)" CanBeNull="true" />
+      <Column Name="Contact" Type="System.String" DbType="VarChar(15) NOT NULL" CanBeNull="false" />
+      <Column Name="Church" Type="System.String" DbType="VarChar(3)" CanBeNull="true" />
+      <Column Name="ChurchOthers" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="CourseAttended" Type="System.Xml.Linq.XElement" DbType="Xml" CanBeNull="true" />
+      <Column Name="History" Type="System.Xml.Linq.XElement" DbType="Xml" CanBeNull="true" />
     </ElementType>
   </Function>
 </Database>

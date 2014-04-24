@@ -118,9 +118,17 @@ function changeChurch() {
     if ($("#" + getChurchByID()).val() == "28") {
         $("#church_others").show();
         $("#church_others").watermark("Name of church");
-    }
+        $("#congregationDiv").hide();
+    }     
     else {
         $("#church_others").val('');
         $("#church_others").hide();
+
+        if ($("#" + getChurchByID()).val() == getCurrentParish()) {
+            $("#congregationDiv").show();
+        }
+        else {
+            $("#congregationDiv").hide();
+        }
     }
 }

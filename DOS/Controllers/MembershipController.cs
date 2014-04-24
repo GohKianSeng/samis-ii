@@ -116,11 +116,14 @@ namespace DOS.Controllers
             string candidate_church = Request.Form["aspnet_variable$MainContent$church"];
             string candidate_church_others = Request.Form["church_others"];
             string mailingList = "";
+            string candidate_congregation = Request.Form["aspnet_variable$MainContent$Congregation"];
+            if (candidate_congregation.Length == 0)
+                candidate_congregation = null;
 
             if (Request.Form["mailingList"] != null)
                 mailingList = Request.Form["mailingList"].ToUpper();
 
-            XElement xml = toUpdateXMLVisitor(mailingList, User.Identity.Name, OriginalNRIC, candidate_nric, candidate_salutation, candidate_english_name, candidate_unit, candidate_blk_house, candidate_nationality, candidate_occupation, candidate_dob, candidate_gender, candidate_street_address, candidate_postal_code, candidate_email, candidate_education, candidate_contact, candidate_church, candidate_church_others);
+            XElement xml = toUpdateXMLVisitor(candidate_congregation, mailingList, User.Identity.Name, OriginalNRIC, candidate_nric, candidate_salutation, candidate_english_name, candidate_unit, candidate_blk_house, candidate_nationality, candidate_occupation, candidate_dob, candidate_gender, candidate_street_address, candidate_postal_code, candidate_email, candidate_education, candidate_contact, candidate_church, candidate_church_others);
             string res = "NotFound";
             sql_conn.usp_updateVistor(xml, ref res);
 
@@ -142,7 +145,7 @@ namespace DOS.Controllers
 
         [ErrorHandler]
         [Authorize]
-        private XElement toUpdateXMLVisitor(string mailingList, string userID, string OriginalNRIC, string nric, string salutation, string english_name, string unit, string blk_house, string nationality, string occupation, string dob, string gender, string street_address, string postal_code, string email, string education,  string contact, string church, string churchOthers)
+        private XElement toUpdateXMLVisitor(string congregation, string mailingList, string userID, string OriginalNRIC, string nric, string salutation, string english_name, string unit, string blk_house, string nationality, string occupation, string dob, string gender, string street_address, string postal_code, string email, string education,  string contact, string church, string churchOthers)
         {
             bool convertok = false;
             DateTime dt;
@@ -171,6 +174,8 @@ namespace DOS.Controllers
             update.Add(new XElement("Church", church));
             update.Add(new XElement("ChurchOthers", churchOthers));
             update.Add(new XElement("mailingList", mailingList));
+            if (congregation != null)
+                update.Add(new XElement("Congregation", congregation));    
             return update;
         }
 
@@ -199,6 +204,7 @@ namespace DOS.Controllers
             ViewData["church"] = res.Church;
             ViewData["church_others"] = res.ChurchOthers;
             ViewData["mailingList"] = res.mailingList.ToString().ToUpper();
+            ViewData["Congregation"] = res.Congregation;
             return View("UpdateVisitorForm_forStaff");           
         }
 
@@ -413,6 +419,8 @@ namespace DOS.Controllers
             string candidate_church_others = Request.Form["church_others"];
             string candidate_course_name = Request.Form["candidate_course_name"];
             string candidate_Congregation = Request.Form["aspnet_variable$MainContent$Congregation"];
+            if (candidate_Congregation.Length == 0)
+                candidate_Congregation = null;
 
             string result = "ERROR";
             usp_addNewCourseMemberParticipantAndAttendanceResult mem;
@@ -431,9 +439,9 @@ namespace DOS.Controllers
                 convertok = DateTime.TryParseExact(candidate_dob, "dd/MM/yyyy", null, System.Globalization.DateTimeStyles.None, out dt);
 
                 if (convertok)
-                    vis = sql_conn.usp_addNewCourseVisitorParticipantAndAttendance(mailingList, candidate_nric, candidate_course, candidate_salutation.Split('~')[0], candidate_english_name, dt, candidate_gender, candidate_education, candidate_nationality, candidate_occupation, candidate_postal_code, candidate_blk_house, candidate_street_address, candidate_unit, candidate_contact, candidate_email, int.Parse(candidate_church.Split('~')[0]), candidate_church_others, User.Identity.Name, WalkInDate).ElementAt(0);
+                    vis = sql_conn.usp_addNewCourseVisitorParticipantAndAttendance(candidate_Congregation, mailingList, candidate_nric, candidate_course, candidate_salutation.Split('~')[0], candidate_english_name, dt, candidate_gender, candidate_education, candidate_nationality, candidate_occupation, candidate_postal_code, candidate_blk_house, candidate_street_address, candidate_unit, candidate_contact, candidate_email, int.Parse(candidate_church.Split('~')[0]), candidate_church_others, User.Identity.Name, WalkInDate).ElementAt(0);
                 else
-                    vis = sql_conn.usp_addNewCourseVisitorParticipantAndAttendance(mailingList, candidate_nric, candidate_course, candidate_salutation.Split('~')[0], candidate_english_name, null, candidate_gender, candidate_education, candidate_nationality, candidate_occupation, candidate_postal_code, candidate_blk_house, candidate_street_address, candidate_unit, candidate_contact, candidate_email, int.Parse(candidate_church.Split('~')[0]), candidate_church_others, User.Identity.Name, WalkInDate).ElementAt(0);
+                    vis = sql_conn.usp_addNewCourseVisitorParticipantAndAttendance(candidate_Congregation, mailingList, candidate_nric, candidate_course, candidate_salutation.Split('~')[0], candidate_english_name, null, candidate_gender, candidate_education, candidate_nationality, candidate_occupation, candidate_postal_code, candidate_blk_house, candidate_street_address, candidate_unit, candidate_contact, candidate_email, int.Parse(candidate_church.Split('~')[0]), candidate_church_others, User.Identity.Name, WalkInDate).ElementAt(0);
 
                 result = vis.Result;
             }
@@ -501,6 +509,8 @@ namespace DOS.Controllers
                 string candidate_church_others = Request.Form["church_others"];
                 string candidate_course_name = Request.Form["candidate_course_name"];
                 string candidate_Congregation = Request.Form["aspnet_variable$MainContent$Congregation"];
+                if (candidate_Congregation.Length == 0)
+                    candidate_Congregation = null;
 
                 string mailingList = "";
                 if (Request.Form["mailingList"] != null)
@@ -604,7 +614,7 @@ namespace DOS.Controllers
                     course = candidate_course_name;
                 }
 
-                XElement visitorxml = toUpdateXMLVisitor(mailingList, "Unspecified", candidate_nric, candidate_nric, candidate_salutation.Split('~')[0], candidate_english_name, candidate_unit, candidate_blk_house, candidate_nationality.Split('~')[0], candidate_occupation.Split('~')[0], candidate_dob, candidate_gender, candidate_street_address, candidate_postal_code, candidate_email, candidate_education.Split('~')[0], candidate_contact, candidate_church.Split('~')[0], candidate_church_others);
+                XElement visitorxml = toUpdateXMLVisitor(candidate_Congregation, mailingList, "Unspecified", candidate_nric, candidate_nric, candidate_salutation.Split('~')[0], candidate_english_name, candidate_unit, candidate_blk_house, candidate_nationality.Split('~')[0], candidate_occupation.Split('~')[0], candidate_dob, candidate_gender, candidate_street_address, candidate_postal_code, candidate_email, candidate_education.Split('~')[0], candidate_contact, candidate_church.Split('~')[0], candidate_church_others);
                 if (existingmember == "null")
                 {
                     sql_conn.usp_addNewCourseVisitorParticipant(visitorxml, candidate_course, ref result, ref sal, ref name, ref course, additionalInfo);
@@ -661,6 +671,7 @@ namespace DOS.Controllers
             }
             catch (Exception e)
             {
+                string msg = e.Message;
                 initializedParameter();
                 if (((string)Session["SystemMode"]).ToUpper() != "FULL")
                     ViewData["listofcourse"] = sql_conn.usp_getListofCourse(true, -1).ToList();

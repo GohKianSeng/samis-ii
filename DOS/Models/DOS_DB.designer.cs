@@ -1343,13 +1343,6 @@ namespace DOS.Models
 			return ((ISingleResult<usp_getCourseRegistrationStatResult>)(result.ReturnValue));
 		}
 		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.usp_getVisitorInformation")]
-		public ISingleResult<usp_getVisitorInformationResult> usp_getVisitorInformation([global::System.Data.Linq.Mapping.ParameterAttribute(Name="NRIC", DbType="VarChar(20)")] string nRIC)
-		{
-			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), nRIC);
-			return ((ISingleResult<usp_getVisitorInformationResult>)(result.ReturnValue));
-		}
-		
 		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.usp_getMemberInformation")]
 		public ISingleResult<usp_getMemberInformationResult> usp_getMemberInformation([global::System.Data.Linq.Mapping.ParameterAttribute(Name="NRIC", DbType="VarChar(20)")] string nRIC, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Type", DbType="VarChar(10)")] string type)
 		{
@@ -1362,33 +1355,6 @@ namespace DOS.Models
 		{
 			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), nRIC);
 			return ((ISingleResult<usp_getMemberInformationPrintingResult>)(result.ReturnValue));
-		}
-		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.usp_addNewCourseVisitorParticipantAndAttendance")]
-		public ISingleResult<usp_addNewCourseVisitorParticipantAndAttendanceResult> usp_addNewCourseVisitorParticipantAndAttendance(
-					[global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(3)")] string mailingList, 
-					[global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(10)")] string nric, 
-					[global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(10)")] string course, 
-					[global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(10)")] string salutation, 
-					[global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(50)")] string english_name, 
-					[global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Date")] System.Nullable<System.DateTime> dob, 
-					[global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(1)")] string gender, 
-					[global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(10)")] string education, 
-					[global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(10)")] string nationality, 
-					[global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(10)")] string occupation, 
-					[global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(6)")] string postal_code, 
-					[global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(10)")] string blk_house, 
-					[global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(1000)")] string street_address, 
-					[global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(10)")] string unit, 
-					[global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(15)")] string contact, 
-					[global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(100)")] string email, 
-					[global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> church, 
-					[global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(100)")] string church_others, 
-					[global::System.Data.Linq.Mapping.ParameterAttribute(Name="UserID", DbType="VarChar(50)")] string userID, 
-					[global::System.Data.Linq.Mapping.ParameterAttribute(DbType="DateTime")] System.Nullable<System.DateTime> today)
-		{
-			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), mailingList, nric, course, salutation, english_name, dob, gender, education, nationality, occupation, postal_code, blk_house, street_address, unit, contact, email, church, church_others, userID, today);
-			return ((ISingleResult<usp_addNewCourseVisitorParticipantAndAttendanceResult>)(result.ReturnValue));
 		}
 		
 		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.usp_getListofCourse")]
@@ -1440,6 +1406,41 @@ namespace DOS.Models
 		{
 			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), fromYear, numberOfCourse, church, nRIC);
 			return ((ISingleResult<usp_getCourseIndividualAttendanceReportResult>)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.usp_addNewCourseVisitorParticipantAndAttendance")]
+		public ISingleResult<usp_addNewCourseVisitorParticipantAndAttendanceResult> usp_addNewCourseVisitorParticipantAndAttendance(
+					[global::System.Data.Linq.Mapping.ParameterAttribute(Name="Congregation", DbType="VarChar(3)")] string congregation, 
+					[global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(3)")] string mailingList, 
+					[global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(10)")] string nric, 
+					[global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(10)")] string course, 
+					[global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(10)")] string salutation, 
+					[global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(50)")] string english_name, 
+					[global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Date")] System.Nullable<System.DateTime> dob, 
+					[global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(1)")] string gender, 
+					[global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(10)")] string education, 
+					[global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(10)")] string nationality, 
+					[global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(10)")] string occupation, 
+					[global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(6)")] string postal_code, 
+					[global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(10)")] string blk_house, 
+					[global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(1000)")] string street_address, 
+					[global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(10)")] string unit, 
+					[global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(15)")] string contact, 
+					[global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(100)")] string email, 
+					[global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> church, 
+					[global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(100)")] string church_others, 
+					[global::System.Data.Linq.Mapping.ParameterAttribute(Name="UserID", DbType="VarChar(50)")] string userID, 
+					[global::System.Data.Linq.Mapping.ParameterAttribute(DbType="DateTime")] System.Nullable<System.DateTime> today)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), congregation, mailingList, nric, course, salutation, english_name, dob, gender, education, nationality, occupation, postal_code, blk_house, street_address, unit, contact, email, church, church_others, userID, today);
+			return ((ISingleResult<usp_addNewCourseVisitorParticipantAndAttendanceResult>)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.usp_getVisitorInformation")]
+		public ISingleResult<usp_getVisitorInformationResult> usp_getVisitorInformation([global::System.Data.Linq.Mapping.ParameterAttribute(Name="NRIC", DbType="VarChar(20)")] string nRIC)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), nRIC);
+			return ((ISingleResult<usp_getVisitorInformationResult>)(result.ReturnValue));
 		}
 	}
 	
@@ -11579,356 +11580,6 @@ namespace DOS.Models
 		}
 	}
 	
-	public partial class usp_getVisitorInformationResult
-	{
-		
-		private bool _mailingList;
-		
-		private string _EnglishName;
-		
-		private string _Salutation;
-		
-		private string _DOB;
-		
-		private string _Gender;
-		
-		private string _NRIC;
-		
-		private string _Nationality;
-		
-		private string _AddressStreet;
-		
-		private string _AddressHouseBlk;
-		
-		private string _AddressPostalCode;
-		
-		private string _AddressUnit;
-		
-		private string _Email;
-		
-		private string _Education;
-		
-		private string _Occupation;
-		
-		private string _Contact;
-		
-		private string _Church;
-		
-		private string _ChurchOthers;
-		
-		private System.Xml.Linq.XElement _CourseAttended;
-		
-		private System.Xml.Linq.XElement _History;
-		
-		public usp_getVisitorInformationResult()
-		{
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_mailingList", DbType="Bit NOT NULL")]
-		public bool mailingList
-		{
-			get
-			{
-				return this._mailingList;
-			}
-			set
-			{
-				if ((this._mailingList != value))
-				{
-					this._mailingList = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_EnglishName", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
-		public string EnglishName
-		{
-			get
-			{
-				return this._EnglishName;
-			}
-			set
-			{
-				if ((this._EnglishName != value))
-				{
-					this._EnglishName = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Salutation", DbType="VarChar(5)")]
-		public string Salutation
-		{
-			get
-			{
-				return this._Salutation;
-			}
-			set
-			{
-				if ((this._Salutation != value))
-				{
-					this._Salutation = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DOB", DbType="VarChar(10) NOT NULL", CanBeNull=false)]
-		public string DOB
-		{
-			get
-			{
-				return this._DOB;
-			}
-			set
-			{
-				if ((this._DOB != value))
-				{
-					this._DOB = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Gender", DbType="VarChar(1) NOT NULL", CanBeNull=false)]
-		public string Gender
-		{
-			get
-			{
-				return this._Gender;
-			}
-			set
-			{
-				if ((this._Gender != value))
-				{
-					this._Gender = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_NRIC", DbType="VarChar(20)")]
-		public string NRIC
-		{
-			get
-			{
-				return this._NRIC;
-			}
-			set
-			{
-				if ((this._NRIC != value))
-				{
-					this._NRIC = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Nationality", DbType="VarChar(5)")]
-		public string Nationality
-		{
-			get
-			{
-				return this._Nationality;
-			}
-			set
-			{
-				if ((this._Nationality != value))
-				{
-					this._Nationality = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_AddressStreet", DbType="VarChar(100) NOT NULL", CanBeNull=false)]
-		public string AddressStreet
-		{
-			get
-			{
-				return this._AddressStreet;
-			}
-			set
-			{
-				if ((this._AddressStreet != value))
-				{
-					this._AddressStreet = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_AddressHouseBlk", DbType="VarChar(10) NOT NULL", CanBeNull=false)]
-		public string AddressHouseBlk
-		{
-			get
-			{
-				return this._AddressHouseBlk;
-			}
-			set
-			{
-				if ((this._AddressHouseBlk != value))
-				{
-					this._AddressHouseBlk = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_AddressPostalCode", DbType="VarChar(6) NOT NULL", CanBeNull=false)]
-		public string AddressPostalCode
-		{
-			get
-			{
-				return this._AddressPostalCode;
-			}
-			set
-			{
-				if ((this._AddressPostalCode != value))
-				{
-					this._AddressPostalCode = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_AddressUnit", DbType="VarChar(10) NOT NULL", CanBeNull=false)]
-		public string AddressUnit
-		{
-			get
-			{
-				return this._AddressUnit;
-			}
-			set
-			{
-				if ((this._AddressUnit != value))
-				{
-					this._AddressUnit = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Email", DbType="VarChar(100) NOT NULL", CanBeNull=false)]
-		public string Email
-		{
-			get
-			{
-				return this._Email;
-			}
-			set
-			{
-				if ((this._Email != value))
-				{
-					this._Email = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Education", DbType="VarChar(5)")]
-		public string Education
-		{
-			get
-			{
-				return this._Education;
-			}
-			set
-			{
-				if ((this._Education != value))
-				{
-					this._Education = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Occupation", DbType="VarChar(5)")]
-		public string Occupation
-		{
-			get
-			{
-				return this._Occupation;
-			}
-			set
-			{
-				if ((this._Occupation != value))
-				{
-					this._Occupation = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Contact", DbType="VarChar(15) NOT NULL", CanBeNull=false)]
-		public string Contact
-		{
-			get
-			{
-				return this._Contact;
-			}
-			set
-			{
-				if ((this._Contact != value))
-				{
-					this._Contact = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Church", DbType="VarChar(3)")]
-		public string Church
-		{
-			get
-			{
-				return this._Church;
-			}
-			set
-			{
-				if ((this._Church != value))
-				{
-					this._Church = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ChurchOthers", DbType="VarChar(100) NOT NULL", CanBeNull=false)]
-		public string ChurchOthers
-		{
-			get
-			{
-				return this._ChurchOthers;
-			}
-			set
-			{
-				if ((this._ChurchOthers != value))
-				{
-					this._ChurchOthers = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CourseAttended", DbType="Xml")]
-		public System.Xml.Linq.XElement CourseAttended
-		{
-			get
-			{
-				return this._CourseAttended;
-			}
-			set
-			{
-				if ((this._CourseAttended != value))
-				{
-					this._CourseAttended = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_History", DbType="Xml")]
-		public System.Xml.Linq.XElement History
-		{
-			get
-			{
-				return this._History;
-			}
-			set
-			{
-				if ((this._History != value))
-				{
-					this._History = value;
-				}
-			}
-		}
-	}
-	
 	public partial class usp_getMemberInformationResult
 	{
 		
@@ -13637,32 +13288,6 @@ namespace DOS.Models
 		}
 	}
 	
-	public partial class usp_addNewCourseVisitorParticipantAndAttendanceResult
-	{
-		
-		private string _Result;
-		
-		public usp_addNewCourseVisitorParticipantAndAttendanceResult()
-		{
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Result", DbType="VarChar(292)")]
-		public string Result
-		{
-			get
-			{
-				return this._Result;
-			}
-			set
-			{
-				if ((this._Result != value))
-				{
-					this._Result = value;
-				}
-			}
-		}
-	}
-	
 	public partial class usp_getListofCourseResult
 	{
 		
@@ -14570,6 +14195,400 @@ namespace DOS.Models
 				if ((this._Parish != value))
 				{
 					this._Parish = value;
+				}
+			}
+		}
+	}
+	
+	public partial class usp_addNewCourseVisitorParticipantAndAttendanceResult
+	{
+		
+		private string _Result;
+		
+		public usp_addNewCourseVisitorParticipantAndAttendanceResult()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Result", DbType="VarChar(292)")]
+		public string Result
+		{
+			get
+			{
+				return this._Result;
+			}
+			set
+			{
+				if ((this._Result != value))
+				{
+					this._Result = value;
+				}
+			}
+		}
+	}
+	
+	public partial class usp_getVisitorInformationResult
+	{
+		
+		private string _Congregation;
+		
+		private bool _mailingList;
+		
+		private string _EnglishName;
+		
+		private string _Salutation;
+		
+		private string _DOB;
+		
+		private string _Gender;
+		
+		private string _NRIC;
+		
+		private string _Nationality;
+		
+		private string _AddressStreet;
+		
+		private string _AddressHouseBlk;
+		
+		private string _AddressPostalCode;
+		
+		private string _AddressUnit;
+		
+		private string _Email;
+		
+		private string _Education;
+		
+		private string _Occupation;
+		
+		private string _Contact;
+		
+		private string _Church;
+		
+		private string _ChurchOthers;
+		
+		private System.Xml.Linq.XElement _CourseAttended;
+		
+		private System.Xml.Linq.XElement _History;
+		
+		public usp_getVisitorInformationResult()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Congregation", DbType="VarChar(2) NOT NULL", CanBeNull=false)]
+		public string Congregation
+		{
+			get
+			{
+				return this._Congregation;
+			}
+			set
+			{
+				if ((this._Congregation != value))
+				{
+					this._Congregation = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_mailingList", DbType="Bit NOT NULL")]
+		public bool mailingList
+		{
+			get
+			{
+				return this._mailingList;
+			}
+			set
+			{
+				if ((this._mailingList != value))
+				{
+					this._mailingList = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_EnglishName", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
+		public string EnglishName
+		{
+			get
+			{
+				return this._EnglishName;
+			}
+			set
+			{
+				if ((this._EnglishName != value))
+				{
+					this._EnglishName = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Salutation", DbType="VarChar(5)")]
+		public string Salutation
+		{
+			get
+			{
+				return this._Salutation;
+			}
+			set
+			{
+				if ((this._Salutation != value))
+				{
+					this._Salutation = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DOB", DbType="VarChar(10) NOT NULL", CanBeNull=false)]
+		public string DOB
+		{
+			get
+			{
+				return this._DOB;
+			}
+			set
+			{
+				if ((this._DOB != value))
+				{
+					this._DOB = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Gender", DbType="VarChar(1) NOT NULL", CanBeNull=false)]
+		public string Gender
+		{
+			get
+			{
+				return this._Gender;
+			}
+			set
+			{
+				if ((this._Gender != value))
+				{
+					this._Gender = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_NRIC", DbType="VarChar(20)")]
+		public string NRIC
+		{
+			get
+			{
+				return this._NRIC;
+			}
+			set
+			{
+				if ((this._NRIC != value))
+				{
+					this._NRIC = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Nationality", DbType="VarChar(5)")]
+		public string Nationality
+		{
+			get
+			{
+				return this._Nationality;
+			}
+			set
+			{
+				if ((this._Nationality != value))
+				{
+					this._Nationality = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_AddressStreet", DbType="VarChar(100) NOT NULL", CanBeNull=false)]
+		public string AddressStreet
+		{
+			get
+			{
+				return this._AddressStreet;
+			}
+			set
+			{
+				if ((this._AddressStreet != value))
+				{
+					this._AddressStreet = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_AddressHouseBlk", DbType="VarChar(10) NOT NULL", CanBeNull=false)]
+		public string AddressHouseBlk
+		{
+			get
+			{
+				return this._AddressHouseBlk;
+			}
+			set
+			{
+				if ((this._AddressHouseBlk != value))
+				{
+					this._AddressHouseBlk = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_AddressPostalCode", DbType="VarChar(6) NOT NULL", CanBeNull=false)]
+		public string AddressPostalCode
+		{
+			get
+			{
+				return this._AddressPostalCode;
+			}
+			set
+			{
+				if ((this._AddressPostalCode != value))
+				{
+					this._AddressPostalCode = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_AddressUnit", DbType="VarChar(10) NOT NULL", CanBeNull=false)]
+		public string AddressUnit
+		{
+			get
+			{
+				return this._AddressUnit;
+			}
+			set
+			{
+				if ((this._AddressUnit != value))
+				{
+					this._AddressUnit = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Email", DbType="VarChar(100) NOT NULL", CanBeNull=false)]
+		public string Email
+		{
+			get
+			{
+				return this._Email;
+			}
+			set
+			{
+				if ((this._Email != value))
+				{
+					this._Email = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Education", DbType="VarChar(5)")]
+		public string Education
+		{
+			get
+			{
+				return this._Education;
+			}
+			set
+			{
+				if ((this._Education != value))
+				{
+					this._Education = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Occupation", DbType="VarChar(5)")]
+		public string Occupation
+		{
+			get
+			{
+				return this._Occupation;
+			}
+			set
+			{
+				if ((this._Occupation != value))
+				{
+					this._Occupation = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Contact", DbType="VarChar(15) NOT NULL", CanBeNull=false)]
+		public string Contact
+		{
+			get
+			{
+				return this._Contact;
+			}
+			set
+			{
+				if ((this._Contact != value))
+				{
+					this._Contact = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Church", DbType="VarChar(3)")]
+		public string Church
+		{
+			get
+			{
+				return this._Church;
+			}
+			set
+			{
+				if ((this._Church != value))
+				{
+					this._Church = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ChurchOthers", DbType="VarChar(100) NOT NULL", CanBeNull=false)]
+		public string ChurchOthers
+		{
+			get
+			{
+				return this._ChurchOthers;
+			}
+			set
+			{
+				if ((this._ChurchOthers != value))
+				{
+					this._ChurchOthers = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CourseAttended", DbType="Xml")]
+		public System.Xml.Linq.XElement CourseAttended
+		{
+			get
+			{
+				return this._CourseAttended;
+			}
+			set
+			{
+				if ((this._CourseAttended != value))
+				{
+					this._CourseAttended = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_History", DbType="Xml")]
+		public System.Xml.Linq.XElement History
+		{
+			get
+			{
+				return this._History;
+			}
+			set
+			{
+				if ((this._History != value))
+				{
+					this._History = value;
 				}
 			}
 		}

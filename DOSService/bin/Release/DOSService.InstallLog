@@ -109,3 +109,206 @@ Affected parameters are:
    logtoconsole = 
    logfile = C:\Users\ks\Desktop\New folder\samis-ii\DOSService\bin\Release\DOSService.InstallLog
    assemblypath = C:\Users\ks\Desktop\New folder\samis-ii\DOSService\bin\Release\DOSService.exe
+Uninstalling assembly 'C:\Users\ks\Desktop\New folder\samis-ii\DOSService\bin\Release\DOSService.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = C:\Users\ks\Desktop\New folder\samis-ii\DOSService\bin\Release\DOSService.InstallLog
+   assemblypath = C:\Users\ks\Desktop\New folder\samis-ii\DOSService\bin\Release\DOSService.exe
+Removing EventLog source SAMIS Service.
+An exception occurred during the uninstallation of the System.Diagnostics.EventLogInstaller installer.
+System.Security.SecurityException: The source was not found, but some or all event logs could not be searched.  Inaccessible logs: Security.
+An exception occurred while uninstalling. This exception will be ignored and the uninstall will continue. However, the application might not be fully uninstalled after the uninstall is complete.
+Installing assembly 'C:\Users\ks\Desktop\New folder\samis-ii\DOSService\bin\Release\DOSService.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = C:\Users\ks\Desktop\New folder\samis-ii\DOSService\bin\Release\DOSService.InstallLog
+   assemblypath = C:\Users\ks\Desktop\New folder\samis-ii\DOSService\bin\Release\DOSService.exe
+Installing service SAMIS Service...
+Creating EventLog source SAMIS Service in log Application...
+Rolling back assembly 'C:\Users\ks\Desktop\New folder\samis-ii\DOSService\bin\Release\DOSService.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = C:\Users\ks\Desktop\New folder\samis-ii\DOSService\bin\Release\DOSService.InstallLog
+   assemblypath = C:\Users\ks\Desktop\New folder\samis-ii\DOSService\bin\Release\DOSService.exe
+Restoring event log to previous state for source SAMIS Service.
+An exception occurred during the Rollback phase of the System.Diagnostics.EventLogInstaller installer.
+System.Security.SecurityException: The source was not found, but some or all event logs could not be searched.  Inaccessible logs: Security.
+An exception occurred during the Rollback phase of the installation. This exception will be ignored and the rollback will continue. However, the machine might not fully revert to its initial state after the rollback is complete.
+Installing assembly 'C:\Users\ks\Desktop\New folder\samis-ii\DOSService\bin\Release\DOSService.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = C:\Users\ks\Desktop\New folder\samis-ii\DOSService\bin\Release\DOSService.InstallLog
+   assemblypath = C:\Users\ks\Desktop\New folder\samis-ii\DOSService\bin\Release\DOSService.exe
+Installing service SAMIS Service...
+Creating EventLog source SAMIS Service in log Application...
+Rolling back assembly 'C:\Users\ks\Desktop\New folder\samis-ii\DOSService\bin\Release\DOSService.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = C:\Users\ks\Desktop\New folder\samis-ii\DOSService\bin\Release\DOSService.InstallLog
+   assemblypath = C:\Users\ks\Desktop\New folder\samis-ii\DOSService\bin\Release\DOSService.exe
+Restoring event log to previous state for source SAMIS Service.
+An exception occurred during the Rollback phase of the System.Diagnostics.EventLogInstaller installer.
+System.Security.SecurityException: The source was not found, but some or all event logs could not be searched.  Inaccessible logs: Security.
+An exception occurred during the Rollback phase of the installation. This exception will be ignored and the rollback will continue. However, the machine might not fully revert to its initial state after the rollback is complete.
+Installing assembly 'C:\Users\ks\Desktop\New folder\samis-ii\DOSService\bin\Release\DOSService.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = C:\Users\ks\Desktop\New folder\samis-ii\DOSService\bin\Release\DOSService.InstallLog
+   assemblypath = C:\Users\ks\Desktop\New folder\samis-ii\DOSService\bin\Release\DOSService.exe
+Installing service SAMIS Service...
+Creating EventLog source SAMIS Service in log Application...
+Rolling back assembly 'C:\Users\ks\Desktop\New folder\samis-ii\DOSService\bin\Release\DOSService.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = C:\Users\ks\Desktop\New folder\samis-ii\DOSService\bin\Release\DOSService.InstallLog
+   assemblypath = C:\Users\ks\Desktop\New folder\samis-ii\DOSService\bin\Release\DOSService.exe
+Restoring event log to previous state for source SAMIS Service.
+An exception occurred during the Rollback phase of the System.Diagnostics.EventLogInstaller installer.
+System.Security.SecurityException: The source was not found, but some or all event logs could not be searched.  Inaccessible logs: Security.
+An exception occurred during the Rollback phase of the installation. This exception will be ignored and the rollback will continue. However, the machine might not fully revert to its initial state after the rollback is complete.
+Uninstalling assembly 'C:\Users\ks\Desktop\New folder\samis-ii\DOSService\bin\Release\DOSService.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = C:\Users\ks\Desktop\New folder\samis-ii\DOSService\bin\Release\DOSService.InstallLog
+   assemblypath = C:\Users\ks\Desktop\New folder\samis-ii\DOSService\bin\Release\DOSService.exe
+Removing EventLog source SAMIS Service.
+An exception occurred during the uninstallation of the System.Diagnostics.EventLogInstaller installer.
+System.Security.SecurityException: The source was not found, but some or all event logs could not be searched.  Inaccessible logs: Security.
+An exception occurred while uninstalling. This exception will be ignored and the uninstall will continue. However, the application might not be fully uninstalled after the uninstall is complete.
+Installing assembly 'C:\Users\ks\Desktop\New folder\samis-ii\DOSService\bin\Release\DOSService.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = C:\Users\ks\Desktop\New folder\samis-ii\DOSService\bin\Release\DOSService.InstallLog
+   assemblypath = C:\Users\ks\Desktop\New folder\samis-ii\DOSService\bin\Release\DOSService.exe
+Installing service SAMIS Service...
+Creating EventLog source SAMIS Service in log Application...
+Rolling back assembly 'C:\Users\ks\Desktop\New folder\samis-ii\DOSService\bin\Release\DOSService.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = C:\Users\ks\Desktop\New folder\samis-ii\DOSService\bin\Release\DOSService.InstallLog
+   assemblypath = C:\Users\ks\Desktop\New folder\samis-ii\DOSService\bin\Release\DOSService.exe
+Restoring event log to previous state for source SAMIS Service.
+An exception occurred during the Rollback phase of the System.Diagnostics.EventLogInstaller installer.
+System.Security.SecurityException: The source was not found, but some or all event logs could not be searched.  Inaccessible logs: Security.
+An exception occurred during the Rollback phase of the installation. This exception will be ignored and the rollback will continue. However, the machine might not fully revert to its initial state after the rollback is complete.
+Installing assembly 'C:\Users\ks\Desktop\New folder\samis-ii\DOSService\bin\Release\DOSService.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = C:\Users\ks\Desktop\New folder\samis-ii\DOSService\bin\Release\DOSService.InstallLog
+   assemblypath = C:\Users\ks\Desktop\New folder\samis-ii\DOSService\bin\Release\DOSService.exe
+Rolling back assembly 'C:\Users\ks\Desktop\New folder\samis-ii\DOSService\bin\Release\DOSService.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = C:\Users\ks\Desktop\New folder\samis-ii\DOSService\bin\Release\DOSService.InstallLog
+   assemblypath = C:\Users\ks\Desktop\New folder\samis-ii\DOSService\bin\Release\DOSService.exe
+Uninstalling assembly 'C:\Users\ks\Desktop\New folder\samis-ii\DOSService\bin\Release\DOSService.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = C:\Users\ks\Desktop\New folder\samis-ii\DOSService\bin\Release\DOSService.InstallLog
+   assemblypath = C:\Users\ks\Desktop\New folder\samis-ii\DOSService\bin\Release\DOSService.exe
+Removing EventLog source DOSService.
+An exception occurred during the uninstallation of the System.Diagnostics.EventLogInstaller installer.
+System.Security.SecurityException: Requested registry access is not allowed.
+An exception occurred while uninstalling. This exception will be ignored and the uninstall will continue. However, the application might not be fully uninstalled after the uninstall is complete.
+Uninstalling assembly 'C:\Users\ks\Desktop\New folder\samis-ii\DOSService\bin\Release\DOSService.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = C:\Users\ks\Desktop\New folder\samis-ii\DOSService\bin\Release\DOSService.InstallLog
+   assemblypath = C:\Users\ks\Desktop\New folder\samis-ii\DOSService\bin\Release\DOSService.exe
+Removing EventLog source DOSService.
+Service DOSService is being removed from the system...
+Service DOSService was successfully removed from the system.
+Installing assembly 'C:\Users\ks\Desktop\New folder\samis-ii\DOSService\bin\Release\DOSService.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = C:\Users\ks\Desktop\New folder\samis-ii\DOSService\bin\Release\DOSService.InstallLog
+   assemblypath = C:\Users\ks\Desktop\New folder\samis-ii\DOSService\bin\Release\DOSService.exe
+Installing service DOSService...
+Service DOSService has been successfully installed.
+Creating EventLog source DOSService in log Application...
+Committing assembly 'C:\Users\ks\Desktop\New folder\samis-ii\DOSService\bin\Release\DOSService.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = C:\Users\ks\Desktop\New folder\samis-ii\DOSService\bin\Release\DOSService.InstallLog
+   assemblypath = C:\Users\ks\Desktop\New folder\samis-ii\DOSService\bin\Release\DOSService.exe
+Uninstalling assembly 'C:\Users\ks\Desktop\New folder\samis-ii\DOSService\bin\Release\DOSService.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = C:\Users\ks\Desktop\New folder\samis-ii\DOSService\bin\Release\DOSService.InstallLog
+   assemblypath = C:\Users\ks\Desktop\New folder\samis-ii\DOSService\bin\Release\DOSService.exe
+Removing EventLog source DOSService.
+Service DOSService is being removed from the system...
+Service DOSService was successfully removed from the system.
+Uninstalling assembly 'C:\Users\ks\Desktop\New folder\samis-ii\DOSService\bin\Release\DOSService.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = C:\Users\ks\Desktop\New folder\samis-ii\DOSService\bin\Release\DOSService.InstallLog
+   assemblypath = C:\Users\ks\Desktop\New folder\samis-ii\DOSService\bin\Release\DOSService.exe
+Removing EventLog source DOSService.
+Warning: The source DOSService is not registered on the local machine.
+Service DOSService is being removed from the system...
+An exception occurred during the uninstallation of the System.ServiceProcess.ServiceInstaller installer.
+System.ComponentModel.Win32Exception: The specified service does not exist as an installed service
+An exception occurred while uninstalling. This exception will be ignored and the uninstall will continue. However, the application might not be fully uninstalled after the uninstall is complete.
+Installing assembly 'C:\Users\ks\Desktop\New folder\samis-ii\DOSService\bin\Release\DOSService.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = C:\Users\ks\Desktop\New folder\samis-ii\DOSService\bin\Release\DOSService.InstallLog
+   assemblypath = C:\Users\ks\Desktop\New folder\samis-ii\DOSService\bin\Release\DOSService.exe
+Installing service SAMIS Service...
+Service SAMIS Service has been successfully installed.
+Creating EventLog source SAMIS Service in log Application...
+Committing assembly 'C:\Users\ks\Desktop\New folder\samis-ii\DOSService\bin\Release\DOSService.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = C:\Users\ks\Desktop\New folder\samis-ii\DOSService\bin\Release\DOSService.InstallLog
+   assemblypath = C:\Users\ks\Desktop\New folder\samis-ii\DOSService\bin\Release\DOSService.exe
+Uninstalling assembly 'C:\Users\ks\Desktop\New folder\samis-ii\DOSService\bin\Release\DOSService.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = C:\Users\ks\Desktop\New folder\samis-ii\DOSService\bin\Release\DOSService.InstallLog
+   assemblypath = C:\Users\ks\Desktop\New folder\samis-ii\DOSService\bin\Release\DOSService.exe
+Removing EventLog source SAMIS Service.
+Service SAMIS Service is being removed from the system...
+Service SAMIS Service was successfully removed from the system.
+Uninstalling assembly 'C:\Users\ks\Desktop\New folder\samis-ii\DOSService\bin\Release\DOSService.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = C:\Users\ks\Desktop\New folder\samis-ii\DOSService\bin\Release\DOSService.InstallLog
+   assemblypath = C:\Users\ks\Desktop\New folder\samis-ii\DOSService\bin\Release\DOSService.exe
+Removing EventLog source SAMIS Service.
+Warning: The source SAMIS Service is not registered on the local machine.
+Service SAMIS Service is being removed from the system...
+An exception occurred during the uninstallation of the System.ServiceProcess.ServiceInstaller installer.
+System.ComponentModel.Win32Exception: The specified service does not exist as an installed service
+An exception occurred while uninstalling. This exception will be ignored and the uninstall will continue. However, the application might not be fully uninstalled after the uninstall is complete.
+Installing assembly 'C:\Users\ks\Desktop\New folder\samis-ii\DOSService\bin\Release\DOSService.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = C:\Users\ks\Desktop\New folder\samis-ii\DOSService\bin\Release\DOSService.InstallLog
+   assemblypath = C:\Users\ks\Desktop\New folder\samis-ii\DOSService\bin\Release\DOSService.exe
+Installing service SAMIS Service...
+Service SAMIS Service has been successfully installed.
+Creating EventLog source SAMIS Service in log Application...
+Committing assembly 'C:\Users\ks\Desktop\New folder\samis-ii\DOSService\bin\Release\DOSService.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = C:\Users\ks\Desktop\New folder\samis-ii\DOSService\bin\Release\DOSService.InstallLog
+   assemblypath = C:\Users\ks\Desktop\New folder\samis-ii\DOSService\bin\Release\DOSService.exe
+Uninstalling assembly 'C:\Users\ks\Desktop\New folder\samis-ii\DOSService\bin\Release\DOSService.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = C:\Users\ks\Desktop\New folder\samis-ii\DOSService\bin\Release\DOSService.InstallLog
+   assemblypath = C:\Users\ks\Desktop\New folder\samis-ii\DOSService\bin\Release\DOSService.exe
+Removing EventLog source SAMIS Service.
+An exception occurred during the uninstallation of the System.Diagnostics.EventLogInstaller installer.
+System.Security.SecurityException: Requested registry access is not allowed.
+An exception occurred while uninstalling. This exception will be ignored and the uninstall will continue. However, the application might not be fully uninstalled after the uninstall is complete.
+Uninstalling assembly 'C:\Users\ks\Desktop\New folder\samis-ii\DOSService\bin\Release\DOSService.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = C:\Users\ks\Desktop\New folder\samis-ii\DOSService\bin\Release\DOSService.InstallLog
+   assemblypath = C:\Users\ks\Desktop\New folder\samis-ii\DOSService\bin\Release\DOSService.exe
+Removing EventLog source SAMIS Service.
+Service SAMIS Service is being removed from the system...
+Service SAMIS Service was successfully removed from the system.

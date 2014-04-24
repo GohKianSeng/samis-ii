@@ -1,0 +1,11 @@
+C:\Users\ks\Desktop\New folder\samis-ii\DOS\bin\DOS.dll
+C:\Users\ks\Desktop\New folder\samis-ii\DOS\bin\DOS.pdb
+C:\Users\ks\Desktop\New folder\samis-ii\DOS\bin\DropNet.dll
+C:\Users\ks\Desktop\New folder\samis-ii\DOS\bin\Microsoft.JScript.dll
+C:\Users\ks\Desktop\New folder\samis-ii\DOS\bin\Newtonsoft.Json.dll
+C:\Users\ks\Desktop\New folder\samis-ii\DOS\bin\RestSharp.dll
+C:\Users\ks\Desktop\New folder\samis-ii\DOS\bin\System.Data.Linq.dll
+C:\Users\ks\Desktop\New folder\samis-ii\DOS\bin\Newtonsoft.Json.xml
+C:\Users\ks\Desktop\New folder\samis-ii\DOS\obj\Release\ResolveAssemblyReference.cache
+C:\Users\ks\Desktop\New folder\samis-ii\DOS\obj\Release\DOS.dll
+C:\Users\ks\Desktop\New folder\samis-ii\DOS\obj\Release\DOS.pdb

@@ -7,6 +7,7 @@ using System.Threading;
 using System.Xml.Linq;
 using System.Net.Mail;
 using System.Net;
+using System.Configuration;
 
 namespace DOSService
 {
@@ -22,6 +23,8 @@ namespace DOSService
         string emailContent = "";
         public DOSService(bool isConsole)
         {
+            sleepinminutes = int.Parse(ConfigurationManager.AppSettings.Get("SleepInMinutes"));
+
             MonitoringThreadTimer = new System.Timers.Timer();
             MonitoringThreadTimer.Elapsed += new ElapsedEventHandler(StartMonitoring);
             
@@ -40,7 +43,7 @@ namespace DOSService
                 Console.WriteLine("StartMonitoring starts " + DateTime.Now);
                 DBConnectionDataContext sql_conn = new DBConnectionDataContext();
                 MonitoringThreadTimer.Enabled = false;
-                MonitoringThreadTimer.Interval = 60000 * 60;
+                MonitoringThreadTimer.Interval = sleepinminutes * 1000 * 60;
 
                 IEnumerable<usp_getAppConfigResult> res = sql_conn.usp_getAppConfig().ToList();
                 for (int x = 0; x < res.Count(); x++)
@@ -95,74 +98,71 @@ namespace DOSService
         }
         
         private void EmailAlert(object args)
-        {
-            while (continueRun)
+        {            
+            try
             {
-                try
+                Console.WriteLine("Email Alert Starts " + DateTime.Now);
+                DBConnectionDataContext sql_conn = new DBConnectionDataContext();
+                IEnumerable<usp_getAllCourseReminderRecipientsResult> res = sql_conn.usp_getAllCourseReminderRecipients().ToList();
+                foreach (usp_getAllCourseReminderRecipientsResult recipient in res)
                 {
-                    Console.WriteLine("Email Alert Starts " + DateTime.Now);
-                    DBConnectionDataContext sql_conn = new DBConnectionDataContext();
-                    IEnumerable<usp_getAllCourseReminderRecipientsResult> res = sql_conn.usp_getAllCourseReminderRecipients().ToList();
-                    foreach (usp_getAllCourseReminderRecipientsResult recipient in res)
+                    if (recipient.Email.Length > 0)
                     {
-                        if (recipient.Email.Length > 0)
-                        {
-                            string mailbody = emailContent;
-                            mailbody = mailbody.Replace("[AreaName]", recipient.AreaName);
-                            mailbody = mailbody.Replace("[CourseEndTime]", recipient.CourseEndTime.ToString(@"hh\:mm"));
-                            mailbody = mailbody.Replace("[CourseName]", recipient.CourseName);
-                            mailbody = mailbody.Replace("[CourseStartDate]", recipient.CourseStartDate.ToString());
-                            mailbody = mailbody.Replace("[CourseStartTime]", recipient.CourseStartTime.ToString(@"hh\:mm"));
-                            mailbody = mailbody.Replace("[Email]", recipient.Email);
-                            mailbody = mailbody.Replace("[Name]", recipient.Name);
+                        string mailbody = emailContent;
+                        mailbody = mailbody.Replace("[AreaName]", recipient.AreaName);
+                        mailbody = mailbody.Replace("[CourseEndTime]", recipient.CourseEndTime.ToString(@"hh\:mm"));
+                        mailbody = mailbody.Replace("[CourseName]", recipient.CourseName);
+                        mailbody = mailbody.Replace("[CourseStartDate]", recipient.CourseStartDate.ToString());
+                        mailbody = mailbody.Replace("[CourseStartTime]", recipient.CourseStartTime.ToString(@"hh\:mm"));
+                        mailbody = mailbody.Replace("[Email]", recipient.Email);
+                        mailbody = mailbody.Replace("[Name]", recipient.Name);
 
 
-                            MailMessage mail = new MailMessage();
-                            mail.IsBodyHtml = true;
-                            string to = recipient.Email;
+                        MailMessage mail = new MailMessage();
+                        mail.IsBodyHtml = true;
+                        string to = recipient.Email;
 
-                            mail.From = new MailAddress(SMTPAccount);
-                            mail.To.Add("<" + to + ">");
+                        mail.From = new MailAddress(SMTPAccount);
+                        mail.To.Add("<" + to + ">");
 
-                            mail.Subject = "Course Commencing Reminder";        // put subject here	        
-                            mail.IsBodyHtml = true;
-                            mail.Body = mailbody;
+                        mail.Subject = "Course Commencing Reminder";        // put subject here	        
+                        mail.IsBodyHtml = true;
+                        mail.Body = mailbody;
 
-                            SmtpClient smtpclient = new SmtpClient(SMTPAddress);
-                            smtpclient.Credentials = new NetworkCredential(SMTPAccount, SMTPAccountPassword);
-                            smtpclient.EnableSsl = true;
-                            smtpclient.Port = 587;
+                        SmtpClient smtpclient = new SmtpClient(SMTPAddress);
+                        smtpclient.Credentials = new NetworkCredential(SMTPAccount, SMTPAccountPassword);
+                        smtpclient.EnableSsl = true;
+                        smtpclient.Port = 587;
 
-                            smtpclient.Send(mail);
-                            Console.WriteLine("EmailAlertThread EmailSent " + recipient.Email + " " + recipient.CourseName);
-                            sql_conn.usp_insertlogging('I', "DOSService", "DOSService", "EmailAlertThread EmailSent " + recipient.Email + " " + recipient.CourseName, 0, "", "", XElement.Parse("<empty />"));
+                        //smtpclient.Send(mail);
+                        Console.WriteLine("EmailAlertThread EmailSent " + recipient.Email + " " + recipient.CourseName);
+                        sql_conn.usp_insertlogging('I', "DOSService", "DOSService", "EmailAlertThread EmailSent " + recipient.Email + " " + recipient.CourseName, 0, "", "", XElement.Parse("<empty />"));
                     
-                        }                        
-                    }
-                    Console.WriteLine("EmailAlert Done");
-                    Thread.Sleep(1000 * sleepinminutes * 60);
+                    }                        
                 }
-                catch (Exception e)
-                {
-                    XElement xml = new XElement("Error");
-                    xml.Add(new XElement("Message", e.Message));
-                    xml.Add(new XElement("InnerException", e.InnerException));
-                    xml.Add(new XElement("Source", e.Source));
-                    xml.Add(new XElement("StackTrace", e.StackTrace));
 
-                    DBConnectionDataContext exception_sql_conn = new DBConnectionDataContext();
-                    exception_sql_conn.usp_insertlogging('E', "DOSService", "DOSService", "EmailAlertThread Exception", 0, "", "", xml);
-                    exception_sql_conn.Connection.Close();
-                }
+                sql_conn.usp_insertlogging('I', "DOSService", "DOSService", "EmailAlertThread Exit, Starting again on " + DateTime.Now.AddMinutes(sleepinminutes).ToString(), 0, "", "", XElement.Parse("<empty />"));
+                Console.WriteLine("EmailAlert Done");                
             }
+            catch (Exception e)
+            {
+                XElement xml = new XElement("Error");
+                xml.Add(new XElement("Message", e.Message));
+                xml.Add(new XElement("InnerException", e.InnerException));
+                xml.Add(new XElement("Source", e.Source));
+                xml.Add(new XElement("StackTrace", e.StackTrace));
+
+                DBConnectionDataContext exception_sql_conn = new DBConnectionDataContext();
+                exception_sql_conn.usp_insertlogging('E', "DOSService", "DOSService", "EmailAlertThread Exception", 0, "", "", xml);
+                exception_sql_conn.Connection.Close();
+            }
+            
         }
 
         public void stopMonitoring()
-        {
-            continueRun = false;
-
+        {            
             DBConnectionDataContext exception_sql_conn = new DBConnectionDataContext();
-            exception_sql_conn.usp_insertlogging('E', "DOSService", "DOSService", "MainThread Exiting", 0, "", "", XElement.Parse("<empty />"));
+            exception_sql_conn.usp_insertlogging('I', "DOSService", "DOSService", "MainThread Exiting", 0, "", "", XElement.Parse("<empty />"));
             exception_sql_conn.Connection.Close();
 
             subThreadEmailAlert.Abort();

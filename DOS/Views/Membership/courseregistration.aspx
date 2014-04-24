@@ -36,13 +36,15 @@
         ListItem item = new ListItem("", "-1");
         List<usp_getAllCourseYearsResult> res1 = (List<usp_getAllCourseYearsResult>)ViewData["Years"];
 
-
-        for (int x = 0; x < res1.Count; x++)
+        if (res1 != null)
         {
-            item = new ListItem(res1.ElementAt(x).Year.ToString(), res1.ElementAt(x).Year.ToString());
-            if (res1.ElementAt(x).Year == int.Parse((string)ViewData["Year"]))
-                item.Selected = true;
-            Year.Items.Add(item);
+            for (int x = 0; x < res1.Count; x++)
+            {
+                item = new ListItem(res1.ElementAt(x).Year.ToString(), res1.ElementAt(x).Year.ToString());
+                if (res1.ElementAt(x).Year == int.Parse((string)ViewData["Year"]))
+                    item.Selected = true;
+                Year.Items.Add(item);
+            }
         }
     } 
     
@@ -53,7 +55,7 @@
         Congregation.Items.Add(item);
         for (int x = 0; x < res.Count; x++)
         {
-            item = new ListItem(res.ElementAt(x).CongregationName, res.ElementAt(x).CongregationName);
+            item = new ListItem(res.ElementAt(x).CongregationName, res.ElementAt(x).CongregationID.ToString());
             Congregation.Items.Add(item);
         }
     }

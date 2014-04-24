@@ -55,6 +55,21 @@
 <!-- watermark scripts   --> 
 
 <script language="C#" runat="server">
+    void loadCongregation(Object Sender, EventArgs e)
+    {
+        List<usp_getAllCongregationResult> res = (List<usp_getAllCongregationResult>)ViewData["congregationlist"];
+        ListItem item = new ListItem("", "");
+        Congregation.Items.Add(item);
+        for (int x = 0; x < res.Count; x++)
+        {
+            item = new ListItem(res.ElementAt(x).CongregationName, res.ElementAt(x).CongregationID.ToString());
+            if (((string)ViewData["Congregation"]) == res.ElementAt(x).CongregationID.ToString()){
+                item.Selected = true;
+            }
+            Congregation.Items.Add(item);
+        }
+    }
+
     void loadOccpation(Object Sender, EventArgs e)
     {
         List<usp_getAllOccupationResult> res = (List<usp_getAllOccupationResult>)ViewData["occupationlist"];
@@ -222,7 +237,14 @@
 </script>
 
 <script type="text/javascript">
-    
+    function getCurrentParish(){
+        return "<%=Session["currentparish"] %>";
+    }
+
+    function getCongregationID(){
+        return "<%=Congregation.ClientID %>";
+    }
+
     function getDateRangeString(){
         return '<%=DateTime.Now.Year - 100%>:<%=DateTime.Now.Year%>';
     }
@@ -414,7 +436,7 @@
                         </td>                        			            
                     </tr>
                     <tr>
-                        <td colspan="2">
+                        <td colspan="1">
                             <label class="description" for="element_19">
                                 Church</label>
 		                        <div>
@@ -422,6 +444,16 @@
                                         </asp:DropDownList>
                                         <input style="width:80%; display:none" value="<%=(string)ViewData["church_others"] %>" class="element text medium" type="text" id="church_others" name="church_others" />
 		                        </div>
+                        </td>
+                        <td colspan="1">
+                            <div id="congregationDiv">
+                            <label class="description" for="element_19">
+                                Congregation</label>
+		                        <div>
+			                            <asp:DropDownList  style="width:80%" onchange="changeChurch();" OnLoad="loadCongregation" class="element select medium" name="church" ID="Congregation" runat="server">
+                                        </asp:DropDownList>                                        
+		                        </div>
+                            </div>
                         </td>
                     </tr>
                     <tr>
