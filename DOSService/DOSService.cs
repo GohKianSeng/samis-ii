@@ -134,7 +134,7 @@ namespace DOSService
                         smtpclient.EnableSsl = true;
                         smtpclient.Port = 587;
 
-                        //smtpclient.Send(mail);
+                        smtpclient.Send(mail);
                         Console.WriteLine("EmailAlertThread EmailSent " + recipient.Email + " " + recipient.CourseName);
                         sql_conn.usp_insertlogging('I', "DOSService", "DOSService", "EmailAlertThread EmailSent " + recipient.Email + " " + recipient.CourseName, 0, "", "", XElement.Parse("<empty />"));
                     

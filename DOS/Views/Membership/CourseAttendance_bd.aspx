@@ -20,13 +20,15 @@
     {
         List<usp_getAllCourseYearsResult> res = (List<usp_getAllCourseYearsResult>)ViewData["Years"];
         ListItem item = new ListItem("", "");
-
-        for (int x = 0; x < res.Count; x++)
+        if (res != null)
         {
-            item = new ListItem(res.ElementAt(x).Year.ToString(), res.ElementAt(x).Year.ToString());
-            if (((int)ViewData["selectedYear"]) == res.ElementAt(x).Year)
-                item.Selected = true;
-            FromYear.Items.Add(item);
+            for (int x = 0; x < res.Count; x++)
+            {
+                item = new ListItem(res.ElementAt(x).Year.ToString(), res.ElementAt(x).Year.ToString());
+                if (((int)ViewData["selectedYear"]) == res.ElementAt(x).Year)
+                    item.Selected = true;
+                FromYear.Items.Add(item);
+            }
         }
     }    
 

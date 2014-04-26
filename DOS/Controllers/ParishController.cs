@@ -175,7 +175,7 @@ namespace DOS.Controllers
 
         [ErrorHandler]
         [Authorize]
-        public ActionResult RemoveCourse(string courseid, string name)
+        public ActionResult RemoveCourse(string courseid, string name, string Year)
         {
             int res = sql_conn.usp_removeCourse(int.Parse(courseid)).ElementAt(0).Result;
 
@@ -187,7 +187,14 @@ namespace DOS.Controllers
             {
                 ViewData["errormsg"] = "Unable to delete course, " + name + ".";
             }
-            ViewData["listofcourse"] = sql_conn.usp_getListofCourse(false, -1).ToList();
+            if (Year == null)
+            {
+                Year = DateTime.Now.Year.ToString();
+            }
+            ViewData["Years"] = sql_conn.usp_getAllCourseYears().ToList();
+
+            ViewData["Year"] = Year;
+            ViewData["listofcourse"] = sql_conn.usp_getListofCourse(false, int.Parse(Year)).ToList();
             return View("ListOfCourse");
         }
 

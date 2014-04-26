@@ -36,12 +36,13 @@
         submitForm.submit();
     }
 
-    function deleteCourse(courseid, name) {
+    function deleteCourse(courseid, name, year) {
         var answer = confirm("Delete course: " + name + "?")
         if (answer) {
             var submitForm = getNewSubmitForm();
             createNewFormElement(submitForm, "courseid", courseid);
             createNewFormElement(submitForm, "name", name);
+            createNewFormElement(submitForm, "Year", year);
             submitForm.action = "/Parish.mvc/removeCourse";
             submitForm.Method = "POST";
             submitForm.submit();
@@ -59,14 +60,16 @@
     {
         ListItem item = new ListItem("", "-1");
         List<usp_getAllCourseYearsResult> res1 = (List<usp_getAllCourseYearsResult>)ViewData["Years"];
-        
-        
-        for (int x = 0; x<res1.Count; x++)
+
+        if (res1 != null)
         {
-            item = new ListItem(res1.ElementAt(x).Year.ToString(), res1.ElementAt(x).Year.ToString());
-            if (res1.ElementAt(x).Year == int.Parse((string)ViewData["Year"]))
-                item.Selected = true;
-            Year.Items.Add(item);
+            for (int x = 0; x < res1.Count; x++)
+            {
+                item = new ListItem(res1.ElementAt(x).Year.ToString(), res1.ElementAt(x).Year.ToString());
+                if (res1.ElementAt(x).Year == int.Parse((string)ViewData["Year"]))
+                    item.Selected = true;
+                Year.Items.Add(item);
+            }
         }
     }    
 </script>
@@ -119,7 +122,7 @@
                     {
                         %>
                             <tr>
-                                <td><img onclick="deleteCourse('<%=res.ElementAt(x).courseID%>', '<%= res.ElementAt(x).CourseName%>');" border="0" src="/Content/images/remove.png" width="20" height="20" style="cursor:pointer" title="Remove"  alt="Remove"/></td>
+                                <td><img onclick="deleteCourse('<%=res.ElementAt(x).courseID%>', '<%= res.ElementAt(x).CourseName%>', $('#<%=Year.ClientID %>').val());" border="0" src="/Content/images/remove.png" width="20" height="20" style="cursor:pointer" title="Remove"  alt="Remove"/></td>
                                 <td><a href="#" onclick="loadCourse('<%= res.ElementAt(x).courseID %>');"><%= res.ElementAt(x).CourseName%></a></td>
 				                <td><%= res.ElementAt(x).CourseStartDate%></td>				                <td><%= res.ElementAt(x).CourseStartTime%></td>
                                 <td><%= res.ElementAt(x).CourseEndTime%></td>
