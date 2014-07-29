@@ -1,0 +1,82 @@
+Certificate:
+    Data:
+        Version: 3 (0x2)
+        Serial Number: 1 (0x1)
+    Signature Algorithm: sha1WithRSAEncryption
+        Issuer: C=SG, ST=SG, L=SAC, O=SAC, OU=SAC, CN=SAMIS/emailAddress=zniter81@gmail.com
+        Validity
+            Not Before: Jul 29 15:40:28 2014 GMT
+            Not After : Dec  6 15:40:28 2386 GMT
+        Subject: C=SG, ST=SG, L=SG, O=St Andrew's Cathedral, OU=SAC, CN=SAMIS
+        Subject Public Key Info:
+            Public Key Algorithm: rsaEncryption
+                Public-Key: (2048 bit)
+                Modulus:
+                    00:b9:b4:2b:56:78:10:75:e1:87:db:00:0b:6c:06:
+                    1b:a0:81:dc:c2:aa:1b:66:f9:da:c9:67:e2:d3:47:
+                    31:e3:f4:9d:66:1f:2b:8f:00:a3:c3:f5:05:12:b1:
+                    8c:e9:52:87:bc:36:0f:14:7a:3b:40:0d:cd:18:dd:
+                    13:87:ef:4d:55:bc:7d:75:f1:7b:fe:95:02:f5:02:
+                    d1:30:d3:18:91:0c:42:09:9d:d5:94:d8:26:06:c4:
+                    e0:47:32:c3:3e:6f:76:cd:6e:3f:6c:1e:b4:bd:ee:
+                    56:be:b3:69:6a:83:4e:7d:0b:d0:da:fd:7a:15:2d:
+                    2f:a0:f5:87:30:cb:fd:2a:89:e8:1f:a1:88:b7:22:
+                    de:b6:04:3f:6c:c4:18:f1:13:1d:8b:69:c5:91:51:
+                    eb:f7:88:da:36:f6:f7:6f:35:b0:d7:6e:d2:b0:3f:
+                    bc:a7:b2:46:c4:ee:13:82:1f:68:36:12:e8:1a:5d:
+                    f5:79:eb:8b:e3:69:2e:78:cf:a1:7a:57:29:95:34:
+                    d1:0a:6c:14:7a:c0:bd:f8:e0:af:f6:f6:7a:77:f8:
+                    7a:1d:c4:8b:46:45:29:9d:4c:05:0c:f4:cd:7b:0e:
+                    28:ff:10:81:4d:55:96:99:2c:ce:95:26:b2:52:ee:
+                    21:e6:d8:9c:bf:4d:af:d8:1d:cb:06:5e:e2:a8:ae:
+                    e8:c1
+                Exponent: 65537 (0x10001)
+        X509v3 extensions:
+            X509v3 Basic Constraints: 
+                CA:FALSE
+            Netscape Comment: 
+                OpenSSL Generated Certificate
+            X509v3 Subject Key Identifier: 
+                71:16:9D:30:7F:FC:27:6D:45:FA:DE:8A:DB:FE:85:13:47:FE:0F:B7
+            X509v3 Authority Key Identifier: 
+                keyid:DE:E2:41:06:C1:E4:3B:37:08:95:B1:30:0A:1C:1D:C0:AD:AE:4F:DD
+
+    Signature Algorithm: sha1WithRSAEncryption
+         94:da:d0:d1:5b:72:4b:d9:e6:09:1d:98:e8:ab:d4:d0:36:09:
+         c0:7e:2d:85:05:e7:75:ff:66:44:3b:6e:70:bc:bb:01:05:e9:
+         ca:bf:2f:1a:55:52:d2:b7:73:bb:ed:0f:b5:e1:21:43:db:fd:
+         05:b0:75:25:ff:63:f2:f9:ab:d9:e1:48:33:f9:65:b9:de:c5:
+         e6:4d:fc:a3:62:d6:35:3e:20:8e:51:e6:f9:50:f0:9f:f3:da:
+         8f:fc:95:98:26:48:ee:0f:d0:9a:01:8e:38:e8:e2:44:bf:f8:
+         ce:12:79:03:cf:15:14:5d:e8:c4:8b:52:42:ca:aa:eb:76:43:
+         1c:f7:e8:0c:c0:58:97:87:b5:ef:8e:93:2f:30:bf:ce:94:2f:
+         1d:b2:60:c7:16:8d:b3:9d:b0:a4:0f:cd:de:97:de:8a:07:a6:
+         22:ff:21:8b:bd:c0:e2:2d:26:1b:19:d1:5c:73:83:8a:2f:41:
+         db:52:f6:11:b2:23:ad:aa:32:80:06:e3:a7:fc:10:58:c6:51:
+         ef:1f:46:8c:c9:2d:32:f8:5d:53:04:31:2b:00:38:f6:f9:74:
+         40:1b:1f:1f:79:50:dd:37:bf:c5:59:0b:13:b6:c3:ea:a3:9e:
+         03:8f:73:5d:1a:ab:bf:33:51:d9:2d:ff:28:01:45:72:ba:c8:
+         23:f8:17:b3
+-----BEGIN CERTIFICATE-----
+MIID1DCCArygAwIBAgIBATANBgkqhkiG9w0BAQUFADB3MQswCQYDVQQGEwJTRzEL
+MAkGA1UECAwCU0cxDDAKBgNVBAcMA1NBQzEMMAoGA1UECgwDU0FDMQwwCgYDVQQL
+DANTQUMxDjAMBgNVBAMMBVNBTUlTMSEwHwYJKoZIhvcNAQkBFhJ6bml0ZXI4MUBn
+bWFpbC5jb20wIBcNMTQwNzI5MTU0MDI4WhgPMjM4NjEyMDYxNTQwMjhaMGUxCzAJ
+BgNVBAYTAlNHMQswCQYDVQQIDAJTRzELMAkGA1UEBwwCU0cxHjAcBgNVBAoMFVN0
+IEFuZHJldydzIENhdGhlZHJhbDEMMAoGA1UECwwDU0FDMQ4wDAYDVQQDDAVTQU1J
+UzCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBALm0K1Z4EHXhh9sAC2wG
+G6CB3MKqG2b52sln4tNHMeP0nWYfK48Ao8P1BRKxjOlSh7w2DxR6O0ANzRjdE4fv
+TVW8fXXxe/6VAvUC0TDTGJEMQgmd1ZTYJgbE4Ecywz5vds1uP2wetL3uVr6zaWqD
+Tn0L0Nr9ehUtL6D1hzDL/SqJ6B+hiLci3rYEP2zEGPETHYtpxZFR6/eI2jb29281
+sNdu0rA/vKeyRsTuE4IfaDYS6Bpd9Xnri+NpLnjPoXpXKZU00QpsFHrAvfjgr/b2
+enf4eh3Ei0ZFKZ1MBQz0zXsOKP8QgU1VlpkszpUmslLuIebYnL9Nr9gdywZe4qiu
+6MECAwEAAaN7MHkwCQYDVR0TBAIwADAsBglghkgBhvhCAQ0EHxYdT3BlblNTTCBH
+ZW5lcmF0ZWQgQ2VydGlmaWNhdGUwHQYDVR0OBBYEFHEWnTB//CdtRfreitv+hRNH
+/g+3MB8GA1UdIwQYMBaAFN7iQQbB5Ds3CJWxMAocHcCtrk/dMA0GCSqGSIb3DQEB
+BQUAA4IBAQCU2tDRW3JL2eYJHZjoq9TQNgnAfi2FBed1/2ZEO25wvLsBBenKvy8a
+VVLSt3O77Q+14SFD2/0FsHUl/2Py+avZ4Ugz+WW53sXmTfyjYtY1PiCOUeb5UPCf
+89qP/JWYJkjuD9CaAY446OJEv/jOEnkDzxUUXejEi1JCyqrrdkMc9+gMwFiXh7Xv
+jpMvML/OlC8dsmDHFo2znbCkD83el96KB6Yi/yGLvcDiLSYbGdFcc4OKL0HbUvYR
+siOtqjKABuOn/BBYxlHvH0aMyS0y+F1TBDErADj2+XRAGx8feVDdN7/FWQsTtsPq
+o54Dj3NdGqu/M1HZLf8oAUVyusgj+Bez
+-----END CERTIFICATE-----
