@@ -157,3 +157,4 @@ C:\Users\sisgks\Desktop\samis-ii\DOS\bin\Newtonsoft.Json.xml
 C:\Users\sisgks\Desktop\samis-ii\DOS\obj\Debug\DOS.dll
 C:\Users\sisgks\Desktop\samis-ii\DOS\obj\Debug\DOS.pdb
 C:\Users\sisgks\Desktop\samis-ii\DOS\bin\System.Web.Routing.dll
+C:\Users\sisgks\Desktop\samis-ii\DOS\obj\Debug\DOS.csprojResolveAssemblyReference.cache
