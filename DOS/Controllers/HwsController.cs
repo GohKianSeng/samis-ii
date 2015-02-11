@@ -53,9 +53,18 @@ namespace DOS.Controllers
             if(ID == null || ID.Length <=0)
                 return View("scanAttendance");
 
-            usp_UpdateHWSAttendanceResult res = sql_conn.usp_UpdateHWSAttendance(int.Parse(ID)).ElementAt(0);
-            ViewData["errormsg"] = "Welcome, " + res.EnglishSurname + " " + res.EnglishGivenName + " / " + res.ChineseSurname + res.ChineseGivenName;
-            return View("scanAttendance");
+            List<usp_UpdateHWSAttendanceResult> res1 = sql_conn.usp_UpdateHWSAttendance(int.Parse(ID)).ToList();
+            if (res1.Count > 0)
+            {
+                usp_UpdateHWSAttendanceResult res = res1.ElementAt(0);
+                ViewData["errormsg"] = "Welcome, " + res.EnglishSurname + " " + res.EnglishGivenName + " / " + res.ChineseSurname + res.ChineseGivenName;
+                return View("scanAttendance");
+            }
+            else
+            {
+                ViewData["errormsg"] = "Worshipper not found.";
+                return View("scanAttendance");
+            }
         }
 
         public ActionResult listmember()

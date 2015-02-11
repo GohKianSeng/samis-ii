@@ -4,3 +4,10 @@ C:\Users\ks\Desktop\New folder\samis-ii\DOSService\obj\x86\Debug\ResolveAssembly
 C:\Users\ks\Desktop\New folder\samis-ii\DOSService\obj\x86\Debug\DOSService.exe
 C:\Users\ks\Desktop\New folder\samis-ii\DOSService\obj\x86\Debug\DOSService.pdb
 C:\Users\ks\Desktop\New folder\samis-ii\DOSService\bin\Debug\DOSService.exe.config
+C:\Users\sisgks\Desktop\samis-ii\DOSService\bin\Debug\DOSService.exe.config
+C:\Users\sisgks\Desktop\samis-ii\DOSService\bin\Debug\DOSService.exe
+C:\Users\sisgks\Desktop\samis-ii\DOSService\bin\Debug\DOSService.pdb
+C:\Users\sisgks\Desktop\samis-ii\DOSService\obj\x86\Debug\DOSService.ProjectInstaller.resources
+C:\Users\sisgks\Desktop\samis-ii\DOSService\obj\x86\Debug\DOSService.csproj.GenerateResource.Cache
+C:\Users\sisgks\Desktop\samis-ii\DOSService\obj\x86\Debug\DOSService.exe
+C:\Users\sisgks\Desktop\samis-ii\DOSService\obj\x86\Debug\DOSService.pdb

@@ -13,7 +13,7 @@ namespace DOS.Controllers
         [ErrorHandler]
         public ActionResult Index()
         {
-            if (((string)Session["SystemMode"]).ToUpper() == "FULL")
+            if (((string)Session["SystemMode"]).ToUpper() == "FULL" || ((string)Session["SystemMode"]).ToUpper() == "HWS")
             {
                 if (!User.Identity.IsAuthenticated)
                     return RedirectToAction("LogOn", "Account");
@@ -34,7 +34,6 @@ namespace DOS.Controllers
                 else
                     return RedirectToAction("About", "Home");
             }
-
             return View();
             
         }

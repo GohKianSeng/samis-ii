@@ -190,7 +190,7 @@
                                 <tr>
                                     <td colspan="3">
                                         <label class="description" for="element_5">
-                                        Address <span style="color:red;">*</span></label>
+                                        Address</label>
 		
 		                                <div>
 			                                <textarea style=" width:100%" id="candidate_street_address" <%=getAutoPostalCode() %> <%=getTextfieldLength("tb_members","AddressStreet")%> name="candidate_street_address"> <%= (string)ViewData["AddressStreet"]%></textarea>

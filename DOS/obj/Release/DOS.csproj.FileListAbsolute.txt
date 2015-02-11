@@ -20,3 +20,14 @@ C:\Users\ks\Desktop\samis-ii\DOS\bin\Newtonsoft.Json.xml
 C:\Users\ks\Desktop\samis-ii\DOS\obj\Release\ResolveAssemblyReference.cache
 C:\Users\ks\Desktop\samis-ii\DOS\obj\Release\DOS.dll
 C:\Users\ks\Desktop\samis-ii\DOS\obj\Release\DOS.pdb
+C:\Users\sisgks\Desktop\samis-ii\DOS\bin\DOS.dll
+C:\Users\sisgks\Desktop\samis-ii\DOS\bin\DOS.pdb
+C:\Users\sisgks\Desktop\samis-ii\DOS\bin\DropNet.dll
+C:\Users\sisgks\Desktop\samis-ii\DOS\bin\Microsoft.JScript.dll
+C:\Users\sisgks\Desktop\samis-ii\DOS\bin\Newtonsoft.Json.dll
+C:\Users\sisgks\Desktop\samis-ii\DOS\bin\RestSharp.dll
+C:\Users\sisgks\Desktop\samis-ii\DOS\bin\System.Data.Linq.dll
+C:\Users\sisgks\Desktop\samis-ii\DOS\bin\Newtonsoft.Json.xml
+C:\Users\sisgks\Desktop\samis-ii\DOS\obj\Release\DOS.csprojResolveAssemblyReference.cache
+C:\Users\sisgks\Desktop\samis-ii\DOS\obj\Release\DOS.dll
+C:\Users\sisgks\Desktop\samis-ii\DOS\obj\Release\DOS.pdb
