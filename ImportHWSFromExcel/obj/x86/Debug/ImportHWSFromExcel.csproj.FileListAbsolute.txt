@@ -1,0 +1,5 @@
+C:\Users\sisgks\Desktop\samis-ii\ImportHWSFromExcel\bin\Debug\ImportHWSFromExcel.exe
+C:\Users\sisgks\Desktop\samis-ii\ImportHWSFromExcel\bin\Debug\ImportHWSFromExcel.pdb
+C:\Users\sisgks\Desktop\samis-ii\ImportHWSFromExcel\obj\x86\Debug\ImportHWSFromExcel.exe
+C:\Users\sisgks\Desktop\samis-ii\ImportHWSFromExcel\obj\x86\Debug\ImportHWSFromExcel.pdb
+C:\Users\sisgks\Desktop\samis-ii\ImportHWSFromExcel\bin\Debug\ImportHWSFromExcel.exe.config

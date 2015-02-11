@@ -1,0 +1,8 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="DOS" Class="BDConnectionDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="AppSettings" ConnectionString="Data Source=localhost;Initial Catalog=DOS;User ID=root" SettingsObjectName="ImportHWSFromExcel.Properties.Settings" SettingsPropertyName="DOSConnectionString" Provider="System.Data.SqlClient" />
+  <Function Name="dbo.usp_addNewHWSMember" Method="usp_addNewHWSMember">
+    <Parameter Name="newXML" Type="System.Xml.Linq.XElement" DbType="Xml" />
+    <Parameter Name="Result" Parameter="result" Type="System.String" DbType="VarChar(10)" Direction="InOut" />
+    <Return Type="System.Int32" />
+  </Function>
+</Database>
