@@ -1,0 +1,14 @@
+.suggest_link td{
+    background-color: #FFFFFF;
+    padding: 2px 6px 2px 6px;
+    height:55px;
+    font-family: "Lucida Grande",Tahoma,Arial,Verdana,sans-serif;
+    font-size: small;    
+}
+.suggest_link_over td{
+	background-color: #84ACFC;
+	padding: 2px 6px 2px 6px;
+	height:55px;
+	font-family: "Lucida Grande",Tahoma,Arial,Verdana,sans-serif;
+    font-size: small;
+}
