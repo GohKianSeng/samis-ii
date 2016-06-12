@@ -1450,6 +1450,13 @@ namespace DOS.Models
 			base64Content = ((string)(result.GetParameterValue(1)));
 			return ((int)(result.ReturnValue));
 		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.usp_SyncAllSettings_CourseAttachment")]
+		public ISingleResult<usp_SyncAllSettings_CourseAttachmentResult> usp_SyncAllSettings_CourseAttachment([global::System.Data.Linq.Mapping.ParameterAttribute(Name="XML", DbType="Xml")] System.Xml.Linq.XElement xML)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), xML);
+			return ((ISingleResult<usp_SyncAllSettings_CourseAttachmentResult>)(result.ReturnValue));
+		}
 	}
 	
 	public partial class usp_addNewCellgroupResult
@@ -14597,6 +14604,32 @@ namespace DOS.Models
 				if ((this._History != value))
 				{
 					this._History = value;
+				}
+			}
+		}
+	}
+	
+	public partial class usp_SyncAllSettings_CourseAttachmentResult
+	{
+		
+		private string _Result;
+		
+		public usp_SyncAllSettings_CourseAttachmentResult()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Result", DbType="VarChar(7) NOT NULL", CanBeNull=false)]
+		public string Result
+		{
+			get
+			{
+				return this._Result;
+			}
+			set
+			{
+				if ((this._Result != value))
+				{
+					this._Result = value;
 				}
 			}
 		}

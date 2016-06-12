@@ -1697,4 +1697,10 @@
     <Parameter Name="base64Content" Type="System.String" DbType="VarChar(MAX)" Direction="InOut" />
     <Return Type="System.Int32" />
   </Function>
+  <Function Name="dbo.usp_SyncAllSettings_CourseAttachment" Method="usp_SyncAllSettings_CourseAttachment">
+    <Parameter Name="XML" Parameter="xML" Type="System.Xml.Linq.XElement" DbType="Xml" />
+    <ElementType Name="usp_SyncAllSettings_CourseAttachmentResult">
+      <Column Name="Result" Type="System.String" DbType="VarChar(7) NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
 </Database>

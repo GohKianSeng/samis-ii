@@ -251,7 +251,7 @@ namespace DOS.Controllers
                     switch (SyncType)
                     {
                         case "AllCourseAttachment":
-                            result = sql_conn.usp_SyncAllSettings_Area(xml).ElementAt(0).Result;
+                            result = sql_conn.usp_SyncAllSettings_CourseAttachment(xml).ElementAt(0).Result;
                             break;
                         case "AllChurchArea":
                             result = sql_conn.usp_SyncAllSettings_Area(xml).ElementAt(0).Result;
