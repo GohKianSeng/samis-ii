@@ -250,6 +250,9 @@ namespace DOS.Controllers
                     string result = "";
                     switch (SyncType)
                     {
+                        case "AllCourseAttachment":
+                            result = sql_conn.usp_SyncAllSettings_Area(xml).ElementAt(0).Result;
+                            break;
                         case "AllChurchArea":
                             result = sql_conn.usp_SyncAllSettings_Area(xml).ElementAt(0).Result;
                             break;

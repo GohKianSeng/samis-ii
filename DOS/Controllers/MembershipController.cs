@@ -10,6 +10,7 @@ using System.Net;
 using System.Net.Mail;
 using System.IO;
 using System.Web.Script.Serialization;
+using System.Text.RegularExpressions;
 
 namespace DOS.Controllers
 {
@@ -490,7 +491,8 @@ namespace DOS.Controllers
                 string candidate_nationality = Request.Form["aspnet_variable$MainContent$candidate_nationality"];
                 string candidate_occupation = Request.Form["aspnet_variable$MainContent$candidate_occupation"];
                 string candidate_postal_code = Request.Form["candidate_postal_code"];
-                string decodedAdditionalInformation = HttpUtility.UrlDecode(Request.Form["EncodedAdditionalInformation"]);
+                string decodedAdditionalInformation = HttpUtility.UrlDecode(Request.Form["EncodedAdditionalInformation"]);                
+
                 string candidate_blk_house;
                 if (Request.Form["candidate_blk_house"] != null)
                     candidate_blk_house = Request.Form["candidate_blk_house"];
@@ -545,6 +547,42 @@ namespace DOS.Controllers
                 ViewData["candidate_email"] = candidate_email;
                 ViewData["candidate_church"] = candidate_church;
                 ViewData["candidate_church_others"] = candidate_church_others;
+
+                XElement additionalInfoXML = XElement.Parse(decodedAdditionalInformation);
+                string base64Content = "NULL";
+                string htmlcontent = "";
+                sql_conn.usp_getCourseAttachment(getExtraHiddenValue(additionalInfoXML, "extra_Got Attachment"), ref base64Content);
+
+
+                if (base64Content != "NULL")
+                {
+                    try
+                    {
+                        byte[] data = Convert.FromBase64String(base64Content);
+                        htmlcontent = System.Text.Encoding.UTF8.GetString(data);
+
+                        var pattern = @"\[(.*?)\]";
+                        var matches = Regex.Matches(htmlcontent, pattern);
+
+                        foreach (Match m in matches)
+                        {
+                            if (m.Groups[1].Value.StartsWith("extra_"))
+                            {
+                                string t = getExtraHiddenValue(additionalInfoXML, m.Groups[1].Value);
+                                htmlcontent = htmlcontent.Replace("[" + m.Groups[1].Value + "]", t);
+                            }
+                            else if(m.Groups[1].Value.StartsWith("candidate_")) {
+                                htmlcontent = htmlcontent.Replace("[" + m.Groups[1].Value + "]", (string)ViewData[m.Groups[1].Value]);
+                            }
+                        }
+
+                    }
+                    catch (Exception e)
+                    {
+
+                    }
+                }
+
 
                 XElement additionalInfo = XElement.Parse(decodedAdditionalInformation);
 
@@ -610,6 +648,15 @@ namespace DOS.Controllers
                     mail.IsBodyHtml = true;
                     mail.Body = mailbody;
 
+                    if (htmlcontent.Length > 0)
+                    {
+                        System.Net.Mime.ContentType ct = new System.Net.Mime.ContentType(System.Net.Mime.MediaTypeNames.Application.Octet);
+                        MemoryStream ms = new MemoryStream(convertHTMLtoPDF(htmlcontent));
+
+                        System.Net.Mail.Attachment attach = new System.Net.Mail.Attachment(ms, ct);
+                        attach.ContentDisposition.FileName = candidate_english_name + ".pdf";
+                        mail.Attachments.Add(attach);
+                    }
                     sal = candidate_salutation;
                     name = candidate_english_name;
                     course = candidate_course_name;
@@ -1449,8 +1496,17 @@ namespace DOS.Controllers
                 string sss = Request.Form.Keys[x].ToString();
                 if (sss.StartsWith("extra_"))
                 {
-                    temp += sss.Substring(6) + ":<br />";
-                    temp += Request.Form[sss] + "<br /><br />";
+                    
+                    if (sss.CompareTo("extra_Got Attachment") == 0)
+                    {
+                        temp += "<input type=\"hidden\" id=\"" + sss + "\" value=\"" + Request.Form[sss] + "\" />";
+                    }
+                    else
+                    {
+                        temp += "<input type=\"hidden\" id=\"" + sss + "\" value=\"" + Request.Form[sss] + "\" />";
+                        temp += sss.Substring(6) + ":<br />";
+                        temp += Request.Form[sss] + "<br /><br />";
+                    }
                 }
             }
             temp += "</div>";
@@ -1920,7 +1976,32 @@ namespace DOS.Controllers
                 ViewData["candidate_transfertodate"] = "";
 
             ViewData["candidate_mailingList"] = res.ReceiveMailingList.ToString().ToUpper();
-        }        
+        }
+
+        private byte[] convertHTMLtoPDF(string html)
+        {
+            MemoryStream ms = new MemoryStream();
+            var pdf = TheArtOfDev.HtmlRenderer.PdfSharp.PdfGenerator.GeneratePdf(html, PdfSharp.PageSize.A4);
+            pdf.Save(ms);            
+            return ms.ToArray();
+        }
+
+        private string getExtraHiddenValue(XElement input, string id)
+        {
+            IEnumerable<XElement> individualField =
+                    from el in input.Elements("input")
+                    where (string)el.Attribute("id") == id
+                    select el;
+
+            if (individualField.Count() > 0)
+            {
+                return individualField.ElementAt(0).Attribute("value").Value;
+            }
+            else
+            {
+                return "";
+            }
+        }
     }
 
 }

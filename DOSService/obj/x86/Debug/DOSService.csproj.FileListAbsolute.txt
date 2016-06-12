@@ -18,3 +18,11 @@ C:\Users\sisgks\Desktop\mini Project\samis-ii\DOSService\obj\x86\Debug\DOSServic
 C:\Users\sisgks\Desktop\mini Project\samis-ii\DOSService\obj\x86\Debug\DOSService.csproj.GenerateResource.Cache
 C:\Users\sisgks\Desktop\mini Project\samis-ii\DOSService\obj\x86\Debug\DOSService.exe
 C:\Users\sisgks\Desktop\mini Project\samis-ii\DOSService\obj\x86\Debug\DOSService.pdb
+C:\Users\ks\Desktop\mini Project\samis-ii\DOSService\bin\Debug\DOSService.exe.config
+C:\Users\ks\Desktop\mini Project\samis-ii\DOSService\obj\x86\Debug\DOSService.exe
+C:\Users\ks\Desktop\mini Project\samis-ii\DOSService\obj\x86\Debug\DOSService.pdb
+C:\Users\ks\Desktop\mini Project\samis-ii\DOSService\bin\Debug\DOSService.exe
+C:\Users\ks\Desktop\mini Project\samis-ii\DOSService\bin\Debug\DOSService.pdb
+C:\Users\ks\Desktop\mini Project\samis-ii\DOSService\obj\x86\Debug\DOSService.csprojResolveAssemblyReference.cache
+C:\Users\ks\Desktop\mini Project\samis-ii\DOSService\obj\x86\Debug\DOSService.ProjectInstaller.resources
+C:\Users\ks\Desktop\mini Project\samis-ii\DOSService\obj\x86\Debug\DOSService.csproj.GenerateResource.Cache

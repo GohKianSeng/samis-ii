@@ -1692,4 +1692,9 @@
       <Column Name="History" Type="System.Xml.Linq.XElement" DbType="Xml" CanBeNull="true" />
     </ElementType>
   </Function>
+  <Function Name="dbo.usp_getCourseAttachment" Method="usp_getCourseAttachment">
+    <Parameter Name="FileName" Parameter="fileName" Type="System.String" DbType="VarChar(50)" />
+    <Parameter Name="base64Content" Type="System.String" DbType="VarChar(MAX)" Direction="InOut" />
+    <Return Type="System.Int32" />
+  </Function>
 </Database>
