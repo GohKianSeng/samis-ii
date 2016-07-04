@@ -1457,6 +1457,13 @@ namespace DOS.Models
 			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), xML);
 			return ((ISingleResult<usp_SyncAllSettings_CourseAttachmentResult>)(result.ReturnValue));
 		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.usp_getAllCongregationExcludeSoftDelete")]
+		public ISingleResult<usp_getAllCongregationExcludeSoftDeleteResult> usp_getAllCongregationExcludeSoftDelete()
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())));
+			return ((ISingleResult<usp_getAllCongregationExcludeSoftDeleteResult>)(result.ReturnValue));
+		}
 	}
 	
 	public partial class usp_addNewCellgroupResult
@@ -14630,6 +14637,50 @@ namespace DOS.Models
 				if ((this._Result != value))
 				{
 					this._Result = value;
+				}
+			}
+		}
+	}
+	
+	public partial class usp_getAllCongregationExcludeSoftDeleteResult
+	{
+		
+		private System.Nullable<int> _CongregationID;
+		
+		private string _CongregationName;
+		
+		public usp_getAllCongregationExcludeSoftDeleteResult()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CongregationID", DbType="Int")]
+		public System.Nullable<int> CongregationID
+		{
+			get
+			{
+				return this._CongregationID;
+			}
+			set
+			{
+				if ((this._CongregationID != value))
+				{
+					this._CongregationID = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CongregationName", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
+		public string CongregationName
+		{
+			get
+			{
+				return this._CongregationName;
+			}
+			set
+			{
+				if ((this._CongregationName != value))
+				{
+					this._CongregationName = value;
 				}
 			}
 		}

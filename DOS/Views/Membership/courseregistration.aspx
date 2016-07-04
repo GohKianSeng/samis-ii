@@ -50,7 +50,7 @@
     
     void loadCongregation(Object Sender, EventArgs e)
     {
-        List<usp_getAllCongregationResult> res = (List<usp_getAllCongregationResult>)ViewData["congregationlist"];
+        List<usp_getAllCongregationExcludeSoftDeleteResult> res = (List<usp_getAllCongregationExcludeSoftDeleteResult>)ViewData["congregationlistExcludSoftDelete"];
         ListItem item = new ListItem("", "");
         Congregation.Items.Add(item);
         for (int x = 0; x < res.Count; x++)

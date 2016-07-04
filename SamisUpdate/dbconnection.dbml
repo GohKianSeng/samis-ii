@@ -1,3 +1,1 @@
-﻿<?xml version="1.0" encoding="utf-8"?><Database Name="DOS" Class="dbconnectionDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
-  <Connection Mode="AppSettings" ConnectionString="Data Source=localhost;Initial Catalog=DOS;Integrated Security=True" SettingsObjectName="SamisUpdate.Properties.Settings" SettingsPropertyName="DOSConnectionString" Provider="System.Data.SqlClient" />
-</Database>
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="DOS" Class="dbconnectionDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007" />

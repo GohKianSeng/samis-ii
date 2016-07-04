@@ -32,12 +32,6 @@ namespace SamisUpdate
     partial void OnCreated();
     #endregion
 		
-		public dbconnectionDataContext() : 
-				base(global::SamisUpdate.Properties.Settings.Default.DOSConnectionString, mappingSource)
-		{
-			OnCreated();
-		}
-		
 		public dbconnectionDataContext(string connection) : 
 				base(connection, mappingSource)
 		{

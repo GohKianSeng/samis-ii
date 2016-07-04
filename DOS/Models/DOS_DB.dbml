@@ -1703,4 +1703,10 @@
       <Column Name="Result" Type="System.String" DbType="VarChar(7) NOT NULL" CanBeNull="false" />
     </ElementType>
   </Function>
+  <Function Name="dbo.usp_getAllCongregationExcludeSoftDelete" Method="usp_getAllCongregationExcludeSoftDelete">
+    <ElementType Name="usp_getAllCongregationExcludeSoftDeleteResult">
+      <Column Name="CongregationID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="CongregationName" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
 </Database>

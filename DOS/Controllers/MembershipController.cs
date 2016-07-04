@@ -1585,6 +1585,7 @@ namespace DOS.Controllers
             ViewData["languagelist"] = sql_conn.usp_getAllLanguage().ToList();
             ViewData["clergylist"] = sql_conn.usp_getAllClergy().ToList();
             ViewData["congregationlist"] = sql_conn.usp_getAllCongregation().ToList();
+            ViewData["congregationlistExcludSoftDelete"] = sql_conn.usp_getAllCongregationExcludeSoftDelete().ToList();
             ViewData["filetypelist"] = sql_conn.usp_getAllFileType().ToList();
             ViewData["familytypelist"] = sql_conn.usp_getAllFamilyType().ToList();
 

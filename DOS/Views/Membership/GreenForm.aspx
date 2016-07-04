@@ -898,7 +898,7 @@ table.MsoTableGrid
               <p class=MsoNormal align=center style='margin-bottom:0in;margin-bottom:.0001pt;
               text-align:center;line-height:normal'><b style='mso-bidi-font-weight:normal'><span
               lang=ZH-CN style='font-size:9.0pt;font-family:\5B8B\4F53;mso-ascii-font-family:
-              Calibri;mso-ansi-language:EN-US'>&#27597;&#20146;</span></b><span
+              Calibri;mso-ansi-language:EN-US'></span></b><span
               style='font-size:9.0pt;mso-ansi-language:EN-US'><br>
               <%= family.Elements("Family").ElementAt(x).Element("FamilyType").Value%><o:p></o:p></span></p>
               </td>
@@ -953,13 +953,13 @@ table.MsoTableGrid
                       <p class=MsoNormal align=center style='margin-bottom:0in;margin-bottom:.0001pt;
                       text-align:center;line-height:normal'><span class=shorttext><b
                       style='mso-bidi-font-weight:normal'><span lang=ZH-CN style='font-size:9.0pt;
-                      font-family:\5B8B\4F53;mso-ascii-font-family:Calibri'>&#19976;&#22827;</span></b></span><span
+                      font-family:\5B8B\4F53;mso-ascii-font-family:Calibri'></span></b></span><span
                       class=shorttext><b style='mso-bidi-font-weight:normal'><span
-                      style='font-size:9.0pt'>/</span></b></span><span class=shorttext><b
+                      style='font-size:9.0pt'>&nbsp;</span></b></span><span class=shorttext><b
                       style='mso-bidi-font-weight:normal'><span lang=ZH-CN style='font-size:9.0pt;
-                      font-family:\5B8B\4F53;mso-ascii-font-family:Calibri'>&#22971;</span></b></span><span
+                      font-family:\5B8B\4F53;mso-ascii-font-family:Calibri'></span></b></span><span
                       class=shorttext><b style='mso-bidi-font-weight:normal'><span lang=ZH-CN
-                      style='font-size:9.0pt;font-family:SimSun;mso-bidi-font-family:SimSun'>&#23376;</span></b></span><span
+                      style='font-size:9.0pt;font-family:SimSun;mso-bidi-font-family:SimSun'></span></b></span><span
                       class=shorttext><b style='mso-bidi-font-weight:normal'><span
                       style='font-size:9.0pt;font-family:SimSun;mso-bidi-font-family:SimSun;
                       mso-ansi-language:EN-US'><o:p></o:p></span></b></span></p>
