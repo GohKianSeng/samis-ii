@@ -9,8 +9,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DOSService", "DOSService\DO
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ImportHWSFromExcel", "ImportHWSFromExcel\ImportHWSFromExcel.csproj", "{FE0164DE-6554-4F6C-81A7-AE6BFED15286}"
 EndProject
-Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "Database1", "Database1\Database1.sqlproj", "{791748E3-9B81-4D0C-9F85-4B26B4759B7F}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SamisUpdate", "SamisUpdate\SamisUpdate.csproj", "{58E2D704-27EC-4086-842F-89FC76CE53A0}"
 EndProject
 Global
@@ -53,20 +51,6 @@ Global
 		{FE0164DE-6554-4F6C-81A7-AE6BFED15286}.Release|Mixed Platforms.Build.0 = Release|x86
 		{FE0164DE-6554-4F6C-81A7-AE6BFED15286}.Release|x86.ActiveCfg = Release|x86
 		{FE0164DE-6554-4F6C-81A7-AE6BFED15286}.Release|x86.Build.0 = Release|x86
-		{791748E3-9B81-4D0C-9F85-4B26B4759B7F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{791748E3-9B81-4D0C-9F85-4B26B4759B7F}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{791748E3-9B81-4D0C-9F85-4B26B4759B7F}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
-		{791748E3-9B81-4D0C-9F85-4B26B4759B7F}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
-		{791748E3-9B81-4D0C-9F85-4B26B4759B7F}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
-		{791748E3-9B81-4D0C-9F85-4B26B4759B7F}.Debug|Mixed Platforms.Deploy.0 = Debug|Any CPU
-		{791748E3-9B81-4D0C-9F85-4B26B4759B7F}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{791748E3-9B81-4D0C-9F85-4B26B4759B7F}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{791748E3-9B81-4D0C-9F85-4B26B4759B7F}.Release|Any CPU.Build.0 = Release|Any CPU
-		{791748E3-9B81-4D0C-9F85-4B26B4759B7F}.Release|Any CPU.Deploy.0 = Release|Any CPU
-		{791748E3-9B81-4D0C-9F85-4B26B4759B7F}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
-		{791748E3-9B81-4D0C-9F85-4B26B4759B7F}.Release|Mixed Platforms.Build.0 = Release|Any CPU
-		{791748E3-9B81-4D0C-9F85-4B26B4759B7F}.Release|Mixed Platforms.Deploy.0 = Release|Any CPU
-		{791748E3-9B81-4D0C-9F85-4B26B4759B7F}.Release|x86.ActiveCfg = Release|Any CPU
 		{58E2D704-27EC-4086-842F-89FC76CE53A0}.Debug|Any CPU.ActiveCfg = Debug|x86
 		{58E2D704-27EC-4086-842F-89FC76CE53A0}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
 		{58E2D704-27EC-4086-842F-89FC76CE53A0}.Debug|Mixed Platforms.Build.0 = Debug|x86
