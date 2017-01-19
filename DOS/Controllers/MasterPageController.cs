@@ -105,12 +105,14 @@ namespace DOS.Controllers
 
         public void sendEmail(MailMessage mail)
         {
-            SmtpClient smtpclient = new SmtpClient((string)Session["SMTPAddress"]);
-            smtpclient.Credentials = new NetworkCredential((string)Session["SMTPAccount"], (string)Session["SMTPAccountPassword"]);
+            
+			mail.From = new MailAddress("jamestan@cathedral.org.sg");
+			SmtpClient smtpclient = new SmtpClient("in-v3.mailjet.com");
+            smtpclient.Credentials = new NetworkCredential("087009d1c4d72791e03c3167c2bf8d88", "322a6fccc20dba6a74fdb243edd2d9af");
             smtpclient.EnableSsl = true;
             smtpclient.Port = 587;
 
-            //smtpclient.Send(mail);            
+            smtpclient.Send(mail);            
         }
 
         public MasterPageController()
