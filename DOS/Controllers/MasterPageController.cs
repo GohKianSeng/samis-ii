@@ -110,7 +110,7 @@ namespace DOS.Controllers
             smtpclient.EnableSsl = true;
             smtpclient.Port = 587;
 
-            smtpclient.Send(mail);            
+            //smtpclient.Send(mail);            
         }
 
         public MasterPageController()
